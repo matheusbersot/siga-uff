@@ -7,7 +7,7 @@
 <siga:pagina titulo="Login" desabilitarbusca="sim"
 	onLoad="try{document.getElementById('j_username').focus();document.getElementById('j_username').select()}catch(e){};">
 
-	<script type="text/javascript" language="Javascript1.1">
+	<script type="text/javascript">
 		/*  converte para maiúscula a sigla do estado  */
 		function converteUsuario(nomeusuario) {
 			re = /^[a-zA-Z]{2}\d{3,6}$/;
@@ -17,6 +17,24 @@
 				nomeusuario.value = tmp.toUpperCase();
 			}
 		}
+
+		function retiraZeroFrenteCPF() {
+			cpf = document.forms["login"]["matricula"].value;
+			acabou = false;
+			while (!acabou) {
+				if (cpf[0] == '0') {
+					cpf = cpf.substring(1);
+				} else {
+					acabou = true;
+				}
+			}
+			return cpf;
+		}
+
+		function adicionaSiglaNoLogin() {
+			cpf = retiraZeroFrenteCPF();
+			document.forms["login"]["j_username"].value = 'FF' + cpf;
+		}
 	</script>
 
 	<c:set var="pagina" scope="session">${pageContext.request.requestURL}</c:set>
@@ -24,7 +42,9 @@
 	<div class="gt-bd gt-cols clearfix">
 
 		<!-- main content -->
-		<div id="gc-ancora" class="gt-content">
+		<div id="gc-ancora" class="gt-content" 
+		style="background: linear-gradient(rgba(226, 234, 238, 0.9), rgba(226, 234, 238, 0.9)), url(/siga/imagens/logotipoUFF.gif) no-repeat; background-size: 50% 70%; background-position: 50% 50%">
+		
 			<ww:if test="${f:resource('siga.gc.paginadelogin')}">
 				<c:url var="url" value="/../sigagc/app/publicKnowledge" >
 					<c:param name="tags">^pagina-de-login</c:param>
@@ -57,9 +77,10 @@
 			<!-- login box -->
 			<div class="gt-mylogin-box">
 				<!-- login form -->
-				<form method="post" action="j_security_check" class="gt-form">
+				<form method="post" action="j_security_check" class="gt-form"
+				 style= "background: url(/siga/imagens/iduff.jpeg) no-repeat; background-size:60px 100px; background-position: 0 20px; padding-left:20px;">
 					<!-- form row -->
-					<div class="gt-form-row">
+					<div class="gt-form-row" style="margin-left: 60px;">
 						<label class="gt-label">CPF (somente n&uacute;meros)</label> <input id="j_username"
 							type="text" name="j_username"
 							onblur="javascript:converteUsuario(this)" class="gt-form-text">
@@ -67,7 +88,7 @@
 					<!-- /form row -->
 
 					<!-- form row -->
-					<div class="gt-form-row">
+					<div class="gt-form-row" style="margin-left: 60px;">
 						<label class="gt-label">Senha do seu IdUFF</label> <input type="password"
 							name="j_password" class="gt-form-text">
 					</div>
@@ -81,10 +102,8 @@
 					<!-- /form row -->
 
 					<p class="gt-forgot-password">
-						<ww:a href="incluir_usuario.action">Sou um novo usuário</ww:a>
-					</p>
-					<p class="gt-forgot-password">
-						<ww:a href="esqueci_senha.action">Esqueci minha senha</ww:a>
+						<a href=https://sistemas.uff.br/portal/ativar_conta_ou_recuperar_senha?retorno=https://sistemas.uff.br/iduff />
+						Esqueci	minha senha</a>	
 					</p>
 
 				</form>

@@ -194,11 +194,26 @@ ${meta}
 								src="/siga/imagens/logo.png">
 						</div>
 
-						<div class="gt-version">
-							Sistema Integrado de Gest&atilde;o Administrativa
-							<c:if test="${not empty env}"> - <span style="color: red">${env}</span>
-							</c:if>
-						</div>
+						<c:choose>
+							<c:when test="${empty cadastrante}">
+								<div class="gt-logo"
+									style="padding: 0; position: relative; left: 70%">
+									<img
+										style="margin-top: 3px; margin-bottom: -5px; height: 55px;"
+										src="/siga/imagens/pdi.png">
+								</div>
+								<div class="gt-version"
+									style="position: relative; right: 8%; top: -20px; width: 500px; display: inline-block;">
+									Sistema Integrado de Gest&atilde;o Administrativa</div>
+								<div class="gt-version"
+									style="position: relative; left: 28%; top: -5px; width: 100; display: inline-block;">
+									Plano de Desenvolvimento Institucional</div>
+							</c:when>
+							<c:when test="${not empty cadastrante}">
+								<div class="gt-version">Sistema Integrado de Gest&atilde;o
+									Administrativa</div>
+							</c:when>
+						</c:choose>
 						<!-- / logo -->
 					</div>
 				</div>
@@ -317,6 +332,10 @@ ${meta}
 														window.location.href = data[3];
 													}
 													return
+
+													
+
+																										
 
 													
 
