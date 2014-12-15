@@ -99,14 +99,79 @@ public class RelConsultaDocEntreDatas extends RelatorioTemplate {
 		List<Object[]> provResultList = query.list();
 
 		List<String> dados = new ArrayList<String>();
-
+		
+		int contador;		
+		
 		for (Object[] array : provResultList) {
+			
+			contador = 0;
+			
 			for (Object value : array)
-				dados.add((String) value);
+			{				
+				//contador == 0 -> código do documento e contador == 1 é URL do documento
+				if( (contador == 0 || contador == 1) && (((String) value).contains(SIGLA_PROCESSO_ADMINISTRATIVO)) ) 
+				{	
+					String codDocumento = processarCodigoDocumentoRelatorio((String) value);
+					if(codDocumento != null)
+					{   
+						if(contador == 0)
+							dados.add(codDocumento);
+						else
+						{
+							int indInicio = ((String) value).indexOf("sigla=");
+							String valor = ((String) value).substring(0, indInicio+6);
+							valor+= codDocumento;
+							dados.add(valor);
+						}
+					}
+					else
+						dados.add((String) value);
+				}
+				else
+				    dados.add((String) value);
+				
+				++contador;
+			}			    
 		}
 
 		return dados;
 	}
+	
+	/*
+	 * Esse método trata valores inseridos nas colunas do relatório de documentos entre datas.
+	 * Os valores tratados são: código de documento e código de documento junto com a URL do mesmo.
+	 */
+	public String processarCodigoDocumentoRelatorio(String valor)
+	{
+			//código de documento
+			
+			final Pattern p = Pattern.compile("([A-Z]{2})-([A-Z]{3})-([0-9]{4})/([0-9])-([0-9])");
+			final Matcher m = p.matcher(valor);
+			
+			if(m.find())
+			{						
+				if((m.group(2) != null) && (m.group(2).compareTo(SIGLA_PROCESSO_ADMINISTRATIVO) == 0) && 
+						(m.group(3) != null) && (m.group(4) != null) && (m.group(5)!= null))
+				{
+					
+					String codigoDoc = ExDocumento.getCodigoProcessoAdministrativoUFF(new Long(m.group(4)), new Long(m.group(3)));
+										
+					// nº do volume
+					
+					String numVolume = m.group(5);
+					while(numVolume.length() < 2)
+						numVolume = "0" + numVolume;
+					
+					codigoDoc +="-V"+numVolume;
+					
+					return codigoDoc;						
+				}
+			}	
+			
+		
+		return null;	
+	}
+
 
 	public Collection processarDadosLento() throws Exception {
 		List<String> dados = new ArrayList<String>();

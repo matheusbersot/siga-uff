@@ -164,6 +164,67 @@ public class ExDocumento extends AbstractExDocumento implements Serializable {
 		}
 		return docsFilhos;
 	}
+	
+	/**
+	 * Retorna o dígito verificador do código da UFF. Se o retorno for igual a
+	 * -1, ocorreu erro no cálculo do código.
+	 * 
+	 */
+	public static Integer getDigitoVerificadorCodigoUFF(String codigo) {
+		if (!codigo.isEmpty()) {
+			String codigoSoComNumeros = codigo.replaceAll("[./-]", "");
+
+			int i = codigoSoComNumeros.length() - 1;
+			int soma = 0;
+			int peso = 2;
+
+			while (i >= 0) {
+				char c = codigoSoComNumeros.charAt(i);
+				int digito = Integer.parseInt(String.valueOf(c));
+				soma += digito * peso;
+				--i;
+				++peso;
+			}
+
+			int restoDivisao = soma % 11;
+			int resultado = 11 - restoDivisao;
+
+			int digitoVerificador = resultado % 10;
+			return digitoVerificador;
+		}
+		throw new Error("Código do Processo Administrativo UFF está vazio.");
+	}
+	
+	/**
+	 * Retorna o código do documento do tipo processo administrativo de acordo
+	 * com as regras de numeração da Universidade Federal Fluminense (Portaria
+	 * Normativa SLTI/MP nº 03, de 16 de maio de 2003).
+	 * 
+	 */
+	public static String getCodigoProcessoAdministrativoUFF(Long numSequencial,
+			Long anoEmissao) {
+		
+		final String CODIGO_UFF = "23069";
+
+		StringBuilder codigo = new StringBuilder(numSequencial.toString());
+
+		while (codigo.length() < 6) {
+			codigo.insert(0, "0");
+		}
+
+		codigo.insert(0, CODIGO_UFF + ".");
+		codigo.append("/" + anoEmissao.toString() + "-");
+
+		// cálculo do 1º dígito verificador
+		Integer digitoVerificador = getDigitoVerificadorCodigoUFF(codigo.toString());
+		codigo.append(digitoVerificador.toString());
+
+		// cálculo do 2º dígito verificador
+		digitoVerificador = getDigitoVerificadorCodigoUFF(codigo.toString());
+		codigo.append(digitoVerificador.toString());
+
+		return codigo.toString();
+	}
 
 	/**
 	 * Retorna o código do documento.
@@ -179,6 +240,11 @@ public class ExDocumento extends AbstractExDocumento implements Serializable {
 			return getExMobilPai().getSigla() + "." + s;
 		}
 		if (getAnoEmissao() != null && getNumExpediente() != null) {
+			
+			if (getExFormaDocumento().getExTipoFormaDoc().isProcesso()) {
+				return getCodigoProcessoAdministrativoUFF(getNumExpediente(),getAnoEmissao());
+			}
+			
 			String s = getNumExpediente().toString();
 			while (s.length() < 5)
 				s = "0" + s;
@@ -280,6 +346,20 @@ public class ExDocumento extends AbstractExDocumento implements Serializable {
 					+ "." + s;
 		}
 		if (anoEmissao != null && numExpediente != null) {
+			
+			/*
+			 * Busca do documento em questão para verificar se o mesmo é um processo administrativo.
+			 * Caso seja, o padrão de código da UFF deve ser adotado.
+			 */
+			Long[] ids = new Long[1];
+			ids[0] = idDoc;
+			
+			List<ExDocumento> listaDocumentos = ExDao.getInstance().consultarEmLotePorId(ids);
+			
+			if ((listaDocumentos.get(0) != null) && (listaDocumentos.get(0).isProcesso())) {
+				return getCodigoProcessoAdministrativoUFF(numExpediente,anoEmissao);
+			}
+			
 			String s = numExpediente.toString();
 			while (s.length() < 5)
 				s = "0" + s;
@@ -315,7 +395,7 @@ public class ExDocumento extends AbstractExDocumento implements Serializable {
 		String s = getCodigo();
 		if (s == null)
 			return null;
-		return s.replace("-", "").replace("/", "");
+		return s.replace("-", "").replace("/", "").replace(".","");
 	}
 
 	/**

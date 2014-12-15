@@ -343,21 +343,81 @@ public class ExMobil extends AbstractExMobil implements Serializable,
 				.compile("^([A-Za-z0-9]{2}"
 						+ acronimos
 						+ ")?-?([A-Za-z]{3})?-?(?:([0-9]{4})/?)??([0-9]{1,5})(\\.?[0-9]{1,3})?(?:((?:-?[a-zA-Z]{1})|(?:-[0-9]{1,2}))|((?:-?V[0-9]{1,2})))?$");
+		final Pattern p3 = Pattern.compile("(23069).([0-9]{6})/?([0-9]{4})-?([0-9]{2})-?(V[0-9]{2})?");
+		
 		final Matcher m2 = p2.matcher(sigla);
 		final Matcher m1 = p1.matcher(sigla);
+		final Matcher m3 = p3.matcher(sigla);
 
 		if (getExDocumento() == null) {
 			final ExDocumento doc = new ExDocumento();
 			setExDocumento(doc);
 		}
 
-		if (m2.find()) {
+		if (m2.find()) {  //DOCUMENTOS EM ELABORAÇÃO/TEMPORÁRIOS 
 			if (m2.group(1) != null)
 				getExDocumento().setIdDoc(new Long(m2.group(1)));
 			return;
 		}
+		
+		if (m3.find()) //PROCESSO ADMINISTRATIVO UFF
+		{
+			final String msgErro = "Erro na leitura do código do processo administrativo.";			
+			
+			final String siglaOrgaoUsuario = "UFF";
+			
+			if (mapAcronimo.containsKey(siglaOrgaoUsuario)) {
+				getExDocumento().setOrgaoUsuario(mapAcronimo.get(siglaOrgaoUsuario));
+			} else {
+				CpOrgaoUsuario orgaoUsuario = new CpOrgaoUsuario();
+				orgaoUsuario.setSiglaOrgaoUsu(siglaOrgaoUsuario);
 
-		if (m1.find()) {
+				orgaoUsuario = ExDao.getInstance().consultarPorSigla(orgaoUsuario);
+
+				getExDocumento().setOrgaoUsuario(orgaoUsuario);
+			}
+			
+			final String siglaFormaDocumento = "ADM";
+			ExFormaDocumento formaDoc = new ExFormaDocumento();
+			formaDoc.setSiglaFormaDoc(siglaFormaDocumento);			
+			formaDoc = ExDao.getInstance().consultarPorSigla(formaDoc);
+			
+			if (formaDoc != null)
+				getExDocumento().setExFormaDocumento(formaDoc);
+			else
+				throw new Error(msgErro);
+			
+			if (m3.group(2) != null) 
+           	 getExDocumento().setNumExpediente(Long.parseLong(m3.group(2)));
+			else
+				throw new Error(msgErro);
+
+            if (m3.group(3) != null) 
+           	 getExDocumento().setAnoEmissao(Long.parseLong(m3.group(3)));
+            else
+				throw new Error(msgErro);
+            
+            if (m3.group(5) != null) {
+				String vsNumVolume = m3.group(5).toUpperCase();
+				if (vsNumVolume.contains("-"))
+					vsNumVolume = vsNumVolume.substring(vsNumVolume
+							.indexOf("-") + 1);
+				if (vsNumVolume.contains("V"))
+					vsNumVolume = vsNumVolume.substring(vsNumVolume
+							.indexOf("V") + 1);
+				Integer vshNumVolume = new Integer(vsNumVolume);
+				setExTipoMobil(ExDao.getInstance()
+						.consultar(ExTipoMobil.TIPO_MOBIL_VOLUME,
+								ExTipoMobil.class, false));
+				setNumSequencia(vshNumVolume);
+			} else {
+				setExTipoMobil(ExDao.getInstance().consultar(
+						ExTipoMobil.TIPO_MOBIL_GERAL, ExTipoMobil.class, false));
+			}
+             
+		}
+
+		if (m1.find()) { //OUTROS DOCUMENTOS
 
 			if (m1.group(1) != null) {
 				try {
