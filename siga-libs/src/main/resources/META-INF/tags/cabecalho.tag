@@ -194,22 +194,6 @@ ${meta}
 								src="/siga/imagens/logo.png">
 						</div>
 
-						<!--  <div class="gt-company">
-							<c:choose>
-								<c:when test="${empty f:obterNomeOrgao()}">
-									<strong>Justi&ccedil;a Federal <c:catch>
-											<c:if test="${not empty titular.orgaoUsuario.descricao}">
-									- ${titular.orgaoUsuario.descricao}
-									</c:if>
-										</c:catch>
-									</strong>
-								</c:when>
-								<c:otherwise>
-									<strong>${f:obterNomeOrgao()}</strong>
-								</c:otherwise>
-							</c:choose>
-						</div>-->
-
 						<div class="gt-version">
 							Sistema Integrado de Gest&atilde;o Administrativa
 							<c:if test="${not empty env}"> - <span style="color: red">${env}</span>
