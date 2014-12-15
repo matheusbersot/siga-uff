@@ -801,8 +801,7 @@ public class Documento {
 						.isInternoProduzido(), an.getArquivo().getQRCode(), an
 						.getArquivo().getMensagem(), an.getPaginaInicial(),
 						an.getPaginaFinal(), an.getOmitirNumeracao(),
-						SigaExProperties.getTextoSuperiorCarimbo(), mob.getExDocumento()
-								.getOrgaoUsuario().getDescricao());
+						SigaExProperties.getTextoSuperiorCarimbo(), "");
 
 				// we create a reader for a certain document
 
