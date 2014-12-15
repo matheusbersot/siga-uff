@@ -916,7 +916,14 @@ public class AssinaturaDigital {
 		try {
 			Properties props = AssinaturaDigital
 					.recuperaNomesAlternativos(assinatura);
-			String sCPF = props.getProperty("2.16.76.1.3.1").substring(8, 19);
+			String sCPF = "";
+			if(props.getProperty("2.16.76.1.3.1") != null)
+				sCPF = props.getProperty("2.16.76.1.3.1").substring(8, 19); //OID ICP-BRASIL
+			else
+			{
+				if(props.getProperty("1.3.6.1.4.1.24839") != null)
+					sCPF= props.getProperty("1.3.6.1.4.1.24839").substring(8, 19); //OID UFF
+			}	
 			@SuppressWarnings("unused")
 			long lCPF = Long.valueOf(sCPF);
 			return sCPF;

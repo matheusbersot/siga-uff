@@ -120,7 +120,14 @@ public class CertificadoUtil {
 	public static String recuperarCPF(X509Certificate cert) throws Exception {
 		try {
 			Properties props = recuperarPropriedadesNomesAlteranativos(cert);
-			String sCPF = props.getProperty("2.16.76.1.3.1").substring(8, 19);
+			String sCPF = "";
+			if(props.getProperty("2.16.76.1.3.1") != null)
+				sCPF = props.getProperty("2.16.76.1.3.1").substring(8, 19); //OID ICP-BRASIL
+			else
+			{
+				if(props.getProperty("1.3.6.1.4.1.24839") != null)
+					sCPF= props.getProperty("1.3.6.1.4.1.24839").substring(8, 19); //OID UFF
+			}	
 			
 			@SuppressWarnings("unused")
 			long lCPF = Long.valueOf(sCPF); // usado apenas para verificar se é numérico
