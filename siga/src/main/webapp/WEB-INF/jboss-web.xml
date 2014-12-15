@@ -8,10 +8,6 @@
   <!--  Configuracao para login com formulario  -->
   <!-- ***************************************  -->
   <!--  Nao alterar comentario _$(iniLogForm)$_ -->
-  <security-domain>SigaPolicy</security-domain>
-  <valve>
-    <class-name>org.apache.catalina.authenticator.SingleSignOn</class-name>
-  </valve>
   <!-- _$(fimLogForm)$_Nao alterar comentario  -->
   <!-- *************************************** -->
   <!--   Fim da configuracao com formulario    -->
@@ -26,4 +22,8 @@
   <!--  Fim da configuracao com certificado     -->
   <!-- ***************************************  -->
   <context-root>/siga</context-root>
+  <security-domain>SigaPolicy</security-domain>
+  <valve>
+		<class-name>org.apache.catalina.authenticator.SingleSignOn</class-name> 
+  </valve>
 </jboss-web>
