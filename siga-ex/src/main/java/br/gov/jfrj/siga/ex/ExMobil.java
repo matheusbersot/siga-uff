@@ -343,7 +343,7 @@ public class ExMobil extends AbstractExMobil implements Serializable,
 				.compile("^([A-Za-z0-9]{2}"
 						+ acronimos
 						+ ")?-?([A-Za-z]{3})?-?(?:([0-9]{4})/?)??([0-9]{1,5})(\\.?[0-9]{1,3})?(?:((?:-?[a-zA-Z]{1})|(?:-[0-9]{1,2}))|((?:-?V[0-9]{1,2})))?$");
-		final Pattern p3 = Pattern.compile("(23069).([0-9]{6})/?([0-9]{4})-?([0-9]{2})-?(V[0-9]{2})?");
+		final Pattern p3 = Pattern.compile("(23069)\\.?([0-9]{6})/?([0-9]{4})-?([0-9]{2})-?(V[0-9]{2})?");
 		
 		final Matcher m2 = p2.matcher(sigla);
 		final Matcher m1 = p1.matcher(sigla);
