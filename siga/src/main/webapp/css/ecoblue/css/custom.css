@@ -140,7 +140,7 @@ tr.fisicoeven:hover td {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 0px;
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 	font-size: 161.6%;
 	font-weight: bold;
 	color: #0e2029;
@@ -150,8 +150,8 @@ tr.fisicoeven:hover td {
 	background-color: #fff;
 	border: 1px solid #ccc;
 	border-radius: 5px;
-	padding: 1.5em 3em;
-	margin-bottom: 1.5em;
+	padding: 1em 2em;
+	margin-bottom: 1em;
 }
 
 .gt-mylogin-box .gt-form .gt-form-text {
@@ -168,7 +168,7 @@ tr.fisicoeven:hover td {
 	display: inline;
 }
 
-/* Formularios que são organizados na forma de tabelas */
+/* Formularios que sï¿½o organizados na forma de tabelas */
 .gt-form-table {
 	width: 100%;
 }

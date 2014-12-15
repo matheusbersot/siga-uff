@@ -50,7 +50,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <title>SIGA - ${titulo_pagina}</title>
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9"/>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
 <META HTTP-EQUIV="Expires" CONTENT="0">
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
@@ -79,21 +79,25 @@ ${meta}
 <link rel="shortcut icon" href="/siga/sigalibs/siga.ico" />
 
 <script language="JavaScript"
-	src="/siga/javascript/jquery/1.6/jquery-1.6.4.min.js" type="text/javascript"></script>
+	src="/siga/javascript/jquery/1.6/jquery-1.6.4.min.js"
+	type="text/javascript"></script>
 <script language="JavaScript"
-	src="/siga/javascript/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
-<link rel="stylesheet" href="/siga/javascript/jquery-ui-1.10.3.custom/css/ui-lightness/jquery-ui-1.10.3.custom.min.css"
+	src="/siga/javascript/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"
+	type="text/javascript"></script>
+<link rel="stylesheet"
+	href="/siga/javascript/jquery-ui-1.10.3.custom/css/ui-lightness/jquery-ui-1.10.3.custom.min.css"
 	type="text/css" media="screen, projection">
-<link rel="stylesheet" href="/siga/javascript/jquery-ui-1.10.3.custom/css/ui-lightness/jquery-ui-1.10.3.custom.min.css"
+<link rel="stylesheet"
+	href="/siga/javascript/jquery-ui-1.10.3.custom/css/ui-lightness/jquery-ui-1.10.3.custom.min.css"
 	type="text/css" media="screen, projection">
 <!-- <link rel="stylesheet" href="/siga/javascript/jquery-ui-1.10.3.custom/development-bundle/themes/base/jquery.ui.all.css"
 	type="text/css" media="screen, projection"> -->
-	
-		
+
+
 <%-- Desabilitado porque requer o jquery 1.7 ou maior. 	
 <script language="JavaScript"
 	src="/siga/javascript/autogrow.min.js" type="text/javascript"></script>
---%>	
+--%>
 <!--[if gte IE 5.5]><script language="JavaScript" src="/siga/javascript/jquery.ienav.js" type="text/javascript"></script><![endif]-->
 
 <script language="JavaScript" type="text/javascript">
@@ -118,6 +122,29 @@ ${meta}
 
 <body onload="${onLoad}">
 	<c:if test="${popup!='true'}">
+
+		<!-- cabeçalho MEC -->
+		<div>
+			<table
+				style="background-image: url(/siga/imagens/egov0.png); background-repeat: no-repeat; width: 100%;"
+				id="egov">
+				<tbody>
+					<tr style="height: 28px">
+						<td style="padding: 0; margin: 0"><a
+							href="http://portal.mec.gov.br"> <img
+								src="/siga/imagens/barra-egovMINC.png"
+								alt="Minist&eacute;rio da Educa&ccedil;&atilde;o" border="0">
+						</a></td>
+					</tr>
+					<tr style="height: 24px; vertical-align: top;">
+						<td><a href="http://www.uff.br"> <img
+								src="/siga/imagens/barra-egovUFF.png" alt="UFF" border="0">
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
 		<div class="gt-hd clearfix">
 			<!-- leaf watermark -->
 			<div class="gt-leaf-watermark clearfix">
@@ -163,16 +190,26 @@ ${meta}
 						<!-- / utility box -->
 						<!-- logo -->
 						<div class="gt-logo" style="padding: 0;">
-							<img style="margin-top: 3px; margin-bottom: -13px;"
+							<img style="margin-top: 3px; margin-bottom: -5px;"
 								src="/siga/imagens/logo.png">
 						</div>
-						<div class="gt-company">
-							<strong>${f:resource('siga.cabecalho.titulo')} <c:catch>
-									<c:if test="${not empty titular.orgaoUsuario.descricao}">
-- ${titular.orgaoUsuario.descricao}
-</c:if>
-								</c:catch> </strong>
-						</div>
+
+						<!--  <div class="gt-company">
+							<c:choose>
+								<c:when test="${empty f:obterNomeOrgao()}">
+									<strong>Justi&ccedil;a Federal <c:catch>
+											<c:if test="${not empty titular.orgaoUsuario.descricao}">
+									- ${titular.orgaoUsuario.descricao}
+									</c:if>
+										</c:catch>
+									</strong>
+								</c:when>
+								<c:otherwise>
+									<strong>${f:obterNomeOrgao()}</strong>
+								</c:otherwise>
+							</c:choose>
+						</div>-->
+
 						<div class="gt-version">
 							Sistema Integrado de Gest&atilde;o Administrativa
 							<c:if test="${not empty env}"> - <span style="color: red">${env}</span>
@@ -197,14 +234,13 @@ ${meta}
 							<c:if test="${desabilitarbusca != 'sim'}">
 								<div class="gt-search">
 									<div class="gt-search-inner" onclick="">
-										<siga:selecao propriedade="buscar"
-											tipo="generico" tema="simple" ocultardescricao="sim"
-											buscar="nao" siglaInicial="Buscar" modulo="siga" />
+										<siga:selecao propriedade="buscar" tipo="generico"
+											tema="simple" ocultardescricao="sim" buscar="nao"
+											siglaInicial="Buscar" modulo="siga" />
 										<script type="text/javascript">
-
 											var lis = document
 													.getElementsByTagName('li');
-											 
+
 											for (var i = 0, li; li = lis[i]; i++) {
 												var link = li
 														.getElementsByTagName('a')[0];
@@ -213,7 +249,7 @@ ${meta}
 													link.onfocus = function() {
 														var ul = this.parentNode
 																.getElementsByTagName('ul')[0];
-														if (ul){
+														if (ul) {
 															ul.style.display = 'block';
 														}
 													}
@@ -227,10 +263,11 @@ ${meta}
 														if (lastItem) {
 															lastItem.onblur = function() {
 																this.parentNode.parentNode.style.display = 'none';
-																  if (this.id == "relclassificados"){
-	                                                                    var rel = document.getElementById("relatorios");
-	                                                                    rel.style.display = 'none';
-	                                                                }
+																if (this.id == "relclassificados") {
+																	var rel = document
+																			.getElementById("relatorios");
+																	rel.style.display = 'none';
+																}
 															}
 															lastItem.parentNode.onblur = function() {
 																this.parentNode.style.display = '';
@@ -296,6 +333,8 @@ ${meta}
 														window.location.href = data[3];
 													}
 													return
+
+													
 
 												}
 												retorna_buscar_generico('', '',

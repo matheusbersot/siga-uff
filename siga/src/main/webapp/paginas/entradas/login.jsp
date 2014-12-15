@@ -60,7 +60,7 @@
 				<form method="post" action="j_security_check" class="gt-form">
 					<!-- form row -->
 					<div class="gt-form-row">
-						<label class="gt-label">Matrícula</label> <input id="j_username"
+						<label class="gt-label">CPF (somente n&uacute;meros)</label> <input id="j_username"
 							type="text" name="j_username"
 							onblur="javascript:converteUsuario(this)" class="gt-form-text">
 					</div>
@@ -68,7 +68,7 @@
 
 					<!-- form row -->
 					<div class="gt-form-row">
-						<label class="gt-label">Senha</label> <input type="password"
+						<label class="gt-label">Senha do seu IdUFF</label> <input type="password"
 							name="j_password" class="gt-form-text">
 					</div>
 					<!-- /form row -->
