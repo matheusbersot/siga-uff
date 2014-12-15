@@ -21,35 +21,35 @@ package br.gov.jfrj.siga.ex.service.impl;
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeSet;
 
-import javax.jws.WebService;
-import org.json.JSONObject;
-
 import javax.annotation.Resource;
+import javax.jws.WebService;
 import javax.servlet.ServletContext;
-import javax.ws.rs.Path;
 import javax.xml.ws.WebServiceContext;
 import javax.xml.ws.handler.MessageContext;
 
+import org.json.JSONObject;
+
+import br.gov.jfrj.siga.base.AplicacaoException;
 import br.gov.jfrj.siga.cp.CpSituacaoConfiguracao;
 import br.gov.jfrj.siga.cp.CpTipoConfiguracao;
 import br.gov.jfrj.siga.dp.CpOrgao;
-import br.gov.jfrj.siga.dp.CpOrgaoUsuario;
 import br.gov.jfrj.siga.dp.DpLotacao;
 import br.gov.jfrj.siga.dp.DpPessoa;
 import br.gov.jfrj.siga.dp.DpResponsavel;
+import br.gov.jfrj.siga.ex.ExMovimentacao;
 import br.gov.jfrj.siga.ex.ExClassificacao;
 import br.gov.jfrj.siga.ex.ExConfiguracao;
 import br.gov.jfrj.siga.ex.ExDocumento;
 import br.gov.jfrj.siga.ex.ExFormaDocumento;
 import br.gov.jfrj.siga.ex.ExMobil;
 import br.gov.jfrj.siga.ex.ExModelo;
+import br.gov.jfrj.siga.ex.ExMovimentacao;
 import br.gov.jfrj.siga.ex.ExNivelAcesso;
 import br.gov.jfrj.siga.ex.ExSituacaoConfiguracao;
 import br.gov.jfrj.siga.ex.ExTipoDocumento;
@@ -732,7 +732,7 @@ public class ExServiceImpl implements ExService {
 				  ExDocumento doc = mob.getExDocumento();
 				  ExDocumentoVO docVO = null;
 				  try {
-						docVO = new ExDocumentoVO(doc, mob, doc.getTitular(), doc.getLotaTitular(), true);
+						docVO = new ExDocumentoVO(doc, mob, doc.getTitular(), doc.getLotaTitular(), true, false);
 			 			for(ExMobilVO mobVO: docVO.getMobs())
 						{
 							  String descricaoMobil =mobVO.getDescricaoCompletaEMarcadoresEmHtml(doc.getCadastrante(),doc.getLotaTitular());
