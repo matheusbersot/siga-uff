@@ -20,8 +20,9 @@ package br.gov.jfrj.siga.ex.service.impl;
 
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
+import java.util.Map;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,7 +37,6 @@ import javax.ws.rs.Path;
 import javax.xml.ws.WebServiceContext;
 import javax.xml.ws.handler.MessageContext;
 
-import br.gov.jfrj.siga.base.AplicacaoException;
 import br.gov.jfrj.siga.cp.CpSituacaoConfiguracao;
 import br.gov.jfrj.siga.cp.CpTipoConfiguracao;
 import br.gov.jfrj.siga.dp.CpOrgao;
@@ -50,7 +50,6 @@ import br.gov.jfrj.siga.ex.ExDocumento;
 import br.gov.jfrj.siga.ex.ExFormaDocumento;
 import br.gov.jfrj.siga.ex.ExMobil;
 import br.gov.jfrj.siga.ex.ExModelo;
-import br.gov.jfrj.siga.ex.ExMovimentacao;
 import br.gov.jfrj.siga.ex.ExNivelAcesso;
 import br.gov.jfrj.siga.ex.ExSituacaoConfiguracao;
 import br.gov.jfrj.siga.ex.ExTipoDocumento;
@@ -59,6 +58,10 @@ import br.gov.jfrj.siga.ex.bl.Ex;
 import br.gov.jfrj.siga.ex.bl.ExCompetenciaBL;
 import br.gov.jfrj.siga.ex.bl.ExConfiguracaoBL;
 import br.gov.jfrj.siga.ex.service.ExService;
+import br.gov.jfrj.siga.ex.vo.ExDocumentoVO;
+import br.gov.jfrj.siga.ex.vo.ExMobilVO;
+import br.gov.jfrj.siga.ex.vo.ExMovimentacaoVO;
+import br.gov.jfrj.siga.ex.vo.ExParteVO;
 import br.gov.jfrj.siga.hibernate.ExDao;
 import br.gov.jfrj.siga.parser.PessoaLotacaoParser;
 import br.gov.jfrj.siga.persistencia.ExMobilDaoFiltro;
@@ -711,42 +714,60 @@ public class ExServiceImpl implements ExService {
 		}
 	}
 
-	public String consultaMovimentacaoProcesso(String numeroProcesso) {
+	public String consultaMovimentacaoProcesso(String numeroProcesso){
 
-		JSONObject resposta = new JSONObject();
-
-		if (numeroProcesso == null || numeroProcesso.length() == 0) {
-			resposta.put("movimentacoes",
-					"Código do Processo Administrativo Inválido");
-		} else {
-			final ExMobilDaoFiltro filter = new ExMobilDaoFiltro();
-			filter.setSigla(numeroProcesso);
-			ExMobil mob = (ExMobil) dao().consultarPorSigla(filter);
-
-			if (mob != null) // && (mob.doc().isProcesso()
-			{
-				ExDocumento doc = mob.getExDocumento();
-				final Set<ExMovimentacao> movs = doc.getMobilGeral()
-						.getExMovimentacaoSet();
-
-				for (ExMovimentacao mov : movs) {
-					HashMap<String, String> movimentacao = new HashMap<String, String>();
-					movimentacao.put("dataEvento", mov.getDtMovDDMMYY());
-					movimentacao.put("tipoEvento",
-							mov.getDescrTipoMovimentacao());
-					movimentacao.put("lotacaoAtendente", mov.getLotacao()
-							.getDescricao());
-					movimentacao.put("descricao", mov.getDescrMov());
-
-					resposta.put(mov.getIdMov().toString(), movimentacao);
-				}
-			} else {
-				resposta.put("movimentacoes",
-						"Código do Processo Administrativo Inválido");
-			}
-		}
-
-		return resposta.toString();
-	}
+		   JSONObject resposta = new JSONObject();
+		   
+		   if(numeroProcesso == null || numeroProcesso.length() == 0){
+			   resposta.put("erro", "Código do Processo Administrativo Inválido");
+		   }
+		   else
+		   {	   
+			   final ExMobilDaoFiltro filter = new ExMobilDaoFiltro();
+			   filter.setSigla(numeroProcesso);
+			   ExMobil mob = (ExMobil) dao().consultarPorSigla(filter);
+			   
+			   if (mob != null)
+			   {
+				  ExDocumento doc = mob.getExDocumento();
+				  ExDocumentoVO docVO = null;
+				  try {
+						docVO = new ExDocumentoVO(doc, mob, doc.getTitular(), doc.getLotaTitular(), true);
+			 			for(ExMobilVO mobVO: docVO.getMobs())
+						{
+							  String descricaoMobil =mobVO.getDescricaoCompletaEMarcadoresEmHtml(doc.getCadastrante(),doc.getLotaTitular());
+							  descricaoMobil = descricaoMobil.replace("&ordm;", "º");
+							  descricaoMobil = descricaoMobil.replaceAll(", FF[\\d]*", " ");
+						  
+							  ArrayList<HashMap<String, String>> listaMovimentacoes = new ArrayList<HashMap<String, String>> ();
+							  			  
+							  for(ExMovimentacaoVO mov: mobVO.getMovs())
+							  {					  
+								  HashMap<String, String> movimentacao = new HashMap<String, String>();
+								  movimentacao.put("dataEvento", mov.getDtRegMovDDMMYY().toString());
+								  movimentacao.put("tipoEvento", mov.getDescrTipoMovimentacao().toString());
+								  
+								  Map<String, ExParteVO> parte = mov.getParte();
+								  ExParteVO lotaSubscritor = parte.get("lotaSubscritor");
+								  movimentacao.put("lotacaoAtendente", lotaSubscritor.getDescricao());
+								  movimentacao.put("descricao", mov.getDescricao()); 
+								  movimentacao.put("duracao", mov.getDuracao());					  
+								 
+								  listaMovimentacoes.add(movimentacao);					  
+							  }						  
+							  resposta.put(descricaoMobil, listaMovimentacoes);
+					   }
+				  } catch (Exception e) {
+					  resposta.put("erro", "Código do Processo Administrativo Inválido");   
+				  }
+			  }   
+			  else
+			  {
+				   resposta.put("erro", "Código do Processo Administrativo Inválido");   
+			  }
+		   }
+		   
+		   return resposta.toString();	   
+	   }
 
 }
