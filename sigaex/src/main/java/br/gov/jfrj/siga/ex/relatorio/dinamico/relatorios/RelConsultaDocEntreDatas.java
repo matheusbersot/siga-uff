@@ -25,6 +25,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.view.JasperViewer;
@@ -37,6 +39,7 @@ import br.gov.jfrj.relatorio.dinamico.RelatorioRapido;
 import br.gov.jfrj.relatorio.dinamico.RelatorioTemplate;
 import br.gov.jfrj.siga.dp.DpLotacao;
 import br.gov.jfrj.siga.dp.DpPessoa;
+import br.gov.jfrj.siga.ex.ExDocumento;
 import br.gov.jfrj.siga.ex.ExMobil;
 import br.gov.jfrj.siga.ex.bl.Ex;
 import br.gov.jfrj.siga.hibernate.ExDao;
@@ -44,6 +47,9 @@ import br.gov.jfrj.siga.model.dao.HibernateUtil;
 
 public class RelConsultaDocEntreDatas extends RelatorioTemplate {
 
+	private final String SIGLA_PROCESSO_ADMINISTRATIVO = "ADM";	
+
+		
 	public RelConsultaDocEntreDatas(Map parametros) throws DJBuilderException {
 		super(parametros);
 		if (parametros.get("secaoUsuario") == null) {
