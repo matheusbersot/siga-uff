@@ -55,9 +55,9 @@
 						value="/arquivo/exibir.action?arquivo=${doc.codigoCompacto}.pdf" />
 				
 					<c:set var="jspServer"
-						value="${request.scheme}://${request.serverName}:${request.localPort}${request.contextPath}/expediente/mov/assinar_gravar.action" />
+						value="${request.scheme}://${request.serverName}:${request.serverPort}${request.contextPath}/expediente/mov/assinar_gravar.action" />
 					<c:set var="nextURL"
-						value="${request.scheme}://${request.serverName}:${request.localPort}${request.contextPath}/expediente/doc/exibir.action?sigla=${sigla}" />
+						value="${request.scheme}://${request.serverName}:${request.serverPort}${request.contextPath}/expediente/doc/exibir.action?sigla=${sigla}" />
 					<c:set var="urlPath" value="${request.contextPath}" />
 
 					<ww:hidden id="jspserver" name="jspserver" value="${jspServer}" />
@@ -93,7 +93,7 @@
 				 
 				<c:if
 					test="${f:podeUtilizarServicoPorConfiguracao(titular,lotaTitular,'SIGA:Sistema Integrado de Gestão Administrativa;DOC:Módulo de Documentos;ASS:Assinatura digital;EXT:Extensão')}">
-					${f:obterExtensaoAssinador(lotaTitular.orgaoUsuario,request.scheme,request.serverName,request.localPort,urlPath,jspServer,nextURL,botao,lote)}	
+					${f:obterExtensaoAssinador(lotaTitular.orgaoUsuario,request.scheme,request.serverName,request.serverPort,urlPath,jspServer,nextURL,botao,lote)}	
 				</c:if>
 			</div>
 		</div>

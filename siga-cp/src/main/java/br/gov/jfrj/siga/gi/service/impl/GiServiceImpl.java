@@ -56,7 +56,7 @@ public class GiServiceImpl implements GiService {
 		String resultado = "";
 		try {
 			final String hashAtual = GeraMessageDigest.executaHash(
-					senha.getBytes(), "MD5");
+					senha.getBytes(), "SHA1");
 			CpDao dao = CpDao.getInstance();
 
 			DpPessoaDaoFiltro flt = new DpPessoaDaoFiltro();
