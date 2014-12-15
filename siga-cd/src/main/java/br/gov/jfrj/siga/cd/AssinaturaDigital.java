@@ -845,10 +845,10 @@ public class AssinaturaDigital {
 	private static String obterNomeExibicao(String s) {
 		s = s.split("CN=")[1];
 		s = s.split(",")[0];
-		// Retira o CPF, se houver
+		/*/ Retira o CPF, se houver
 		String[] splitted = s.split(":");
 		if (splitted.length == 2 && Pattern.compile("[0-9]{11}").matcher(splitted[1]).matches())
-			return splitted[0];
+			return splitted[0];*/
 		return s;
 	}
 
