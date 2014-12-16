@@ -6,8 +6,7 @@
 
 <h4>Modelos Padronizados</h4>
 <p>Está sendo realizada uma padronização dos modelos de expedientes
-	usados pelo CJF e pelos TRF's da 2ª e 3ª Região. Alguns modelos, como o
-	de ofício, já estão com um novo layout no Siga-Doc.</p>
+	usados pela Universidade Federal Fluminense..</p>
 
 <h4>Novo Editor de Textos</h4>
 <p>

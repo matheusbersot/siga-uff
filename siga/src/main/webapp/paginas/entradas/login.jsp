@@ -77,7 +77,7 @@
 			<!-- login box -->
 			<div class="gt-mylogin-box">
 				<!-- login form -->
-				<form method="post" action="j_security_check" class="gt-form"
+				<form method="post" name="login" action="j_security_check" class="gt-form"
 				 style= "background: url(/siga/imagens/iduff.jpeg) no-repeat; background-size:60px 100px; background-position: 0 20px; padding-left:20px;">
 					<!-- form row -->
 					<div class="gt-form-row" style="margin-left: 60px;">
