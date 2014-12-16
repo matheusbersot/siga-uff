@@ -19,7 +19,7 @@
 		}
 
 		function retiraZeroFrenteCPF() {
-			cpf = document.forms["login"]["matricula"].value;
+			cpf = document.forms["login"]["j_username"].value;
 			acabou = false;
 			while (!acabou) {
 				if (cpf[0] == '0') {
@@ -76,8 +76,8 @@
 
 			<!-- login box -->
 			<div class="gt-mylogin-box">
-				<!-- login form -->
-				<form method="post" name="login" action="j_security_check" class="gt-form"
+				<!-- login form -->			
+				<form method="post" name="login" action="j_security_check" class="gt-form" onsubmit="adicionaSiglaNoLogin()"
 				 style= "background: url(/siga/imagens/iduff.jpeg) no-repeat; background-size:60px 100px; background-position: 0 20px; padding-left:20px;">
 					<!-- form row -->
 					<div class="gt-form-row" style="margin-left: 60px;">
