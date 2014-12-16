@@ -59,6 +59,8 @@ public class Correio {
 		props.put("mail.smtp.host", SigaBaseProperties.getString("servidor.smtp"));
 		props.put("mail.host", SigaBaseProperties.getString("servidor.smtp"));
 		props.put("mail.mime.charset", "UTF-8");
+		props.put("mail.smtp.starttls.enable",  SigaBaseProperties.getString("servidor.mail.smtp.starttls.enable"));
+
 
 		// Cria sessão. setDebug(true) é interessante pois
 		// mostra os passos do envio da mensagem e o
