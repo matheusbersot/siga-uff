@@ -295,7 +295,7 @@ public class CpBL {
 					idNova.setDtCriacaoIdentidade(dt);
 
 					final String hashNova = GeraMessageDigest.executaHash(
-							novaSenha.getBytes(), "MD5");
+							novaSenha.getBytes(), "SHA1");
 					idNova.setDscSenhaIdentidade(hashNova);
 
 					BASE64Encoder encoderBase64 = new BASE64Encoder();
@@ -379,7 +379,7 @@ public class CpBL {
 					try {
 						CpIdentidade idNova = new CpIdentidade();
 						final String hashNova = GeraMessageDigest.executaHash(
-								novaSenha.getBytes(), "MD5");
+								novaSenha.getBytes(), "SHA1");
 						idNova.setDscSenhaIdentidade(hashNova);
 						idNova.setNmLoginIdentidade(matricula);
 						idNova.setDpPessoa(pessoa);
@@ -433,7 +433,7 @@ public class CpBL {
 			throw new AplicacaoException("Senha atual não confere");
 		}
 		final String hashAtual = GeraMessageDigest.executaHash(
-				senhaAtual.getBytes(), "MD5");
+				senhaAtual.getBytes(), "SHA1");
 
 		final CpIdentidade id = dao().consultaIdentidadeCadastrante(
 				nomeUsuario, true);
@@ -500,7 +500,7 @@ public class CpBL {
 				idNova.setIdIdentidade(null);
 				idNova.setDtCriacaoIdentidade(dt);
 				final String hashNova = GeraMessageDigest.executaHash(
-						senhaNova.getBytes(), "MD5");
+						senhaNova.getBytes(), "SHA1");
 				idNova.setDscSenhaIdentidade(hashNova);
 
 				BASE64Encoder encoderBase64 = new BASE64Encoder();
@@ -575,9 +575,9 @@ public class CpBL {
 			String hashSenha1 = null;
 			String hashSenha2 = null;
 			hashSenha1 = GeraMessageDigest
-					.executaHash(senha1.getBytes(), "MD5");
+					.executaHash(senha1.getBytes(), "SHA1");
 			hashSenha2 = GeraMessageDigest
-					.executaHash(senha2.getBytes(), "MD5");
+					.executaHash(senha2.getBytes(), "SHA1");
 
 			if (pesAux1.getIdInicial().equals(pesAux2.getIdInicial())
 					|| pesAux1.getIdInicial().equals(pessoa.getIdInicial())
@@ -671,7 +671,7 @@ public class CpBL {
 				idNova.setIdIdentidade(null);
 				idNova.setDtCriacaoIdentidade(dt);
 				final String hashNova = GeraMessageDigest.executaHash(
-						senhaNova.getBytes(), "MD5");
+						senhaNova.getBytes(), "SHA1");
 				idNova.setDscSenhaIdentidade(hashNova);
 
 				BASE64Encoder encoderBase64 = new BASE64Encoder();
