@@ -4,7 +4,7 @@
 <%@ taglib uri="http://localhost/libstag" prefix="f"%>
 <%@ taglib prefix="ww" uri="/webwork"%>
 
-<siga:pagina titulo="Login" desabilitarbusca="sim"
+<siga:pagina titulo="Login" desabilitarbusca="sim" desabilitarmenu="sim"
 	onLoad="try{document.getElementById('j_username').focus();document.getElementById('j_username').select()}catch(e){};">
 
 	<script type="text/javascript">
