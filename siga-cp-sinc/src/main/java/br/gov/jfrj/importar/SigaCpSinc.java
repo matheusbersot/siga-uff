@@ -1143,6 +1143,9 @@ public class SigaCpSinc {
 				// inferir tipo de pessoa para a SJRJ se vier nulo no XML
 				inferirTipoPessoaSJRJ(pessoa);
 			}
+			
+			pessoa.setIdIdentificacaoIduff(parseLong(parser, "ididentificacao_iduff"));
+			
 		} catch (Exception e) {
 			throw e;
 		}

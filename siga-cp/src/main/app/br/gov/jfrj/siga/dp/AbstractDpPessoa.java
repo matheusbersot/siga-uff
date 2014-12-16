@@ -160,6 +160,8 @@ public abstract class AbstractDpPessoa extends DpResponsavel implements
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_TP_PESSOA")
 	private CpTipoPessoa cpTipoPessoa;
+	@Column(name="ididentificacao_iduff")
+	private Long idIdentificacaoIduff;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pessoaInicial")
 	@Desconsiderar
@@ -654,6 +656,24 @@ public abstract class AbstractDpPessoa extends DpResponsavel implements
 	 */
 	public String getNomeExibicao() {
 		return nomeExibicao;
+	}
+	
+	/**
+	 * Retorna o id da identificação iduff
+	 * 
+	 * @return 
+	 */
+	public Long getIdIdentificacaoIduff() {
+		return idIdentificacaoIduff;
+	}
+
+	/**
+	 * Define o id da identificação iduff
+	 * 
+	 * @param idIdentificacaoIduff
+	 */
+	public void setIdIdentificacaoIduff(Long idIdentificacaoIduff) {
+		this.idIdentificacaoIduff = idIdentificacaoIduff;
 	}
 
 }
