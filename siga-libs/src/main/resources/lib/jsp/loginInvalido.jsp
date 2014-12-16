@@ -32,9 +32,7 @@
 						</tr>
 						<tr>
 							<td style="text-align: center; padding: 10pt; font-size: 10pt;">Verifique
-								se a matrícula foi preenchida na forma <br /> <b>XX</b>99999,
-								onde XX é a sigla do seu órgão (T2, RJ, ES, etc.) e 99999 é o
-								número da sua matrícula.</td>
+								se o IdUFF foi preenchido corretamente.</td>
 						</tr>
 					</table>
 				</div>
