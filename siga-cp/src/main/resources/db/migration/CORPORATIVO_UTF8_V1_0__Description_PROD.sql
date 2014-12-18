@@ -2614,12 +2614,12 @@ src_blob := utl_raw.cast_to_raw(convert('
             </tr>
             <tr>
                 <td width="100%" align="center">
-<p style="font-family: AvantGarde Bk BT, Arial; font-size: 11pt;">${(func.obterTitulo1DoCabecalhoPrimeiraPaginaModelo())!}</p>
+<p style="font-family: AvantGarde Bk BT, Arial; font-size: 11pt;">${(func.resource("siga.ex.modelos.cabecalho.titulo"))!}</p>
                 </td>
             </tr>
             <tr>
                 <td width="100%" align="center">
-<p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${(func.obterTitulo2DoCabecalhoPrimeiraPaginaModelo())!}</p>
+<p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${(func.resource("siga.ex.modelos.cabecalho.subtitulo"))!}</p>
                 </td>
             </tr>
           [#if func.orgaoUsuarioPresenteNoCabecalhoModelo()!true]
@@ -2649,12 +2649,12 @@ src_blob := utl_raw.cast_to_raw(convert('
         <table width="100%" border="0" cellpadding="2">
             <tr>
                 <td width="100%" align="center">
-<p style="font-family: AvantGarde Bk BT, Arial; font-size: 11pt;">${(func.obterTitulo1DoCabecalhoPrimeiraPaginaModelo())!}</p>
+<p style="font-family: AvantGarde Bk BT, Arial; font-size: 11pt;">${(func.resource("siga.ex.modelos.cabecalho.titulo"))!}</p>
                 </td>
             </tr>
             <tr>
                 <td width="100%" align="center">
-<p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${(func.obterTitulo2DoCabecalhoPrimeiraPaginaModelo())!}</p>
+<p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${(func.resource("siga.ex.modelos.cabecalho.subtitulo"))!}</p>
                 </td>
             </tr>
           [#if func.orgaoUsuarioPresenteNoCabecalhoModelo()!true]
@@ -2686,12 +2686,12 @@ src_blob := utl_raw.cast_to_raw(convert('
         <table align="left" width="100%">
             <tr>
                 <td width="100%" align="center">
-<p style="font-family: AvantGarde Bk BT, Arial; font-size: 11pt;">${(func.obterTitulo1DoCabecalhoPrimeiraPaginaModelo())!}</p>
+<p style="font-family: AvantGarde Bk BT, Arial; font-size: 11pt;">${(func.resource("siga.ex.modelos.cabecalho.titulo"))!}</p>
                 </td>
             </tr>
             <tr>
                 <td width="100%" align="center">
-<p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${(func.obterTitulo2DoCabecalhoPrimeiraPaginaModelo())!}</p>
+<p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${(func.resource("siga.ex.modelos.cabecalho.subtitulo"))!}</p>
                 </td>
             </tr>
           [#if func.orgaoUsuarioPresenteNoCabecalhoModelo()!true]
@@ -2721,12 +2721,12 @@ src_blob := utl_raw.cast_to_raw(convert('
         <table width="100%">
             <tr>
                 <td width="100%" align="center">
-<p style="font-family: AvantGarde Bk BT, Arial; font-size: 11pt;">${(func.obterTitulo1DoCabecalhoPrimeiraPaginaModelo())!}</p>
+<p style="font-family: AvantGarde Bk BT, Arial; font-size: 11pt;">${(func.resource("siga.ex.modelos.cabecalho.titulo"))!}</p>
                 </td>
             </tr>
             <tr>
                 <td width="100%" align="center">
-<p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${(func.obterTitulo2DoCabecalhoPrimeiraPaginaModelo())!}</p>
+<p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${(func.resource("siga.ex.modelos.cabecalho.subtitulo"))!}</p>
                 </td>
             </tr>
           [#if func.orgaoUsuarioPresenteNoCabecalhoModelo()!true]

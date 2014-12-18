@@ -4,6 +4,16 @@
 <%@ taglib uri="http://localhost/functiontag" prefix="f"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<c:choose>
+	<c:when test="${empty f:orgaoUsuarioPresenteNoCabecalhoModelo()}">
+		<c:set var="mostrarOrgaoUsuario" scope="request" value="true" />
+	</c:when>
+	<c:otherwise>
+		<c:set var="mostrarOrgaoUsuario" scope="request"
+			value="${f:orgaoUsuarioPresenteNoCabecalhoModelo()}" />
+	</c:otherwise>
+</c:choose>
+
 <table width="100%" align="left" border="0" bgcolor="#FFFFFF">
 	<col width="15%"></col>
 	<col width="1%"></col>
@@ -26,6 +36,8 @@
 					</td>
 				</tr>
 			</c:if>
+							<c:if test="${mostrarOrgaoUsuario}">
+			
 			<tr>
 				<td width="100%" align="left">
 				<p style="font-size: 8pt;">
@@ -35,6 +47,7 @@
 				</c:choose></p>
 				</td>
 			</tr>
+			</c:if>
 		</table>
 		</td>
 	</tr>

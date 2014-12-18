@@ -1043,4 +1043,8 @@ public class FuncoesEL {
 		InputSource inputSource = new InputSource( new StringReader( xml ) );
 		return freemarker.ext.dom.NodeModel.parse(inputSource);
 	}
+	
+	public static boolean orgaoUsuarioPresenteNoCabecalhoModelo() throws Exception {
+		return SigaExProperties.isOrgaoUsuarioPresenteNoCabecalhoModelo();		
+	}
 }

@@ -9,6 +9,10 @@ BEGIN
 select conteudo_blob_mod into dest_blob from CORPORATIVO.cp_modelo where id_modelo = 1 for update;
 
 src_blob := utl_raw.cast_to_raw(convert('
+<!-- ------------------------ macros UFF ------------------------ -->','WE8ISO8859P1'));
+
+
+src_blob := utl_raw.cast_to_raw(convert('
 [#macro br]<br/>[/#macro]','WE8ISO8859P1'));
 
 dbms_lob.append(dest_blob, src_blob);
@@ -104,12 +108,12 @@ src_blob := utl_raw.cast_to_raw(convert('
             </tr>
             <tr>
                 <td width="100%" align="center">
-                <p style="font-family: AvantGarde Bk BT, Arial; font-size: 11pt; font-weight:bold;">${(func.obterTitulo1DoCabecalhoPrimeiraPaginaModelo())!}</p>
+                <p style="font-family: AvantGarde Bk BT, Arial; font-size: 11pt; font-weight:bold;">${(func.resource("siga.ex.modelos.cabecalho.titulo"))!}</p>
                 </td>
             </tr>
  			<tr>
                 <td width="100%" align="center">
-                  <p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${(func.obterTitulo2DoCabecalhoPrimeiraPaginaModelo())!}</p>
+                  <p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${(func.resource("siga.ex.modelos.cabecalho.subtitulo"))!}</p>
                 </td>
             </tr>
             <tr>
