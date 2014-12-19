@@ -18,9 +18,9 @@
 	<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 	<TABLE WIDTH="100%" height="100%" BORDER=0 CELLPADDING=0 CELLSPACING=0>
 		<TR>
-			<TD valign="top">
-				</c:if>
+			<TD valign="top">				
 				<c:if test="${title=='false'}">
+				</c:if>
 			</TD>
 		</TR>
 	</TABLE>

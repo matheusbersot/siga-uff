@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	buffer="64kb"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	buffer="64kb"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="ww" uri="/webwork"%>
 <%@ taglib uri="http://localhost/customtag" prefix="tags"%>
@@ -8,14 +7,15 @@
 <c:set var="titulo_pagina" scope="request">
 	Visualizar
 </c:set>
+
 <c:if test="${not empty modelo.nmArqMod}">
-	<c:set var="jsp" scope="request" value="${modelo.nmArqMod}" />
+	<c:set var="jsp" scope="request" value="${modelo.nmArqMod}" />	
 </c:if>
 <c:if test="${(empty jsp) and (not empty nmArqMod)}">
 	<c:set var="jsp" scope="request" value="${nmArqMod}" />
 </c:if>
 
-<c:import context="/siga" url="/paginas/cabecalho_popup.jsp" />
+<title>SIGA - ${titulo_pagina}</title>
 
 <table width="100%" border="0">
 	<tr>
@@ -36,5 +36,3 @@
 		</tags:fixdocumenthtml></td>
 	</tr>
 </table>
-<c:import context="/siga" url="/paginas/rodape_popup.jsp" />
-
