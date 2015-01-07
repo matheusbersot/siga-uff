@@ -11,9 +11,10 @@
             <module name="org.apache.neethi" />  
             <module name="org.apache.lucene" />
             <module name="org.apache.commons.lang" />  
-            <module name="org.apache.commons.collections" />  
-            <module name="org.antlr" />
-            
+            <module name="org.apache.commons.collections" />
+            <module name="org.apache.commons.beanutils" />            
+                       
+            <module name="org.antlr" />            
             <module name="org.dom4j" /> 
             <module name="org.jdom" /> 
                         
@@ -21,7 +22,6 @@
             <module name="com.opensymphony" /> 
         
             <module name="nl.captcha" />
-            <module name="net.sf.jasperreports" />            
 
             <module name="javax.xml.bind" />    
             <module name="javax.wsdl4j.api" />            

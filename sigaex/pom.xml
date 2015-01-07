@@ -74,6 +74,8 @@
 								<include>iText-2.1.5.jar</include>
 								<include>iText-rtf-2.1.5.jar</include>
 								<include>Tidy.jar</include>
+								<include>commons-digester-1.7.jar</include>
+								<include>jasperreports-3.5.1.jar</include>
 							</includes>
 							<targetPath>WEB-INF/lib</targetPath>
 						</resource>
