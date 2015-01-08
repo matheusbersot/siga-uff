@@ -21,25 +21,10 @@ servidor.mail.smtp.starttls.enable=true
 servidor.smtp.debug=false
 servidor.smtp.usuario.remetente=errossigadoc@gmail.com
 
-# -- Cabeçalhos de Todas as Páginas--
-# Se nenhum valor for definido, o padrão "Justiça Federal - <Nome do Órgão do Usuário>" será utilizado
-siga.nomeOrgao=Universidade Federal Fluminense
-
-# host
-
-#Desenvolvimento
-siga.host=192.168.1.181:8081
-
-#Homologação
-#siga.host=200.20.0.58:8080
-
-#Produção
-#siga.host=<servidor>:<porta>
-
-
 # ################### 
 # #####siga.base##### 
 # ################### 
+
 
 # -- validator --
 siga.base.errors.maxlength={0} não pode ter mais de {1} caracteres.
@@ -681,6 +666,7 @@ siga.ex.email.baseTeste=Obs. Mensagem enviada pelo sistema de testes. Favor desc
 
 
 
+
 # -- Pontos de Extensão --
 
 #editor
@@ -718,6 +704,12 @@ siga.ex.classificacao.mascara.nomeNivel.6      =      SubSubAtividade
 #siga.ex.classificacao.mascara.saida           =      %1$02d.%2$03d.%3$02d
 #siga.ex.classificacao.mascara.javascript      =      99.999.99
 
+###################
+###   siga.wf   ###
+###################
+
+siga.wf.rel.estatisticas.gerais.media.truncada.min      =       5
+siga.wf.rel.estatisticas.gerais.media.truncada.max      =       25
 # ################### 
 # ##    siga.ldap  ## 
 # ################### 
@@ -786,7 +778,7 @@ siga.cd.tspUrl= http://tsp.iaik.at/tsp/TspRequest
 #siga.ws.service.ex.remotePort=8080
 
 #Desenvolvimento
-siga.ws.service.ex.remoteHost=192.168.1.181
+siga.ws.service.ex.remoteHost=192.168.1.50
 siga.ws.service.ex.remotePort=8080
 
 
@@ -950,7 +942,7 @@ log.thread.filter.dir=/home/matheusbersot/Servidores/jboss-as-7.1.1.Final/standa
 #wfservice.endpoint=http://200.20.0.58:8080:8080/sigawf/servicos/WfService?wsdl
 
 # Desenvolvimento
-wfservice.endpoint=http://192.168.1.181:8081/sigawf/servicos/WfService?wsdl
+wfservice.endpoint=http://192.168.1.50:8081/sigawf/servicos/WfService?wsdl
 
 wfservice.qname=http://impl.service.wf.siga.jfrj.gov.br/
 wfservice.servicename=WfServiceImplService
@@ -962,7 +954,7 @@ wfservice.servicename=WfServiceImplService
 #exservice.endpoint=http://200.20.0.58:8080/sigaex/servicos/ExService?wsdl
 
 # Desenvolvimento
-exservice.endpoint=http://192.168.1.181:8081/sigaex/servicos/ExService?wsdl
+exservice.endpoint=http://192.168.1.50:8081/sigaex/servicos/ExService?wsdl
 
 exservice.qname=http://impl.service.ex.siga.jfrj.gov.br/
 exservice.servicename=ExServiceImplService
@@ -974,7 +966,7 @@ exservice.servicename=ExServiceImplService
 #cdservice.endpoint=http://200.20.0.58:8080/sigacd/servicos/CdService?wsdl
 
 # Desenvolvimento
-cdservice.endpoint=http://192.168.1.181:8081/sigacd/servicos/CdService?wsdl
+cdservice.endpoint=http://192.168.1.50:8081/sigacd/servicos/CdService?wsdl
 cdservice.qname=http://impl.service.cd.siga.jfrj.gov.br/
 cdservice.servicename=CdServiceImplService
 
@@ -1058,7 +1050,7 @@ siga.ex.dataInicioObrigacaoDeAssinarAnexoEDespacho=01/01/2014
 #siga.ex.enderecoAutenticidadeDocs=http://200.20.0.58:8080/sigaex/autenticar.action
 
 #Desenvolvimento
-siga.ex.enderecoAutenticidadeDocs=http://192.168.1.181:8081/sigaex/autenticar.action
+siga.ex.enderecoAutenticidadeDocs=http://192.168.1.50:8081/sigaex/autenticar.action
 
 
 ################################
@@ -1066,12 +1058,8 @@ siga.ex.enderecoAutenticidadeDocs=http://192.168.1.181:8081/sigaex/autenticar.ac
 ################################
 
 #cabeçalho do modelo da primeira página
-siga.ex.cabecalhoPrimeiraPaginaModelo.titulo.1=SERVIÇO PÚBLICO FEDERAL
-siga.ex.cabecalhoPrimeiraPaginaModelo.titulo.2=UNIVERSIDADE FEDERAL FLUMINENSE
-
-#cabeçalho do modelo das páginas subsequentes
-siga.ex.cabecalhoModelo.titulo.1=UNIVERSIDADE FEDERAL FLUMINENSE                   
-siga.ex.cabecalhoModelo.titulo.2=
+siga.ex.modelos.cabecalho.titulo=SERVIÇO PÚBLICO FEDERAL
+siga.ex.modelos.cabecalho.subtitulo=UNIVERSIDADE FEDERAL FLUMINENSE
 
 #O nome do orgão do usuário deve aparecer no cabeçalho do modelo
 siga.ex.orgaoUsuarioPresenteNoCabecalhoModelo=false

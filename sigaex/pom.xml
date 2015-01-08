@@ -76,6 +76,7 @@
 								<include>Tidy.jar</include>
 								<include>commons-digester-1.7.jar</include>
 								<include>jasperreports-3.5.1.jar</include>
+								<include>Qrcode.jar</include>
 							</includes>
 							<targetPath>WEB-INF/lib</targetPath>
 						</resource>

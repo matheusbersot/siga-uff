@@ -7,6 +7,11 @@
             <module name="org.springframework" />
             <module name="org.apache.xml-resolver" /> 
             <module name="org.apache.neethi" /> 
+			<module name="org.bouncycastle" />
+			<module name="org.apache.commons.io" />		
+			<module name="org.apache.xerces" />	
+			
+			<module name="com.sun.jaxpri" />   
 
             <module name="javax.wsdl4j.api" />
             <module name="javax.xml.bind" />    
