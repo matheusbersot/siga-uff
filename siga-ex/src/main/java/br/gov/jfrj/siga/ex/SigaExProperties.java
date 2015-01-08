@@ -229,7 +229,7 @@ public class SigaExProperties extends ModeloPropriedade {
 	}
 
 	public static String getTextoSuperiorCarimbo() {
-		return getString("textoSuperiorCarimbo");
+		return getString("siga.ex.modelos.cabecalho.subtitulo");
 	}
 	
 	public static boolean isOrgaoUsuarioPresenteNoCabecalhoModelo() {

@@ -381,14 +381,16 @@ public class Documento {
 			code39.setCode(sigla.replace("-", "").replace("/", "")
 					.replace(".", ""));
 			code39.setStartStopText(false);
-			final Image image39 = code39.createImageWithBarcode(over, null,
+			final Image image39 = code39.createImageWithBarcode(under, null,
 					null);
 			Rectangle r = stamp.getReader().getPageSizeWithRotation(i);
 
 			image39.setInitialRotation((float) Math.PI / 2.0f);
-			image39.setAbsolutePosition(r.getWidth() - image39.getHeight()
+			/*image39.setAbsolutePosition(r.getWidth() - image39.getHeight()
 					+ (STAMP_BORDER_IN_CM - PAGE_BORDER_IN_CM) * CM_UNIT,
-					BARCODE_HEIGHT_IN_CM * CM_UNIT);
+					BARCODE_HEIGHT_IN_CM * CM_UNIT);*/
+			image39.setAbsolutePosition(PAGE_BORDER_IN_CM * 10,
+					BARCODE_HEIGHT_IN_CM * CM_UNIT * 2);
 
 			image39.setBackgroundColor(Color.green);
 			image39.setBorderColor(Color.RED);
@@ -396,17 +398,17 @@ public class Documento {
 
 			image39.setImageMask(mask);
 
-			over.setRGBColorFill(255, 255, 255);
+			under.setRGBColorFill(255, 255, 255);
 			mask.setAbsolutePosition(r.getWidth() - image39.getHeight()
 					- (PAGE_BORDER_IN_CM) * CM_UNIT,
 					(BARCODE_HEIGHT_IN_CM - STAMP_BORDER_IN_CM) * CM_UNIT);
 			mask.scaleAbsolute(image39.getHeight() + 2 * STAMP_BORDER_IN_CM
 					* CM_UNIT, image39.getWidth() + 2 * STAMP_BORDER_IN_CM
 					* CM_UNIT);
-			over.addImage(mask);
+			under.addImage(mask);
 
-			over.setRGBColorFill(0, 0, 0);
-			over.addImage(image39);
+			under.setRGBColorFill(0, 0, 0);
+			under.addImage(image39);
 
 			// over.addImage(mask, mask.getScaledWidth() * 8, 0, 0,
 			// mask.getScaledHeight() * 8, 100, 450);
