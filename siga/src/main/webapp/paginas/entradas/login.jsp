@@ -78,7 +78,7 @@
 			<div class="gt-mylogin-box">
 				<!-- login form -->			
 				<form method="post" name="login" action="j_security_check" class="gt-form" onsubmit="adicionaSiglaNoLogin()"
-				 style= "background: url(/siga/imagens/iduff.jpeg) no-repeat; background-size:60px 100px; background-position: 0 20px; padding-left:20px;">
+				 style= "background: url(/siga/imagens/iduff.jpeg) no-repeat; background-position: 0 20px; padding-left:20px;">
 					<!-- form row -->
 					<div class="gt-form-row" style="margin-left: 60px;">
 						<label class="gt-label">CPF (somente n&uacute;meros)</label> <input id="j_username"

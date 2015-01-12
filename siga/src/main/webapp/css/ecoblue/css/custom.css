@@ -100,6 +100,28 @@ tr.fisicoeven:hover td {
 	display: block;
 }
 
+.gt-hd .gt-version-left {
+	margin-left: 0px;
+	margin-bottom: 0;
+	padding-top: 20px;
+	color: #fff;
+	font-size: 100%;
+	font-weight: normal;
+	float: left;
+	display: inline;
+}
+
+.gt-hd .gt-version-right {
+	margin-right: 40px;
+	margin-bottom: 0;
+	padding-top: 5px;
+	color: #fff;
+	font-size: 100%;
+	font-weight: normal;
+	float: right;
+	display: inline;
+}
+
 .le-action-list {
 	color: #999;
 	margin: 0;

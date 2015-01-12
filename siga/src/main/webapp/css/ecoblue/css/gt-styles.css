@@ -48,6 +48,26 @@ body {
 	float: left;
 	display: inline;
 }
+
+.gt-hd .gt-logo-left {
+	margin-left: 35px;
+	margin-bottom: 0;
+	color: #fff;
+	font-size: 215%;
+	font-weight: normal;
+	float: left;
+	display: inline;
+}
+
+.gt-hd .gt-logo-right {
+	margin-right: 10px;
+	margin-bottom: 0;
+	color: #fff;
+	font-size: 215%;
+	font-weight: normal;
+	float: right;
+	display: inline;
+}
 .gt-hd .gt-logo .gt-leaf {
 	vertical-align: top;
 }

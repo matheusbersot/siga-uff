@@ -189,28 +189,28 @@ ${meta}
 						</c:if>
 						<!-- / utility box -->
 						<!-- logo -->
-						<div class="gt-logo" style="padding: 0;">
+						<div class="gt-logo-left">
 							<img style="margin-top: 3px; margin-bottom: -5px;"
 								src="/siga/imagens/logo.png">
 						</div>
+						
 
 						<c:choose>
 							<c:when test="${empty cadastrante}">
-								<div class="gt-logo"
-									style="padding: 0; position: relative; left: 70%">
-									<img
-										style="margin-top: 3px; margin-bottom: -5px; height: 55px;"
-										src="/siga/imagens/pdi.png">
-								</div>
-								<div class="gt-version"
-									style="position: relative; right: 8%; top: -20px; width: 500px; display: inline-block;">
+								<div class="gt-version-left">
 									Sistema Integrado de Gest&atilde;o Administrativa</div>
-								<div class="gt-version"
-									style="position: relative; left: 28%; top: -5px; width: 100; display: inline-block;">
+								
+								<div class="gt-version-right" style="width:100px">
 									Plano de Desenvolvimento Institucional</div>
+									
+								<div class="gt-logo-right">
+									<img style="height: 55px;"
+										src="/siga/imagens/pdi.png">
+								</div>								
+								
 							</c:when>
 							<c:when test="${not empty cadastrante}">
-								<div class="gt-version">Sistema Integrado de Gest&atilde;o
+								<div class="gt-version-left">Sistema Integrado de Gest&atilde;o
 									Administrativa</div>
 							</c:when>
 						</c:choose>
