@@ -19,7 +19,7 @@
 		}
 
 		function retiraZeroFrenteCPF() {
-			cpf = document.forms["login"]["j_username"].value;
+			cpf = document.forms["login"]["matricula"].value;
 			acabou = false;
 			while (!acabou) {
 				if (cpf[0] == '0') {
@@ -81,10 +81,17 @@
 				 style= "background: url(/siga/imagens/iduff.jpeg) no-repeat; background-position: 0 20px; padding-left:20px;">
 					<!-- form row -->
 					<div class="gt-form-row" style="margin-left: 60px;">
-						<label class="gt-label">CPF (somente n&uacute;meros)</label> <input id="j_username"
-							type="text" name="j_username"
+						<input id="j_username" type="text" name="j_username"
+							onblur="javascript:converteUsuario(this)" class="gt-form-text" style="display:none">
+					</div>
+					
+					
+					<div class="gt-form-row" style="margin-left: 60px;">
+						<label class="gt-label">CPF (somente n&uacute;meros)</label> <input
+							id="matricula" type="text" name="matricula"
 							onblur="javascript:converteUsuario(this)" class="gt-form-text">
 					</div>
+					
 					<!-- /form row -->
 
 					<!-- form row -->
