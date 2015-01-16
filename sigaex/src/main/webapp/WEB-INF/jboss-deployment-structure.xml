@@ -25,7 +25,7 @@
         
             <module name="nl.captcha" />
 
-            <module name="javax.xml.bind" />    
+            <module name="com.sun.xml.bind" /> 
             <module name="javax.wsdl4j.api" />            
             
             <module name="dwr" />

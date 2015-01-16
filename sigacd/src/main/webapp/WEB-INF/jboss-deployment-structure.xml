@@ -14,7 +14,7 @@
 			<module name="com.sun.jaxpri" />   
 
             <module name="javax.wsdl4j.api" />
-            <module name="javax.xml.bind" />    
+            <module name="com.sun.xml.bind" /> 
         </dependencies>
     </deployment>	
 </jboss-deployment-structure>

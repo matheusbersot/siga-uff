@@ -1,3 +1,0 @@
-digraph dependencies {
-  node [shape = box, fontsize=10.0];
-}
