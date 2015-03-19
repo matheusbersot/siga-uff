@@ -53,6 +53,7 @@ import br.gov.jfrj.siga.ex.ExNivelAcesso;
 import br.gov.jfrj.siga.ex.ExSituacaoConfiguracao;
 import br.gov.jfrj.siga.ex.ExTipoDocumento;
 import br.gov.jfrj.siga.ex.ExTipoMobil;
+import br.gov.jfrj.siga.ex.ExTipoMovimentacao;
 import br.gov.jfrj.siga.ex.bl.Ex;
 import br.gov.jfrj.siga.ex.bl.ExCompetenciaBL;
 import br.gov.jfrj.siga.ex.bl.ExConfiguracaoBL;
@@ -732,30 +733,34 @@ public class ExServiceImpl implements ExService {
 				  ExDocumentoVO docVO = null;
 				  try {
 						docVO = new ExDocumentoVO(doc, mob, doc.getTitular(), doc.getLotaTitular(), true, false);
-			 			for(ExMobilVO mobVO: docVO.getMobs())
-						{
-							  String descricaoMobil =mobVO.getDescricaoCompletaEMarcadoresEmHtml(doc.getCadastrante(),doc.getLotaTitular());
-							  descricaoMobil = descricaoMobil.replace("&ordm;", "º");
-							  descricaoMobil = descricaoMobil.replaceAll(", FF[\\d]*", " ");
-						  
-							  ArrayList<HashMap<String, String>> listaMovimentacoes = new ArrayList<HashMap<String, String>> ();
-							  			  
+					    ArrayList<HashMap<String, String>> listaMovimentacoes = new ArrayList<HashMap<String, String>> ();
+
+						for(ExMobilVO mobVO: docVO.getMobs())
+						{							  
 							  for(ExMovimentacaoVO mov: mobVO.getMovs())
 							  {					  
-								  HashMap<String, String> movimentacao = new HashMap<String, String>();
-								  movimentacao.put("dataEvento", mov.getDtRegMovDDMMYY().toString());
-								  movimentacao.put("tipoEvento", mov.getDescrTipoMovimentacao().toString());
-								  
-								  Map<String, ExParteVO> parte = mov.getParte();
-								  ExParteVO lotaSubscritor = parte.get("lotaSubscritor");
-								  movimentacao.put("lotacaoAtendente", lotaSubscritor.getDescricao());
-								  movimentacao.put("descricao", mov.getDescricao()); 
-								  movimentacao.put("duracao", mov.getDuracao());					  
-								 
-								  listaMovimentacoes.add(movimentacao);					  
+								  if ((mov.getIdTpMov() == ExTipoMovimentacao.TIPO_MOVIMENTACAO_CRIACAO) 
+									 || (mov.getIdTpMov() == ExTipoMovimentacao.TIPO_MOVIMENTACAO_TRANSFERENCIA) 
+								     || (mov.getIdTpMov() == ExTipoMovimentacao.TIPO_MOVIMENTACAO_RECEBIMENTO)
+								     || (mov.getIdTpMov() == ExTipoMovimentacao.TIPO_MOVIMENTACAO_DESPACHO_TRANSFERENCIA) 
+								     || (mov.getIdTpMov() == ExTipoMovimentacao.TIPO_MOVIMENTACAO_DESPACHO_INTERNO_TRANSFERENCIA) 
+								     || (mov.getIdTpMov() == ExTipoMovimentacao.TIPO_MOVIMENTACAO_TRANSFERENCIA_EXTERNA)
+								     || (mov.getIdTpMov() == ExTipoMovimentacao.TIPO_MOVIMENTACAO_DESPACHO_TRANSFERENCIA_EXTERNA))
+								  {
+									  HashMap<String, String> movimentacao = new HashMap<String, String>();
+									  movimentacao.put("dataEvento", mov.getDtRegMovDDMMYY().toString());								  
+									  movimentacao.put("tipoEvento", mov.getDescrTipoMovimentacao().toString());
+									  
+									  Map<String, ExParteVO> parte = mov.getParte();
+									  movimentacao.put("lotacaoOrigem", parte.get("lotaSubscritor").getSigla());		
+									  movimentacao.put("lotacaoDestino", parte.get("lotaResp").getSigla());										  				  
+									 
+									  listaMovimentacoes.add(movimentacao);
+								  }					  
 							  }						  
-							  resposta.put(descricaoMobil, listaMovimentacoes);
+							  
 					   }
+			 		  resposta.put("resposta", listaMovimentacoes);	
 				  } catch (Exception e) {
 					  resposta.put("erro", "Código do Processo Administrativo Inválido");   
 				  }
@@ -768,5 +773,6 @@ public class ExServiceImpl implements ExService {
 		   
 		   return resposta.toString();	   
 	   }
+
 
 }

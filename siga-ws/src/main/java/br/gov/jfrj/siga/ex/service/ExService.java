@@ -67,7 +67,5 @@ public interface ExService extends Remote {
 	public String criarDocumento(String cadastranteStr, String subscritorStr, String destinatarioStr, String destinatarioCampoExtraStr, String descricaoTipoDeDocumento, String nomeForma ,String nomeModelo, String classificacaoStr, 
 			String descricaoStr, Boolean eletronico, String nomeNivelDeAcesso, String conteudo, String siglaMobilPai, Boolean finalizar) throws Exception;
 	
-	public String consultaMovimentacaoProcesso(@WebParam(name="numeroProcesso") String numeroProcesso) throws Exception;
-
-
+	public String consultaMovimentacaoProcesso(@WebParam(name="numeroProcesso") String numeroProcesso) throws Exception;	
 }
