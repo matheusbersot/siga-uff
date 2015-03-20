@@ -1466,8 +1466,7 @@ begin
         select cp_feriado_SEQ.nextval into :new.id_feriado from dual;
      end if;
 end cp_feriado_insert_trg;
-
-
+/
 ALTER TRIGGER "CP_FERIADO_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger CP_LOCALIDADE_INSERT_TRG
@@ -1481,8 +1480,7 @@ if :new.ID_localidade is null then
 select cp_localidade_SEQ.nextval into :new.id_localidade from dual;
 end if;
 end;
-
-
+/
 ALTER TRIGGER "CP_LOCALIDADE_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger CP_ORGAO_INSERT_TRG
@@ -1495,7 +1493,7 @@ if :new.ID_ORGAO is null then
 select CP_ORGAO_SEQ.nextval into :new.ID_ORGAO from dual;
 end if;
 end;
-
+/
 ALTER TRIGGER "CP_ORGAO_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger CP_SEDE_INSERT_TRG
@@ -1509,7 +1507,7 @@ if :new.ID_SEDE is null then
 select CP_SEDE_SEQ.nextval into :new.ID_SEDE from dual;
 end if;
 end;
-
+/
 ALTER TRIGGER "CP_SEDE_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger CP_UF_INSERT_TRG
@@ -1525,8 +1523,7 @@ begin
      select cp_uf_SEQ.nextval into :new.id_uf from dual;
  end if;
 end cp_uf_insert_trg;
-
-
+/
 ALTER TRIGGER "CP_UF_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger DP_CARGO_INSERT_TRG
@@ -1544,7 +1541,7 @@ if :new.id_cargo_inicial is null then
 end if;
 end;
 --
-
+/
 ALTER TRIGGER "DP_CARGO_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger DP_ESTADO_CIVIL_INSERT_TRG
@@ -1560,8 +1557,7 @@ begin
         select DP_ESTADO_CIVIL_SEQ.nextval into :new.ID_ESTADO_CIVIL from dual;
      end if;
 end DP_ESTADO_CIVIL_insert_trg;
-
-
+/
 ALTER TRIGGER "DP_ESTADO_CIVIL_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger DP_FUNC_CONF_INSERT_TRG
@@ -1578,7 +1574,7 @@ if :new.id_fun_conf_ini is null then
     select :new.ID_funcao_confianca into :new.id_fun_conf_ini from dual;
 end if;
 end;
-
+/
 ALTER TRIGGER "DP_FUNC_CONF_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger DP_LOTACAO_INSERT_TRG
@@ -1595,7 +1591,7 @@ if :new.id_lotacao_ini is null then
     select :new.ID_lotacao into :new.id_lotacao_ini from dual;
 end if;
 end;
-
+/
 ALTER TRIGGER "DP_LOTACAO_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger DP_PADRAO_REF_INSERT_TRG
@@ -1608,7 +1604,7 @@ if :new.ID_padrao_referencia is null then
 select dP_padrao_referencia_SEQ.nextval into :new.ID_padrao_referencia from dual;
 end if;
 end;
-
+/
 ALTER TRIGGER "DP_PADRAO_REF_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger DP_PESSOA_INSERT_TRG
@@ -1624,7 +1620,7 @@ if :new.id_pessoa_inicial is null then
     select :new.ID_pessoa into :new.id_pessoa_inicial from dual;
 end if;
 end;
-
+/
 ALTER TRIGGER "DP_PESSOA_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger DP_PROVIMENTO_INSERT_TRG
@@ -1638,7 +1634,7 @@ if :new.ID_provimento is null then
 select dp_provimento_SEQ.nextval into :new.id_provimento from dual;
 end if;
 end;
-
+/
 ALTER TRIGGER "DP_PROVIMENTO_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger DP_SUBSTITUICAO_INSERT_TRG
@@ -1650,7 +1646,7 @@ if :new.ID_substituicao is null then
 select dP_substituicao_SEQ.nextval into :new.ID_substituicao from dual;
 end if;
 end;
-
+/
 ALTER TRIGGER "DP_SUBSTITUICAO_INSERT_TRG" ENABLE;
 
 --------------------------------------------------------

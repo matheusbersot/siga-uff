@@ -200,7 +200,7 @@ src_blob := utl_raw.cast_to_raw(convert('
             <table align="center" width="60%" border="1" cellspacing="1"  bgcolor="#000000">
               <tr>
                  <td width="30%" bgcolor="#FFFFFF" align="center"><br />
-                 <b>${tipo} Nº</b><br />
+                 <b>${tipo} N&ordm;</b><br />
                  <br />
                  </td>
 
