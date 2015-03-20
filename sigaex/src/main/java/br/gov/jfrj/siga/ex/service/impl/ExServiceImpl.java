@@ -751,6 +751,9 @@ public class ExServiceImpl implements ExService {
 									  movimentacao.put("dataEvento", mov.getDtRegMovDDMMYY().toString());								  
 									  movimentacao.put("tipoEvento", mov.getDescrTipoMovimentacao().toString());
 									  
+									  Long idTipoEvento = mov.getIdTpMov();
+									  movimentacao.put("idTipoEvento", idTipoEvento.toString());
+									  
 									  Map<String, ExParteVO> parte = mov.getParte();
 									  movimentacao.put("lotacaoOrigem", parte.get("lotaSubscritor").getSigla());		
 									  movimentacao.put("lotacaoDestino", parte.get("lotaResp").getSigla());										  				  
