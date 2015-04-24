@@ -7,6 +7,7 @@ import org.mozilla.jss.crypto.X509Certificate;
 public class Certificate {
 	
 	private java.security.cert.X509Certificate jdkCert;
+	private X509Certificate cert;
 	private DN issuer;
 	private DN subject;
 	private boolean smartCard;
@@ -16,6 +17,7 @@ public class Certificate {
 		this.jdkCert = jdkCert;
 		this.issuer = new DN(cert.getIssuerDN().getName());
 		this.subject = new DN(cert.getSubjectDN().getName());
+		this.cert = cert;
 	}
 		
 	public String getNotBefore(SimpleDateFormat sDf)
@@ -34,7 +36,11 @@ public class Certificate {
 
 	public DN getSubject() {
 		return subject;
-	}	
+	}
+	
+	public X509Certificate getMozillaX509Certificate() {
+		return cert;
+	}
 	
 	public boolean fromSmartCard(String nomeModulo)
 	{

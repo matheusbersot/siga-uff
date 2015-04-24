@@ -2,50 +2,54 @@ package br.jus.tjrr.siga.assinador;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 
-public class DialogoAlias extends JDialog implements ActionListener {
+public class DialogPassword extends JDialog implements ActionListener {
 
 
-    private JComboBox comboBox = null;
+    private JPasswordField password = new JPasswordField();
     private JButton ok =  new JButton("OK");
     private JButton cancel = new JButton("Cancelar");
-    private JLabel prompt = new JLabel("Selecione o certificado:");
+    private JLabel prompt = new JLabel("Entre com a senha do token:");
     JPanel passPanel = new JPanel();
     JPanel labelInput = new JPanel();
     JPanel buttons = new JPanel();
-    private String result;
+    private char[] result = null;
 
-    DialogoAlias(ArrayList<String> aliases) {
-        setTitle("Seleção de Certificado");
+    DialogPassword() {
+		setModalityType(ModalityType.APPLICATION_MODAL);
+    	setTitle("Senha");
+		setBounds(100, 100, 250, 130);
+        
         passPanel.setLayout(new BorderLayout());
         labelInput.setLayout(new GridLayout(2,1));
-        buttons.setLayout(new BorderLayout());
+        buttons.setLayout(new FlowLayout());
 
-        comboBox = new JComboBox(aliases.toArray());
+        password.setEchoChar('*');
 
         ok.addActionListener(this);
         cancel.addActionListener(this);
 
         labelInput.add(prompt);
-        labelInput.add(comboBox);
-        buttons.add(ok, BorderLayout.WEST);
-        buttons.add(cancel, BorderLayout.EAST);
-        passPanel.setPreferredSize(new Dimension(350, 100));
+        labelInput.add(password);
+        buttons.add(ok, BorderLayout.CENTER);
+        buttons.add(cancel, BorderLayout.CENTER);
+        passPanel.setPreferredSize(new Dimension(200, 100));
         passPanel.add(labelInput, BorderLayout.NORTH);
         passPanel.add(buttons, BorderLayout.SOUTH);
 
-        add(passPanel);
-        pack();
+        getContentPane().add(passPanel);
+        //pack();
 
         setLocationRelativeTo(null);
         setResizable(false);
@@ -55,15 +59,17 @@ public class DialogoAlias extends JDialog implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e){
+        char[] tempPassArray = password.getPassword();
+
         if(e.getSource() == ok){
-            result = (String) comboBox.getSelectedItem();
+            result = tempPassArray;
         } else {
             result = null;
         }
         dispose();
     }
 
-    public String getResult(){
+    public char[] getResult(){
         return result;
     }
 

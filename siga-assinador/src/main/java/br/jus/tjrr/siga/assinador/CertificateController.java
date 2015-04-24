@@ -1,10 +1,16 @@
 package br.jus.tjrr.siga.assinador;
 
 import java.io.ByteArrayInputStream;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.Signature;
+import java.security.SignatureException;
 import java.security.cert.CertificateExpiredException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.CertificateNotYetValidException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,9 +20,12 @@ import org.mozilla.jss.CryptoManager.NotInitializedException;
 import org.mozilla.jss.crypto.CryptoStore;
 import org.mozilla.jss.crypto.CryptoToken;
 import org.mozilla.jss.crypto.ObjectNotFoundException;
+import org.mozilla.jss.crypto.PrivateKey;
 import org.mozilla.jss.crypto.TokenException;
 import org.mozilla.jss.crypto.X509Certificate;
 import org.mozilla.jss.pkcs11.PK11Module;
+
+import br.jus.tjrr.siga.assinador.exception.CertificateNotFoundException;
 
 public class CertificateController {
 
@@ -24,17 +33,11 @@ public class CertificateController {
 			.getName());
 
 	public static ArrayList<Certificate> getValidCertByOrganization(
-			String organizacao) {
+			String organizacao) throws NotInitializedException  {
 
 		ArrayList<Certificate> certificados = new ArrayList<Certificate>();
-		CryptoManager cm = null;
-
-		try {
-			cm = CryptoManager.getInstance();
-		} catch (NotInitializedException e) {
-			logger.log(Level.SEVERE, "Falha em inicializar o CryptoManager.", e);
-		}
-
+		CryptoManager cm = CryptoManager.getInstance();
+		
 		Enumeration listaModulos = cm.getModules();
 
 		PK11Module modulo = null;
@@ -64,7 +67,8 @@ public class CertificateController {
 							try {
 								jdkCert = convertToJdkCert(certs[i]);
 								jdkCert.checkValidity();
-								String issuerDN = certs[i].getIssuerDN().toString();
+								String issuerDN = certs[i].getIssuerDN()
+										.toString();
 								String orgProcurada = "O=" + organizacao;
 								if (issuerDN.contains(orgProcurada)) {
 
@@ -110,17 +114,11 @@ public class CertificateController {
 		return jdkCert;
 	}
 
-	public static Certificate getCertByIssuerAndSubject(String issuer, 
-			String subject) throws ObjectNotFoundException {
+	public static Certificate getCertByIssuerAndSubject(String issuer,
+			String subject) throws CertificateNotFoundException, NotInitializedException{
 
-		CryptoManager cm = null;
-
-		try {
-			cm = CryptoManager.getInstance();
-		} catch (NotInitializedException e) {
-			logger.log(Level.SEVERE, "Falha em inicializar o CryptoManager.", e);
-		}
-
+		CryptoManager cm = CryptoManager.getInstance();
+		
 		Enumeration listaModulos = cm.getModules();
 
 		PK11Module modulo = null;
@@ -149,12 +147,15 @@ public class CertificateController {
 							try {
 								jdkCert = convertToJdkCert(certs[i]);
 								jdkCert.checkValidity();
-								String issuerDNCert= certs[i].getIssuerDN().toString();
-								String subjectDNCert = certs[i].getSubjectDN().toString();
-								if (issuerDNCert.compareTo(issuer) == 0 && 
-										subjectDNCert.compareTo(subject) == 0) {
+								String issuerDNCert = certs[i].getIssuerDN()
+										.toString();
+								String subjectDNCert = certs[i].getSubjectDN()
+										.toString();
+								if (issuerDNCert.compareTo(issuer) == 0
+										&& subjectDNCert.compareTo(subject) == 0) {
 
-									return new Certificate(certs[i],jdkCert, modulo.getName());
+									return new Certificate(certs[i], jdkCert,
+											modulo.getName());
 								}
 							} catch (CertificateNotYetValidException e) {
 								logger.log(Level.INFO, "Certificado "
@@ -172,7 +173,28 @@ public class CertificateController {
 			}
 		}
 
-		throw new ObjectNotFoundException();
+		throw new CertificateNotFoundException();
+	}
+
+	public static void signDocument(byte[] data, Certificate cert) 
+			throws ObjectNotFoundException,TokenException, NotInitializedException, SignatureException, NoSuchAlgorithmException, NoSuchProviderException, InvalidKeyException{
+
+		// get private key
+		PrivateKey privKey = CryptoManager.getInstance().findPrivKeyByCert(cert.getMozillaX509Certificate());
+		
+		//set algorithm, provider and private key to Signature
+		Signature s = Signature.getInstance(Constants.ALG_SHA256_WITH_RSA, Constants.MOZILLA_JSS_PROVIDER);
+		s.initSign(privKey);
+		
+		// set data to be signed
+		s.update(data);
+		
+		//signing
+		byte signature[] = s.sign();
+		
+		String base64String = Base64.getEncoder().encodeToString(signature);
+		System.out.println(base64String);
+		
 	}
 
 }
