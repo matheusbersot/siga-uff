@@ -5,14 +5,13 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 
 public class DialogoAlias extends JDialog implements ActionListener {
 
@@ -20,14 +19,14 @@ public class DialogoAlias extends JDialog implements ActionListener {
     private JComboBox comboBox = null;
     private JButton ok =  new JButton("OK");
     private JButton cancel = new JButton("Cancelar");
-    private JLabel prompt = new JLabel("Selecione o alias:");
+    private JLabel prompt = new JLabel("Selecione o certificado:");
     JPanel passPanel = new JPanel();
     JPanel labelInput = new JPanel();
     JPanel buttons = new JPanel();
     private String result;
 
-    DialogoAlias(List<String> aliases) {
-        setTitle("Seleção alias");
+    DialogoAlias(ArrayList<String> aliases) {
+        setTitle("Seleção de Certificado");
         passPanel.setLayout(new BorderLayout());
         labelInput.setLayout(new GridLayout(2,1));
         buttons.setLayout(new BorderLayout());

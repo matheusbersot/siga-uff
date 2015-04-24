@@ -18,52 +18,41 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.opensc.pkcs11.PKCS11LoadStoreParameter;
-import org.opensc.pkcs11.PKCS11Provider;
 
-public class Assinador {
+public class Signer {
 
-    private static final String CAMINHO_LIB_LINUX = "/var/lib/opensc-pkcs11.so";
-
-    private Provider provider;
     private KeyStore keyStore = null;
 
     private boolean windows;
 
-    private Logger logger = Logger.getLogger(Assinador.class.getName());
+    private Logger logger = Logger.getLogger(Signer.class.getName());
 
-    public Assinador() {
+    
+    public Signer() {
         windows = System.getProperty("os.name").contains("Windows");
-    }
-
-    private void carregarProvider() {
-        if (provider == null && !windows) {
-            try {
-                this.provider = new PKCS11Provider(CAMINHO_LIB_LINUX);
-                Security.addProvider(provider);
-            } catch (Throwable throwable) {
-                logger.log(Level.SEVERE, "Erro ao carregar provider", throwable);
-            }
-        }
-    }
+    }    
 
     public KeyStore carregarKeyStore(char[] password) throws NoSuchProviderException, KeyStoreException, CertificateException, NoSuchAlgorithmException, IOException {
 
+        Provider[] providers = Security.getProviders();
+        for (int i = 0; i < providers.length; i++) {
+            final String name = providers[i].getName();
+            System.out.println(name);
+        }
+    	
         if (System.getProperty("os.name").contains("Windows")) {
             //Windows
             keyStore = KeyStore.getInstance("Windows-MY", "SunMSCAPI");
             keyStore.load(null, null);
         } else {
             //Linux
-            keyStore = KeyStore.getInstance("PKCS11", "OpenSC-PKCS11");
-            PKCS11LoadStoreParameter pkcs11LoadStoreParameter = new PKCS11LoadStoreParameter();
-            pkcs11LoadStoreParameter.setWaitForSlot(true);
-            pkcs11LoadStoreParameter.setProtectionPIN(password);
-            try {
+            keyStore = KeyStore.getInstance("PKCS11", "SunPKCS11");
+            
+            /*try {
                 keyStore.load(pkcs11LoadStoreParameter);
             } catch (Exception e) {
                 logger.log(Level.SEVERE, "Erro ao carregar keyStore", e);
-            }
+            }*/
         }
         return keyStore;
     }
@@ -103,7 +92,5 @@ public class Assinador {
     public void setWindows(boolean windows) {
         this.windows = windows;
     }
-
-
 
 }
