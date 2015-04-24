@@ -31,7 +31,7 @@ import java.util.ArrayList;
  * 
  */
 public enum TrustAnchorEnum {
-	AC_RAIZ_CURSO(CertificadoACEnum.AC_RAIZ_CURSO.toTrustAnchor());
+	AC_RAIZ_ICPEDU_V2(CertificadoACEnum.AC_RAIZ_ICPEDU_V2.toTrustAnchor());
 
 	TrustAnchor trustAnchor;
 
