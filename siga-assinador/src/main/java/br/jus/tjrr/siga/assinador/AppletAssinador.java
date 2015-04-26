@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
+import netscape.javascript.JSException;
 import netscape.javascript.JSObject;
 
 import org.mozilla.jss.CryptoManager;
@@ -28,15 +29,13 @@ import br.jus.tjrr.siga.assinador.exception.CertificateNotFoundException;
 public class AppletAssinador extends Applet {
 
 	private Logger logger = Logger.getLogger(AppletAssinador.class.getName());
-	private JButton btnAssinar;
-
-	private JSObject jsObject;
+	private JButton btnAssinar;	
 
 	@Override	
 	public void init() {
+		
 		super.init();
-		jsObject = (JSObject) JSObject.getWindow(AppletAssinador.this);
-
+		
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
@@ -44,6 +43,7 @@ public class AppletAssinador extends Applet {
 		}
 
 		initCryptoManager();
+		initJsIntegration();
 
 		btnAssinar = new JButton();
 		btnAssinar.setLocation(0, 0);
@@ -58,6 +58,11 @@ public class AppletAssinador extends Applet {
 
 		add(btnAssinar);
 		setLayout(null);
+	}
+	
+	public void initJsIntegration()
+	{
+		JSController.setJsObject( (JSObject) JSObject.getWindow(AppletAssinador.this));
 	}
 
 	public void initCryptoManager() {
@@ -85,11 +90,13 @@ public class AppletAssinador extends Applet {
 						.getCertByIssuerAndSubject(
 								dadosCertificado.get("issuer"),
 								dadosCertificado.get("subject"));
+				
+				// obter documentos para assinar
+				byte[] data = JSController.getDocuments();
 
-				// obter documento para assinar
-				String dados = new String("AAAAAAAAAAAAAAA");
-				byte[] data = dados.getBytes();
-				CertificateController.signDocument(data, cert);
+				// assinar documentos
+				String signatureB64 = CertificateController.signDocument(data, cert);
+				JOptionPane.showMessageDialog(this, signatureB64);				
 			}
 
 		} catch (CertificateNotFoundException e) {
@@ -113,6 +120,10 @@ public class AppletAssinador extends Applet {
 					"Algoritmo de assinatura inexistente.");
 		} catch (NoSuchProviderException e) {
 			JOptionPane.showMessageDialog(this, "Provider inexistente.");
+		} catch (JSException e) {
+			JOptionPane.showMessageDialog(this, "Erro ao executar parse Json." + e.getMessage());
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(this, "Não foi possível completar a operação: " + e);
 		}
 	}
 
@@ -136,12 +147,5 @@ public class AppletAssinador extends Applet {
 		return dadosCertificadoEscolhido;
 	}
 
-	/*
-	 * private Object chamarMetodoJS(String metodo) { return
-	 * jsObject.eval(metodo); }
-	 * 
-	 * private Object chamarMetodoJS(String metodo, Object[] parametros) {
-	 * return jsObject.call(metodo, parametros); }
-	 */
-
+	
 }

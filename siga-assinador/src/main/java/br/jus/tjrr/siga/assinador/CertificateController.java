@@ -176,7 +176,7 @@ public class CertificateController {
 		throw new CertificateNotFoundException();
 	}
 
-	public static void signDocument(byte[] data, Certificate cert) 
+	public static String signDocument(byte[] data, Certificate cert) 
 			throws ObjectNotFoundException,TokenException, NotInitializedException, SignatureException, NoSuchAlgorithmException, NoSuchProviderException, InvalidKeyException{
 
 		// get private key
@@ -192,8 +192,8 @@ public class CertificateController {
 		//signing
 		byte signature[] = s.sign();
 		
-		String base64String = Base64.getEncoder().encodeToString(signature);
-		System.out.println(base64String);
+		String signatureB64 = Base64.getEncoder().encodeToString(signature);
+		return signatureB64;
 		
 	}
 
