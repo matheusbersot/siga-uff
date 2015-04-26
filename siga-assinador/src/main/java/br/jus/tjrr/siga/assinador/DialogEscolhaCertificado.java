@@ -27,8 +27,6 @@ import javax.swing.SwingConstants;
 
 public class DialogEscolhaCertificado extends JDialog implements ActionListener {
 
-	// private final JPanel contentPanel = new JPanel();
-	//private JComboBox<String> comboBox = null;
 	private JButton btnOk = new JButton("OK");
 	private JButton btnCancel = new JButton("Cancelar");	
 	private String result;

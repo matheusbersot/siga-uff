@@ -3,14 +3,9 @@ package br.jus.tjrr.siga.assinador;
 import java.applet.Applet;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
-import java.security.Signature;
 import java.security.SignatureException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +15,8 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+
+import netscape.javascript.JSObject;
 
 import org.mozilla.jss.CryptoManager;
 import org.mozilla.jss.CryptoManager.NotInitializedException;
@@ -33,12 +30,12 @@ public class AppletAssinador extends Applet {
 	private Logger logger = Logger.getLogger(AppletAssinador.class.getName());
 	private JButton btnAssinar;
 
-	// private JSObject jsObject;
+	private JSObject jsObject;
 
-	@Override
+	@Override	
 	public void init() {
 		super.init();
-		// jsObject = (JSObject) JSObject.getWindow(AppletAssinador.this);
+		jsObject = (JSObject) JSObject.getWindow(AppletAssinador.this);
 
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -111,17 +108,15 @@ public class AppletAssinador extends Applet {
 		} catch (SignatureException e) {
 			JOptionPane.showMessageDialog(this,
 					"Erro ao criar objeto Signature.");
-			e.printStackTrace();
 		} catch (NoSuchAlgorithmException e) {
 			JOptionPane.showMessageDialog(this,
 					"Algoritmo de assinatura inexistente.");
-			e.printStackTrace();
 		} catch (NoSuchProviderException e) {
 			JOptionPane.showMessageDialog(this, "Provider inexistente.");
-		} 
+		}
 	}
 
-	public HashMap<String, String> escolherCertificado()
+	private HashMap<String, String> escolherCertificado()
 			throws NotInitializedException {
 
 		ArrayList<Certificate> listaCertificados;
