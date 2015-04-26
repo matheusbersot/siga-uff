@@ -1,0 +1,5 @@
+grant {
+   permission java.lang.RuntimePermission "loadLibrary.jss4";
+   permission java.security.SecurityPermission "putProviderProperty.Mozilla-JSS";
+   permission java.security.SecurityPermission "insertProvider.Mozilla-JSS";
+};

@@ -116,8 +116,8 @@ public class DialogEscolhaCertificado extends JDialog implements ActionListener 
 			String requerente = cert.getSubject().getCommonName();
 
 			SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
-			String validade = "Vï¿½lido de " + cert.getNotBefore(formatoData)
-					+ " atï¿½ " + cert.getNotAfter(formatoData);
+			String validade = "Válido de " + cert.getNotBefore(formatoData)
+					+ " até " + cert.getNotAfter(formatoData);
 
 			String certDescription = "<html>"
 					+ "<p style=\"font-family: Verdana; font-size:14px;\">"

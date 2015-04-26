@@ -66,7 +66,7 @@ public class AppletAssinador extends Applet {
 	public void initCryptoManager() {
 		// Inicializa o Provider "Mozilla-JSS" e o ambiente do CryptoManager
 		CryptoManager.InitializationValues valores = new CryptoManager.InitializationValues(
-				"/home/matheus/.mozilla/firefox/o7eytyn0.default");
+				"/home/matheus/.mozilla/firefox/o0sq08ia.default-1429543362699");
 		valores.readOnly = true;
 		valores.passwordCallback = new DialogPasswordCallback();
 
@@ -90,10 +90,8 @@ public class AppletAssinador extends Applet {
 								dadosCertificado.get("subject"));
 
 				// obter documento para assinar
-				
-				Path path = Paths.get("/home/matheus/exibir.pdf");
-				byte[] data = Files.readAllBytes(path);			
-				
+				String dados = new String("AAAAAAAAAAAAAAA");
+				byte[] data = dados.getBytes();
 				CertificateController.signDocument(data, cert);
 			}
 
@@ -109,8 +107,7 @@ public class AppletAssinador extends Applet {
 			JOptionPane.showMessageDialog(this,
 					"Falha em inicializar o CryptoManager.");
 		} catch (InvalidKeyException e) {
-			JOptionPane.showMessageDialog(this,
-					"Chave privada inválida.");
+			JOptionPane.showMessageDialog(this, "Chave privada inválida.");
 		} catch (SignatureException e) {
 			JOptionPane.showMessageDialog(this,
 					"Erro ao criar objeto Signature.");
@@ -120,23 +117,21 @@ public class AppletAssinador extends Applet {
 					"Algoritmo de assinatura inexistente.");
 			e.printStackTrace();
 		} catch (NoSuchProviderException e) {
-			JOptionPane.showMessageDialog(this,
-					"Provider inexistente.");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}	
+			JOptionPane.showMessageDialog(this, "Provider inexistente.");
+		} 
+	}
 
 	public HashMap<String, String> escolherCertificado()
 			throws NotInitializedException {
 
 		ArrayList<Certificate> listaCertificados;
-		listaCertificados = CertificateController.getValidCertByOrganization("RNP");
+		listaCertificados = CertificateController
+				.getValidCertByOrganization("RNP");
 
 		HashMap<String, String> dadosCertificadoEscolhido = null;
 		if (listaCertificados.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Nenhum certificado válido encontrado.");
+			JOptionPane.showMessageDialog(this,
+					"Nenhum certificado válido encontrado.");
 		} else // exibe janela para selecionar o certificado
 		{
 			DialogEscolhaCertificado dgEscolhaCertificado = new DialogEscolhaCertificado(
