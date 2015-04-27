@@ -1,4 +1,4 @@
-function getDataToSignDocument() {
+function getDataToBuildURL() {
 	var doc = {
 		nome : "",
 		url : "",
@@ -90,11 +90,11 @@ function getContent(url) {
 		
 		var blob = null;
         
-        if(xhr.getResponseHeader("Content-Type") == "application/pdf") {
+        /*if(xhr.getResponseHeader("Content-Type") == "application/pdf") {
             blob = new Blob([ xhr.response ], {type : 'application/pdf'});                    
-        }
+        }*/
 	} 
 	
-	return [xhr.responseText, blob];
+	return [xhr.responseText, btoa(xhr.response)];
 
 }

@@ -1,5 +1,7 @@
 package br.jus.tjrr.siga.assinador;
 
+import java.util.Base64;
+
 import netscape.javascript.JSException;
 import netscape.javascript.JSObject;
 
@@ -25,45 +27,39 @@ public class JSController {
 
 	public static byte[] getDocuments() throws JSException, Exception {
 
-		// obter dados para auxiliar no processo de assinatura do
-		// documento
-		String dadosGerais = (String) chamarMetodoJS("getDataToSignDocument()");
+		String dataToBuildURL = (String) chamarMetodoJS("getDataToBuildURL()");
 
 		JSONParser parser = new JSONParser();
-		JSONObject jsonDadosGerais;
-		jsonDadosGerais = (JSONObject) parser.parse(dadosGerais);
+		JSONObject jsonDataToBuildURL;
+		jsonDataToBuildURL = (JSONObject) parser.parse(dataToBuildURL);
 
-		String urlBase = (String) jsonDadosGerais.get("urlBase");
-		String urlPath = (String) jsonDadosGerais.get("urlPath");
-
+		String urlBase = (String) jsonDataToBuildURL.get("urlBase");
+		String urlPath = (String) jsonDataToBuildURL.get("urlPath");
 		String url = "";
 
-		JSONArray docs = (JSONArray) jsonDadosGerais.get("docs");
-
+		JSONArray docs = (JSONArray) jsonDataToBuildURL.get("docs");
 		JSONObject doc = (JSONObject) docs.get(0);
+
 		url = urlBase + urlPath + (String) doc.get("url") + "&semmarcas=1";
 		
-		Object resposta = chamarMetodoJS("getContent", new Object[] {url});
-		if(resposta == null )
-			throw new Exception("resposta nula");
+		JSObject response = (JSObject) chamarMetodoJS("getContent", new Object[] {url});
+		if(response == null )
+			throw new Exception("Erro na comunicação com o JavaScript");
 		
-		JSObject r1 = (JSObject) resposta;
-		Object responseText = r1.getSlot(0);
-		Object document = r1.getSlot(1); 
+		String responseText = (String) response.getSlot(0);
+		String documentB64 = (String) response.getSlot(1);
+		byte[] documentBytes = null;
 		
-		/*if (resposta.getSlot(0) instanceof String) {
-			throw new Exception((String) resposta.getSlot(0));
-		} else {
-			byte[] dados = (byte[]) resposta.getSlot(1);
-			if (dados == null) {
-				throw new Exception("Não foi possível obter o arquivo PDF.");
-			} else {
-				return dados;
-			}
-		}*/
+		if(documentB64 != null) //document was returned
+		{
+			documentBytes = Base64.getDecoder().decode(documentB64);			
+		}
+		else
+		{
+			throw new Exception(responseText);
+		}
 		
-		String b = "aaa";
-		return b.getBytes();
+		return documentBytes;
 	}
 
 }
