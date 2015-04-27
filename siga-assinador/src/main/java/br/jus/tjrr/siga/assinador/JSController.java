@@ -42,12 +42,14 @@ public class JSController {
 
 		JSONObject doc = (JSONObject) docs.get(0);
 		url = urlBase + urlPath + (String) doc.get("url") + "&semmarcas=1";
-		Object[] param = new Object[1];
-		param[0] = url;
-
-		JSObject resposta = (JSObject) chamarMetodoJS("getContent", param);
-		if(resposta ==null )
+		
+		Object resposta = chamarMetodoJS("getContent", new Object[] {url});
+		if(resposta == null )
 			throw new Exception("resposta nula");
+		
+		JSObject r1 = (JSObject) resposta;
+		Object responseText = r1.getSlot(0);
+		Object document = r1.getSlot(1); 
 		
 		/*if (resposta.getSlot(0) instanceof String) {
 			throw new Exception((String) resposta.getSlot(0));

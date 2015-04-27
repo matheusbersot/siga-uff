@@ -81,26 +81,20 @@ function getContent(url) {
 
 	// url="https://sistemas.uff.br:443/sigaex/arquivo/exibir.action?arquivo=23069100007201526.pdf&semmarcas=1";
 	var xhr = new XMLHttpRequest();
-	xhr.open("GET", url, true);
+	xhr.open("GET", url, false);
 	xhr.send();
+	
+	if (xhr.status === 200) {
 
-	xhr.onload = function(e) {
-		if (xhr.readyState === 4) {
-			if (xhr.status === 200) {
+		var gAtributoAssinavelDataHora = xhr.getResponseHeader("Atributo-Assinavel-Data-Hora");
+		
+		var blob = null;
+        
+        if(xhr.getResponseHeader("Content-Type") == "application/pdf") {
+            blob = new Blob([ xhr.response ], {type : 'application/pdf'});                    
+        }
+	} 
+	
+	return [xhr.responseText, blob];
 
-				var gAtributoAssinavelDataHora = xhr.getResponseHeader("Atributo-Assinavel-Data-Hora");
-				
-				var blob = null;
-                
-                if(xhr.getResponseHeader("Content-Type") == "application/pdf") {
-                    blob = new Blob([ xhr.response ], {type : 'application/pdf'});                    
-                }
-                
-				return new Array[xhr.responseText, blob];
-
-			} else {
-				console.error(xhr.statusText);
-			}
-		}
-	};
 }
