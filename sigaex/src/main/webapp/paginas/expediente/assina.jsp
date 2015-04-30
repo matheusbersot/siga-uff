@@ -74,6 +74,10 @@
 				<c:if
 					test="${f:podeUtilizarServicoPorConfiguracao(titular,lotaTitular,'SIGA:Sistema Integrado de Gestão Administrativa;DOC:Módulo de Documentos;ASS:Assinatura digital;VBS:VBScript e CAPICOM')}">
 					<c:import url="/paginas/expediente/inc_assina_js.jsp" />
+					<!-- <c:import url="/paginas/expediente/inc_assina_js_firefox.jsp" />  -->
+					
+					<!-- <input type="button" value="Click me" onclick="getContent('http://172.28.0.9:8081/sigaex/arquivo/exibir.action?arquivo=23069100013201583.pdf&semmarcas=1')" /> -->
+					
 					<div id="capicom-div">
 					<a id="bot-assinar" href="#" onclick="javascript: AssinarDocumentos('false', this);"
 						class="gt-btn-alternate-large gt-btn-left">Assinar Documento</a>

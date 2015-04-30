@@ -1,5 +1,6 @@
 package br.jus.tjrr.siga.assinador;
 
+import java.util.ArrayList;
 import java.util.Base64;
 
 import netscape.javascript.JSException;
@@ -25,7 +26,7 @@ public class JSController {
 		return jsObject.call(metodo, parametros);
 	}
 
-	public static byte[] getDocuments() throws JSException, Exception {
+	public static ArrayList<byte[]> getDocuments() throws JSException, Exception {
 
 		String dataToBuildURL = (String) chamarMetodoJS("getDataToBuildURL()");
 
@@ -38,28 +39,23 @@ public class JSController {
 		String url = "";
 
 		JSONArray docs = (JSONArray) jsonDataToBuildURL.get("docs");
-		JSONObject doc = (JSONObject) docs.get(0);
+		ArrayList<byte[]> listDocs = new ArrayList<byte[]>();
+		
+		for(int i=0; i < docs.size(); ++i)
+		{
+			JSONObject doc = (JSONObject) docs.get(0);
 
-		url = urlBase + urlPath + (String) doc.get("url") + "&semmarcas=1";
-		
-		JSObject response = (JSObject) chamarMetodoJS("getContent", new Object[] {url});
-		if(response == null )
-			throw new Exception("Erro na comunicação com o JavaScript");
-		
-		String responseText = (String) response.getSlot(0);
-		String documentB64 = (String) response.getSlot(1);
-		byte[] documentBytes = null;
-		
-		if(documentB64 != null) //document was returned
-		{
-			documentBytes = Base64.getDecoder().decode(documentB64);			
-		}
-		else
-		{
-			throw new Exception(responseText);
-		}
-		
-		return documentBytes;
+			url = urlBase + urlPath + (String) doc.get("url") + "&semmarcas=1";
+
+			String documentB64 = (String) chamarMetodoJS("getContent", new Object[] { url });
+			if (documentB64 == null)
+				throw new Exception("Não foi possível obter o conteúdo do documento a ser assinado");
+
+			byte[] docBytes = Base64.getDecoder().decode(documentB64);
+			listDocs.add(docBytes);
+		}	
+
+		return listDocs;
 	}
 
 }
