@@ -3244,7 +3244,11 @@ public class ExBL extends CpBL {
 			// Verifica se reiniciar a numeração ou continua com a numeração
 			// anterior
 			if (getComp().podeReiniciarNumeracao(doc)) {
-				num = 100000L;
+				
+				if(doc.getExFormaDocumento().getExTipoFormaDoc().isExpediente())
+				    num = 1L;
+				else //PROCESSO ADMINISTRATIVO
+					num = 100000L;
 			} else {
 				// Obtém o próximo número considerando os anos anteriores até
 				// 2006
@@ -3256,7 +3260,10 @@ public class ExBL extends CpBL {
 				// Se continuar null é porque nunca foi criado documento para
 				// este formato.
 				if (num == null)
-					num = 100000L;
+					if(doc.getExFormaDocumento().getExTipoFormaDoc().isExpediente())
+					    num = 1L;
+					else //PROCESSO ADMINISTRATIVO
+						num = 100000L;
 			}
 		}
 
