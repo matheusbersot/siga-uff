@@ -68,7 +68,7 @@ public class AppletAssinador extends Applet {
 	public void initCryptoManager() {
 		// Inicializa o Provider "Mozilla-JSS" e o ambiente do CryptoManager
 		CryptoManager.InitializationValues valores = new CryptoManager.InitializationValues(
-				"/home/matheus/.mozilla/firefox/o7eytyn0.default");
+				"/home/matheus/.mozilla/firefox/o0sq08ia.default-1429543362699");
 		valores.readOnly = true;
 		valores.passwordCallback = new DialogPasswordCallback();
 
@@ -93,11 +93,10 @@ public class AppletAssinador extends Applet {
 				
 				// obter documentos para assinar
 				ArrayList<byte[]> listDocs = JSController.getDocuments();
-
 				
 				
 				// assinar documentos
-				String signatureB64 = CertificateController.signDocument(data, cert);
+				String signatureB64 = CertificateController.signDocument(listDocs.get(0), cert);
 				JOptionPane.showMessageDialog(this, signatureB64);				
 			}
 
