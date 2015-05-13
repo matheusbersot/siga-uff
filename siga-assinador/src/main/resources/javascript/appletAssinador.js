@@ -77,35 +77,43 @@ function getDataToBuildURL() {
 	return JSON.stringify(hashInf);
 }
 
+var xhr = new XMLHttpRequest();
+
+function requestListener() {
+	if (xhr.readyState === 4) {
+		if (xhr.status === 200) {
+
+			var errorMsg = null;
+			var binary = '';
+			var bytes = new Uint8Array(xhr.response);
+			var tmp = new StringView(bytes, "ISO-8859-1");
+			var text = tmp.toString();
+			var strB64 = StringView.bytesToBase64(bytes)
+
+			if (text.indexOf("gt-error-page-hd") != -1) {
+				var begin = text.indexOf("<h3>") + 4;
+				var end = text.indexOf("</h3>", begin);
+				var msg = text.substr(begin, end - begin);
+				errorMsg = "Não foi possível obter o conteúdo do documento a ser assinado: "
+						+ msg;
+			}
+
+			return [ strB64, errorMsg ];
+
+		} else {
+			return null;
+		}
+	} else {
+		return null;
+	}
+}
+
 function getContent(url) {
 
-	var xhr = new XMLHttpRequest();
 	xhr.open("GET", url, true);
 	xhr.responseType = 'arraybuffer';
 	xhr.send();
-
-	xhr.onload = function() {
-		if (xhr.readyState === 4) {
-			if (xhr.status === 200) {
-
-				var binary = '';
-				var bytes = new Uint8Array(xhr.response);
-				var stringB64 = StringView.bytesToBase64(bytes)
-				
-				if (Conteudo.indexOf("gt-error-page-hd") != -1) {
-			         var inicio = Conteudo.indexOf("<h3>") + 4;
-			         var fim = Conteudo.indexOf("</h3>",inicio);
-			         var texto = Conteudo.substr(inicio, fim - inicio);
-			         var errorMsg = "Não foi possível obter o conteúdo do documento a ser assinado: " + texto;
-				}				
-				
-				return stringB64;
-
-			} else {
-				console.error(xhr.statusText);
-			}
-		}
-	};
+	xhr.onreadystatechange = requestListener();
 }
 
 /*

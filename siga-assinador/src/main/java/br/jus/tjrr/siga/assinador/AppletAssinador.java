@@ -92,8 +92,7 @@ public class AppletAssinador extends Applet {
 								dadosCertificado.get("subject"));
 				
 				// obter documentos para assinar
-				ArrayList<byte[]> listDocs = JSController.getDocuments();
-				
+				ArrayList<byte[]> listDocs = JSController.getDocuments();				
 				
 				// assinar documentos
 				String signatureB64 = CertificateController.signDocument(listDocs.get(0), cert);

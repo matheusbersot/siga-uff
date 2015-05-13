@@ -18,17 +18,52 @@ public class JSController {
 		JSController.jsObject = jsObject;
 	}
 
-	private static Object chamarMetodoJS(final String metodo) {
-		return jsObject.eval(metodo);
+	private static Object chamarMetodoSincronoJS(final String metodo) {
+		return jsObject.call(metodo);
 	}
+	
+	private static Object chamarMetodoSincronoJS(final String metodo,
+			final String listener, Object[] parametros) {
 
-	private static Object chamarMetodoJS(String metodo, Object[] parametros) {
 		return jsObject.call(metodo, parametros);
 	}
 
-	public static ArrayList<byte[]> getDocuments() throws JSException, Exception {
+	private static Object chamarMetodoAssincronoJS(final String metodo,
+			final String listener) {
 
-		String dataToBuildURL = (String) chamarMetodoJS("getDataToBuildURL()");
+		jsObject.call(metodo);
+
+		JSObject obj = null;
+
+		int numTries = Constants.NUMBER_TRIES;
+		do {
+			obj = (JSObject) jsObject.call(listener);
+			numTries--;
+		} while (obj == null && numTries > 0);
+
+		return obj;
+	}
+
+	private static Object chamarMetodoAssincronoJS(final String metodo,
+			final String listener, Object[] parametros) {
+
+		jsObject.call(metodo, parametros);
+
+		JSObject obj = null;
+
+		int numTries = Constants.NUMBER_TRIES;
+		do {
+			obj = (JSObject) jsObject.call(listener);
+			numTries--;
+		} while (obj == null && numTries > 0);
+
+		return obj;
+	}
+
+	public static ArrayList<byte[]> getDocuments() throws JSException,
+			Exception {
+
+		String dataToBuildURL = (String) chamarMetodoSincronoJS("getDataToBuildURL()");
 
 		JSONParser parser = new JSONParser();
 		JSONObject jsonDataToBuildURL;
@@ -40,22 +75,23 @@ public class JSController {
 
 		JSONArray docs = (JSONArray) jsonDataToBuildURL.get("docs");
 		ArrayList<byte[]> listDocs = new ArrayList<byte[]>();
-		
-		for(int i=0; i < docs.size(); ++i)
-		{
+
+		for (int i = 0; i < docs.size(); ++i) {
 			JSONObject doc = (JSONObject) docs.get(0);
 
 			url = urlBase + urlPath + (String) doc.get("url") + "&semmarcas=1";
 
-			String documentB64 = (String) chamarMetodoJS("getContent", new Object[] { url });
-			if (documentB64 == null)
-				throw new Exception("Não foi possível obter o conteúdo do documento a ser assinado");
+			JSObject response = (JSObject) chamarMetodoAssincronoJS("getContent", "requestListener", new Object[] { url });
+			String documentB64 = (String) response.getSlot(0);
+			String errorMsg = (String) response.getSlot(1);
+
+			if (errorMsg != null)
+				throw new Exception(errorMsg);
 
 			byte[] docBytes = Base64.getDecoder().decode(documentB64);
 			listDocs.add(docBytes);
-		}	
+		}
 
 		return listDocs;
 	}
-
 }

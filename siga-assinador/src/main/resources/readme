@@ -8,9 +8,6 @@ COMANDOS GERAIS
 
 /opt/jdk1.8.0_31/bin/appletviewer ./target/assinador.html 
 
-
-"https://sistemas.uff.br:443/sigaex/arquivo/exibir.action?arquivo=23069100007201526.pdf&semmarcas=1"
-
 -- Criando par de chaves
 keytool -genkey -keystore mykeystore -alias myalias
 
@@ -30,14 +27,16 @@ keytool -changealias -keystore mykeystore.jks -alias "nss certificate db:matheus
 --assinando applet
 
 /opt/jdk1.8.0_31/bin/jarsigner -keystore mykeystore.jks ./target/siga-assinador.jar mycert
+/usr/local/jdk1.8.0_45/bin/jarsigner -keystore mykeystore.jks ./target/siga-assinador.jar mycert
+
 
 -- assinando jar JSON do google
 
 /opt/jdk1.8.0_31/bin/jarsigner -keystore mykeystore.jks ./target/lib/json-simple-1.1.1.jar mycert
+/usr/local/jdk1.8.0_45/bin/jarsigner -keystore mykeystore.jks ./target/lib/json-simple-1.1.1.jar mycert
 
- sudo cp ~/Projetos_Java/siga-uff/siga-assinador/target/assinador.html ./
- sudo cp ~/Projetos_Java/siga-uff/siga-assinador/target/siga-assinador.jar ./
- sudo cp -r ~/Projetos_Java/siga-uff/siga-assinador/target/icons ./
- sudo cp -r ~/Projetos_Java/siga-uff/siga-assinador/target/javascript/ ./
- sudo cp -r ~/Projetos_Java/siga-uff/siga-assinador/target/lib/ ./
+
+-- Copiar arquivos para pasta do apache
+
+sudo sh copiaArquivos.sh
 
