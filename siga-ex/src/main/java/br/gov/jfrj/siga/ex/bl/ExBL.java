@@ -2011,9 +2011,7 @@ public class ExBL extends CpBL {
 			throws AplicacaoException {
 		String sNome;
 
-		// TODO: descomentar essa parte quando CPF fizer parte do certificado da
-		// RNP
-		// Long lCPF = null;
+		Long lCPF = null;
 
 		if (doc.isCancelado())
 			throw new AplicacaoException(
@@ -2064,14 +2062,11 @@ public class ExBL extends CpBL {
 			// cms, dao().dt());
 			Service.throwExceptionIfError(sNome);
 
-			// TODO: descomentar essa parte quando CPF fizer parte do
-			// certificado da RNP
-			/*
-			 * String sCPF = client.recuperarCPF(cms);
-			 * Service.throwExceptionIfError(sCPF);
-			 * 
-			 * lCPF = Long.valueOf(sCPF);
-			 */
+			  String sCPF = client.recuperarCPF(cms);
+			  Service.throwExceptionIfError(sCPF);
+			  
+			  lCPF = Long.valueOf(sCPF);
+			 
 
 			// } else {
 			// sNome = s;
@@ -2138,56 +2133,26 @@ public class ExBL extends CpBL {
 					}
 			}
 
-			// Comparar nome presente no certificado e no documento
-			// TODO: retirar essa parte quando CPF fizer parte do certificado da
-			// RNP
-			if (!fValido && sNome != null) {
-				if (doc.getSubscritor() != null
-						&& sNome.toUpperCase().equals(
-								doc.getSubscritor().getNomePessoa())) {
-					fValido = true;
-					usuarioDoToken = doc.getSubscritor();
-				}
-				if (!fValido) {
-					fValido = (sNome.toUpperCase().equals(doc.getCadastrante()
-							.getNomePessoa()))
-							&& (doc.getExTipoDocumento().getIdTpDoc() == ExTipoDocumento.TIPO_DOCUMENTO_EXTERNO);
-				}
-				if (!fValido)
-					for (ExMovimentacao m : doc.getMobilGeral()
-							.getExMovimentacaoSet()) {
-						if (m.getExTipoMovimentacao().getIdTpMov() == ExTipoMovimentacao.TIPO_MOVIMENTACAO_INCLUSAO_DE_COSIGNATARIO
-								&& m.getExMovimentacaoCanceladora() == null
-								&& sNome.toUpperCase().equals(
-										m.getSubscritor().getNomePessoa())) {
-							fValido = true;
-							usuarioDoToken = m.getSubscritor();
-							continue;
-						}
-					}
-			}
 
-			// TODO: descomentar essa parte quando CPF fizer parte do
-			// certificado da RNP
-			/*
-			 * if (!fValido && lCPF != null) { if (doc.getSubscritor() != null
-			 * && lCPF.equals(doc.getSubscritor().getCpfPessoa())) { fValido =
-			 * true; usuarioDoToken = doc.getSubscritor(); } if (!fValido) {
-			 * fValido = (lCPF.equals(doc.getCadastrante().getCpfPessoa())) &&
-			 * (doc.getExTipoDocumento().getIdTpDoc() ==
-			 * ExTipoDocumento.TIPO_DOCUMENTO_EXTERNO); } if (!fValido) for
-			 * (ExMovimentacao m : doc.getMobilGeral() .getExMovimentacaoSet())
-			 * { if (m.getExTipoMovimentacao().getIdTpMov() ==
-			 * ExTipoMovimentacao.TIPO_MOVIMENTACAO_INCLUSAO_DE_COSIGNATARIO &&
-			 * m.getExMovimentacaoCanceladora() == null &&
-			 * lCPF.equals(m.getSubscritor().getCpfPessoa())) { fValido = true;
-			 * usuarioDoToken = m.getSubscritor(); continue; } } }
-			 * 
-			 * if (lMatricula == null && lCPF == null) throw new
-			 * AplicacaoException(
-			 * "Não foi possível recuperar nem a matrícula nem o CPF do assinante"
-			 * );
-			 */
+
+			  if (!fValido && lCPF != null) { if (doc.getSubscritor() != null
+			  && lCPF.equals(doc.getSubscritor().getCpfPessoa())) { fValido =
+			  true; usuarioDoToken = doc.getSubscritor(); } if (!fValido) {
+			  fValido = (lCPF.equals(doc.getCadastrante().getCpfPessoa())) &&
+			  (doc.getExTipoDocumento().getIdTpDoc() ==
+			  ExTipoDocumento.TIPO_DOCUMENTO_EXTERNO); } if (!fValido) for
+			  (ExMovimentacao m : doc.getMobilGeral() .getExMovimentacaoSet())
+			  { if (m.getExTipoMovimentacao().getIdTpMov() ==
+			  ExTipoMovimentacao.TIPO_MOVIMENTACAO_INCLUSAO_DE_COSIGNATARIO &&
+			  m.getExMovimentacaoCanceladora() == null &&
+			  lCPF.equals(m.getSubscritor().getCpfPessoa())) { fValido = true;
+			  usuarioDoToken = m.getSubscritor(); continue; } } }
+			  
+			  if (lMatricula == null && lCPF == null) throw new
+			  AplicacaoException(
+			  "Não foi possível recuperar nem a matrícula nem o CPF do assinante"
+			  );
+			 
 
 			if (fValido == false)
 				throw new AplicacaoException(
@@ -2336,9 +2301,7 @@ public class ExBL extends CpBL {
 		}
 
 		String sNome;
-		// TODO: descomentar essa parte quando CPF fizer parte do certificado da
-		// RNP
-		// Long lCPF = null;
+		Long lCPF = null;
 
 		final byte[] cms;
 		try {
@@ -2374,14 +2337,11 @@ public class ExBL extends CpBL {
 
 			Service.throwExceptionIfError(sNome);
 
-			// TODO: descomentar essa parte quando CPF fizer parte do
-			// certificado da RNP
-			/*
-			 * String sCPF = client.recuperarCPF(cms);
-			 * Service.throwExceptionIfError(sCPF);
-			 * 
-			 * lCPF = Long.valueOf(sCPF);
-			 */
+			String sCPF = client.recuperarCPF(cms);
+			Service.throwExceptionIfError(sCPF);
+			 
+			lCPF = Long.valueOf(sCPF);
+			
 
 			boolean fValido = false;
 			Long lMatricula = null;
@@ -2412,26 +2372,17 @@ public class ExBL extends CpBL {
 										.getMatricula());
 					}
 
-					if (!fValido && sNome != null) {
-						fValido = movAlvo.getSubscritor() != null
-								&& sNome.toUpperCase()
-										.equals(movAlvo.getSubscritor()
-												.getNomePessoa());
-					}
-
-					// TODO: descomentar essa parte quando CPF fizer parte do
-					// certificado da RNP
-					/*
-					 * if (!fValido && lCPF != null) { fValido =
-					 * movAlvo.getSubscritor() != null &&
-					 * lCPF.equals(movAlvo.getSubscritor() .getCpfPessoa()); }
-					 * 
-					 * if (lMatricula == null && lCPF == null) { log.warn(
-					 * "Não foi possível recuperar nem a matrícula nem o CPF do assinante"
-					 * ); throw new AplicacaoException(
-					 * "Não foi possível recuperar nem a matrícula nem o CPF do assinante"
-					 * ); }
-					 */
+		
+					  if (!fValido && lCPF != null) { fValido =
+					  movAlvo.getSubscritor() != null &&
+					  lCPF.equals(movAlvo.getSubscritor() .getCpfPessoa()); }
+					  
+					  if (lMatricula == null && lCPF == null) { log.warn(
+					  "Não foi possível recuperar nem a matrícula nem o CPF do assinante"
+					  ); throw new AplicacaoException(
+					  "Não foi possível recuperar nem a matrícula nem o CPF do assinante"
+					  ); }
+					 
 
 					if (fValido == false
 							&& movAlvo.getIdTpMov() == ExTipoMovimentacao.TIPO_MOVIMENTACAO_CANCELAMENTO_JUNTADA) {
