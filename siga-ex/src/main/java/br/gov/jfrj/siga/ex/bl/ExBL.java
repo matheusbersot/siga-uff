@@ -3199,7 +3199,7 @@ public class ExBL extends CpBL {
 				if(doc.getExFormaDocumento().getExTipoFormaDoc().isExpediente())
 				    num = 1L;
 				else //PROCESSO ADMINISTRATIVO
-					num = 100000L;
+					num = 150000L;
 			} else {
 				// Obtém o próximo número considerando os anos anteriores até
 				// 2006
@@ -3214,7 +3214,7 @@ public class ExBL extends CpBL {
 					if(doc.getExFormaDocumento().getExTipoFormaDoc().isExpediente())
 					    num = 1L;
 					else //PROCESSO ADMINISTRATIVO
-						num = 100000L;
+						num = 150000L;
 			}
 		}
 
