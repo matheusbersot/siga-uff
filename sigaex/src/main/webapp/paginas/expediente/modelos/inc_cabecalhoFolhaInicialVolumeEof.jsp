@@ -15,10 +15,16 @@
 					<td width="100%" align="left">
 						<p style="font-family: AvantGarde Bk BT, Arial; font-size: 11pt;">${f:resource('siga.ex.modelos.cabecalho.titulo')}</p></td>
 				</tr>
-				<c:if test="${not empty f:resource('siga.ex.modelos.cabecalho.subtitulo')}">
+				<c:if test="${not empty f:resource('siga.ex.modelos.cabecalho.subtitulo1')}">
 					<tr>
 						<td width="100%" align="left">
-							<p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${f:resource('siga.ex.modelos.cabecalho.subtitulo')}</p></td>
+							<p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${f:resource('siga.ex.modelos.cabecalho.subtitulo1')}</p></td>
+					</tr>
+				</c:if>
+				<c:if test="${not empty f:resource('siga.ex.modelos.cabecalho.subtitulo2')}">
+					<tr>
+						<td width="100%" align="left">
+							<p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${f:resource('siga.ex.modelos.cabecalho.subtitulo2')}</p></td>
 					</tr>
 				</c:if>
 				<tr>
