@@ -26,9 +26,7 @@ import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -815,9 +813,8 @@ public class ExDocumento extends AbstractExDocumento implements Serializable {
 	 * 
 	 */
 	public String getDtMMMM() {
-		SimpleDateFormat df1 = new SimpleDateFormat();
-		try {
-			df1.applyPattern("MMMM");
+		SimpleDateFormat df1 = new SimpleDateFormat("MMMM", new Locale("pt", "BR"));
+		try {				
 			return df1.format(getDtDoc()).toLowerCase();
 		} catch (Exception e) {
 			return null;
