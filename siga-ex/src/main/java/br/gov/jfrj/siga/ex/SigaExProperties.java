@@ -23,10 +23,11 @@
  * Window - Preferences - Java - Code Style - Code Templates
  */
 package br.gov.jfrj.siga.ex;
+
 /*
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
-*/
+ import java.util.MissingResourceException;
+ import java.util.ResourceBundle;
+ */
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,30 +40,27 @@ import br.gov.jfrj.siga.model.prop.ext.ModeloPropriedade;
 public class SigaExProperties extends ModeloPropriedade {
 	/*
 	 * 
-	 *  Antes a classe se chamava Mensagens (foi renomeada - refactor)
-	 *  
+	 * Antes a classe se chamava Mensagens (foi renomeada - refactor)
 	 */
-	//private static final String BUNDLE_NAME = "resource.application";
-	/*private static final String BUNDLE_NAME = "globalMessages";
-
-	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(Mensagens.BUNDLE_NAME);
-
-	public static String getString(final String key) {
-
-		try {
-			return Mensagens.RESOURCE_BUNDLE.getString(key);
-		} catch (final MissingResourceException e) {
-			return '!' + key + '!';
-		}
-	}
-	*/
+	// private static final String BUNDLE_NAME = "resource.application";
+	/*
+	 * private static final String BUNDLE_NAME = "globalMessages";
+	 * 
+	 * private static final ResourceBundle RESOURCE_BUNDLE =
+	 * ResourceBundle.getBundle(Mensagens.BUNDLE_NAME);
+	 * 
+	 * public static String getString(final String key) {
+	 * 
+	 * try { return Mensagens.RESOURCE_BUNDLE.getString(key); } catch (final
+	 * MissingResourceException e) { return '!' + key + '!'; } }
+	 */
 
 	protected SigaExProperties() {
 		// construtor privado
 	}
-	
+
 	private static SigaExProperties instance = new SigaExProperties();
-	
+
 	public static String getString(final String key) {
 		try {
 			return instance.obterPropriedade(key);
@@ -71,30 +69,30 @@ public class SigaExProperties extends ModeloPropriedade {
 			return "";
 		}
 	}
-	
+
 	public static String getAmbiente() {
 		return System.getProperty("ambiente");
 	}
-	
-	public static String getStringComAmbiente(String key){
+
+	public static String getStringComAmbiente(String key) {
 		String ambiente = System.getProperty("ambiente");
 		if (ambiente != null && ambiente.length() > 0)
-			return getString(ambiente+"."+key).trim();
+			return getString(ambiente + "." + key).trim();
 		return "";
 	}
-	
-	public static String getServidorDJE(){
+
+	public static String getServidorDJE() {
 		return getStringComAmbiente("dje.servidor");
 	}
-	
-	public static String getConversorHTMLFactory(){
+
+	public static String getConversorHTMLFactory() {
 		return getString("conversor.html.factory");
 	}
 
 	public static String getMontadorQuery() {
 		return getString("montador.query");
 	}
-	
+
 	public static String getExClassificacaoMascaraEntrada() {
 		return getString("classificacao.mascara.entrada");
 	}
@@ -102,30 +100,33 @@ public class SigaExProperties extends ModeloPropriedade {
 	public static String getExClassificacaoMascaraSaida() {
 		return getString("classificacao.mascara.saida");
 	}
-	
+
 	public static String getExClassificacaoMascaraExibicao() {
 		return getString("classificacao.mascara.exibicao");
 	}
-	
-	public static List<String> getExClassificacaoNomesNiveis() throws AplicacaoException{
+
+	public static List<String> getExClassificacaoNomesNiveis()
+			throws AplicacaoException {
 		try {
-			return instance.obterPropriedadeLista("siga.ex.classificacao.mascara.nomeNivel");
+			return instance
+					.obterPropriedadeLista("siga.ex.classificacao.mascara.nomeNivel");
 		} catch (Exception e) {
-			throw new AplicacaoException("Não foi possível encontrar os nomes dos níveis da classificação documental no arquivo siga.properties. Ex: siga.ex.classificacao.mascara.nomeNivel.0 = Assunto");
+			throw new AplicacaoException(
+					"Não foi possível encontrar os nomes dos níveis da classificação documental no arquivo siga.properties. Ex: siga.ex.classificacao.mascara.nomeNivel.0 = Assunto");
 		}
 	}
-	
+
 	public static Integer getExClassificacaoNivelMinimoDeEnquadramento() {
 		String s = getString("classificacao.nivel.minimo.de.enquadramento");
 		if (s == null || s.trim().length() == 0)
 			return null;
 		return Integer.valueOf(s);
 	}
-	
-	public static boolean isAmbienteProducao(){
+
+	public static boolean isAmbienteProducao() {
 		if (getAmbiente() != null && getAmbiente().equals("prod"))
 			return true;
-		
+
 		return false;
 	}
 
@@ -137,8 +138,8 @@ public class SigaExProperties extends ModeloPropriedade {
 	public static String getExtensaoConversorHTML() {
 		return getString("conversor.html.ext");
 	}
-	
-	public static String getAssinaturaDecodificador(){
+
+	public static String getAssinaturaDecodificador() {
 		return getString("siga.ex.assinatura.decodificador");
 	}
 
@@ -157,81 +158,87 @@ public class SigaExProperties extends ModeloPropriedade {
 	public static String getEnderecoAutenticidadeDocs() {
 		return getString("siga.ex.enderecoAutenticidadeDocs");
 	}
-	
-	public static Long getIdModInternoImportado() throws Exception{
+
+	public static Long getIdModInternoImportado() throws Exception {
 		String s = getStringComAmbiente("modelos.interno_importado");
 		if (s == null)
-			throw new Exception("Propriedade para o identificador do modelo Interno Importado não encontrada");
-		try{
+			throw new Exception(
+					"Propriedade para o identificador do modelo Interno Importado não encontrada");
+		try {
 			return Long.valueOf(s);
-		} catch (NumberFormatException nfe){
-			throw new Exception("Erro ao obter propriedade para o identificador do modelo Interno Importado");
-		}
-	}
-	
-	public static Long getIdModPA() throws Exception{
-		String s = getStringComAmbiente("modelos.processo_administrativo");
-		if (s == null)
-			throw new Exception("Propriedade para o identificador do modelo Processo Administrativo não encontrada");
-		try{
-			return Long.valueOf(s);
-		} catch (NumberFormatException nfe){
-			throw new Exception("Erro ao obter propriedade para o identificador do modelo Processo Administrativo");
+		} catch (NumberFormatException nfe) {
+			throw new Exception(
+					"Erro ao obter propriedade para o identificador do modelo Interno Importado");
 		}
 	}
 
-	public static Long getAnoInicioAcronimoNoCodigoDoDocumento() throws Exception{
+	public static Long getIdModPA() throws Exception {
+		String s = getStringComAmbiente("modelos.processo_administrativo");
+		if (s == null)
+			throw new Exception(
+					"Propriedade para o identificador do modelo Processo Administrativo não encontrada");
+		try {
+			return Long.valueOf(s);
+		} catch (NumberFormatException nfe) {
+			throw new Exception(
+					"Erro ao obter propriedade para o identificador do modelo Processo Administrativo");
+		}
+	}
+
+	public static Long getAnoInicioAcronimoNoCodigoDoDocumento()
+			throws Exception {
 		String s = getString("siga.ex.anoInicioAcronimoNoCodigoDoDocumento");
 		if (s == null)
 			return 9999L;
-		try{
+		try {
 			return Long.valueOf(s);
-		} catch (NumberFormatException nfe){
-			throw new Exception("Erro ao obter propriedade para o ano inicial para a utilização do acrônimo no código do documento");
+		} catch (NumberFormatException nfe) {
+			throw new Exception(
+					"Erro ao obter propriedade para o ano inicial para a utilização do acrônimo no código do documento");
 		}
 	}
 
 	/**
-	 * Retorna a máscara da classificação a ser utilizadas em caixas de texto DURANTE a digitação do valor
+	 * Retorna a máscara da classificação a ser utilizadas em caixas de texto
+	 * DURANTE a digitação do valor
 	 *
-	 * a - Represents an alpha character (A-Z,a-z)
-	 * 9 - Represents a numeric character (0-9)
-	 * * - Represents an alphanumeric character (A-Z,a-z,0-9)
+	 * a - Represents an alpha character (A-Z,a-z) 9 - Represents a numeric
+	 * character (0-9) * - Represents an alphanumeric character (A-Z,a-z,0-9)
 	 * 
 	 * Exemplos:
 	 * 
-	 * 	Data		99/99/9999
-	 *  Telefone		(999) 999-9999
-	 *	Telefone + Ramal		(999) 999-9999? x99999
-	 *	CPF		999.999.999-99
-	 *	Chave de produto		a*-999-a999
+	 * Data 99/99/9999 Telefone (999) 999-9999 Telefone + Ramal (999) 999-9999?
+	 * x99999 CPF 999.999.999-99 Chave de produto a*-999-a999
 	 * 
-	 *  Para mais detalhes, veja http://digitalbush.com/projects/masked-input-plugin/
-
+	 * Para mais detalhes, veja
+	 * http://digitalbush.com/projects/masked-input-plugin/
+	 * 
 	 * @return
 	 */
 	public static String getExClassificacaoMascaraJavascript() {
 		return getString("classificacao.mascara.javascript");
 	}
-	
-	public static Date getDataInicioObrigacaoDeAssinarAnexoEDespacho() throws Exception{
+
+	public static Date getDataInicioObrigacaoDeAssinarAnexoEDespacho()
+			throws Exception {
 		String s = getString("siga.ex.dataInicioObrigacaoDeAssinarAnexoEDespacho");
-		
-		DateFormat formatter = new SimpleDateFormat("MM/dd/yy");  
-				
+
+		DateFormat formatter = new SimpleDateFormat("MM/dd/yy");
+
 		if (s == null)
-			return (Date)formatter.parse("31/12/2099");
-		try{
-			return (Date)formatter.parse(s);
-		} catch (NumberFormatException nfe){
-			throw new Exception("Erro ao obter propriedade para o data inicial de obrigação de assinatura de anexos e despachos em documentos eletrônicos");
+			return (Date) formatter.parse("31/12/2099");
+		try {
+			return (Date) formatter.parse(s);
+		} catch (NumberFormatException nfe) {
+			throw new Exception(
+					"Erro ao obter propriedade para o data inicial de obrigação de assinatura de anexos e despachos em documentos eletrônicos");
 		}
 	}
 
 	public static String getTextoSuperiorCarimbo() {
-		return getString("siga.ex.modelos.cabecalho.subtitulo");
+		return getString("siga.ex.modelos.texto.superior.carimbo");
 	}
-	
+
 	public static boolean isOrgaoUsuarioPresenteNoCabecalhoModelo() {
 		String valor = getString("siga.ex.orgaoUsuarioPresenteNoCabecalhoModelo");
 		if (valor != null && valor.equals("true"))
@@ -239,6 +246,5 @@ public class SigaExProperties extends ModeloPropriedade {
 		else
 			return false;
 	}
-
 
 }

@@ -87,14 +87,14 @@
         </filter-class>
     </filter>
     
-    <filter>
+    <!-- <filter>
     	<filter-name>CORSFilter</filter-name>
         <filter-class>br.gov.jfrj.siga.ex.util.CORSFilter</filter-class>
-    </filter>    
+    </filter>     
     <filter-mapping>
         <filter-name>CORSFilter</filter-name>
         <url-pattern>/arquivo/*</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
         
     <filter-mapping>
         <filter-name>SigaLogFilter</filter-name>

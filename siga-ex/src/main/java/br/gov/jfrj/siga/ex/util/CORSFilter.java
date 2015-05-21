@@ -24,7 +24,7 @@ public class CORSFilter implements Filter {
 		FilterChain chain) throws IOException, ServletException {
 		
 		((HttpServletResponse)response).addHeader(
-				"Access-Control-Allow-Origin", "http://172.28.0.9"
+				"Access-Control-Allow-Origin", "*"
 			);
 		((HttpServletResponse)response).addHeader(
 			"Access-Control-Allow-Credentials", "true"
