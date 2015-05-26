@@ -18,6 +18,7 @@
 			<module name="org.antlr" />
 			<module name="org.apache.commons.lang" />
 			<module name="org.apache.commons.beanutils" />
+			<module name="org.apache.commons.io" />
             <module name="com.sun.xml.bind" /> 
 			<module name="javax.wsdl4j.api" />
 		</dependencies>
