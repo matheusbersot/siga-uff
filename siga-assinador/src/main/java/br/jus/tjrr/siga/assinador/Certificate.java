@@ -2,6 +2,7 @@ package br.jus.tjrr.siga.assinador;
 
 import java.text.SimpleDateFormat;
 
+import org.mozilla.jss.asn1.INTEGER;
 import org.mozilla.jss.crypto.X509Certificate;
 
 public class Certificate {
@@ -10,14 +11,17 @@ public class Certificate {
 	private X509Certificate cert;
 	private DN issuer;
 	private DN subject;
-	private boolean smartCard;
+	private INTEGER serialNumber;
+	private boolean isFromSmartCard;
 	
-	public Certificate(X509Certificate cert, java.security.cert.X509Certificate jdkCert, String nomeModulo)
+	public Certificate(X509Certificate cert, java.security.cert.X509Certificate jdkCert, String moduleName)
 	{
 		this.jdkCert = jdkCert;
 		this.issuer = new DN(cert.getIssuerDN().getName());
 		this.subject = new DN(cert.getSubjectDN().getName());
+		this.serialNumber = new INTEGER(cert.getSerialNumber());
 		this.cert = cert;
+		this.isFromSmartCard = (moduleName.compareTo(Constants.INTERNAL_CERTIFICATE) == 0)? false: true;
 	}
 		
 	public String getNotBefore(SimpleDateFormat sDf)
@@ -33,18 +37,27 @@ public class Certificate {
 	public DN getIssuer() {
 		return issuer;
 	}
-
+	
 	public DN getSubject() {
 		return subject;
+	}
+	
+	public INTEGER getSerialNumber()
+	{
+		return serialNumber;
 	}
 	
 	public X509Certificate getMozillaX509Certificate() {
 		return cert;
 	}
 	
-	public boolean fromSmartCard(String nomeModulo)
+	public java.security.cert.X509Certificate getJdkX509Certificate()
 	{
-		//TODO: Tentar colocar a leitora para funcionar e ler o nome do módulo Gemalto
-		return false;
+		return jdkCert;
+	}
+	
+	public boolean isfromSmartCard()
+	{
+		return isFromSmartCard;
 	}
 }

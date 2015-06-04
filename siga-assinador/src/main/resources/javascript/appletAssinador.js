@@ -1,4 +1,4 @@
-function getDataToBuildURL() {
+function buildUrl() {
 	var doc = {
 		nome : "",
 		url : "",
@@ -6,26 +6,17 @@ function getDataToBuildURL() {
 	}
 
 	var hashInf = {
-		urlPost : "",
-		nextUrl : "",
 		urlBase : "",
 		urlPath : "",
 		docs : new Array()
 	}
 
-	var oUrlPost = document.getElementById("jspserver");
-	hashInf.urlPost = oUrlPost.defaultValue;
-	if (oUrlPost == null) {
-		alert("Elemento jspserver não existe");
-		return null;
-	}
-
-	var oUrlNext = document.getElementById("nexturl");
+	/*var oUrlNext = document.getElementById("nexturl");
 	hashInf.urlNext = oUrlNext.defaultValue;
 	if (oUrlNext == null) {
 		alert("Elemento nexturl não existe");
 		return null;
-	}
+	}*/
 
 	var oUrlBase = document.getElementById("urlbase");
 	hashInf.urlBase = oUrlBase.defaultValue;
@@ -77,12 +68,26 @@ function getDataToBuildURL() {
 	return JSON.stringify(hashInf);
 }
 
-var xhr = new XMLHttpRequest();
 
-function requestListener() {
-	if (xhr.readyState === 4) {
-		if (xhr.status === 200) {
+var response = null;
 
+function getResponse()
+{
+	return response;
+}
+
+function getContent(url) {
+
+	response = null;
+	
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", url, true);
+	xhr.responseType = 'arraybuffer';
+	xhr.withCredentials = true;
+	xhr.send();
+
+	xhr.onload = function() {
+		if (xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 304 )) {
 			var errorMsg = null;
 			var binary = '';
 			var bytes = new Uint8Array(xhr.response);
@@ -98,23 +103,63 @@ function requestListener() {
 						+ msg;
 			}
 
-			return [ strB64, errorMsg ];
+			response =  [ strB64, errorMsg ];
 
 		} else {
-			return null;
+			response = null;
 		}
-	} else {
-		return null;
 	}
 }
 
-function getContent(url) {
+function getUrlPost()
+{
+	var oUrlPost = document.getElementById("jspserver");
 
-	xhr.open("GET", url, true);
-	xhr.responseType = 'arraybuffer';
-	xhr.send();
-	xhr.onreadystatechange = requestListener();
+	if (oUrlPost == null) {
+		alert("Elemento jspserver não existe");
+		return null;
+	}
+	
+	return oUrlPost.defaultValue;
 }
+
+
+function sendDataToSigadoc(url, documentCode, isCopy, signatureB64, signer) {
+	
+	response = null;
+
+	var dataToSend = "sigla=" + encodeURIComponent(documentCode) + "&copia=" + isCopy + "&assinaturaB64=" + encodeURIComponent(signatureB64) + "&assinante=" + encodeURIComponent(signer);
+	
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.withCredentials = true;
+	xhr.send(dataToSend);
+
+	xhr.onload = function() {
+		if (xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 304 )) {
+
+			var errorMsg = null;
+			var text = xhr.responseText;
+			
+			//Edson: adicionei a segunda sentença ao if abaixo porque, no caso da assinatura externa, a página
+			//de retorno é esta mesma, que obviamente já tem o texto gt-error-page-hd (na linha abaixo) sem
+			//significar que seja uma página de erro
+			if (text.indexOf("gt-error-page-hd") != -1 && text.indexOf("function GravarAssinatura") < 0) {
+				var begin = text.indexOf("<h3>") + 4;
+				var end = text.indexOf("</h3>", begin);
+				var msg = text.substr(begin, end - begin);
+				errorMsg = "Não foi possível obter o conteúdo do documento a ser assinado: " + msg;
+				response = errorMsg;
+			}
+
+			response =  "200"; //HTTP SUCESS CODE = OK
+
+		} else {
+			response = null;
+		}
+	}
+}
+
 
 /*
  * ##################### MOZILLA STRINGVIEW LIBRARY ###########################
@@ -863,3 +908,6 @@ StringView.prototype.valueOf = StringView.prototype.toString = function() {
 	return sView;
 
 };
+
+
+	

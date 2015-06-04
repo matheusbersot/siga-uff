@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -49,7 +48,6 @@ public class DialogPassword extends JDialog implements ActionListener {
         passPanel.add(buttons, BorderLayout.SOUTH);
 
         getContentPane().add(passPanel);
-        //pack();
 
         setLocationRelativeTo(null);
         setResizable(false);

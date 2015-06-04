@@ -7,8 +7,6 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,10 +20,9 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
-public class DialogEscolhaCertificado extends JDialog implements ActionListener {
+public class DialogChooseCertificate extends JDialog implements ActionListener {
 
 	private JButton btnOk = new JButton("OK");
 	private JButton btnCancel = new JButton("Cancelar");	
@@ -34,10 +31,16 @@ public class DialogEscolhaCertificado extends JDialog implements ActionListener 
 	/**
 	 * Create the dialog.
 	 */
-	public DialogEscolhaCertificado(ArrayList<Certificate> listaCertificados) {
+	public DialogChooseCertificate(ArrayList<Certificate> certList) {
+		
 		setTitle("Certificados");
 		setModalityType(ModalityType.APPLICATION_MODAL);
-		setBounds(100, 100, 500, 350);
+		
+		if(certList.size() >= 2)
+		  setBounds(100, 100, 500, 350);
+		else if (certList.size() == 1)
+	      setBounds(100, 100, 500, 250);	
+
 		BorderLayout borderLayout = new BorderLayout();
 		getContentPane().setLayout(borderLayout);
 
@@ -57,10 +60,7 @@ public class DialogEscolhaCertificado extends JDialog implements ActionListener 
 			lbEscolhaCertificado.setHorizontalAlignment(SwingConstants.LEFT);
 			labelPanel.add(lbEscolhaCertificado, BorderLayout.NORTH);
 		}
-		{
-			JSeparator separator = new JSeparator();
-			labelPanel.add(separator, BorderLayout.SOUTH);
-		}
+
 
 		// Content Panel
 		JPanel contentPanel = new JPanel();
@@ -69,13 +69,14 @@ public class DialogEscolhaCertificado extends JDialog implements ActionListener 
 		contentPanel.setBackground(Color.WHITE);
 		
 		JScrollPane scrollPane = new JScrollPane(contentPanel);
-		scrollPane.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setViewportBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 				
 		getContentPane().add(scrollPane);
 		{
-			addCertificatesButtons(contentPanel, listaCertificados);
+			addCertificatesButtons(contentPanel, certList);
 		}
 
 		// Button Panel
@@ -106,39 +107,52 @@ public class DialogEscolhaCertificado extends JDialog implements ActionListener 
 		setVisible(true);
 	}
 
-    public void addCertificatesButtons(JPanel panel, ArrayList<Certificate> listaCertificados) {
-				
-		for (int i = 0; i < listaCertificados.size(); ++i) {
-			Certificate cert = listaCertificados.get(i);
-			String emissor = cert.getIssuer().getCommonName();
-			String requerente = cert.getSubject().getCommonName();
+    public void addCertificatesButtons(JPanel panel, ArrayList<Certificate> certList) {
+		
+		for (int i = 0; i < certList.size(); ++i) {
+			Certificate cert = certList.get(i);
+			String issuer = cert.getIssuer().getCommonName();
+			String subject = cert.getSubject().getCommonName();
 
-			SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
-			String validade = "Válido de " + cert.getNotBefore(formatoData)
-					+ " até " + cert.getNotAfter(formatoData);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			String validity = "Válido de " + cert.getNotBefore(dateFormat)
+					+ " até " + cert.getNotAfter(dateFormat);
 
 			String certDescription = "<html>"
 					+ "<p style=\"font-family: Verdana; font-size:14px;\">"
-					+ requerente
+					+ subject
 					+ "</p>"
 					+ "<p style=\"font-family: Verdana; font-size:9px;\"><b>Emissor:</b> "
-					+ emissor
+					+ issuer
 					+ "</p>"
 					+ "<p style=\"font-family: Verdana; font-size:9px;\"><b>Validade:</b> "
-					+ validade + "</p>" + "</html>";
+					+ validity + "</p>" + "</html>";
 
-			Path path = FileSystems.getDefault().getPath("icons",
-					"smartcard64x64.png");
-			ImageIcon certIcon = new ImageIcon(path.toString());
+		    java.net.URL imgURL = null;
+		    
+		    if(cert.isfromSmartCard())
+		    	imgURL =  getClass().getResource("/icons/smartcard64x64.png");
+		    else
+		    	imgURL =  getClass().getResource("/icons/certificate64x64.png");
+					    
+		    ImageIcon certIcon = new ImageIcon(imgURL);
 
-			JButton certButton = new JButton(certDescription, certIcon);
+			JButton certButton = new JButton(certDescription,certIcon);
 			certButton.setName(cert.getSubject().toString()+";"+cert.getIssuer().toString());
-			certButton.setMaximumSize(new Dimension(450, 100));
+			certButton.setIconTextGap(10);
+			certButton.setHorizontalAlignment(SwingConstants.LEFT);;
+			
+			if(certList.size() > 2)
+			  certButton.setMaximumSize(new Dimension(450, 100));			
+			else 
+			  certButton.setMaximumSize(new Dimension(465, 100));
+			
+			  
 			certButton.setSelected(false);
 			certButton.addActionListener(this);
 			
 			panel.add(certButton);
-			panel.add(Box.createRigidArea(new Dimension(0,5)));
+			panel.add(Box.createRigidArea(new Dimension(0,10)));
 		}
 	}
     

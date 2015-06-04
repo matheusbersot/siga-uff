@@ -1,5 +1,9 @@
 grant {
    permission java.lang.RuntimePermission "loadLibrary.jss4";
+   permission java.lang.RuntimePermission "accessClassInPackage.org.mozilla.jss.util";
+   permission java.lang.RuntimePermission "accessClassInPackage.org.mozilla.jss.crypto";
+   permission java.lang.RuntimePermission "accessClassInPackage.org.mozilla.jss.asn1";
+   permission java.lang.RuntimePermission "accessClassInPackage.org.mozilla.jss";
    permission java.security.SecurityPermission "putProviderProperty.Mozilla-JSS";
    permission java.security.SecurityPermission "insertProvider.Mozilla-JSS";
 };
