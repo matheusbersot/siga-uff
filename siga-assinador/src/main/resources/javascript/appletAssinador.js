@@ -1,3 +1,91 @@
+var gProgressBar = {	
+		
+		index: 0,
+		setNumSteps: function(numSteps){		
+			this.numSteps = numSteps;
+		},		
+		run: function() {
+			window.scrollTo(0, 0);
+			this.dialogo = $('<div id="dialog-ad" title="Assinatura Digital"><p id="msgProgressBar">Iniciando...</p><div id="progressbar-ad"></div></div>').dialog({
+				       title: "Assinatura Digital (Java Applet)",
+				       width: '50%',
+				       height: 'auto',
+				       resizable: false,
+				       autoOpen: true,
+				       position: { my: "center top+25%", at: "center top", of: window },
+				       modal: true,
+				       closeText: "hide" 
+			       });
+		    this.progressbar = $('#progressbar-ad').progressbar();
+			},
+		finalize: function() {
+			this.dialogo.dialog('destroy');
+			},
+	    nextStep: function(){
+		    ++this.index;
+	    	this.progressbar.progressbar("value", 100 * (this.index / this.numSteps));
+	    	
+	    	if (this.index === this.numSteps) {
+	            this.finalize();
+		    }
+	    },
+	    setMessage: function(msg){	    	
+	    	    var msgProgressBar;
+	    	    msgProgressBar = document.getElementById("msgProgressBar");
+	    	    if (msgProgressBar != null) {
+	    	    	msgProgressBar.innerHTML = msg;
+	    	    }	    	    
+	    	},
+	    restartIndex: function(){
+	    	this.index = 0;
+	    }
+	    	
+};
+
+function setNumStepsProgressBar(numSteps)
+{
+	gProgressBar.setNumSteps(numSteps);
+}
+
+function setMessageProgressBar(msg)
+{
+	gProgressBar.setMessage(msg);
+}
+
+function getQtyDocuments()
+{
+	var qtyDocuments = 0;
+	var code;
+	var nodeList = document.getElementsByTagName("INPUT");
+	for (var i = 0, len = nodeList.length; i < len; i++) {
+
+		var elem = nodeList[i];
+
+		if (elem.name.substr(0, 7) == "pdfchk_") {
+
+			code = elem.name.substr(7);
+
+			var oNome = document.getElementsByName("pdfchk_" + code)[0];
+			if (oNome == null) {
+				alert("Elemento pdfchk_" + code + " não existe");
+				return null;
+			}
+
+			var oChk = document.getElementsByName("chk_" + code)[0];
+			if (oChk == null) {
+				++qtyDocuments;
+			}
+			else if (oChk.value)
+			{
+	     		++qtyDocuments;				
+			}
+		}
+	}
+	
+	return qtyDocuments;
+}
+
+
 function buildUrl() {
 	var doc = {
 		nome : "",
@@ -11,24 +99,15 @@ function buildUrl() {
 		docs : new Array()
 	}
 
-	/*var oUrlNext = document.getElementById("nexturl");
-	hashInf.urlNext = oUrlNext.defaultValue;
-	if (oUrlNext == null) {
-		alert("Elemento nexturl não existe");
-		return null;
-	}*/
-
 	var oUrlBase = document.getElementById("urlbase");
-	hashInf.urlBase = oUrlBase.defaultValue;
+	hashInf.urlBase = oUrlBase.value;
 	if (oUrlBase == null) {
-		alert("Elemento urlbase não existe");
 		return null;
 	}
 
 	var oUrlPath = document.getElementById("urlpath");
-	hashInf.urlPath = oUrlPath.defaultValue;
+	hashInf.urlPath = oUrlPath.value;
 	if (oUrlPath == null) {
-		alert("Elemento urlpath não existe");
 		return null;
 	}
 
@@ -43,22 +122,26 @@ function buildUrl() {
 			code = elem.name.substr(7);
 
 			var doc = {
-				nome : null,
+				name : null,
 				url : null,
 				chk : null
 			}
 
 			var oNome = document.getElementsByName("pdfchk_" + code)[0];
-			doc.nome = oNome.defaultValue;
+			doc.name = oNome.value;
 			if (oNome == null) {
 				alert("Elemento pdfchk_" + code + " não existe");
 				return null;
 			}
-			doc.url = (document.getElementsByName("urlchk_" + code)[0]).defaultValue;
+			doc.url = (document.getElementsByName("urlchk_" + code)[0]).value;
 
 			var oChk = document.getElementsByName("chk_" + code)[0];
-			if (oChk != null) {
-				doc.chk = oChk.defaultValue;
+			if (oChk == null) {
+				doc.chk = true;
+			}
+			else
+			{
+				doc.chk = oChk.checked;
 			}
 
 			hashInf.docs.push(doc);
@@ -69,95 +152,119 @@ function buildUrl() {
 }
 
 
-var response = null;
-
-function getResponse()
+function str2bin(str)
 {
+	var buffer = new ArrayBuffer(str.length); 
+	var byteArray = new Uint8Array(buffer);
+	
+    for (var i = 0, strLen = str.length; i < strLen; ++i) {
+      var c = str.charCodeAt(i);
+      byteArray[i] = c & 0xff;  // byte at offset i
+    }
+    
+    return byteArray;
+}
+
+function getContent(url){
+
+	var response = null;
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", url, false);	
+	xhr.overrideMimeType('text/plain; charset=x-user-defined'); 	// Hack to pass bytes through unprocessed.
+	xhr.send();
+	
+	if (xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 304 )) {
+
+		var errorMsg = null;
+				
+    	var bytes = str2bin(xhr.responseText);		
+		var text = xhr.responseText;
+		var strB64 = StringView.bytesToBase64(bytes);
+
+		if (text.indexOf("gt-error-page-hd") != -1) {
+			var begin = text.indexOf("<h3>") + 4;
+			var end = text.indexOf("</h3>", begin);
+			var msg = text.substr(begin, end - begin);
+			errorMsg = "Não foi possível obter o conteúdo do documento a ser assinado: "
+					+ msg;
+		}
+
+		response =  [ strB64, errorMsg ];
+	}
+	else {
+		response =  null;
+	}
+	
 	return response;
 }
 
-function getContent(url) {
-
-	response = null;
-	
-	var xhr = new XMLHttpRequest();
-	xhr.open("GET", url, true);
-	xhr.responseType = 'arraybuffer';
-	xhr.withCredentials = true;
-	xhr.send();
-
-	xhr.onload = function() {
-		if (xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 304 )) {
-			var errorMsg = null;
-			var binary = '';
-			var bytes = new Uint8Array(xhr.response);
-			var tmp = new StringView(bytes, "ISO-8859-1");
-			var text = tmp.toString();
-			var strB64 = StringView.bytesToBase64(bytes)
-
-			if (text.indexOf("gt-error-page-hd") != -1) {
-				var begin = text.indexOf("<h3>") + 4;
-				var end = text.indexOf("</h3>", begin);
-				var msg = text.substr(begin, end - begin);
-				errorMsg = "Não foi possível obter o conteúdo do documento a ser assinado: "
-						+ msg;
-			}
-
-			response =  [ strB64, errorMsg ];
-
-		} else {
-			response = null;
+function print(bytes)
+{
+	var valor = "";
+	for(var i=0; i< bytes.length; ++i){
+		
+		valor += i + ": " + bytes[i] + "\n";
+		if(i%4000 === 0){
+			console.log(valor);
+			valor = "";
 		}
 	}
+	console.log(valor);
 }
 
-function getUrlPost()
+function getData(id)
 {
-	var oUrlPost = document.getElementById("jspserver");
-
-	if (oUrlPost == null) {
-		alert("Elemento jspserver não existe");
-		return null;
-	}
-	
-	return oUrlPost.defaultValue;
+	var data = document.getElementById(id);	
+	return data.value;
 }
 
-
-function sendDataToSigadoc(url, documentCode, isCopy, signatureB64, signer) {
+function sendDataToSigadoc(documentCode, isCopy, signatureB64, signer) {	
 	
-	response = null;
+	var url = getData("jspserver");
+	if(url === null)
+		return;
 
 	var dataToSend = "sigla=" + encodeURIComponent(documentCode) + "&copia=" + isCopy + "&assinaturaB64=" + encodeURIComponent(signatureB64) + "&assinante=" + encodeURIComponent(signer);
 	
+	var code = documentCode.split(":");
+	if(code.length === 2){
+		dataToSend = "id=" + code[1] + "&" + dataToSend;
+	}	
+	
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.withCredentials = true;
+	xhr.open("POST", url, false);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhr.send(dataToSend);
 
-	xhr.onload = function() {
-		if (xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 304 )) {
+	if (xhr.readyState === 4 && xhr.status === 200) {
 
-			var errorMsg = null;
-			var text = xhr.responseText;
-			
-			//Edson: adicionei a segunda sentença ao if abaixo porque, no caso da assinatura externa, a página
-			//de retorno é esta mesma, que obviamente já tem o texto gt-error-page-hd (na linha abaixo) sem
-			//significar que seja uma página de erro
-			if (text.indexOf("gt-error-page-hd") != -1 && text.indexOf("function GravarAssinatura") < 0) {
-				var begin = text.indexOf("<h3>") + 4;
-				var end = text.indexOf("</h3>", begin);
-				var msg = text.substr(begin, end - begin);
-				errorMsg = "Não foi possível obter o conteúdo do documento a ser assinado: " + msg;
-				response = errorMsg;
-			}
-
-			response =  "200"; //HTTP SUCESS CODE = OK
-
-		} else {
-			response = null;
+		var errorMsg = null;
+		var text = xhr.responseText;
+		
+		//Edson: adicionei a segunda sentença ao if abaixo porque, no caso da assinatura externa, a página
+		//de retorno é esta mesma, que obviamente já tem o texto gt-error-page-hd (na linha abaixo) sem
+		//significar que seja uma página de erro
+		if (text.indexOf("gt-error-page-hd") != -1 && text.indexOf("function GravarAssinatura") < 0) {
+			var begin = text.indexOf("<h3>") + 4;
+			var end = text.indexOf("</h3>", begin);
+			var msg = text.substr(begin, end - begin);
+			errorMsg = "Não foi possível obter o conteúdo do documento a ser assinado: " + msg;
+			return errorMsg;
 		}
-	}
+
+		return "200"; //HTTP SUCESS CODE = OK
+	} 
+}
+
+function redirectTo(url)
+{
+	location.href=url;
+}
+
+function redirectToNextURL()
+{
+	nextURL = getData("nexturl");
+	redirectTo(nextURL);	
 }
 
 
@@ -908,6 +1015,3 @@ StringView.prototype.valueOf = StringView.prototype.toString = function() {
 	return sView;
 
 };
-
-
-	

@@ -12,7 +12,7 @@ public class Certificate {
 	private DN issuer;
 	private DN subject;
 	private INTEGER serialNumber;
-	private boolean isFromSmartCard;
+	private boolean fromSmartCard;
 	
 	public Certificate(X509Certificate cert, java.security.cert.X509Certificate jdkCert, String moduleName)
 	{
@@ -21,7 +21,7 @@ public class Certificate {
 		this.subject = new DN(cert.getSubjectDN().getName());
 		this.serialNumber = new INTEGER(cert.getSerialNumber());
 		this.cert = cert;
-		this.isFromSmartCard = (moduleName.compareTo(Constants.INTERNAL_CERTIFICATE) == 0)? false: true;
+		this.fromSmartCard = (moduleName.compareTo(Constants.INTERNAL_CERTIFICATE) == 0)? false: true;
 	}
 		
 	public String getNotBefore(SimpleDateFormat sDf)
@@ -45,7 +45,7 @@ public class Certificate {
 	public INTEGER getSerialNumber()
 	{
 		return serialNumber;
-	}
+	}	
 	
 	public X509Certificate getMozillaX509Certificate() {
 		return cert;
@@ -56,8 +56,8 @@ public class Certificate {
 		return jdkCert;
 	}
 	
-	public boolean isfromSmartCard()
+	public boolean fromSmartCard()
 	{
-		return isFromSmartCard;
+		return fromSmartCard;
 	}
 }

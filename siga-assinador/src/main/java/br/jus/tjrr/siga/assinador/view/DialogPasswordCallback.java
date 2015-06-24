@@ -1,4 +1,4 @@
-package br.jus.tjrr.siga.assinador;
+package br.jus.tjrr.siga.assinador.view;
 
 import org.mozilla.jss.util.Password;
 import org.mozilla.jss.util.PasswordCallback;

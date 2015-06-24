@@ -3,7 +3,12 @@ grant {
    permission java.lang.RuntimePermission "accessClassInPackage.org.mozilla.jss.util";
    permission java.lang.RuntimePermission "accessClassInPackage.org.mozilla.jss.crypto";
    permission java.lang.RuntimePermission "accessClassInPackage.org.mozilla.jss.asn1";
+   permission java.lang.RuntimePermission "accessClassInPackage.org.mozilla.jss.pkcs11";
    permission java.lang.RuntimePermission "accessClassInPackage.org.mozilla.jss";
+   permission java.lang.RuntimePermission "accessClassInPackage.org.mozilla.jss.provider.java.security";
+   permission java.lang.RuntimePermission "getenv.*";
    permission java.security.SecurityPermission "putProviderProperty.Mozilla-JSS";
-   permission java.security.SecurityPermission "insertProvider.Mozilla-JSS";
+   permission java.security.SecurityPermission "insertProvider.Mozilla-JSS";  
+   permission java.security.SecurityPermission "insertProvider.BC";
+   permission java.io.FilePermission "/home/matheus/.mozilla/firefox/profiles.ini", "read";
 };

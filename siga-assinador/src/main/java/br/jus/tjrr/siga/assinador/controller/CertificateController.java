@@ -1,4 +1,4 @@
-package br.jus.tjrr.siga.assinador;
+package br.jus.tjrr.siga.assinador.controller;
 
 import java.io.ByteArrayInputStream;
 import java.security.cert.CertificateExpiredException;
@@ -16,6 +16,8 @@ import org.mozilla.jss.crypto.CryptoToken;
 import org.mozilla.jss.crypto.TokenException;
 import org.mozilla.jss.crypto.X509Certificate;
 import org.mozilla.jss.pkcs11.PK11Module;
+
+import br.jus.tjrr.siga.assinador.Certificate;
 
 
 public class CertificateController {
@@ -37,7 +39,7 @@ public class CertificateController {
 
 			module = (PK11Module) moduleList.nextElement();
 			
-			System.out.println(module.getName() + " - " + module.getLibraryName());
+			logger.log(Level.INFO,module.getName() + " - " + module.getLibraryName());
 
 			Enumeration tokenList = module.getTokens();
 
@@ -63,14 +65,10 @@ public class CertificateController {
 								Boolean isCA = (jdkCert.getBasicConstraints() == -1)? Boolean.FALSE: Boolean.TRUE;
 								if(!isCA)
 								{
-									/*String issuerDN = certs[i].getIssuerDN().toString();
+									String issuerDN = certs[i].getIssuerDN().toString();
 									if (issuerDN.contains("O=" + org)) {
 										certList.add(new Certificate(certs[i],jdkCert, module.getName()));
-									}*/
-									
-									if(certList.size() < 2)
-									   certList.add(new Certificate(certs[i],jdkCert, module.getName()));
-									//certList.add(new Certificate(certs[i],jdkCert, module.getName()));
+									}
 								}								
 								
 							} catch (CertificateNotYetValidException e) {
@@ -103,7 +101,7 @@ public class CertificateController {
 		while (moduleList.hasMoreElements()) {
 
 			module = (PK11Module) moduleList.nextElement();
-			System.out.println(module.getName());
+			logger.log(Level.INFO,module.getName());
 
 			Enumeration tokenList = module.getTokens();
 

@@ -7,7 +7,7 @@ public class Constants {
 	public static String DIG_SHA1 = "SHA-1";
 
 	public static String MOZILLA_JSS_PROVIDER = "Mozilla-JSS";
-	public static int NUMBER_TRIES = 10;
+	public static int NUMBER_TRIES = 15;
 	public static long SLEEP_TIME = 1000; //ms
 	
 	public static String HTTP_OK = "200";

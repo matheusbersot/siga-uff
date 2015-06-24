@@ -11,7 +11,7 @@
 	<artifactId>siga-assinador</artifactId>
 
 	<properties>
-		<java.dir>/opt/jdk1.8.0_31</java.dir>
+		<java.dir>/opt/jdk1.6.0_45</java.dir>
 	</properties>
 
 	<build>
@@ -51,6 +51,7 @@
 						<manifestEntries>
 							<Application-Name>siga-assinador</Application-Name>
 							<Permissions>all-permissions</Permissions>
+							<Class-Path>lib/commons-codec-1.10.jar lib/plugin-1.6.jar</Class-Path>
 						</manifestEntries>
 					</archive>
 				</configuration>
@@ -63,7 +64,7 @@
 					<verbose>true</verbose>
 					<fork>true</fork>
 					<executable>${java.dir}/bin/javac</executable>
-					<compilerVersion>1.8</compilerVersion>
+					<compilerVersion>1.6</compilerVersion>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -107,6 +108,40 @@
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
 		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
+		</dependency>
+		<dependency>
+			<groupId>sun.plugin</groupId>
+			<artifactId>plugin</artifactId>
+			<version>1.6</version>
+			<scope>system</scope>
+			<systemPath>${java.dir}/jre/lib/plugin.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.52</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcpkix-jdk15on</artifactId>
+			<version>1.52</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ini4j</groupId>
+			<artifactId>ini4j</artifactId>
+			<version>0.5.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.1.1</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
+
 
 </project>

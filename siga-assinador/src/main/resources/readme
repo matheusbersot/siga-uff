@@ -16,7 +16,7 @@ keytool -genkey -keystore mykeystore -alias myalias
 keytool -selfcert -keystore mykeystore -alias myalias
 
 -- Inserindo o meu certificado SAEC P1 (formato P12) na keystore local
-keytool -v -importkeystore -srckeystore CertificadoP12Matheus -srcstoretype PKCS12 -destkeystore mykeystore.jks -deststoretype JKS
+keytool -v -importkeystore -srckeystore matheusbersot.p12 -srcstoretype PKCS12 -destkeystore mykeystore.jks -deststoretype JKS
 
 -- listando os certificados
 keytool -v -keystore mykeystore.jks --list
@@ -26,14 +26,25 @@ keytool -changealias -keystore mykeystore.jks -alias "nss certificate db:matheus
 
 --assinando applet
 
-/opt/jdk1.8.0_31/bin/jarsigner -keystore mykeystore.jks ./target/siga-assinador.jar mycert
-/usr/local/jdk1.8.0_45/bin/jarsigner -keystore mykeystore.jks ./target/siga-assinador.jar mycert
+/opt/jdk1.8.0_31/bin/jarsigner -tsa https://tsa.safecreative.org/ -keystore mykeystore.jks ./target/siga-assinador.jar mycert
+
+or 
+
+tsa servers
+
+http://time.certum.pl
+http://dse200.ncipher.com/TSS/HttpTspServer
+http://tsa.safecreative.org
+http://zeitstempel.dfn.de
+
+
+/usr/local/jdk1.8.0_45/bin/jarsigner -tsa https://tsa.safecreative.org/ -keystore mykeystore.jks ./target/siga-assinador.jar mycert
 
 
 -- assinando jar JSON do google
 
-/opt/jdk1.8.0_31/bin/jarsigner -keystore mykeystore.jks ./target/lib/json-simple-1.1.1.jar mycert
-/usr/local/jdk1.8.0_45/bin/jarsigner -keystore mykeystore.jks ./target/lib/json-simple-1.1.1.jar mycert
+/opt/jdk1.8.0_31/bin/jarsigner-tsa https://tsa.safecreative.org/  -keystore mykeystore.jks ./target/lib/json-simple-1.1.1.jar mycert
+/usr/local/jdk1.8.0_45/bin/jarsigner -tsa https://tsa.safecreative.org/ -keystore mykeystore.jks ./target/lib/json-simple-1.1.1.jar mycert
 
 
 -- Copiar arquivos para pasta do apache

@@ -6,32 +6,35 @@
 <script src="javascript/appletAssinador.js"></script>
 </head>
 <body>
-    <div id="applet-div">
-	    <embed id="assinador" width="130" height="20" align="top"
-			type="application/x-java-applet;version=1.8"
-			pluginspage="http://java.sun.com/products/plugin/index.html#download"
-			code="br.jus.tjrr.siga.assinador.AppletAssinador"
-			archive="siga-assinador.jar" mayscript="true" scriptable="true">
-		<param name="ehCopia" value="true">
-		</embed>
+						
+	<div id="applet-div" style="display: none;">
+		<applet id="assinador" width="400" height="40" align="top"
+			code="br.jus.tjrr.siga.assinador.SignerApplet"
+			archive="siga-assinador.jar">
+		<param name="isCopyBtn1" value="false" />
+		<param name="labelBtn1" value="Assinar Documento" />
+		<param name="backgroundColor_R" value="226" />
+		<param name="backgroundColor_G" value="234" />						
+		<param name="backgroundColor_B" value="238" />
+		<param name="permissions" value="all-permissions" />
+		</applet>
+	</div>	
 		
-		<input type="button" value="Click me" onclick="getContent()" />
+	<input type="button" value="Click me" onclick="getContent('http://192.168.0.126:8080/sigaex/arquivo/exibir.action?arquivo=23069150001201508.pdf&semmarcas=1')" />
 		
-<input name="pdfchk_121" value="23069.100007/2015-26" id="pdfchk_0" type="hidden">
-<input name="urlchk_121" value="/arquivo/exibir.action?arquivo=23069100007201526.pdf" id="urlchk_0" type="hidden">
-<input name="jspserver" value="https://sistemas.uff.br:443/sigaex/expediente/mov/assinar_gravar.action" id="jspserver" type="hidden">
-<input name="nextUrl" value="https://sistemas.uff.br:443/sigaex/expediente/doc/exibir.action?sigla=23069.100007/2015-26" id="nexturl" type="hidden">
-<input name="urlpath" value="/sigaex" id="urlpath" type="hidden">
-<input name="urlbase" value="https://sistemas.uff.br:443" id="urlbase" type="hidden">
-		
-		
-    </div>
-	<div id="capicom-div">
+	<input type="hidden" name="pdfchk_3" value="23069.150001/2015-08" id="pdfchk_0"/>
+	<input type="hidden" name="urlchk_3" value="/arquivo/exibir.action?arquivo=23069150001201508.pdf" id="urlchk_0"/>
+	<input type="hidden" name="jspserver" value="http://192.168.0.126:8080/sigaex/expediente/mov/assinar_gravar.action" id="jspserver"/>
+	<input type="hidden" name="nextUrl" value="http://192.168.0.126:8080/sigaex/expediente/doc/exibir.action?sigla=23069.150001/2015-08" id="nexturl"/>
+	<input type="hidden" name="urlpath" value="/sigaex" id="urlpath"/>
+	<input type="hidden" name="urlbase" value="http://192.168.0.126:8080" id="urlbase"/>
+
+	<div id="capicom-div" style="display: none;">
 		<a id="bot-assinar" href="#"
 			onclick="javascript: AssinarDocumentos('false', this);"
 			class="gt-btn-alternate-large gt-btn-left">Assinar Documento</a>
 	</div>
-	<p id="ie-missing" style="display: none;">
+	<p id="ie-firefox-missing" style="display: none;">
 		A assinatura digital utilizando padrão do SIGA-DOC só poderá ser
 		realizada no Internet Explorer. No navegador atual, apenas a
 		assinatura com <i>Applet Java</i> é permitida.
@@ -46,23 +49,20 @@
 		instalação.
 	</p>
 	<script type="text/javascript">
+
 		if (window.navigator.userAgent.indexOf("MSIE ") > 0
-				|| window.navigator.userAgent.indexOf(" rv:11.0") > 0) {
-			testCAPICOM();
+				|| window.navigator.userAgent
+						.indexOf(" rv:11.0") > 0) {
+			TestarAssinaturaDigital();
 			document.getElementById("capicom-div").style.display = "block";
-			document.getElementById("applet-div").style.display = "none";
-			document.getElementById("ie-missing").style.display = "none";
-		} 	
-		else if(window.navigator.userAgent.indexOf("Mozilla") != -1
-				) {
-			document.getElementById("capicom-div").style.display = "none";
-			document.getElementById("applet-div").style.display = "block";
-	    }
-		else {
-			document.getElementById("capicom-div").style.display = "none";
-			document.getElementById("applet-div").style.display = "none";
-			document.getElementById("ie-missing").style.display = "block";
+
+		} else if (window.navigator.userAgent.indexOf("Mozilla") != -1
+			      && window.navigator.platform.indexOf("Linux") != -1) {
+
+			document.getElementById("applet-div").style.display = "block";					
+		} else {
+			document.getElementById("ie-firefox-missing").style.display = "block";
 		}
-	</script>
+	</script>	
 </body>
 </html>

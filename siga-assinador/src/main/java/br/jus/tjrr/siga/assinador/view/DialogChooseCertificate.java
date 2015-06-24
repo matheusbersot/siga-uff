@@ -1,4 +1,4 @@
-package br.jus.tjrr.siga.assinador;
+package br.jus.tjrr.siga.assinador.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -21,6 +21,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+
+import br.jus.tjrr.siga.assinador.Certificate;
 
 public class DialogChooseCertificate extends JDialog implements ActionListener {
 
@@ -130,7 +132,7 @@ public class DialogChooseCertificate extends JDialog implements ActionListener {
 
 		    java.net.URL imgURL = null;
 		    
-		    if(cert.isfromSmartCard())
+		    if(cert.fromSmartCard())
 		    	imgURL =  getClass().getResource("/icons/smartcard64x64.png");
 		    else
 		    	imgURL =  getClass().getResource("/icons/certificate64x64.png");

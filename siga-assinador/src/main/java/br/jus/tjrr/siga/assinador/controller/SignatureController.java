@@ -1,4 +1,4 @@
-package br.jus.tjrr.siga.assinador;
+package br.jus.tjrr.siga.assinador.controller;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
@@ -28,6 +28,9 @@ import org.mozilla.jss.CryptoManager.NotInitializedException;
 import org.mozilla.jss.crypto.ObjectNotFoundException;
 import org.mozilla.jss.crypto.PrivateKey;
 import org.mozilla.jss.crypto.TokenException;
+
+import br.jus.tjrr.siga.assinador.Certificate;
+import br.jus.tjrr.siga.assinador.Constants;
 
 public class SignatureController {	
 	
@@ -67,13 +70,6 @@ public class SignatureController {
 		
 		//creating pkcs7 detached signature
 		CMSSignedData sigData = gen.generate(inf, false);
-		
-        String signedContent =  Base64.encodeBase64String((byte[]) sigData.getSignedContent().getContent());
-        String envelopedData =  Base64.encodeBase64String(sigData.getEncoded());
-
-        System.out.println("Signed content: " + signedContent + "\n");
-        System.out.println("Enveloped data: " + envelopedData);
-		
 		String signatureB64 = Base64.encodeBase64String(sigData.getEncoded());
 		
 		return signatureB64;		

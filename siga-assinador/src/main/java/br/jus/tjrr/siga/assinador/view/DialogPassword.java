@@ -1,4 +1,4 @@
-package br.jus.tjrr.siga.assinador;
+package br.jus.tjrr.siga.assinador.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
