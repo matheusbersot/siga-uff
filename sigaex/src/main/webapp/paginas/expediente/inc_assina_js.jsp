@@ -759,7 +759,4 @@ _utf8_decode : function (utftext) {
 }
 
 }
-
-
-
 </script>

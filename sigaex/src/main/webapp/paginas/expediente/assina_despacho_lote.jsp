@@ -8,7 +8,7 @@
 <%@ taglib prefix="ww" uri="/webwork"%>
 <%@ taglib uri="http://localhost/functiontag" prefix="f"%>
 
-<siga:pagina titulo="Assinatura de Despacho em Lote" onLoad="javascript: TestarAssinaturaDigital()">
+<siga:pagina titulo="Assinatura de Despacho em Lote">
 
 	<script type="text/javascript" language="Javascript1.1"
 		src="<c:url value="/staticJavascript.action"/>"></script>
@@ -69,21 +69,51 @@
 				</div>			
 				<c:if
 					test="${f:podeUtilizarServicoPorConfiguracao(titular,lotaTitular,'SIGA:Sistema Integrado de Gestão Administrativa;DOC:Módulo de Documentos;ASS:Assinatura digital;VBS:VBScript e CAPICOM')}">
+					
+					<c:import url="/paginas/expediente/inc_assina_js_firefox.jsp" />
+					<div id="applet-div" style="display: none;">
+						<applet id="assinador" width="400" height="40" align="top"
+							code="br.jus.tjrr.siga.assinador.SignerApplet"
+							archive="../../appletAssinador/siga-assinador.jar">
+						<param name="isCopyBtn1" value="false" />
+						<param name="labelBtn1" value="Assinar em Lote" />
+						<param name="backgroundColor_R" value="255" />
+						<param name="backgroundColor_G" value="255" />						
+						<param name="backgroundColor_B" value="255" />						
+						<param name="permissions" value="all-permissions" />
+						</applet>
+					</div>						
+					
+					
 					<c:import url="/paginas/expediente/inc_assina_js.jsp" />
-						<div id="capicom-div">
+						<div id="capicom-div" style="display: none;">
 							<a id="bot-assinar" href="#" onclick="javascript: AssinarDocumentos('false', this);" class="gt-btn-alternate-large gt-btn-left">Assinar em Lote</a>
 						</div> 
-					<p id="ie-missing" style="display: none;">A assinatura digital utilizando padrão do SIGA-DOC só poderá ser realizada no Internet Explorer. No navegador atual, apenas a assinatura com <i>Applet Java</i> é permitida.</p>
-					<p id="capicom-missing" style="display: none;">Não foi possível localizar o componente <i>CAPICOM.DLL</i>. Para realizar assinaturas digitais utilizando o método padrão do SIGA-DOC, será necessário instalar este componente. O <i>download</i> pode ser realizado clicando <a href="https://code.google.com/p/projeto-siga/downloads/detail?name=Capicom.zip&can=2&q=#makechanges"><u>aqui</u></a>. Será necessário expandir o <i>ZIP</i> e depois executar o arquivo de instalação.</p>
-				<script type="text/javascript">
-					 if (window.navigator.userAgent.indexOf("MSIE ") > 0 || window.navigator.userAgent.indexOf(" rv:11.0") > 0) {
-						 document.getElementById("capicom-div").style.display = "block";
-						 document.getElementById("ie-missing").style.display = "none";
-					} else {
-						 document.getElementById("capicom-div").style.display = "none";
-						 document.getElementById("ie-missing").style.display = "block";
-					}
-				 </script>
+						
+					<p id="ie-firefox-missing" style="display: none;">
+						A assinatura digital só poderá ser realizada no Windows através do
+						navegador Internet Explorer e no Linux através do navegador Mozilla Firefox.
+					</p>
+							
+					<p id="capicom-missing" style="display: none;">Não foi possível localizar o componente <i>CAPICOM.DLL</i>. Para realizar assinaturas digitais utilizando o método padrão do SIGA-DOC, será necessário instalar este componente. O <i>download</i> pode ser realizado clicando <a href="https://code.google.com/p/projeto-siga/downloads/detail?name=Capicom.zip&can=2&q=#makechanges"><u>aqui</u></a>. Será necessário expandir o <i>ZIP</i> e depois executar o arquivo de instalação.</p>				
+				
+				
+					<script type="text/javascript">
+		
+						if (window.navigator.userAgent.indexOf("MSIE ") > 0
+								|| window.navigator.userAgent
+										.indexOf(" rv:11.0") > 0) {
+							TestarAssinaturaDigital();
+							document.getElementById("capicom-div").style.display = "block";
+
+						} else if (window.navigator.userAgent.indexOf("Mozilla") != -1
+							      && window.navigator.platform.indexOf("Linux") != -1) {
+	
+							document.getElementById("applet-div").style.display = "block";					
+						} else {
+							document.getElementById("ie-firefox-missing").style.display = "block";
+						}
+					</script>		
 		    
 				</c:if>
 			

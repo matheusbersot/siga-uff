@@ -17,6 +17,7 @@
 	<c:if
 		test="${f:podeUtilizarServicoPorConfiguracao(titular,lotaTitular,'SIGA:Sistema Integrado de Gestão Administrativa;DOC:Módulo de Documentos;ASS:Assinatura digital;VBS:VBScript e CAPICOM')}">
 		<c:import url="/paginas/expediente/inc_assina_js.jsp" />
+		<c:import url="/paginas/expediente/inc_assina_js_firefox.jsp" />		
 	</c:if>
 
 	<script type="text/javascript" language="Javascript1.1">
@@ -125,8 +126,7 @@
 									          size="80" />
 							</tr>
 							<tr>
-								<ww:file name="arquivo" label="Arquivo" accept="application/pdf"
-									     onchange="testpdf(this.form)" />
+								<ww:file name="arquivo" label="Arquivo" accept="application/pdf"   onchange="testpdf(this.form)" />
 							</tr>
 							
 							<c:set var="pendencias" value="${false}"/>
@@ -312,21 +312,50 @@
 			</div>			
 			<c:if
 				test="${f:podeUtilizarServicoPorConfiguracao(titular,lotaTitular,'SIGA:Sistema Integrado de Gestão Administrativa;DOC:Módulo de Documentos;ASS:Assinatura digital;VBS:VBScript e CAPICOM')}">
-					<div id="capicom-div">
-						<a id="bot-conferir" href="#" onclick="javascript: AssinarDocumentos('true', this);" class="gt-btn-alternate-large gt-btn-left">Conferir Cópia em Lote</a> 
-						<a id="bot-assinar" href="#" onclick="javascript: AssinarDocumentos('false', this);" class="gt-btn-alternate-large gt-btn-left">Assinar em Lote</a>
-					</div> 
-				<p id="ie-missing" style="display: none;">A assinatura digital utilizando padrão do SIGA-DOC só poderá ser realizada no Internet Explorer. No navegador atual, apenas a assinatura com <i>Applet Java</i> é permitida.</p>
+				
+				<div id="applet-div" style="display: none;">
+						<applet id="assinador" width="400" height="40" align="top"
+							code="br.jus.tjrr.siga.assinador.SignerApplet"
+							archive="../../appletAssinador/siga-assinador.jar">
+						<param name="isCopyBtn1" value="true"/>
+						<param name="labelBtn1" value="Conferir Cópia em Lote"/>	
+						<param name="isCopyBtn2" value="false"/>
+						<param name="labelBtn2" value="Assinar em Lote"/>
+						<param name="backgroundColor_R" value="226" />
+						<param name="backgroundColor_G" value="234" />						
+						<param name="backgroundColor_B" value="238" />
+						<param name="permissions" value="all-permissions" />
+						</applet>
+				</div>
+				
+				<div id="capicom-div" style="display: none;">
+					<a id="bot-conferir" href="#" onclick="javascript: AssinarDocumentos('true', this);" class="gt-btn-alternate-large gt-btn-left">Conferir Cópia em Lote</a> 
+					<a id="bot-assinar" href="#" onclick="javascript: AssinarDocumentos('false', this);" class="gt-btn-alternate-large gt-btn-left">Assinar em Lote</a>
+				</div> 
+				
+				<p id="ie-firefox-missing" style="display: none;">
+					A assinatura digital só poderá ser realizada no Windows através do
+					navegador Internet Explorer e no Linux através do navegador Mozilla Firefox.
+				</p>
+				 
 				<p id="capicom-missing" style="display: none;">Não foi possível localizar o componente <i>CAPICOM.DLL</i>. Para realizar assinaturas digitais utilizando o método padrão do SIGA-DOC, será necessário instalar este componente. O <i>download</i> pode ser realizado clicando <a href="https://code.google.com/p/projeto-siga/downloads/detail?name=Capicom.zip&can=2&q=#makechanges">aqui</a>. Será necessário expandir o <i>ZIP</i> e depois executar o arquivo de instalação.</p>
-				<script type="text/javascript">
-					 if (window.navigator.userAgent.indexOf("MSIE ") > 0 || window.navigator.userAgent.indexOf(" rv:11.0") > 0) {
-						 document.getElementById("capicom-div").style.display = "block";
-						 document.getElementById("ie-missing").style.display = "none";
+				
+				
+				<script type="text/javascript">	
+					if (window.navigator.userAgent.indexOf("MSIE ") > 0
+							|| window.navigator.userAgent
+									.indexOf(" rv:11.0") > 0) {
+						TestarAssinaturaDigital();
+						document.getElementById("capicom-div").style.display = "block";
+
+					} else if (window.navigator.userAgent.indexOf("Mozilla") != -1
+						      && window.navigator.platform.indexOf("Linux") != -1) {
+
+						document.getElementById("applet-div").style.display = "block";					
 					} else {
-						 document.getElementById("capicom-div").style.display = "none";
-						 document.getElementById("ie-missing").style.display = "block";
+						document.getElementById("ie-firefox-missing").style.display = "block";
 					}
-				 </script>
+				</script>		
 			</c:if>
  
 		    

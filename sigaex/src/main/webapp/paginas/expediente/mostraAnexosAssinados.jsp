@@ -9,6 +9,7 @@
 
 
 <ww:if test="${(not empty mobilVO.movs)}">
+    <br/>
     <h2>Anexos Assinados</h2> 	
 	<div class="gt-content-box gt-for-table">
 	    <ww:form name="frm_anexo" id="frm_anexo" cssClass="form"
@@ -105,7 +106,7 @@
 									</c:forEach>
 									<c:if test="${f:podeUtilizarServicoPorConfiguracao(titular,lotaTitular,'SIGA:Sistema Integrado de Gestão Administrativa;DOC:Módulo de Documentos;ASS:Assinatura digital;EXT:Extensão')}">
 										<ww:hidden name="pdf${x}" value="${mov.mov.referencia}" />
-										<ww:hidden name="url${x}" value="${mov.mov.nmPdf}" />
+										<ww:hidden name="url${x}" value="/arquivo/exibir.action?arquivo=${mov.mov.nmPdf}" />
 									</c:if>	
 								</siga:links></td>
 							</tr>
@@ -133,26 +134,56 @@
 	</div>    					
 	<c:if 
 		test="${f:podeUtilizarServicoPorConfiguracao(titular,lotaTitular,'SIGA:Sistema Integrado de Gestão Administrativa;DOC:Módulo de Documentos;ASS:Assinatura digital;VBS:VBScript e CAPICOM')}">
-			<div id="capicom-div">
-				<a id="bot-conferir" href="#" onclick="javascript: AssinarDocumentos('true', this);" class="gt-btn-alternate-large gt-btn-left">Conferir Cópia em Lote</a> 
-				<a id="bot-assinar" href="#" onclick="javascript: AssinarDocumentos('false', this);" class="gt-btn-alternate-large gt-btn-left">Assinar em Lote</a>
-			</div> 
-		<p id="ie-missing" style="display: none;">A assinatura digital utilizando padrão do SIGA-DOC só poderá ser realizada no Internet Explorer. No navegador atual, apenas a assinatura com <i>Applet Java</i> é permitida.</p>
+		<br/>
+		<div id="applet-div" style="display: none;">
+			<applet id="assinador" width="400" height="40" align="top"
+				code="br.jus.tjrr.siga.assinador.SignerApplet"
+				archive="../../appletAssinador/siga-assinador.jar">
+			<param name="isCopyBtn1" value="true"/>
+			<param name="labelBtn1" value="Conferir Cópia em Lote"/>	
+			<param name="isCopyBtn2" value="false"/>
+			<param name="labelBtn2" value="Assinar em Lote"/>
+			<param name="backgroundColor_R" value="226" />
+			<param name="backgroundColor_G" value="234" />						
+			<param name="backgroundColor_B" value="238" />
+			<param name="permissions" value="all-permissions" />
+			</applet>
+		</div>
+		
+		<div id="capicom-div" style="display: none;">
+			<a id="bot-conferir" href="#" onclick="javascript: AssinarDocumentos('true', this);" class="gt-btn-alternate-large gt-btn-left">Conferir Cópia em Lote</a> 
+			<a id="bot-assinar" href="#" onclick="javascript: AssinarDocumentos('false', this);" class="gt-btn-alternate-large gt-btn-left">Assinar em Lote</a>
+		</div> 
+
+		<p id="ie-firefox-missing" style="display: none;">
+			A assinatura digital só poderá ser realizada no Windows através do
+			navegador Internet Explorer e no Linux através do navegador Mozilla Firefox.
+		</p>
+
 		<p id="capicom-missing" style="display: none;">Não foi possível localizar o componente <i>CAPICOM.DLL</i>. Para realizar assinaturas digitais utilizando o método padrão do SIGA-DOC, será necessário instalar este componente. O <i>download</i> pode ser realizado clicando <a href="https://code.google.com/p/projeto-siga/downloads/detail?name=Capicom.zip&can=2&q=#makechanges">aqui</a>. Será necessário expandir o <i>ZIP</i> e depois executar o arquivo de instalação.</p>
-				<script type="text/javascript">
-					 if (window.navigator.userAgent.indexOf("MSIE ") > 0 || window.navigator.userAgent.indexOf(" rv:11.0") > 0) {
-						 document.getElementById("capicom-div").style.display = "block";
-						 document.getElementById("ie-missing").style.display = "none";
-					} else {
-						 document.getElementById("capicom-div").style.display = "none";
-						 document.getElementById("ie-missing").style.display = "block";
-					}
-				 </script>
+		
+		
+		<script type="text/javascript">	
+			if (window.navigator.userAgent.indexOf("MSIE ") > 0
+					|| window.navigator.userAgent
+							.indexOf(" rv:11.0") > 0) {
+				TestarAssinaturaDigital();
+				document.getElementById("capicom-div").style.display = "block";
+
+			} else if (window.navigator.userAgent.indexOf("Mozilla") != -1
+				      && window.navigator.platform.indexOf("Linux") != -1) {
+
+				document.getElementById("applet-div").style.display = "block";					
+			} else {
+				document.getElementById("ie-firefox-missing").style.display = "block";
+			}
+		</script>
 	</c:if>
     
 	<c:if test="${f:podeUtilizarServicoPorConfiguracao(titular,lotaTitular,'SIGA:Sistema Integrado de Gestão Administrativa;DOC:Módulo de Documentos;ASS:Assinatura digital;EXT:Extensão')}">
 	    ${f:obterExtensaoAssinador(lotaTitular.orgaoUsuario,request.scheme,request.serverName,request.serverPort,urlPath,jspServer,nextURL,botao,lote)}						
 	</c:if>
+	
 </ww:if>
 <ww:else>
 		<b>Não há anexos assinados</b>

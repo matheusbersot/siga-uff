@@ -7,9 +7,11 @@
 <%@ taglib uri="http://localhost/functiontag" prefix="f"%>
 <%@ taglib uri="http://localhost/customtag" prefix="tags"%>
 
-<siga:pagina titulo="Documento" onLoad="javascript: TestarAssinaturaDigital();">
+<siga:pagina titulo="Documento">
 	<c:if test="${not doc.eletronico}">
-		<script type="text/javascript">$("html").addClass("fisico");</script>
+		<script type="text/javascript">
+			$("html").addClass("fisico");
+		</script>
 	</c:if>
 
 	<div class="gt-bd" style="padding-bottom: 0px;">
@@ -39,7 +41,8 @@
 							<td colspan="2">
 								<div id="conteudo" style="padding-top: 10px;">
 									<tags:fixdocumenthtml>${doc.conteudoBlobHtmlStringComReferencias}</tags:fixdocumenthtml>
-								</div></td>
+								</div>
+							</td>
 						</tr>
 					</c:if>
 				</table>
@@ -53,7 +56,7 @@
 						value="${sigla}" />
 					<ww:hidden id="urlchk_0" name="urlchk_${doc.idDoc}"
 						value="/arquivo/exibir.action?arquivo=${doc.codigoCompacto}.pdf" />
-				
+
 					<c:set var="jspServer"
 						value="${request.scheme}://${request.serverName}:${request.serverPort}${request.contextPath}/expediente/mov/assinar_gravar.action" />
 					<c:set var="nextURL"
@@ -70,41 +73,67 @@
 					<c:set var="botao" value="" />
 					<c:set var="lote" value="false" />
 				</div>
-				
+
 				<c:if
 					test="${f:podeUtilizarServicoPorConfiguracao(titular,lotaTitular,'SIGA:Sistema Integrado de Gestão Administrativa;DOC:Módulo de Documentos;ASS:Assinatura digital;VBS:VBScript e CAPICOM')}">
+											
+					<c:import url="/paginas/expediente/inc_assina_js_firefox.jsp" />						
+					<div id="applet-div" style="display: none;">
+						<applet id="assinador" width="400" height="40" align="top"
+							code="br.jus.tjrr.siga.assinador.SignerApplet"
+							archive="../../appletAssinador/siga-assinador.jar">
+						<param name="isCopyBtn1" value="false" />
+						<param name="labelBtn1" value="Assinar Documento" />
+						<param name="backgroundColor_R" value="226" />
+						<param name="backgroundColor_G" value="234" />						
+						<param name="backgroundColor_B" value="238" />
+						<param name="permissions" value="all-permissions" />
+						</applet>
+					</div>						
+			
 					<c:import url="/paginas/expediente/inc_assina_js.jsp" />
-					<!-- <c:import url="/paginas/expediente/inc_assina_js_firefox.jsp" />  -->
-					
-					<!-- <input type="button" value="Click me" onclick="getContent('http://172.28.0.9:8081/sigaex/arquivo/exibir.action?arquivo=23069100013201583.pdf&semmarcas=1')" /> -->
-					
-					<!-- <div id="applet-div">
-					    <embed id="assinador" width="130" height="20" align="top"
-							type="application/x-java-applet;version=1.8"
-							pluginspage="http://java.sun.com/products/plugin/index.html#download"
-							code="br.jus.tjrr.siga.assinador.AppletAssinador"
-							archive="../../applet/siga-assinador.jar" mayscript="true" scriptable="true">
-						<param name="ehCopia" value="true">
-						</embed>		
-				    </div>	-->		
-										
-					<div id="capicom-div">
-					<a id="bot-assinar" href="#" onclick="javascript: AssinarDocumentos('false', this);"
-						class="gt-btn-alternate-large gt-btn-left">Assinar Documento</a>
+					<div id="capicom-div" style="display: none;">
+						<a id="bot-assinar" href="#"
+							onclick="javascript: AssinarDocumentos('false', this);"
+							class="gt-btn-alternate-large gt-btn-left">Assinar Documento</a>
 					</div>
-					<p id="ie-missing" style="display: none;">A assinatura digital utilizando padrão do SIGA-DOC só poderá ser realizada no Internet Explorer. No navegador atual, apenas a assinatura com <i>Applet Java</i> é permitida.</p>
-					<p id="capicom-missing" style="display: none;">Não foi possível localizar o componente <i>CAPICOM.DLL</i>. Para realizar assinaturas digitais utilizando o método padrão do SIGA-DOC, será necessário instalar este componente. O <i>download</i> pode ser realizado clicando <a href="https://code.google.com/p/projeto-siga/downloads/detail?name=Capicom.zip&can=2&q=#makechanges">aqui</a>. Será necessário expandir o <i>ZIP</i> e depois executar o arquivo de instalação.</p>
-				<script type="text/javascript">
-					 if (window.navigator.userAgent.indexOf("MSIE ") > 0 || window.navigator.userAgent.indexOf(" rv:11.0") > 0) {
-						 document.getElementById("capicom-div").style.display = "block";
-						 document.getElementById("ie-missing").style.display = "none";
-					} else {
-						 document.getElementById("capicom-div").style.display = "none";
-						 document.getElementById("ie-missing").style.display = "block";
-					}
-				 </script>
+			
+			
+					<p id="ie-firefox-missing" style="display: none;">
+						A assinatura digital só poderá ser realizada no Windows através do
+						navegador Internet Explorer e no Linux através do navegador Mozilla Firefox.
+					</p>
+			
+			
+					<p id="capicom-missing" style="display: none;">
+						Não foi possível localizar o componente <i>CAPICOM.DLL</i>. Para
+						realizar assinaturas digitais utilizando o método padrão do
+						SIGA-DOC, será necessário instalar este componente. O <i>download</i>
+						pode ser realizado clicando <a
+							href="https://code.google.com/p/projeto-siga/downloads/detail?name=Capicom.zip&can=2&q=#makechanges">aqui</a>.
+						Será necessário expandir o <i>ZIP</i> e depois executar o arquivo
+						de instalação.
+					</p>	
+					
+					<script type="text/javascript">
+		
+						if (window.navigator.userAgent.indexOf("MSIE ") > 0
+								|| window.navigator.userAgent
+										.indexOf(" rv:11.0") > 0) {
+							TestarAssinaturaDigital();
+							document.getElementById("capicom-div").style.display = "block";
+
+						} else if (window.navigator.userAgent.indexOf("Mozilla") != -1
+							      && window.navigator.platform.indexOf("Linux") != -1) {
+	
+							document.getElementById("applet-div").style.display = "block";					
+						} else {
+							document.getElementById("ie-firefox-missing").style.display = "block";
+						}
+					</script>							
+
 				</c:if>
-				 
+
 				<c:if
 					test="${f:podeUtilizarServicoPorConfiguracao(titular,lotaTitular,'SIGA:Sistema Integrado de Gestão Administrativa;DOC:Módulo de Documentos;ASS:Assinatura digital;EXT:Extensão')}">
 					${f:obterExtensaoAssinador(lotaTitular.orgaoUsuario,request.scheme,request.serverName,request.serverPort,urlPath,jspServer,nextURL,botao,lote)}	
