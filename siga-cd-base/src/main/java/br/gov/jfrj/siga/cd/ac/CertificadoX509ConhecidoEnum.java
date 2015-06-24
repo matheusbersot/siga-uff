@@ -27,9 +27,9 @@ import java.util.ArrayList;
  */
 public enum CertificadoX509ConhecidoEnum {
 	AC_RAIZ_ICPEDU_V2(CertificadoACEnum.AC_RAIZ_ICPEDU_V2.toX509Certificate()),
-	AC_PESSOAS_P5(CertificadoACEnum.AC_PESSOAS_P5.toX509Certificate())
-	;
-	
+	AC_PESSOAS_P5(CertificadoACEnum.AC_PESSOAS_P5.toX509Certificate()),
+	AC_PESSOAS_P1(CertificadoACEnum.AC_PESSOAS_P1.toX509Certificate())
+	;	
 	
 	X509Certificate certificado;
 	
