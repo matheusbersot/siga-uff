@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -245,7 +244,6 @@ public class SignerApplet extends Applet {
 				    
 				    // sign document
 					String signatureB64 = SignatureController.signDocument(contentDoc, cert);
-					System.out.println(signatureB64);					
 		
 					ProgressBarController.setMessage(documentCode + ": Gravando assinatura...");					
 					ProgressBarController.nextStep();
@@ -255,8 +253,10 @@ public class SignerApplet extends Applet {
 					
 				}	
 				
-				ProgressBarController.setMessage("Concluído, redirecionando...");				
+				ProgressBarController.setMessage("Concluído, redirecionando...");
 				ProgressBarController.nextStep();
+				Thread.sleep(500); //500ms	
+				ProgressBarController.finalizeProgressBar();
 		
 				//redirect to document page
 				JSController.redirectToDocumentPage();

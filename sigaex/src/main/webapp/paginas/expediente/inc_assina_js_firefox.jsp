@@ -29,10 +29,6 @@ var gProgressBar = {
 	    nextStep: function(){
 		    ++this.index;
 	    	this.progressbar.progressbar("value", 100 * (this.index / this.numSteps));
-	    	
-	    	if (this.index === this.numSteps) {
-	            this.finalize();
-		    }
 	    },
 	    setMessage: function(msg){	    	
 	    	    var msgProgressBar;
