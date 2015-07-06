@@ -27,7 +27,6 @@ import netscape.javascript.JSObject;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.ini4j.Ini;
-import org.ini4j.InvalidFileFormatException;
 import org.mozilla.jss.CryptoManager;
 import org.mozilla.jss.CryptoManager.NotInitializedException;
 import org.mozilla.jss.crypto.ObjectNotFoundException;
