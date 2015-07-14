@@ -51,6 +51,7 @@ import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.search.annotations.Store;
+import org.json.simple.JSONObject;
 
 import br.gov.jfrj.itextpdf.Documento;
 import br.gov.jfrj.lucene.HtmlBridge;
@@ -2533,5 +2534,41 @@ public class ExDocumento extends AbstractExDocumento implements Serializable {
 		}
 
 		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public String toJson()  
+	{
+		JSONObject jsonDataDoc = new JSONObject();
+		
+		jsonDataDoc.put("idDoc", getIdDoc());
+		jsonDataDoc.put("anoEmissao", getAnoEmissao());		
+		jsonDataDoc.put("numExpediente", getNumExpediente());		
+		jsonDataDoc.put("idTpDoc", getExTipoDocumento().getId());
+		jsonDataDoc.put("idFormaDoc", getExFormaDocumento().getId());
+		jsonDataDoc.put("idModelo", getExModelo().getId());
+		jsonDataDoc.put("idCadastrante", getCadastrante().getId());
+		jsonDataDoc.put("idLotaCadastrante", getLotaCadastrante().getId());		
+		jsonDataDoc.put("idSubscritor", getSubscritor().getId());
+		jsonDataDoc.put("idLotaSubscritor", getLotaSubscritor().getId());
+		
+		if(getDestinatario() != null)
+			jsonDataDoc.put("idDestinatario", getDestinatario().getId());
+		else
+			jsonDataDoc.put("idDestinatario", "");		
+		
+		if(getLotaDestinatario() != null)
+			jsonDataDoc.put("idLotaDestinatario", getLotaDestinatario().getId());
+		else
+			jsonDataDoc.put("idLotaDestinatario", "");
+
+		jsonDataDoc.put("descrDocumento", getDescrDocumento()); 
+		jsonDataDoc.put("dtDoc", getDtDocDDMMYY());		
+		jsonDataDoc.put("conteudoBlobDoc", getConteudoBlobHtmlB64().trim());		
+		jsonDataDoc.put("idOrgUsuario", getOrgaoUsuario().getId());
+		jsonDataDoc.put("idClassificacao", getExClassificacao().getId());
+		
+		
+		return jsonDataDoc.toString();
 	}
 }

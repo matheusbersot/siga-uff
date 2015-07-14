@@ -41,6 +41,7 @@ import org.hibernate.search.annotations.FieldBridge;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.Store;
+import org.json.simple.JSONObject;
 
 import br.gov.jfrj.itextpdf.Documento;
 import br.gov.jfrj.lucene.HtmlBridge;
@@ -998,5 +999,31 @@ public class ExMovimentacao extends AbstractExMovimentacao implements
 				return true;
 		return false;
 
+	}
+	
+	@SuppressWarnings("unchecked")
+	public String toJson() 
+	{
+		JSONObject jsonDataMov = new JSONObject();
+		jsonDataMov.put("idMov", getIdMov());
+		jsonDataMov.put("idDoc", getExDocumento().getIdDoc());
+		jsonDataMov.put("idCadastrante", getCadastrante().getId());
+		jsonDataMov.put("idLotaCadastrante", getLotaCadastrante().getId());		
+		jsonDataMov.put("idSubscritor", getSubscritor().getId());
+		jsonDataMov.put("idLotaSubscritor", getLotaSubscritor().getId());		
+		jsonDataMov.put("dtMov", getDtMovDDMMYY()); 
+		
+		if(getConteudoBlobPdfB64() != null)
+			jsonDataMov.put("conteudoBlobDoc", getConteudoBlobPdfB64());
+		else
+			jsonDataMov.put("conteudoBlobDoc", "");
+		
+		if(getDescrMov() != null)
+			jsonDataMov.put("descrMov", getDescrMov());
+		else
+			jsonDataMov.put("descrMov", "");
+		
+		
+		return jsonDataMov.toString();
 	}
 }

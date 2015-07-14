@@ -1988,6 +1988,20 @@ public class ExDao extends CpDao {
 		q.setLong("idOrgaoUsuario", orgaoUsu.getIdOrgaoUsu());
 		return q.list();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ExDocumento> obterTodosDocumentos()
+	{
+		Query query = getSessao().createQuery("from ExDocumento");
+		return query.list();
+		
+		//return findByCriteria(ExDocumento.class);
+	}
+	
+	public List<ExMovimentacao> obterTodasMovimentacoes()
+	{
+		return findByCriteria(ExMovimentacao.class);
+	}
 
 	public List<ExPapel> listarExPapeis() {
 		return findByCriteria(ExPapel.class);
