@@ -35,9 +35,13 @@ public class MontadorQuery implements IMontadorQuery {
 		StringBuffer sbf = new StringBuffer();
 
 		if (apenasCount)
-			sbf.append("select count(doc) from ExMarca label inner join label.exMobil mob inner join label.exMobil.exDocumento doc");
+			sbf.append("select count(doc) from ExMarca label "
+					+ "inner join label.exMobil mob "
+					+ "inner join label.exMobil.exDocumento doc ");
 		else
-			sbf.append("select doc, mob, label from ExMarca label inner join label.exMobil mob inner join mob.exDocumento doc");
+			sbf.append("select doc, mob, label from ExMarca label "
+					+ "inner join label.exMobil mob "
+					+ "inner join mob.exDocumento doc");
 
 		//Nato: desabilitei este where pois causava muito impacto na velocidade da consulta. Precisamos criar uma variavel denormalizada mais a frente para resolver esse problema.
 		//sbf.append(" where not exists (from ExMovimentacao where exTipoMovimentacao.idTpMov = 10 and (exMobil.idMobil = mob.idMobil ");

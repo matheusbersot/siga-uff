@@ -68,6 +68,8 @@
 								<include>hibernate-entitymanager.jar</include>
 								<include>hibernate-search-3.1.1.GA.jar</include>
 								<include>siga-ext.jar</include>
+								<include>siga-ext-busca-textual.jar</include>
+								<include>siga-ext-busca-textual-sources.jar</include>
 								<include>pd4ml_demo.jar</include>
 								<include>pd4ml_tl_demo.jar</include>
 								<include>XmlSchema-1.4.5.jar</include>

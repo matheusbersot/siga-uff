@@ -52,7 +52,6 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-annotations</artifactId>
         </dependency>
-        
     </dependencies>
     <properties>
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>

@@ -29,6 +29,7 @@
         <module>siga-cp-sinc</module>
         <module>siga-assinador</module> 
         <module>siga-carga-elasticsearch</module> 
+        <module>siga-ext-busca-textual</module> 
         <!--
         <module>siga-play-module</module>
         <module>sigasr</module>
@@ -75,15 +76,15 @@
                     <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
             </plugin>
-              <plugin>
+            <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.4</version>
                 <configuration>
                   <packagingExcludes>
-                    WEB-INF/lib/siga-ext-*.jar
+                    WEB-INF/lib/siga-ext-*-${siga.version}.jar
                   </packagingExcludes>
                 </configuration>
-              </plugin>
+            </plugin> 
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -186,6 +187,11 @@
             <dependency>
                 <groupId>projeto-siga</groupId>
                 <artifactId>siga-ext</artifactId>
+                <version>${siga.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>projeto-siga</groupId>
+                <artifactId>siga-ext-busca-textual</artifactId>
                 <version>${siga.version}</version>
             </dependency>
             <dependency>

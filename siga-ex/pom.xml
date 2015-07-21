@@ -214,9 +214,11 @@
 			<groupId>projeto-siga</groupId>
 			<artifactId>siga-ext</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>projeto-siga</groupId>
+			<artifactId>siga-ext-busca-textual</artifactId>
+		</dependency>
 	</dependencies>
-
-
 
 	<profiles>
 		<profile>
