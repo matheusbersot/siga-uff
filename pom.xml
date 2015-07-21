@@ -28,7 +28,6 @@
         <module>siga-cd-aut</module>
         <module>siga-cp-sinc</module>
         <module>siga-assinador</module> 
-        <module>siga-carga-elasticsearch</module> 
         <module>siga-ext-busca-textual</module> 
         <!--
         <module>siga-play-module</module>
