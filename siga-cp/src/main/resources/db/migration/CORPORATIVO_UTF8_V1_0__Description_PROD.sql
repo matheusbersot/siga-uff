@@ -2976,15 +2976,14 @@ src_blob := utl_raw.cast_to_raw(convert('
     [@cabecalhoCentralizadoPrimeiraPagina/]
     [/@primeiroCabecalho]
 
-    [@cabecalho]
-    [@cabecalhoCentralizado/]
-    [/@cabecalho]
+    <br/>
+    <br/>
 
     [@letra tamanho=tamanhoLetra]
             [#if !numeracaoCentralizada]
             <table style="float:none; clear:both;" width="100%" border="0" bgcolor="#FFFFFF">
                 <tr>
-                                <td align="left"><p style="font-family:Arial;font-weight:bold;font-size:11pt;"><br/>[@numeroDJE]${tipo} N&ordm; ${(doc.codigo)!}[/@numeroDJE]</p></td>
+                                <td align="left"><p style="font-family:Arial;font-weight:bold;font-size:11pt;"><br/>[@numeroDJE]${tipo} N&ordm; ${(doc.numExpediente)!}[/@numeroDJE]</p></td>
                 </tr>
                         [#if !dataAntesDaAssinatura]
                 <tr>
@@ -2997,7 +2996,7 @@ src_blob := utl_raw.cast_to_raw(convert('
                 <tr>
                             <td align="center">
                                 <p style="font-family:Arial;font-weight:bold;font-size:11pt;"><br/>
-                                 [@numeroDJE]${tipo} N&ordm; ${(doc.codigo)!}[/@numeroDJE]
+                                 [@numeroDJE]${tipo} N&ordm; ${(doc.numExpediente)!}[/@numeroDJE]
                                 [#if !dataAntesDaAssinatura && doc?? && doc.dtD??]
                                     de ${doc.dtD} de ${doc.dtMMMM} de ${doc.dtYYYY}</p>
                                 [/#if]
@@ -3008,7 +3007,9 @@ src_blob := utl_raw.cast_to_raw(convert('
             [@tituloDJE]
 		${(doc.codigo)!}
             [/@tituloDJE]
-            [#nested]
+			<br/>
+            <br/>            
+			[#nested]
             [#if dataAntesDaAssinatura]<p style="text-align:center">[#if mov??]${mov.dtExtenso!}[#else]${doc.dtExtenso!}[/#if]</p>[/#if]
         <p>&nbsp;</p>
             [#if mov??]
@@ -3052,7 +3053,7 @@ src_blob := utl_raw.cast_to_raw(convert('
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
-[#macro portaria texto abertura="" tamanhoLetra="Normal" _tipo="PORTARIA" dispoe_sobre=""]
+[#macro portaria texto abertura="" tamanhoLetra="Normal" _tipo="PORTARIA" ementa=""]
     [#if tamanhoLetra! == "Normal"]
         [#assign tl = "11pt" /]
     [#elseif tamanhoLetra! == "Pequeno"]
@@ -3064,13 +3065,14 @@ src_blob := utl_raw.cast_to_raw(convert('
     [/#if]
     [@estiloBrasaoCentralizado tipo=_tipo tamanhoLetra=tl formatarOrgao=false numeracaoCentralizada=true]
         [@mioloDJE]
-            [#if dispoe_sobre != ""]     
+            [#if ementa != ""]     
               <table style="float:none;" width="100%" border="0" cellpadding="2" cellspacing="0" bgcolor="#FFFFFF">
                   <tr>
                       <td align="left" width="50%"></td>
-                    <td align="left" width="50%" style="font-family: Arial; font-size: ${tl};"><br/>Dispõe sobre ${dispoe_sobre!}</td>
+                    <td align="left" width="50%" style="font-family: Arial; font-size: ${tl};"><br/><span style="font-weight: bold">EMENTA:&nbsp;</span>${ementa!}</td>
                   </tr>
               </table>
+			  <br/><br/>
             [/#if]
             
             <div style="font-family: Arial; font-size: ${tl};">
@@ -3082,11 +3084,10 @@ src_blob := utl_raw.cast_to_raw(convert('
                 [@corpoBIE]
                     ${texto!}
                 [/@corpoBIE]
-                <span style="font-family: Arial; font-size: ${tl}"><center>
+                <span style="font-family: Arial; font-size: ${tl}">
                 [@fechoBIE]
-                    PUBLIQUE-SE. REGISTRE-SE. CUMPRA-SE.</center></span></p>
-                [/@fechoBIE]
-                </center></span></p>
+                    Publique-se, registre-se e cumpra-se.</span>
+                [/@fechoBIE]                
             </div>            
         [/@mioloDJE]
      [/@estiloBrasaoCentralizado]

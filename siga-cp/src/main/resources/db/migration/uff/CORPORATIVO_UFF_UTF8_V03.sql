@@ -10,16 +10,16 @@ select conteudo_blob_mod into dest_blob from CORPORATIVO.cp_modelo where id_mode
 
 src_blob := utl_raw.cast_to_raw(convert('
 <!-- ------------------------ macros UFF ------------------------ -->','WE8ISO8859P1'));
-
+dbms_lob.append(dest_blob, src_blob);
 
 src_blob := utl_raw.cast_to_raw(convert('
 [#macro br]<br/>[/#macro]','WE8ISO8859P1'));
-
 dbms_lob.append(dest_blob, src_blob);
+
 src_blob := utl_raw.cast_to_raw(convert('
 [#macro negritoUff]<b>[#nested]</b>[/#macro]','WE8ISO8859P1'));
-
 dbms_lob.append(dest_blob, src_blob);
+
 src_blob := utl_raw.cast_to_raw(convert('
 [#macro assinaturaCentroUff formatarOrgao=false]
 <p style="font-family: Arial; font-size: 5 pt;" align="center">
@@ -93,102 +93,8 @@ _________________________________________
     [/#if]
 </p>
 [/#macro]','WE8ISO8859P1'));
-
-
-dbms_lob.append(dest_blob, src_blob);
-src_blob := utl_raw.cast_to_raw(convert('
-[#macro cabecalhoCentralizadoPrimeiraPaginaUff lotacao=""]
-<table style="float:none; clear:both;" width="100%" align="left" border="0" cellpadding="0"
-    cellspacing="0" bgcolor="#FFFFFF">
-    <tr bgcolor="#FFFFFF">
-        <td width="100%">
-        <table width="100%" border="0" cellpadding="2">
-            <tr>
-                <td width="100%" align="center" valign="bottom"><img src="contextpath/imagens/brasao2.png" width="65" height="65" /></td>
-            </tr>
-            <tr>
-                <td width="100%" align="center">
-                <p style="font-family: AvantGarde Bk BT, Arial; font-size: 11pt; font-weight:bold;">${(func.resource("siga.ex.modelos.cabecalho.titulo"))!}</p>
-                </td>
-            </tr>
-			<tr>
-                <td width="100%" align="center">
-                  <p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${(func.resource("siga.ex.modelos.cabecalho.subtitulo1"))!}</p>
-                </td>
-            </tr>
- 			<tr>
-                <td width="100%" align="center">
-                  <p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${(func.resource("siga.ex.modelos.cabecalho.subtitulo2"))!}</p>
-                </td>
-            </tr>
-            <tr>
-                <td width="100%" align="center">
-                     <p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${lotacao!}</p>
-                </td>
-            </tr>            
-        </table>
-        </td>
-    </tr>
-</table>
-[/#macro]','WE8ISO8859P1'));
-
-dbms_lob.append(dest_blob, src_blob);
-src_blob := utl_raw.cast_to_raw(convert('
-[#macro estiloBrasaoCentralizadoUff tipo nome_lotacao tx_rodape tamanhoLetra="11pt" formatarOrgao=true tipoCentralizado=false ]
-    [@primeiroCabecalho]
-    [@cabecalhoCentralizadoPrimeiraPaginaUff lotacao=nome_lotacao! /]
-    [/@primeiroCabecalho]
-
-    [@br/]
-    [@br/]
-    [@br/]
-    [@br/]
-
-    [@letra tamanho=tamanhoLetra]
-            [#if !tipoCentralizado]
-            <table style="float:none; clear:both;" width="100%" border="0" bgcolor="#FFFFFF">
-                <tr>
-                    <td align="left"><p style="font-family:Arial;font-weight:bold;font-size:20pt;"><br/>${tipo}</p></td>
-                </tr>
-            </table>
-            [#else]
-            <table style="float:none; clear:both;" width="100%" border="0" bgcolor="#FFFFFF">
-                <tr>
-                     <td align="center">
-                     <p style="font-family:Arial;font-weight:bold;font-size:20pt;"><br/>${tipo}</td>
-                </tr>
-            </table>
-            [/#if]
-            [@br/]
-            [@br/]
-            [@br/]
-            [@br/]
-            [#nested]
-            [@br/]
-            [@br/] 
-            [@br/]
-            [@br/]
-            [#if mov??]
-            [@assinaturaMovCentro formatarOrgao=formatarOrgao/]
-            [#else]
-            [@assinaturaCentroUff formatarOrgao=formatarOrgao/]
-            [/#if]
-    [/@letra]
-
-    [@br/]
-    [@br/] 
-    [@br/] 
-    <table align="center" width="100%" bgcolor="#FFFFFF" border="0" cellspacing="1" >
-         <tr> <td> [@rodapeClassificacaoDocumental/] </td> </tr> 
-         <tr> <td> &nbsp; </td> </tr>
-         <tr> <td> ${tx_rodape!}  </td> </tr>         
-     <table>   
-
-[/#macro]','WE8ISO8859P1'));
-
 dbms_lob.append(dest_blob, src_blob);
 
-dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
 [#macro estiloBrasaoCentralizadoPADUff tipo tamanhoLetra="11pt"]
     [@primeiroCabecalho]
@@ -242,7 +148,6 @@ src_blob := utl_raw.cast_to_raw(convert('
     [/@primeiroRodape]
 
 [/#macro]','WE8ISO8859P1'));
-
 dbms_lob.append(dest_blob, src_blob);
 
 src_blob := utl_raw.cast_to_raw(convert('
@@ -254,8 +159,8 @@ src_blob := utl_raw.cast_to_raw(convert('
                 <span style="font-size: ${tl}"> ${txCorpo!} </span>                
         [/@estiloBrasaoCentralizadoPADUff]
 [/#macro]','WE8ISO8859P1'));
-
 dbms_lob.append(dest_blob, src_blob);
+
 src_blob := utl_raw.cast_to_raw(convert('
 [#function formatarCPF strCPF=""]
 [#local strCPFFormatado = ""]
@@ -271,7 +176,6 @@ src_blob := utl_raw.cast_to_raw(convert('
 [#local strCPFFormatado = "${strCPFSoComNumeros?substring(0,3)}.${strCPFSoComNumeros?substring(3,6)}.${strCPFSoComNumeros?substring(6,9)}-${strCPFSoComNumeros?substring(9,11)}"] 
 [#return strCPFFormatado]
 [/#function]','WE8ISO8859P1'));
-
 dbms_lob.append(dest_blob, src_blob);
 
 commit;
