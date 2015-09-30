@@ -3399,13 +3399,13 @@ dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
 [#macro extensaoBuscaTextual]
 <tr>
-   <td class=\"tdLabel\">
-      <label for=\"fullText\" class=\"label\">Conteúdo:<\/label>
-   <\/td>
+   <td class="tdLabel">
+      <label for="fullText" class="label">Conteúdo:</label>
+   </td>
    <td>
-      <input type=\"text\" name=\"fullText\" size=\"80\" value=\"\" id=\"fullText\"\/>
-   <\/td>
-<\/tr>[\/#macro]','WE8ISO8859P1'));
+      <input type="text" name="fullText" size="80" value="" id="fullText"/>
+   </td>
+</tr>[/#macro]','WE8ISO8859P1'));
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
