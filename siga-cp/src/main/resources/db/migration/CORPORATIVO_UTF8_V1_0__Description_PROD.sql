@@ -2610,7 +2610,7 @@ src_blob := utl_raw.cast_to_raw(convert('
             </tr>
             <tr>
                 <td width="100%" align="center">
-<p style="font-family: AvantGarde Bk BT, Arial; font-size: 11pt;">${(func.resource("siga.ex.modelos.cabecalho.titulo"))!}</p>
+<p style="font-family: AvantGarde Bk BT, Arial; font-size: 11pt;font-weight: bold;">${(func.resource("siga.ex.modelos.cabecalho.titulo"))!}</p>
                 </td>
             </tr>
 			<tr>
