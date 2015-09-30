@@ -1,3 +1,7 @@
+Insert into SIGA.EX_FORMA_DOCUMENTO (ID_FORMA_DOC,DESCR_FORMA_DOC,SIGLA_FORMA_DOC,ID_TIPO_FORMA_DOC) values (500,'Norma de Serviço','NRS',1);
+Insert into SIGA.EX_TP_FORMA_DOC (ID_FORMA_DOC,ID_TP_DOC) values (500,1);
+Insert into SIGA.EX_TP_FORMA_DOC (ID_FORMA_DOC,ID_TP_DOC) values (500,2);
+
 --REM INSERTING into SIGA.EX_MODELO
 
 DECLARE
@@ -29,7 +33,7 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 [/@entrevista]
 
 [#-- Bloco Documento --]
-[@documento margemEsquerda="1cm" margemDireita="2cm" margemSuperior="0.5cm" margemInferior="2cm"]
+[@documento margemEsquerda="2cm" margemDireita="2cm" margemSuperior="0.5cm" margemInferior="2cm"]
 [@portaria texto=texto_portaria ementa=texto_ementa/]
 [/@documento]
 ','AL32UTF8'));
@@ -69,7 +73,7 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 [/@entrevista]
 
 [#-- Bloco Documento --]
-[@documento margemEsquerda="1cm" margemDireita="2cm" margemSuperior="0.5cm" margemInferior="2cm"]
+[@documento margemEsquerda="2cm" margemDireita="2cm" margemSuperior="0.5cm" margemInferior="2cm"]
 [@norma_servico texto=texto_norma_servico ementa=texto_ementa/]
 [/@documento]
 ','AL32UTF8'));

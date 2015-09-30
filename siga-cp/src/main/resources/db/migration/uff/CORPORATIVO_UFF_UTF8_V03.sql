@@ -1,3 +1,5 @@
+SET DEFINE OFF;
+
 ----------------TAGS PARA MODELOS FREEMARKER UFF ---------------------
 
 DECLARE
@@ -98,7 +100,7 @@ dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
 [#macro estiloBrasaoCentralizadoPADUff tipo tamanhoLetra="11pt"]
     [@primeiroCabecalho]
-    [@cabecalhoCentralizadoPrimeiraPaginaUff/]
+    [@cabecalhoCentralizadoPrimeiraPagina/]
     [/@primeiroCabecalho]
 
     [@br/]
