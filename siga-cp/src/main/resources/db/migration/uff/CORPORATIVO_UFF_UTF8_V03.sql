@@ -19,10 +19,6 @@ src_blob := utl_raw.cast_to_raw(convert('
 dbms_lob.append(dest_blob, src_blob);
 
 src_blob := utl_raw.cast_to_raw(convert('
-[#macro negritoUff]<b>[#nested]</b>[/#macro]','WE8ISO8859P1'));
-dbms_lob.append(dest_blob, src_blob);
-
-src_blob := utl_raw.cast_to_raw(convert('
 [#macro assinaturaCentroUff formatarOrgao=false]
 <p style="font-family: Arial; font-size: 5 pt;" align="center">
 _________________________________________
@@ -178,6 +174,15 @@ src_blob := utl_raw.cast_to_raw(convert('
 [#local strCPFFormatado = "${strCPFSoComNumeros?substring(0,3)}.${strCPFSoComNumeros?substring(3,6)}.${strCPFSoComNumeros?substring(6,9)}-${strCPFSoComNumeros?substring(9,11)}"] 
 [#return strCPFFormatado]
 [/#function]','WE8ISO8859P1'));
+dbms_lob.append(dest_blob, src_blob);
+
+src_blob := utl_raw.cast_to_raw(convert('
+[#assign codigos_fg = "FG-1;FG-2;FG-3;FG-4;FG-5;FG-6;FG-7;FG-8;FG-9;" /]','WE8ISO8859P1'));
+dbms_lob.append(dest_blob, src_blob);
+
+src_blob := utl_raw.cast_to_raw(convert('
+[#assign localidades = "Angra dos Reis;Arraial do Cabo;Bom Jesus do Itabapoana;Cabo Frio;Campos dos Goytacazes;Itaperuna;Macaé;Miracema;Niterói;Nova Friburgo;Nova Iguaçu;Pinheiral;Quissamã;Rio das Ostras;Santo Antônio de Pádua;São João De Meriti;Volta Redonda" /]
+','WE8ISO8859P1'));
 dbms_lob.append(dest_blob, src_blob);
 
 commit;

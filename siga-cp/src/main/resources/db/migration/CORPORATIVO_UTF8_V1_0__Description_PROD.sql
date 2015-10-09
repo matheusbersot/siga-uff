@@ -2813,7 +2813,7 @@ dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
 [#macro assinaturaCentro formatarOrgao=false]
 [@assinaturaBIE]
-<p style="font-family: Arial; font-size: 11pt;" align="center">
+<p style="font-family: Times New Roman; font-size: 12pt;" align="center">
     [#if (doc.nmSubscritor)??]
         ${doc.nmSubscritor}
     [#else]
@@ -2894,7 +2894,7 @@ src_blob := utl_raw.cast_to_raw(convert('
             [local funcSubscrDoc = movim.descrMov /]
         [/#if]
     [/#list]
-    <p align="center" style="font-family:Arial;font-size:11pt;">${(mov.subscritor.descricao)!}<br />
+    <p align="center" style="font-family:Times New Roman;font-size:12pt;">${(mov.subscritor.descricao)!}<br />
     [#if mov.nmFuncao??]
         ${mov.nmFuncao}
     [#elseif mov.titular?? && doc.titular?? && mov.titular.idPessoa == doc.titular.idPessoa && doc.nmFuncao??]
@@ -2983,11 +2983,11 @@ src_blob := utl_raw.cast_to_raw(convert('
             [#if !numeracaoCentralizada]
             <table style="float:none; clear:both;" width="100%" border="0" bgcolor="#FFFFFF">
                 <tr>
-                                <td align="left"><p style="font-family:Arial;font-weight:bold;font-size:11pt;"><br/>[@numeroDJE]${tipo} N&ordm; ${(doc.numExpediente)!}[/@numeroDJE]</p></td>
+                                <td align="left"><p style="font-family:Arial;font-weight:bold;font-size:12pt;"><br/>[@numeroDJE]${tipo} n&ordm; ${(doc.numExpediente)!}[/@numeroDJE]</p></td>
                 </tr>
                         [#if !dataAntesDaAssinatura]
                 <tr>
-                    <td align="right">[@letra tamanho="11pt"]<p>[#if mov??]${mov.dtExtenso!}[#else]${doc.dtExtenso!}[/#if]</p>[/@letra]</td>
+                    <td align="right">[@letra tamanho="12pt"]<p>[#if mov??]${mov.dtExtenso!}[#else]${doc.dtExtenso!}[/#if]</p>[/@letra]</td>
                 </tr>
                         [/#if]
             </table>
@@ -2995,8 +2995,8 @@ src_blob := utl_raw.cast_to_raw(convert('
             <table style="float:none; clear:both;" width="100%" border="0" bgcolor="#FFFFFF">
                 <tr>
                             <td align="center">
-                                <p style="font-family:Arial;font-weight:bold;font-size:11pt;"><br/>
-                                 [@numeroDJE]${tipo} N&ordm; ${(doc.numExpediente)!}[/@numeroDJE]
+                                <p style="font-family:Arial;font-weight:bold;font-size:12pt;"><br/>
+                                 [@numeroDJE]${tipo} n&ordm; ${(doc.numExpediente)!}[/@numeroDJE]
                                 [#if !dataAntesDaAssinatura && doc?? && doc.dtD??]
                                     de ${doc.dtD} de ${doc.dtMMMM} de ${doc.dtYYYY}</p>
                                 [/#if]
@@ -3053,9 +3053,13 @@ src_blob := utl_raw.cast_to_raw(convert('
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
-[#macro portaria texto abertura="" tamanhoLetra="Normal" _tipo="PORTARIA" ementa=""]
+[#assign recuo_paragrafo = "2.5cm" /]','WE8ISO8859P1'));
+
+dbms_lob.append(dest_blob, src_blob);
+src_blob := utl_raw.cast_to_raw(convert('
+[#macro portaria texto abertura="" tamanhoLetra="Normal" _tipo="Portaria" ementa=""]
     [#if tamanhoLetra! == "Normal"]
-        [#assign tl = "11pt" /]
+        [#assign tl = "12pt" /]
     [#elseif tamanhoLetra! == "Pequeno"]
         [#assign tl = "9pt" /]
     [#elseif tamanhoLetra! == "Grande"]
@@ -3069,13 +3073,13 @@ src_blob := utl_raw.cast_to_raw(convert('
               <table style="float:none;" width="100%" border="0" cellpadding="2" cellspacing="0" bgcolor="#FFFFFF">
                   <tr>
                       <td align="left" width="50%"></td>
-                    <td align="left" width="50%" style="font-family: Arial; font-size: ${tl};"><br/><span style="font-weight: bold">EMENTA:&nbsp;</span>${ementa!}</td>
+                    <td align="left" width="50%" style="text-align: justify;font-family: Times New Roman; font-size: ${tl};"><br/>${ementa!}</td>
                   </tr>
               </table>
 			  <br/><br/>
             [/#if]
             
-            <div style="font-family: Arial; font-size: ${tl};">
+            <div style="font-family: Times New Roman; font-size: ${tl};">
                 [#if abertura != ""] 
                     [@aberturaBIE]
                         ${abertura!}
@@ -3084,7 +3088,7 @@ src_blob := utl_raw.cast_to_raw(convert('
                 [@corpoBIE]
                     ${texto!}
                 [/@corpoBIE]
-                <span style="font-family: Arial; font-size: ${tl}">
+                <span style="font-family: Times New Roman; font-size: ${tl}; margin-left:${recuo_paragrafo}">
                 [@fechoBIE]
                     Publique-se, registre-se e cumpra-se.</span>
                 [/@fechoBIE]                
@@ -3351,45 +3355,6 @@ src_blob := utl_raw.cast_to_raw(convert('
 	[/#if]
     [/#if]
 [/#macro]','WE8ISO8859P1'));
-
-dbms_lob.append(dest_blob, src_blob);
-src_blob := utl_raw.cast_to_raw(convert('
-[#assign _presidente = {
-    "genero":"M", 
-    "vocativo":"Excelentíssimo Senhor", 
-    "vocativo_carta":"Exmo. Sr. Juiz Federal - Diretor do Foro", 
-    "enderecamento":"Exmo. Sr. Dr.", 
-    "nome":"<DEFINIR_NOME>", 
-    "cargo":"<DEFINIR_CARGO>",
-    "orgao":"<DEFINIR_ORGAO>",
-    "endereco":"Avenida Almirante Barroso, 78 / 13º andar - Centro - Rio de Janeiro/RJ - CEP: 20031-004"} /]','WE8ISO8859P1'));
-    
-dbms_lob.append(dest_blob, src_blob);
-src_blob := utl_raw.cast_to_raw(convert('
-[#assign _secretario_geral = {
-    "genero":"F", 
-    "vocativo":"Senhora", 
-    "vocativo_carta":"Sra. Diretora da Secretaria Geral", 
-    "enderecamento":"Sra. Dra.", 
-    "nome":"<DEFINIR_NOME>", 
-    "cargo":"<DEFINIR_CARGO>",
-    "orgao":"<DEFINIR_ORGAO>",
-    "endereco":"Avenida Almirante Barroso, 78  - Centro - Rio de Janeiro/RJ - CEP: 20031-004"} /]','WE8ISO8859P1'));
-    
-dbms_lob.append(dest_blob, src_blob);
-src_blob := utl_raw.cast_to_raw(convert('
-[#assign _secretario_rh = {
-    "genero":"F", 
-    "vocativo":"Senhora", 
-    "vocativo_carta":"Sra. Diretora da Subsecretaria de Gestão de Pessoas", 
-    "enderecamento":"Sra. Dra.", 
-    "nome":"<DEFINIR_NOME>", 
-    "cargo":"<DEFINIR_CARGO>",
-    "orgao":"<DEFINIR_ORGAO>",
-    "endereco":"Avenida Almirante Barroso, 78  - Centro - Rio de Janeiro/RJ - CEP: 20031-004"} /]
-[#assign enderecamentoPresidente = "Exmo. Sr. Juiz Federal - Diretor de Foro" /]
-[#assign enderecamentoDiretorGeral = "Ilmo(a). Sr(a). Diretor(a)-Geral" /]
-[#assign enderecamentoDiretorDeRH = "Ilma. Sra. Diretora da Subsecretaria de Gestão de Pessoas" /]','WE8ISO8859P1'));
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('

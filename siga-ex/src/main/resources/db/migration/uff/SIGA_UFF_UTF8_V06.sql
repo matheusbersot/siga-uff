@@ -1,3 +1,7 @@
+Insert into SIGA.EX_FORMA_DOCUMENTO (ID_FORMA_DOC,DESCR_FORMA_DOC,SIGLA_FORMA_DOC,ID_TIPO_FORMA_DOC) values (500,'Norma de Serviço','NRS',1);
+Insert into SIGA.EX_TP_FORMA_DOC (ID_FORMA_DOC,ID_TP_DOC) values (500,1);
+Insert into SIGA.EX_TP_FORMA_DOC (ID_FORMA_DOC,ID_TP_DOC) values (500,2);
+
 --REM INSERTING into SIGA.EX_MODELO
 
 DECLARE
@@ -6,49 +10,71 @@ DECLARE
   
 BEGIN
 
--- ######## PROCESSO ADMINISTRATIVO ###############	
-Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1000,'Reembolso de Passagens','Reembolso de Passagens','template/freemarker', null ,55,1000,1);
-	
-update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1000;
+-- ######## PORTARIA ###############	
 
-select conteudo_blob_mod into dest_blob_ex_mod from SIGA.EX_MODELO where id_mod = 1000 for update;
+Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
+values (1001,'Portaria','Portaria','template/freemarker', null, 6, 1001,1);
+	
+update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1001;
+
+select conteudo_blob_mod into dest_blob_ex_mod from SIGA.EX_MODELO where id_mod = 1001 for update;
 src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 [#-- Bloco Entrevista --]
+
 [@entrevista]
+	[@grupo]
+	[@memo var="texto_ementa" titulo="Ementa" colunas="63" linhas="3"/]
+	[/@grupo] 
+    [@grupo titulo="Texto a ser inserido no corpo da portaria"]
+	[@grupo]
+	[@editor titulo="" var="texto_portaria" /]
+	[/@grupo]
+	[/@grupo]
 [/@entrevista]
 
 [#-- Bloco Documento --]
-[@documento margemEsquerda="1cm" margemDireita="2cm" margemSuperior="0.5cm" margemInferior="2cm"]
+[@documento margemEsquerda="2cm" margemDireita="2cm" margemSuperior="0.5cm" margemInferior="2cm"]
+[@portaria texto=texto_portaria ementa=texto_ementa/]
+[/@documento]
+','AL32UTF8'));
+dbms_lob.append(dest_blob_ex_mod, src_blob_ex_mod);
 
-[#assign var_texto_pad]
+END;
+/
 
-<table align="center" width="50%" border="1" cellspacing="1" bgcolor="#000000">
-<tr>
-	<td bgcolor="#FFFFFF" align="center">
-        <p><br/><b>Data de abertura</b><br/><br/></p>
-	</td>
-	<td bgcolor="#FFFFFF" align="center">${doc.dtDocDDMMYYYY}</td>
-</tr>
-</table>
 
-<br>
-<br>
+--REM INSERTING into SIGA.EX_MODELO
 
-<table align="center" width="85%" border="1" cellspacing="1" bgcolor="#000000">
-<tr>
-	<td bgcolor="#FFFFFF" align="center"><br/><b>Assunto</b><br/><br/>
-        </td>
-</tr>
-<tr>
-	<td bgcolor="#FFFFFF" align="center"><br/>Reembolso de Passagem<br/><br/>
-	</td>
-</tr>
-</table>
+DECLARE
+  dest_blob_ex_mod BLOB;
+  src_blob_ex_mod BLOB;
+  
+BEGIN
+	
+-- ######## NORMA DE SERVIÇO ###############	
+Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
+values (1002,'Norma de Serviço','Norma de Serviço','template/freemarker', null, 500, 1002,1);
+	
+update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1002;
 
-[/#assign]
+select conteudo_blob_mod into dest_blob_ex_mod from SIGA.EX_MODELO where id_mod = 1002 for update;
+src_blob_ex_mod := utl_raw.cast_to_raw(convert('
+[#-- Bloco Entrevista --]
 
-[@pad txCorpo=var_texto_pad /]
+[@entrevista]
+	[@grupo]
+	[@memo var="texto_ementa" titulo="Ementa" colunas="63" linhas="3"/]
+	[/@grupo] 
+    [@grupo titulo="Texto a ser inserido no corpo da norma de serviço"]
+	[@grupo]
+	[@editor titulo="" var="texto_norma_servico" /]
+	[/@grupo]
+	[/@grupo]
+[/@entrevista]
+
+[#-- Bloco Documento --]
+[@documento margemEsquerda="2cm" margemDireita="2cm" margemSuperior="0.5cm" margemInferior="2cm"]
+[@norma_servico texto=texto_norma_servico ementa=texto_ementa/]
 [/@documento]
 ','AL32UTF8'));
 dbms_lob.append(dest_blob_ex_mod, src_blob_ex_mod);
