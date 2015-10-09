@@ -34,6 +34,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.swing.text.MaskFormatter;
 
 import org.xml.sax.InputSource;
@@ -1046,5 +1047,14 @@ public class FuncoesEL {
 	
 	public static boolean orgaoUsuarioPresenteNoCabecalhoModelo() throws Exception {
 		return SigaExProperties.isOrgaoUsuarioPresenteNoCabecalhoModelo();		
+	}
+	
+	public static boolean requisicaoVeioDoLinuxEFirefox(HttpServletRequest request){
+		String userAgent =  request.getHeader("user-agent");
+		boolean resultado = false;
+		if(userAgent.indexOf("Linux") != -1 && userAgent.indexOf("Firefox") != -1){
+			resultado = true;
+		}
+		return resultado;		
 	}
 }

@@ -7,7 +7,8 @@
 <%@ taglib uri="http://localhost/sigatags" prefix="siga"%>
 <%@ taglib uri="http://localhost/functiontag" prefix="f"%>
 
-<siga:pagina titulo="Documento" popup="true" onLoad="javascript: TestarAssinaturaDigital();">
+<siga:pagina titulo="Documento" popup="true"
+	onLoad="javascript: TestarAssinaturaDigital();">
 
 	<c:if test="${not mob.doc.eletronico}">
 		<script type="text/javascript">$("html").addClass("fisico");</script>
@@ -128,8 +129,7 @@ function visualizarImpressao(via) {
 												test='${not empty exibemov}'>
 												<table class="message" style="width: 100%;">
 													<tr class="header_${exibemov}">
-														<td width="50%"><b>${mov.descrTipoMovimentacao}</b>
-														</td>
+														<td width="50%"><b>${mov.descrTipoMovimentacao}</b></td>
 														<td><b>Data:</b> ${mov.dtRegMovDDMMYY}</td>
 													</tr>
 													<tr class="header_${exibemov}">
@@ -140,8 +140,7 @@ function visualizarImpressao(via) {
 															<c:url var='anexo'
 																value='/arquivo/exibir.action?arquivo=${mov.nmPdf}' />
 															<td><b>Arquivo:</b> <a class="attached"
-																href="${anexo}" target="_blank">${mov.nmArqMov}</a>
-															</td>
+																href="${anexo}" target="_blank">${mov.nmArqMov}</a></td>
 														</c:if>
 
 														<%-- TIPO_MOVIMENTACAO_JUNTADA --%>
@@ -178,8 +177,8 @@ function visualizarImpressao(via) {
 														<c:if test="${exibemov == 'anexacao'}">
 															<tr>
 																<td colspan=2><c:url var="anexo"
-																		value="/arquivo/exibir.action?arquivo=${mov.nmPdf}" /> <iframe
-																		src="${anexo}" width="100%" height="600"
+																		value="/arquivo/exibir.action?arquivo=${mov.nmPdf}" />
+																	<iframe src="${anexo}" width="100%" height="600"
 																		align="center" style="margin-top: 10px;"> </iframe></td>
 															</tr>
 														</c:if>
@@ -197,8 +196,7 @@ function visualizarImpressao(via) {
 																		test="${mov.conteudoTpMov == 'application/zip'}">
 																		<td colspan="2" style="margin-top: 10px;"><tags:fixdocumenthtml>
 																			${mov.conteudoBlobHtmlString}
-																		</tags:fixdocumenthtml>
-																		</td>
+																		</tags:fixdocumenthtml></td>
 																	</c:when>
 																	<c:otherwise>
 																		<td colspan="2" style="margin-top: 10px;">${mov.obs}</td>
@@ -208,10 +206,10 @@ function visualizarImpressao(via) {
 														</c:if>
 													</tr>
 												</table>
-											</c:if>
-										</td>
+											</c:if></td>
 									</tr>
-								</table></td>
+								</table>
+							</td>
 						</tr>
 					</table>
 				</div>
@@ -251,12 +249,10 @@ function visualizarImpressao(via) {
 									</td>
 									<td width="4%" align="left"><siga:selecionado
 											sigla="${movReferenciadora.cadastrante.iniciais}"
-											descricao="${movReferenciadora.cadastrante.descricao}" />
-									</td>
+											descricao="${movReferenciadora.cadastrante.descricao}" /></td>
 									<td width="44%"><tags:assinatura_mov
 											assinante="${movReferenciadora.obs}"
-											idmov="${movReferenciadora.idMov}" />
-									</td>
+											idmov="${movReferenciadora.idMov}" /></td>
 								</tr>
 							</c:forEach>
 						</table>
@@ -275,21 +271,22 @@ function visualizarImpressao(via) {
 			<div style="padding-left: 10;">
 				<div id="dados-assinatura" style="visible: hidden">
 					<ww:hidden name="pdfchk_${mov.idMov}" value="${mov.referencia}" />
-					<ww:hidden name="urlchk_${mov.idMov}" value="/arquivo/exibir.action?arquivo=${mov.nmPdf}" />
+					<ww:hidden name="urlchk_${mov.idMov}"
+						value="/arquivo/exibir.action?arquivo=${mov.nmPdf}" />
 
 					<c:set var="jspServer"
 						value="${request.scheme}://${request.serverName}:${request.serverPort}/${request.contextPath}/expediente/mov/assinar_mov_gravar.action" />
 					<c:set var="nextURL"
 						value="${request.scheme}://${request.serverName}:${request.serverPort}/${request.contextPath}/expediente/mov/fechar_popup.action?sigla=${mob.sigla}" />
 					<c:set var="urlPath" value="${request.contextPath}" />
-					
+
 					<ww:hidden id="jspserver" name="jspserver" value="${jspServer}" />
 					<ww:hidden id="nexturl" name="nextUrl" value="${nextURL}" />
 					<ww:hidden id="urlpath" name="urlpath" value="${urlPath}" />
 					<c:set var="urlBase"
 						value="${request.scheme}://${request.serverName}:${request.serverPort}" />
 					<ww:hidden id="urlbase" name="urlbase" value="${urlBase}" />
-					
+
 					<ww:if test="${mov.exTipoMovimentacao.idTpMov==2}">
 						<c:set var="botao" value="ambos" />
 					</ww:if>
@@ -297,77 +294,97 @@ function visualizarImpressao(via) {
 						<c:set var="botao" value="" />
 					</ww:else>
 					<c:set var="lote" value="false" />
-				</div>		
-				<p><b>Link para assinatura externa: </b>${enderecoAutenticacao} (informar o código ${mov.siglaAssinaturaExterna})</p>
+				</div>
+				<p>
+					<b>Link para assinatura externa: </b>${enderecoAutenticacao}
+					(informar o código ${mov.siglaAssinaturaExterna})
+				</p>
 				<c:if
 					test="${f:podeUtilizarServicoPorConfiguracao(titular,lotaTitular,'SIGA:Sistema Integrado de Gestão Administrativa;DOC:Módulo de Documentos;ASS:Assinatura digital;VBS:VBScript e CAPICOM')}">
-					
-					<c:import url="/paginas/expediente/inc_assina_js_firefox.jsp" />
-					<div id="applet-div" style="display: none;">
-						<applet id="assinador" width="400" height="40" align="top"
-							code="br.jus.tjrr.siga.assinador.SignerApplet"
-							archive="../../appletAssinador/siga-assinador.jar">
-						<c:choose>
-							<c:when test="${mov.exTipoMovimentacao.idTpMov==5  || mov.exTipoMovimentacao.idTpMov==18}">
-								<param name="isCopyBtn1" value="false"/>
-								<param name="labelBtn1" value="Assinar Despacho"/>						
-							</c:when>
-							<c:when test="${mov.exTipoMovimentacao.idTpMov==6 }">
-								<param name="isCopyBtn1" value="false"/>
-								<param name="labelBtn1" value="Assinar Transferir"/>	
-							</c:when>
-							<c:when test="${mov.exTipoMovimentacao.idTpMov==13}">
-								<param name="isCopyBtn1" value="false"/>
-								<param name="labelBtn1" value="Assinar Desentranhamento"/>							
-							</c:when>
-							<c:when test="${mov.exTipoMovimentacao.idTpMov==43}">
-								<param name="isCopyBtn1" value="false"/>
-								<param name="labelBtn1" value="Assinar Encerramento"/>
-							</c:when>
-							<c:when test="${mov.exTipoMovimentacao.idTpMov==2}">
-								<param name="isCopyBtn1" value="true"/>
-								<param name="labelBtn1" value="Conferir Cópia"/>	
-								<param name="isCopyBtn2" value="false"/>
-								<param name="labelBtn2" value="Assinar Anexo"/>
-							</c:when>
-						</c:choose>	
-						
-						<param name="backgroundColor_R" value="226" />
-						<param name="backgroundColor_G" value="234" />						
-						<param name="backgroundColor_B" value="238" />
-						<param name="permissions" value="all-permissions" />
-						</applet>
-					</div>
-					
+
+					<c:if test="${f:requisicaoVeioDoLinuxEFirefox(request)}">
+						<c:import url="/paginas/expediente/inc_assina_js_firefox.jsp" />
+						<div id="applet-div" style="display: block;">
+							<applet id="assinador" width="400" height="40" align="top"
+								code="br.jus.tjrr.siga.assinador.SignerApplet"
+								archive="../../appletAssinador/siga-assinador.jar">
+								<c:choose>
+									<c:when
+										test="${mov.exTipoMovimentacao.idTpMov==5  || mov.exTipoMovimentacao.idTpMov==18}">
+										<param name="isCopyBtn1" value="false" />
+										<param name="labelBtn1" value="Assinar Despacho" />
+									</c:when>
+									<c:when test="${mov.exTipoMovimentacao.idTpMov==6 }">
+										<param name="isCopyBtn1" value="false" />
+										<param name="labelBtn1" value="Assinar Transferir" />
+									</c:when>
+									<c:when test="${mov.exTipoMovimentacao.idTpMov==13}">
+										<param name="isCopyBtn1" value="false" />
+										<param name="labelBtn1" value="Assinar Desentranhamento" />
+									</c:when>
+									<c:when test="${mov.exTipoMovimentacao.idTpMov==43}">
+										<param name="isCopyBtn1" value="false" />
+										<param name="labelBtn1" value="Assinar Encerramento" />
+									</c:when>
+									<c:when test="${mov.exTipoMovimentacao.idTpMov==2}">
+										<param name="isCopyBtn1" value="true" />
+										<param name="labelBtn1" value="Conferir Cópia" />
+										<param name="isCopyBtn2" value="false" />
+										<param name="labelBtn2" value="Assinar Anexo" />
+									</c:when>
+								</c:choose>
+
+								<param name="backgroundColor_R" value="226" />
+								<param name="backgroundColor_G" value="234" />
+								<param name="backgroundColor_B" value="238" />
+								<param name="permissions" value="all-permissions" />
+							</applet>
+						</div>
+					</c:if>
 					
 					<c:import url="/paginas/expediente/inc_assina_js.jsp" />
 					<div id="capicom-div" style="display: none;">
 						<c:choose>
 							<c:when
 								test="${mov.exTipoMovimentacao.idTpMov==5  || mov.exTipoMovimentacao.idTpMov==18}">
-								<a id="bot-assinar" href="#" onclick="javascript: AssinarDocumentos('false', this);" class="gt-btn-alternate-large gt-btn-left">Assinar Despacho</a> 
+								<a id="bot-assinar" href="#"
+									onclick="javascript: AssinarDocumentos('false', this);"
+									class="gt-btn-alternate-large gt-btn-left">Assinar Despacho</a>
 							</c:when>
 							<c:when test="${mov.exTipoMovimentacao.idTpMov==6 }">
-								<a id="bot-assinar" href="#" onclick="javascript: AssinarDocumentos('false', this);" class="gt-btn-alternate-large gt-btn-left">Assinar Transferir</a> 
+								<a id="bot-assinar" href="#"
+									onclick="javascript: AssinarDocumentos('false', this);"
+									class="gt-btn-alternate-large gt-btn-left">Assinar
+									Transferir</a>
 							</c:when>
 							<c:when test="${mov.exTipoMovimentacao.idTpMov==13}">
-								<a id="bot-assinar" href="#" onclick="javascript: AssinarDocumentos('false', this);" class="gt-btn-alternate-large gt-btn-left">Assinar Desentranhamento</a> 
+								<a id="bot-assinar" href="#"
+									onclick="javascript: AssinarDocumentos('false', this);"
+									class="gt-btn-alternate-large gt-btn-left">Assinar
+									Desentranhamento</a>
 							</c:when>
 							<c:when test="${mov.exTipoMovimentacao.idTpMov==43}">
-								<a id="bot-assinar" href="#" onclick="javascript: AssinarDocumentos('false', this);" class="gt-btn-alternate-large gt-btn-left">Assinar Encerramento</a> 
+								<a id="bot-assinar" href="#"
+									onclick="javascript: AssinarDocumentos('false', this);"
+									class="gt-btn-alternate-large gt-btn-left">Assinar
+									Encerramento</a>
 							</c:when>
 							<c:when test="${mov.exTipoMovimentacao.idTpMov==2}">
-								<a id="bot-conferir" href="#" onclick="javascript: AssinarDocumentos('true', this);" class="gt-btn-alternate-large gt-btn-left">Conferir Cópia</a> 
-								<a id="bot-assinar" href="#" onclick="javascript: AssinarDocumentos('false', this);" class="gt-btn-alternate-large gt-btn-left">Assinar Anexo</a> 
+								<a id="bot-conferir" href="#"
+									onclick="javascript: AssinarDocumentos('true', this);"
+									class="gt-btn-alternate-large gt-btn-left">Conferir Cópia</a>
+								<a id="bot-assinar" href="#"
+									onclick="javascript: AssinarDocumentos('false', this);"
+									class="gt-btn-alternate-large gt-btn-left">Assinar Anexo</a>
 							</c:when>
 						</c:choose>
 					</div>
-					
-					<p id="ie-firefox-missing" style="display: none;">
-						A assinatura digital só poderá ser realizada no Windows através do
-						navegador Internet Explorer e no Linux através do navegador Mozilla Firefox.
+
+					<p id="ie-firefox-missing" style="display: none;">A assinatura
+						digital só poderá ser realizada no Windows através do navegador
+						Internet Explorer e no Linux através do navegador Mozilla Firefox.
 					</p>
-					
+
 					<p id="capicom-missing" style="display: none;">
 						Não foi possível localizar o componente <i>CAPICOM.DLL</i>. Para
 						realizar assinaturas digitais utilizando o método padrão do
@@ -376,21 +393,16 @@ function visualizarImpressao(via) {
 							href="https://code.google.com/p/projeto-siga/downloads/detail?name=Capicom.zip&can=2&q=#makechanges">aqui</a>.
 						Será necessário expandir o <i>ZIP</i> e depois executar o arquivo
 						de instalação.
-					</p>					
-					
+					</p>
+
 
 					<script type="text/javascript">	
 						if (window.navigator.userAgent.indexOf("MSIE ") > 0
 								|| window.navigator.userAgent
 										.indexOf(" rv:11.0") > 0) {
 							TestarAssinaturaDigital();
-							document.getElementById("capicom-div").style.display = "block";
-	
-						} else if (window.navigator.userAgent.indexOf("Mozilla") != -1
-							      && window.navigator.platform.indexOf("Linux") != -1) {
-	
-							document.getElementById("applet-div").style.display = "block";					
-						} else {
+							document.getElementById("capicom-div").style.display = "block";	
+						} else if (window.navigator.userAgent.indexOf("Firefox") == -1 || window.navigator.platform.indexOf("Linux") == -1){
 							document.getElementById("ie-firefox-missing").style.display = "block";
 						}
 					</script>

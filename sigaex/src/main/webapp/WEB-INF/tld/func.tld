@@ -367,4 +367,9 @@
   <function-class>br.gov.jfrj.siga.ex.util.FuncoesEL</function-class>
   <function-signature>java.lang.Boolean orgaoUsuarioPresenteNoCabecalhoModelo()</function-signature>  
  </function> 
+  <function>
+  <name>requisicaoVeioDoLinuxEFirefox</name>
+  <function-class>br.gov.jfrj.siga.ex.util.FuncoesEL</function-class>
+  <function-signature>java.lang.Boolean requisicaoVeioDoLinuxEFirefox(javax.servlet.http.HttpServletRequest)</function-signature>  
+ </function> 
 </taglib>
