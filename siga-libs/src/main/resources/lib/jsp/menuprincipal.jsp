@@ -105,9 +105,10 @@
 			</li>
 			<li><a href="#">Administração</a>
 				<ul>
+					<%--
 					<li><ww:a href="/siga/trocar_senha.action">Trocar senha</ww:a>
 					</li>
-					<%--
+					
 					<li><a href="/siga/substituicao/substituir.action">Entrar
 							como substituto</a>
 					</li>

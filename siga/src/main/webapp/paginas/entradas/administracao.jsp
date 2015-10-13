@@ -17,12 +17,14 @@
 
 		</tr>
 
+		<!--  
 		<tr>
 			<td width="521" valign="top" bgcolor="#FFFF99"><ww:a
 				href="/autenticador/usuario.jf?acao=aListar&exibir=troca">
 				<font size="2" face="Arial"> Trocar senha </font>
 			</ww:a></td>
 		</tr>
+		-->
 
 		<tr>
 			<td width="521" valign="top" bgcolor="#FFFF99"><ww:url id="url"
