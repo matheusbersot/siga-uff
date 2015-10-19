@@ -481,7 +481,9 @@ public class ExMobilVO extends ExVO {
 		if (mob.getExDocumento().isFinalizado()
 				&& mob.getUltimaMovimentacaoNaoCancelada() != null
 				&& mob.getUltimaMovimentacaoNaoCancelada()
-						.getExTipoMovimentacao().getIdTpMov() != ExTipoMovimentacao.TIPO_MOVIMENTACAO_INCLUSAO_DE_COSIGNATARIO)
+						.getExTipoMovimentacao().getIdTpMov() != ExTipoMovimentacao.TIPO_MOVIMENTACAO_INCLUSAO_DE_COSIGNATARIO
+				&& mob.getUltimaMovimentacaoNaoCancelada()
+						.getExTipoMovimentacao().getIdTpMov() != ExTipoMovimentacao.TIPO_MOVIMENTACAO_ANOTACAO)
 			addAcao("arrow_undo",
 					"Desfazer "
 							+ mob.getDescricaoUltimaMovimentacaoNaoCancelada(),
