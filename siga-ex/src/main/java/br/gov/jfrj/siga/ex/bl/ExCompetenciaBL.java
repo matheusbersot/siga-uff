@@ -2679,8 +2679,7 @@ public class ExCompetenciaBL extends CpCompetenciaBL {
 	public boolean podeFazerAnotacao(final DpPessoa titular,
 			final DpLotacao lotaTitular, final ExMobil mob) throws Exception {
 
-		return (!mob.isEmTransitoInterno() && !mob.isEliminado() && !mob
-				.isGeral())
+		return (!mob.isEmTransitoInterno() && !mob.isEliminado() && mob.isGeral())
 				&& getConf().podePorConfiguracao(titular, lotaTitular,
 						ExTipoMovimentacao.TIPO_MOVIMENTACAO_ANOTACAO,
 						CpTipoConfiguracao.TIPO_CONFIG_MOVIMENTAR);
