@@ -148,13 +148,12 @@ public class ExMovimentacaoVO extends ExVO {
 		if (idTpMov == TIPO_MOVIMENTACAO_ANOTACAO) {
 			descricao = mov.getObs();
 			addAcao(null,
-					"Excluir",
+					"Desfazer Anotação",
 					"/expediente/mov",
-					"excluir",
+					"cancelarAnotacao",
 					Ex.getInstance()
 							.getComp()
-							.podeExcluirAnotacao(titular, lotaTitular,
-									mov.mob(), mov));
+							.podeExcluirAnotacao(titular, lotaTitular, mov.mob(), mov));
 		}
 
 		if (idTpMov == TIPO_MOVIMENTACAO_VINCULACAO_PAPEL) {
