@@ -16,4 +16,7 @@ insert into corporativo.cp_configuracao (id_configuracao, id_tp_configuracao, id
 insert into siga.ex_configuracao (id_configuracao_ex, id_tp_mov) values (CORPORATIVO.CP_CONFIGURACAO_SEQ.currval, 38);
 
 -- Default para Tipo Configuracao  = Pode criar documento filho
-UPDATE "CORPORATIVO"."CP_TIPO_CONFIGURACAO" SET ID_SIT_CONFIGURACAO = '2' WHERE ID_TP_CONFIGURACAO = 24; 
+UPDATE "CORPORATIVO"."CP_TIPO_CONFIGURACAO" SET ID_SIT_CONFIGURACAO = '2' WHERE ID_TP_CONFIGURACAO = 24;
+
+-- Default para Tipo Configuracao  = Notificar por Email
+UPDATE "CORPORATIVO"."CP_TIPO_CONFIGURACAO" SET ID_SIT_CONFIGURACAO = '1' WHERE ID_TP_CONFIGURACAO = 27;
