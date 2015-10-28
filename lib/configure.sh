@@ -5,7 +5,6 @@ mvn install:install-file -Dfile=ss_css2.jar -DgroupId=com.steadystate.css.parser
 mvn install:install-file -Dfile=jbpm-jpdl.jar -DgroupId=jbpm -DartifactId=jbpm-jpdl -Dversion=1.0.0 -Dpackaging=jar
 mvn install:install-file -Dfile=jbpm-identity.jar -DgroupId=jbpm -DartifactId=jbpm-identity -Dversion=1.0.0 -Dpackaging=jar
 mvn install:install-file -Dfile=WikiParser.jar -DgroupId=ys.wikiparser -DartifactId=WikiParser -Dversion=1.0.0 -Dpackaging=jar
-mvn install:install-file -Dfile=opensc-PKCS11-0.2.2.jar -DgroupId=opensc -DartifactId=opensc.pkcs11 -Dversion=0.2.2 -Dpackaging=jar
 mvn install:install-file -Dfile=ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0.3.0 -Dpackaging=jar
 mvn install:install-file -Dfile=hibernate-validator-legacy-3.1.0.GA.jar -DgroupId=org.hibernate -DartifactId=hibernate-validator-legacy -Dversion=3.1.0.GA -Dpackaging=jar
 mvn install:install-file -Dfile=jta-1.0.1B.jar -DgroupId=javax.transaction -DartifactId=jta -Dversion=1.0.1B -Dpackaging=jar
