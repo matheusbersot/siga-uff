@@ -79,8 +79,8 @@ public class ExActionSupport extends SigaActionSupport {
 	public List<ExNivelAcesso> getListaNivelAcesso(ExTipoDocumento exTpDoc,
 			ExFormaDocumento forma, ExModelo exMod, ExClassificacao classif)
 			throws Exception {
-		List<ExNivelAcesso> listaNiveis = ExDao.getInstance()
-				.listarOrdemNivel();
+		List<ExNivelAcesso> listaNiveis = ExDao.getInstance().listarOrdemNivel();
+		listaNiveis.remove(0); //remove o nível de acesso Público
 		ArrayList<ExNivelAcesso> niveisFinal = new ArrayList<ExNivelAcesso>();
 		Date dt = ExDao.getInstance().consultarDataEHoraDoServidor();
 
@@ -159,7 +159,9 @@ public class ExActionSupport extends SigaActionSupport {
 	}
 
 	public List<ExTipoDocumento> getTiposDocumento() throws AplicacaoException {
-		return dao().listarExTiposDocumento();
+		List<ExTipoDocumento> tiposDocumento = new ArrayList<ExTipoDocumento>();
+		tiposDocumento.add(dao().consultar(1L, ExTipoDocumento.class,false)); 
+		return tiposDocumento;
 	}
 
 	public ExDao dao() {

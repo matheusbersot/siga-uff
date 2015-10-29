@@ -2127,9 +2127,9 @@ public class ExDocumentoAction extends ExActionSupport {
 	public Map<Integer, String> getListaTipoDest() {
 		final Map<Integer, String> map = new TreeMap<Integer, String>();
 		map.put(1, "Matrícula");
-		map.put(2, "Órgão Integrado");
-		map.put(3, "Órgão Externo");
-		map.put(4, "Campo Livre");
+		map.put(2, "Setor");
+		//map.put(3, "Órgão Externo");
+		//map.put(4, "Campo Livre");
 		return map;
 	}
 
