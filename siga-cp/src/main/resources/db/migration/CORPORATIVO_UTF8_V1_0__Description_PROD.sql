@@ -1893,7 +1893,7 @@ src_blob := utl_raw.cast_to_raw(convert('
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
-[#macro texto var titulo="" largura="" maxcaracteres="" idAjax="" reler="" relertab="" obrigatorio="nao" default=""]
+[#macro texto var titulo="" largura="" maxcaracteres="" idAjax="" reler="" relertab="" obrigatorio="nao" default="" desativado="false"]
     [#if reler == ''ajax'']
         [#local jreler = " onchange=\"javascript: sbmt(''" + idAjax + "'');\""]
     [/#if]
@@ -1939,7 +1939,7 @@ src_blob := utl_raw.cast_to_raw(convert('
     [/#if]
     
     [#if !gerar_formulario!false]
-    <input type="text" name="${var}" value="${v}" ${jreler!""}${jrelertab!""}${jlargura!""}${jmaxcaracteres!""}/>
+    <input type="text" name="${var}" value="${v}" ${jreler!""}${jrelertab!""}${jlargura!""}${jmaxcaracteres!""}[#if desativado == "true"] disabled [/#if] />
     [#else]
     <span class="valor">${v}</span>
     [/#if]
@@ -2032,7 +2032,7 @@ src_blob := utl_raw.cast_to_raw(convert('
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
-[#macro editor var titulo semBotaoSalvar=false]
+[#macro editor var titulo semBotaoSalvar=false desativado="false"]
     [#if .vars[var]??]
         [#local v = .vars[var]/]
     [#else]
@@ -2047,7 +2047,7 @@ src_blob := utl_raw.cast_to_raw(convert('
         [#if titulo != ""]
             <b>${titulo}</b>
         [/#if]
-        [#if !formulario!false]
+        [#if desativado == "false" && !formulario!false]
             <input type="hidden" name="vars" value="${var}" />
             <script type="text/javascript">FCKeditorAPI = null;__FCKeditorNS = null;</script>   
             <table class="entrevista" width="100%">
@@ -2206,7 +2206,7 @@ src_blob := utl_raw.cast_to_raw(convert('
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
-[#macro selecao var titulo opcoes reler=false idAjax="" onclick=""]
+[#macro selecao var titulo opcoes reler=false idAjax="" onclick="" desativado="false"]
     [#local l=opcoes?split(";")]
     [#if .vars[var]??]
         [#local v = .vars[var]/]
@@ -2220,7 +2220,8 @@ src_blob := utl_raw.cast_to_raw(convert('
 
     [#if !gerar_formulario!false]
         <input type="hidden" name="vars" value="${var}" />
-        <select name="${var}" [#if reler] onchange="javascript: sbmt([#if idAjax != ""]''${idAjax}''[/#if]);"[/#if] onclick="${onclick}">
+        <select name="${var}" [#if reler] onchange="javascript: sbmt([#if idAjax != ""]''${idAjax}''[/#if]);"[/#if] onclick="${onclick}"
+                      [#if desativado == "true"] disabled [/#if]  >
                     [#list l as opcao]
                         <option[#if v == opcao] selected[/#if] value="${opcao}">${opcao}</option><br/>
             [/#list]
@@ -2232,7 +2233,7 @@ src_blob := utl_raw.cast_to_raw(convert('
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
-[#macro memo var titulo colunas linhas reler=false obrigatorio=false default=""]
+[#macro memo var titulo colunas linhas reler=false obrigatorio=false default="" desativado="false"]
         [#if reler == true]
                 [#local jreler = " onchange=\"javascript: sbmt();\""]
         [/#if]
@@ -2260,7 +2261,7 @@ src_blob := utl_raw.cast_to_raw(convert('
                 [/#if]
 
                 [#if !gerar_formulario!false]
-                    <textarea cols="${colunas}" rows="${linhas}" name="${var}" ${jreler!""}>${v}</textarea>
+                    <textarea cols="${colunas}" rows="${linhas}" name="${var}" ${jreler!""} [#if desativado == "true"] disabled [/#if] >${v}</textarea>
                 [#else]
                     <span class="valor">${v}</span>
                 [/#if]
@@ -2462,7 +2463,7 @@ src_blob := utl_raw.cast_to_raw(convert('
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
-[#macro data titulo var reler=false idAjax="" default="" alerta=false obrigatorio=false]
+[#macro data titulo var reler=false idAjax="" default="" alerta=false obrigatorio=false desativado="false"]
     [#if reler == true && idAjax != ""]
             [#local jreler = " sbmt(''" + idAjax + "'');\""]
     [#elseif reler == true]
@@ -2488,7 +2489,7 @@ src_blob := utl_raw.cast_to_raw(convert('
 
     [#if !gerar_formulario!false]
         <input type="hidden" name="vars" value="${var}" />
-        <input type="text" name="${var}" value="${v}" size="10" maxlength="10" onblur="javascript:verifica_data(this[#if alerta], ''Sim''[/#if]);${jreler!}" />
+        <input type="text" name="${var}" value="${v}" size="10" maxlength="10" onblur="javascript:verifica_data(this[#if alerta], ''Sim''[/#if]);${jreler!}" [#if desativado == "true"] disabled [/#if]  />
     [#else]
     <span class="valor">${v}</span>
     [/#if]
@@ -3385,6 +3386,10 @@ src_blob := utl_raw.cast_to_raw(convert('
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
 [#macro botoesExtensaoAssinador][/#macro]','WE8ISO8859P1'));
+
+dbms_lob.append(dest_blob, src_blob);
+src_blob := utl_raw.cast_to_raw(convert('
+[#macro complementoHEAD][/#macro]','WE8ISO8859P1'));
 
 dbms_lob.append(dest_blob, src_blob);
 commit;

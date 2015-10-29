@@ -28,7 +28,7 @@ begin
         if updating then
             if  :Old.dt_fechamento <> :New.dt_fechamento 
                then
-                 raise_application_error( -20101,'Não é permitido alterar uma DATA de FECHAMENTO j� existente' );
+                 raise_application_error( -20101,'Não é permitido alterar uma DATA de FECHAMENTO já existente' );
              end if;
 
              if :Old.fg_eletronico = 'N' then

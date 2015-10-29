@@ -725,7 +725,12 @@ public class ExDocumentoAction extends ExActionSupport {
 				new String[] { getRequest().getServerName()
 						+ (getRequest().getServerPort() > 0 ? ":"
 								+ getRequest().getServerPort() : "") });
-
+		
+		if(doc.getCadastrante().equivale(getCadastrante()))
+			getPar().put("desabilitadoEdicao", new String[] {"false"});
+		else
+			getPar().put("desabilitadoEdicao", new String[] {"true"});
+		
 		// ...inclusive nas operações com preenchimento automático
 		if (getPreenchRedirect() != null && getPreenchRedirect().length() > 2) {
 			setPreenchRedirect(getPreenchRedirect() + "&serverAndPort="

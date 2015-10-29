@@ -321,16 +321,17 @@ function tryAgainAutoSave(){
 									list="tiposDocumento" listKey="idTpDoc"
 									listValue="descrTipoDocumento"
 									onchange="javascript:document.getElementById('alterouModelo').value='true';sbmt();"
-									cssStyle="${estiloTipo}" /> <span style="${estiloTipoSpan}">${doc.exTipoDocumento.descrTipoDocumento}</span>
+									cssStyle="${estiloTipo}" 
+									disabled="${doc.cadastrante.idPessoaIni != cadastrante.idPessoaIni}"/> <span style="${estiloTipoSpan}">${doc.exTipoDocumento.descrTipoDocumento}</span>
 							</td>
 							<td width="5%" align="right">Data:</td>
 							<input type="hidden" name="campos" value="dtDocString" />
 							<td><ww:textfield name="dtDocString" size="10"
-									onblur="javascript:verifica_data(this, true);" /> &nbsp;&nbsp;
+									onblur="javascript:verifica_data(this, true);" disabled="${doc.cadastrante.idPessoaIni != cadastrante.idPessoaIni}"/> &nbsp;&nbsp;
 								<input type="hidden" name="campos" value="nivelAcesso" />Acesso
 								<ww:select name="nivelAcesso" list="listaNivelAcesso"
-									theme="simple" listKey="idNivelAcesso"
-									listValue="nmNivelAcesso" /> <input type="hidden"
+									theme="simple" listKey="idNivelAcesso" 
+									listValue="nmNivelAcesso" disabled="${doc.cadastrante.idPessoaIni != cadastrante.idPessoaIni}"/> <input type="hidden"
 								name="campos" value="eletronico" /> <c:choose>
 									<c:when test="${eletronicoFixo}">
 										<input type="hidden" name="eletronico" id="eletronicoHidden"
@@ -343,8 +344,8 @@ function tryAgainAutoSave(){
 									<c:otherwise>
 										<ww:radio list="%{#{1:'Digital',2:'Físico'}}"
 											name="eletronico" id="eletronicoCheck" label=""
-											value="${eletronico}" disabled="${eletronicoFixo}"
-											onchange="setFisico();" />
+											value="${eletronico}" disabled="${eletronicoFixo || (doc.cadastrante.idPessoaIni != cadastrante.idPessoaIni)}"
+											onchange="setFisico();"/>
 										<script type="text/javascript">function setFisico() {if ($('input[name=eletronico]:checked').val() == 2) $('html').addClass('fisico'); else $('html').removeClass('fisico');}; setFisico();</script>
 									</c:otherwise>
 								</c:choose></td>
@@ -409,7 +410,7 @@ function tryAgainAutoSave(){
 									<td>Subscritor:</td>
 									<input type="hidden" name="campos" value="nmSubscritorExt" />
 									<td colspan="3"><ww:textfield name="nmSubscritorExt"
-											size="80" maxLength="256" /></td>
+											size="80" maxLength="256" readonly="${doc.cadastrante.idPessoaIni != cadastrante.idPessoaIni}"/></td>
 								</c:when>
 								<c:otherwise>
 									<td>Subscritor:</td>
@@ -516,7 +517,7 @@ function tryAgainAutoSave(){
 								<td colspan="3"><ww:select name="idFormaDoc"
 										onchange="javascript:document.getElementById('alterouModelo').value='true';sbmt();"
 										list="formasDocPorTipo" listKey="idFormaDoc"
-										listValue="descrFormaDoc" cssStyle="${estiloTipo}" />
+										listValue="descrFormaDoc" cssStyle="${estiloTipo}" disabled="${doc.cadastrante.idPessoaIni != cadastrante.idPessoaIni}" />
 									<!-- sbmt('forma') --> <c:if
 										test="${not empty doc.exFormaDocumento}">
 										<span style="${estiloTipoSpan}">${doc.exFormaDocumento.descrFormaDoc}</span>
@@ -529,7 +530,7 @@ function tryAgainAutoSave(){
 										<ww:select name="idMod"
 											onchange="document.getElementById('alterouModelo').value='true';sbmt();"
 											list="modelos" listKey="idMod" listValue="nmMod"
-											cssStyle="${estiloTipo}" />
+											cssStyle="${estiloTipo}" disabled="${doc.cadastrante.idPessoaIni != cadastrante.idPessoaIni}"/>
 										<c:if test="${not empty doc.exModelo}">
 											<span style="${estiloTipoSpan}">${doc.exModelo.nmMod}</span>
 										</c:if>
@@ -593,7 +594,7 @@ function tryAgainAutoSave(){
 						<tr
 							style="display:<ww:if test="%{modelo.exClassificacao!=null}">none</ww:if><ww:else>visible</ww:else>">
 							<td>Classificação:</td>
-							<c:if test="${modelo.exClassificacao!=null}">
+							<c:if test="${modelo.exClassificacao!=null || (doc.cadastrante.idPessoaIni != cadastrante.idPessoaIni)}">
 								<c:set var="desativarClassif" value="sim" />
 							</c:if>
 							<input type="hidden" name="campos" value="classificacaoSel.id" />
@@ -623,7 +624,8 @@ function tryAgainAutoSave(){
 							<input type="hidden" name="campos" value="descrDocumento" />
 							<td>Descrição:</td>
 							<td colspan="3"><ww:textarea name="descrDocumento" cols="80"
-									rows="2" id="descrDocumento" cssClass="gt-form-textarea" /> <br>
+									rows="2" id="descrDocumento" cssClass="gt-form-textarea"
+									disabled="${doc.cadastrante.idPessoaIni != cadastrante.idPessoaIni}" /> <br>
 								<span><b>(preencher o campo acima com palavras-chave,
 										sempre usando substantivos, gênero masculino e singular)</b></span></td>
 						</tr>
