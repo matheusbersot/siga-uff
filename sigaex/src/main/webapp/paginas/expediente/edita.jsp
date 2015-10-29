@@ -314,8 +314,6 @@ function tryAgainAutoSave(){
 
 						<input type="hidden" name="campos" value="idTpDoc" />
 						<tr>
-
-
 							<td width="10%">Origem:</td>
 							<td width="10%"><ww:select name="idTpDoc"
 									list="tiposDocumento" listKey="idTpDoc"
@@ -539,7 +537,7 @@ function tryAgainAutoSave(){
 									</siga:div></td>
 							</tr>
 
-
+							<!--  
 							<tr>
 								<td>Preenchimento Automático:</td>
 								<input type="hidden" name="campos" value="preenchimento" />
@@ -556,6 +554,7 @@ function tryAgainAutoSave(){
 									type="button" value="Adicionar" name="btnAdicionar"
 									onclick="javascript:adicionaPreench()"></td>
 							</tr>
+							-->
 
 							<%--
 					<tr>
