@@ -30,7 +30,7 @@
 					<div style="width: 100%; padding: 0; margin: 0;">
 						<!-- Files Table -->
 						<!-- This table can be used for listing things like files, pictures, documents, etc -->
-						<h2 class="gt-table-head">Expedientes</h2>
+						<h2 class="gt-table-head">Documentos Avulsos</h2>
 						<!-- content box -->
 						<div id='left'></div>
 						<script type="text/javascript">
