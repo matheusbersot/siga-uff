@@ -288,6 +288,17 @@ function tryAgainAutoSave(){
 					<ww:hidden name="criandoAnexo" value="${criandoAnexo}" />
 					<input type="hidden" name="campos" value="idMobilAutuado" />
 					<ww:hidden name="idMobilAutuado" value="${idMobilAutuado}" />
+					
+					<c:if test="${doc.cadastrante.idPessoaIni != cadastrante.idPessoaIni}">
+						<ww:hidden name="idTpDoc" value="${idTpDoc}"/>
+						<ww:hidden name="dtDocString" value="${dtDocString}"/>
+						<ww:hidden name="nivelAcesso" value="${nivelAcesso}"/>									
+						<ww:hidden name="eletronico" value="${eletronico}"/> 
+						<ww:hidden name="descrDocumento" value="${descrDocumento}" />						
+						<ww:hidden name="idFormaDoc" value="${idFormaDoc}" />
+						<ww:hidden name="idMod" value="${idMod}" />
+					</c:if>
+					
 
 					<table class="gt-form-table">
 						<tr class="header">
@@ -311,11 +322,12 @@ function tryAgainAutoSave(){
 								<c:set var="estiloTipoSpan" value="display: none" />
 							</c:otherwise>
 						</c:choose>
-
+						
 						<input type="hidden" name="campos" value="idTpDoc" />
 						<tr>
 							<td width="10%">Origem:</td>
-							<td width="10%"><ww:select name="idTpDoc"
+							<td width="10%">
+									<ww:select name="idTpDoc"
 									list="tiposDocumento" listKey="idTpDoc"
 									listValue="descrTipoDocumento"
 									onchange="javascript:document.getElementById('alterouModelo').value='true';sbmt();"
@@ -324,13 +336,16 @@ function tryAgainAutoSave(){
 							</td>
 							<td width="5%" align="right">Data:</td>
 							<input type="hidden" name="campos" value="dtDocString" />
-							<td><ww:textfield name="dtDocString" size="10"
+							<td>
+								<ww:textfield name="dtDocString" size="10"
 									onblur="javascript:verifica_data(this, true);" disabled="${doc.cadastrante.idPessoaIni != cadastrante.idPessoaIni}"/> &nbsp;&nbsp;
+								
 								<input type="hidden" name="campos" value="nivelAcesso" />Acesso
 								<ww:select name="nivelAcesso" list="listaNivelAcesso"
 									theme="simple" listKey="idNivelAcesso" 
-									listValue="nmNivelAcesso" disabled="${doc.cadastrante.idPessoaIni != cadastrante.idPessoaIni}"/> <input type="hidden"
-								name="campos" value="eletronico" /> <c:choose>
+									listValue="nmNivelAcesso" disabled="${doc.cadastrante.idPessoaIni != cadastrante.idPessoaIni}"/> 
+									<input type="hidden" name="campos" value="eletronico" /> 
+								<c:choose>
 									<c:when test="${eletronicoFixo}">
 										<input type="hidden" name="eletronico" id="eletronicoHidden"
 											value="${eletronico}" />

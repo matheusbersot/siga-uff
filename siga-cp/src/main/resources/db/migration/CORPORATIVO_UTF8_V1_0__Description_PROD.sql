@@ -1919,6 +1919,10 @@ src_blob := utl_raw.cast_to_raw(convert('
         [#local v = default/]
     [/#if]
 
+    [#if desativado == "true"]
+	    <input type="hidden" name="${var}" value="${v}" />
+    [/#if]
+
     <input type="hidden" name="vars" value="${var}" />
 
     [#if alerta!"" == ''Sim'' && v==""]
@@ -2047,8 +2051,14 @@ src_blob := utl_raw.cast_to_raw(convert('
         [#if titulo != ""]
             <b>${titulo}</b>
         [/#if]
+        
+	    <input type="hidden" name="vars" value="${var}" />
+
+		[#if desativado == "true"]
+			<input type="hidden" id="${var}" name="${var}" value="${v?html}">
+		[/#if]
+
         [#if desativado == "false" && !formulario!false]
-            <input type="hidden" name="vars" value="${var}" />
             <script type="text/javascript">FCKeditorAPI = null;__FCKeditorNS = null;</script>   
             <table class="entrevista" width="100%">
                 <tr>
@@ -2214,9 +2224,13 @@ src_blob := utl_raw.cast_to_raw(convert('
         [#local v = l?first/]
                 [#assign inlineTemplate = ["[#assign ${var} = v/]", "assignInlineTemplate"]?interpret /]
                 [@inlineTemplate/]
-        [/#if]
+    [/#if]
     
-        ${titulo!""}[#if titulo != ""]:[/#if]
+    ${titulo!""}[#if titulo != ""]:[/#if]
+
+	[#if desativado == "true"]
+	    <input type="hidden" name="${var}" value="${v}" />
+    [/#if]
 
     [#if !gerar_formulario!false]
         <input type="hidden" name="vars" value="${var}" />
@@ -2254,6 +2268,10 @@ src_blob := utl_raw.cast_to_raw(convert('
             [#local negrito = "font-weight:bold"]
             <input type="hidden" name="obrigatorios" value="${var}" />
         [/#if]
+
+		[#if desativado == "true"]
+			<input type="hidden" name="${var}" value="${v}" />
+		[/#if]
 
         <div style="padding-top:5px;">
                 [#if titulo != ""] 
@@ -2483,6 +2501,10 @@ src_blob := utl_raw.cast_to_raw(convert('
     [#if obrigatorio]
     [#local negrito = "font-weight:bold"]
     <input type="hidden" name="obrigatorios" value="${var}" />
+    [/#if]
+
+    [#if desativado == "true"]
+	    <input type="hidden" name="${var}" value="${v}" />
     [/#if]
 
     [#if titulo?? && titulo != ""]<span style="${negrito!};${vermelho!}">${titulo}</span>[/#if]
