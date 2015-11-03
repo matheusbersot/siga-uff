@@ -945,16 +945,7 @@
 					exibir?sigla=${doc.sigla}
 				</param>
 			</result>
-		</action>
-		<action name="cancelarAnotacao" class="br.gov.jfrj.webwork.action.ExMovimentacaoAction"
-			method="aCancelarAnotacao">
-			<result type="redirect-action">
-				<param name="namespace">/expediente/doc</param>
-				<param name="actionName">
-					exibir?sigla=${doc.sigla}
-				</param>
-			</result>
-		</action>
+		</action>		
 		<action name="cancelar" class="br.gov.jfrj.webwork.action.ExMovimentacaoAction"
 			method="aCancelar">
 			<!-- <result type="redirect-action"> <param name="namespace">/expediente/doc</param> 

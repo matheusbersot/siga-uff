@@ -144,18 +144,7 @@ public class ExMovimentacaoVO extends ExVO {
 		if (idTpMov == TIPO_MOVIMENTACAO_ASSINATURA_DIGITAL_MOVIMENTACAO) {
 			descricao = Texto.maiusculasEMinusculas(mov.getObs());
 		}
-
-		if (idTpMov == TIPO_MOVIMENTACAO_ANOTACAO) {
-			descricao = mov.getObs();
-			addAcao(null,
-					"Desfazer Anotação",
-					"/expediente/mov",
-					"cancelarAnotacao",
-					Ex.getInstance()
-							.getComp()
-							.podeExcluirAnotacao(titular, lotaTitular, mov.mob(), mov));
-		}
-
+		
 		if (idTpMov == TIPO_MOVIMENTACAO_VINCULACAO_PAPEL) {
 			addAcao(null,
 					"Cancelar",

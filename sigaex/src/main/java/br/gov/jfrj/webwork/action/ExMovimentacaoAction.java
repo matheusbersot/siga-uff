@@ -1693,19 +1693,6 @@ public class ExMovimentacaoAction extends ExActionSupport {
 		setDoc(mov.getExDocumento());
 		return Action.SUCCESS;
 	}
-	
-	public String aCancelarAnotacao() throws Exception {
-
-		buscarDocumento(true);
-		
-		try {
-			Ex.getInstance().getBL().cancelarAnotacao(getCadastrante(), getLotaTitular(), mob, getId());
-		} catch (final Exception e) {
-			throw e;
-		}
-
-		return Action.SUCCESS;
-	}
 
 	public String aCancelarUltimaMovimentacao() throws Exception {
 		buscarDocumento(true);

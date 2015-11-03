@@ -2275,49 +2275,7 @@ public class ExBL extends CpBL {
 				}
 			}
 		}
-	}
-
-	/*
-	 * Esse m�todo cancela a movimenta��o de anota��o que o usu�rio escolher na
-	 * interface.
-	 */
-	public void cancelarAnotacao(final DpPessoa cadastrante, final DpLotacao lotaCadastrante, final ExMobil mob, Long idMov) {
-
-		try {
-
-			ExMovimentacao movACancelar = dao().consultar(idMov, ExMovimentacao.class, false);
-
-			if (movACancelar.getExTipoMovimentacao().getIdTpMov() == ExTipoMovimentacao.TIPO_MOVIMENTACAO_ANOTACAO) {
-
-				iniciarAlteracao();
-
-				final ExMovimentacao mov = criarNovaMovimentacao(ExTipoMovimentacao.TIPO_MOVIMENTACAO_CANCELAMENTO_DE_MOVIMENTACAO, cadastrante, lotaCadastrante, mob, null, null, null, null, null,
-						null);
-
-				gravarMovimentacao(mov);
-
-				mov.setExMovimentacaoRef(movACancelar);
-				mov.setExNivelAcesso(movACancelar.getExNivelAcesso());
-				mov.setExClassificacao(null);
-				mov.setLotaResp(movACancelar.getLotaResp());
-				mov.setResp(movACancelar.getResp());
-				mov.setLotaDestinoFinal(movACancelar.getLotaDestinoFinal());
-				mov.setDestinoFinal(movACancelar.getDestinoFinal());
-
-				gravarMovimentacaoCancelamento(mov, movACancelar);
-
-				atualizarDnmAnotacao(mob);
-
-				concluirAlteracaoParcial(mob);
-
-				concluirAlteracao(null);
-			}
-
-		} catch (final Exception e) {
-			cancelarAlteracao();
-			throw new AplicacaoException("Erro ao cancelar movimenta��o.", 0, e);
-		}
-	}
+	}	
 
 	public void cancelarMovimentacao(final DpPessoa cadastrante, final DpLotacao lotaCadastrante, final ExMobil mob) throws Exception {
 		try {
