@@ -84,6 +84,25 @@ public class ExClassificacao extends AbstractExClassificacao implements
 		return false;
 	}
 
+	
+	private String removeZerosDireitaCodificacao(String codificacao) {
+		int i=codificacao.length()-1; 
+		int fim= 2; // todas as classificações tem ao menos 3 digitos, mesmo que tenha zero no final.
+		int indUltimoDigitoDiffZero = -1;
+		while ((i > fim) && (indUltimoDigitoDiffZero == -1)){			
+			char c = codificacao.charAt(i);
+			if(c != '0' && c != '.'){
+				indUltimoDigitoDiffZero = i;
+			}
+			--i;
+		}
+		
+		if(i == fim){
+			indUltimoDigitoDiffZero = fim;
+		}
+		
+		return codificacao.substring(0, indUltimoDigitoDiffZero+1);
+	}
 
 
 	/**
@@ -91,7 +110,7 @@ public class ExClassificacao extends AbstractExClassificacao implements
 	 * 
 	 */
 	public String getSigla() {
-		return getCodificacao();
+		return removeZerosDireitaCodificacao(getCodificacao());
 	}
 
 	/**
