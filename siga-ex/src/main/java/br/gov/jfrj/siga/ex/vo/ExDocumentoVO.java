@@ -569,7 +569,7 @@ public class ExDocumentoVO extends ExVO {
 						.getComp()
 						.podeExibirInformacoesCompletas(titular, lotaTitular,
 								mob)
-						&& !exibirAntigo, null, null, null, null, null);
+						&& !exibirAntigo, null, "&exibirCompleto=true", null, null, null);
 
 		vo.addAcao(
 				"eye",
