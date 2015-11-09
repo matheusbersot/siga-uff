@@ -38,6 +38,8 @@ public class ExFormaDocumento extends AbstractExFormaDocumento implements
 	 */
 	private static final long serialVersionUID = 8863713030171351063L;
 
+	public static final String PORTARIA = "Portaria";
+	
 	/**
 	 * Simple constructor of ExFormaDocumento instances.
 	 */

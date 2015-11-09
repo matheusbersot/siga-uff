@@ -415,8 +415,9 @@ public class ExBL extends CpBL {
 	}
 
 	/**
-	 * Mï¿½todo criado para contar o nï¿½mero de pï¿½ginas de um documento que foi
-	 * criado antes da funï¿½ï¿½o que grava um documento com o total de pï¿½ginas.
+	 * Mï¿½todo criado para contar o número de pï¿½ginas de um documento que foi
+	 * criado antes da funï¿½ï¿½o que grava um documento com o total de
+	 * pï¿½ginas.
 	 * 
 	 * @param doc
 	 * @return
@@ -430,7 +431,7 @@ public class ExBL extends CpBL {
 		try {
 			ExDao.commitTransacao();
 		} catch (Throwable e) {
-			System.out.println("Erro ao contar o nï¿½mero de pï¿½ginas do documento." + doc);
+			System.out.println("Erro ao contar o número de pï¿½ginas do documento." + doc);
 			e.printStackTrace();
 		}
 
@@ -438,8 +439,9 @@ public class ExBL extends CpBL {
 	}
 
 	/**
-	 * Mï¿½todo criado para contar o nï¿½mero de pï¿½ginas de uma movimentacao que foi
-	 * criada antes da funï¿½ï¿½o que grava uma movimentacao com o total de pï¿½ginas.
+	 * Mï¿½todo criado para contar o número de pï¿½ginas de uma movimentacao que
+	 * foi criada antes da funï¿½ï¿½o que grava uma movimentacao com o total de
+	 * pï¿½ginas.
 	 * 
 	 * @param doc
 	 * @return
@@ -453,7 +455,7 @@ public class ExBL extends CpBL {
 		try {
 			ExDao.commitTransacao();
 		} catch (Throwable e) {
-			System.out.println("Erro ao contar o nï¿½mero de pï¿½ginas da movimentaï¿½ï¿½o." + mov);
+			System.out.println("Erro ao contar o número de pï¿½ginas da movimentaï¿½ï¿½o." + mov);
 			e.printStackTrace();
 		}
 
@@ -608,8 +610,8 @@ public class ExBL extends CpBL {
 	}
 
 	/**
-	 * Calcula quais as marcas cada mobil terï¿½ com base nas movimentaï¿½ï¿½es que
-	 * foram feitas no documento.
+	 * Calcula quais as marcas cada mobil terï¿½ com base nas movimentaï¿½ï¿½es
+	 * que foram feitas no documento.
 	 * 
 	 * @param mob
 	 */
@@ -675,10 +677,11 @@ public class ExBL extends CpBL {
 						} else if (t == ExTipoMovimentacao.TIPO_MOVIMENTACAO_ANEXACAO && mob.doc().isEletronico() && !mob.doc().jaTransferido()) {
 							m = CpMarcador.MARCADOR_ANEXO_PENDENTE_DE_ASSINATURA;
 							/*
-							 * nï¿½o ï¿½ possï¿½vel usar ExMovimentacao.isAssinada()
-							 * pois nï¿½o hï¿½ tempo habil no BD de efetivar a
-							 * inclusao de movimentacao de assinatura de
-							 * movimentï¿½ï¿½o Edson: Por que nï¿½o?
+							 * nï¿½o ï¿½ possï¿½vel usar
+							 * ExMovimentacao.isAssinada() pois nï¿½o hï¿½ tempo
+							 * habil no BD de efetivar a inclusao de
+							 * movimentacao de assinatura de movimentï¿½ï¿½o
+							 * Edson: Por que nï¿½o?
 							 */
 							for (ExMovimentacao movAss : mob.getExMovimentacaoSet()) {
 								if ((movAss.getExTipoMovimentacao().getIdTpMov() == ExTipoMovimentacao.TIPO_MOVIMENTACAO_ASSINATURA_DIGITAL_MOVIMENTACAO || movAss.getExTipoMovimentacao().getIdTpMov() == ExTipoMovimentacao.TIPO_MOVIMENTACAO_CONFERENCIA_COPIA_DOCUMENTO)
@@ -804,9 +807,9 @@ public class ExBL extends CpBL {
 				if (t == ExTipoMovimentacao.TIPO_MOVIMENTACAO_ANEXACAO && mob.doc().isEletronico()) {
 					m = CpMarcador.MARCADOR_ANEXO_PENDENTE_DE_ASSINATURA;
 					/*
-					 * nï¿½o ï¿½ possï¿½vel usar ExMovimentacao.isAssinada() pois nï¿½o
-					 * hï¿½ tempo habil no BD de efetivar a inclusao de
-					 * movimentacao de assinatura de movimentï¿½ï¿½o
+					 * nï¿½o ï¿½ possï¿½vel usar ExMovimentacao.isAssinada()
+					 * pois nï¿½o hï¿½ tempo habil no BD de efetivar a inclusao
+					 * de movimentacao de assinatura de movimentï¿½ï¿½o
 					 */
 					for (ExMovimentacao movAss : mob.getExMovimentacaoSet()) {
 						if ((movAss.getExTipoMovimentacao().getIdTpMov() == ExTipoMovimentacao.TIPO_MOVIMENTACAO_ASSINATURA_DIGITAL_MOVIMENTACAO || movAss.getExTipoMovimentacao().getIdTpMov() == ExTipoMovimentacao.TIPO_MOVIMENTACAO_CONFERENCIA_COPIA_DOCUMENTO)
@@ -919,8 +922,8 @@ public class ExBL extends CpBL {
 	}
 
 	/**
-	 * Calcula quais as marcas cada mobil terï¿½ com base nas movimentaï¿½ï¿½es que
-	 * foram feitas no documento.
+	 * Calcula quais as marcas cada mobil terï¿½ com base nas movimentaï¿½ï¿½es
+	 * que foram feitas no documento.
 	 * 
 	 * @param mob
 	 */
@@ -1123,9 +1126,11 @@ public class ExBL extends CpBL {
 			iniciarAlteracao();
 
 			DatasPublicacaoDJE DJE = new DatasPublicacaoDJE(dtDispPublicacao);
-			// Esse teste ï¿½ feito para validar a data de disponibilizaï¿½ï¿½o e
+			// Esse teste ï¿½ feito para validar a data de disponibilizaï¿½ï¿½o
+			// e
 			// pegar a data de publicaï¿½ï¿½o correta.
-			// Pois se a data de disponibilizaï¿½ï¿½o for sexta o sistema coloca a
+			// Pois se a data de disponibilizaï¿½ï¿½o for sexta o sistema coloca
+			// a
 			// data de publicaï¿½ï¿½o para segunda.
 			String sMensagem = DJE.validarDataDeDisponibilizacao(true);
 			if (sMensagem != null)
@@ -1187,8 +1192,8 @@ public class ExBL extends CpBL {
 				}
 			}
 
-			Correio.enviar(SigaBaseProperties.getString("servidor.smtp.usuario.remetente"), emailsAtendentes.toArray(new String[emailsAtendentes.size()]), "Nova solicitaï¿½ï¿½o de publicaï¿½ï¿½o DJE ("
-					+ mov.getLotaCadastrante().getSiglaLotacao() + ") ", sb.toString(), sbHtml.toString());
+			Correio.enviar(SigaBaseProperties.getString("servidor.smtp.usuario.remetente"), emailsAtendentes.toArray(new String[emailsAtendentes.size()]),
+					"Nova solicitaï¿½ï¿½o de publicaï¿½ï¿½o DJE (" + mov.getLotaCadastrante().getSiglaLotacao() + ") ", sb.toString(), sbHtml.toString());
 
 			concluirAlteracao(mov.getExDocumento());
 		} catch (final Exception e) {
@@ -1611,7 +1616,8 @@ public class ExBL extends CpBL {
 
 			// Verifica se o documento possui documento pai e faz a juntada
 			// automï¿½tica. Caso o pai seja um volume de um processo, primeiro
-			// verifica se o volume estï¿½ encerrado, se estiver procura o ï¿½ltimo
+			// verifica se o volume estï¿½ encerrado, se estiver procura o
+			// ï¿½ltimo
 			// volume para juntar.
 
 			if (doc.getExMobilPai() != null) {
@@ -1673,7 +1679,8 @@ public class ExBL extends CpBL {
 	}
 
 	public String criarDocTeste() throws Exception {
-		// Mï¿½todo utilizado para testar criaï¿½ï¿½o de documentos por webService
+		// Mï¿½todo utilizado para testar criaï¿½ï¿½o de documentos por
+		// webService
 		/*
 		 * ExService client = Service.getExService(); String s;
 		 * 
@@ -1854,7 +1861,8 @@ public class ExBL extends CpBL {
 
 			// Verifica se o documento possui documento pai e faz a juntada
 			// automï¿½tica. Caso o pai seja um volume de um processo, primeiro
-			// verifica se o volume estï¿½ encerrado, se estiver procura o ï¿½ltimo
+			// verifica se o volume estï¿½ encerrado, se estiver procura o
+			// ï¿½ltimo
 			// volume para juntar.
 
 			if (doc.getExMobilPai() != null) {
@@ -1996,7 +2004,8 @@ public class ExBL extends CpBL {
 				lMatricula = Long.valueOf(sMatricula.replace("-", ""));
 			} catch (final Exception e) {
 				// throw new AplicacaoException(
-				// "Nï¿½o foi possï¿½vel obter a matrï¿½cula do assinante", 0, e);
+				// "Nï¿½o foi possï¿½vel obter a matrï¿½cula do assinante", 0,
+				// e);
 			}
 
 			// Verifica se a matrï¿½cula confere com o subscritor do Despacho ou
@@ -2183,11 +2192,11 @@ public class ExBL extends CpBL {
 	}
 
 	/**
-	 * Calcula o nï¿½mero original de pï¿½ginas do documento que estï¿½ sendo
+	 * Calcula o número original de pï¿½ginas do documento que estï¿½ sendo
 	 * desentranhado, com base em um vetor de arquivos numerados. Depois, inclui
-	 * essa informaï¿½ï¿½o no contexto do processador html para gerar a certidï¿½o.
-	 * Tambï¿½m armazena o nï¿½mero original de pï¿½ginas em campo especï¿½fico da
-	 * movimentaï¿½ï¿½o de cancelamento ou desentranhamento.
+	 * essa informaï¿½ï¿½o no contexto do processador html para gerar a
+	 * certidï¿½o. Tambï¿½m armazena o número original de pï¿½ginas em campo
+	 * especï¿½fico da movimentaï¿½ï¿½o de cancelamento ou desentranhamento.
 	 * 
 	 * @param mov
 	 * @param mob
@@ -2201,7 +2210,7 @@ public class ExBL extends CpBL {
 	private void armazenarCertidaoDeDesentranhamento(final ExMovimentacao mov, final ExMobil mob, List<ExArquivoNumerado> ans, String textoMotivo) throws AplicacaoException, IOException,
 			UnsupportedEncodingException, Exception {
 		if (ans == null || ans.size() == 0)
-			throw new AplicacaoException("Nï¿½o foi possï¿½vel obter a numeraï¿½ï¿½o ï¿½nica automï¿½tica das pï¿½ginas da movimentaï¿½ï¿½o a ser cancelada.");
+			throw new AplicacaoException("Nï¿½o foi possï¿½vel obter a numeração ï¿½nica automï¿½tica das pï¿½ginas da movimentaï¿½ï¿½o a ser cancelada.");
 
 		Integer paginaInicial = ans.get(0).getPaginaInicial();
 		Integer paginaFinal = ans.get(ans.size() - 1).getPaginaFinal();
@@ -2236,9 +2245,9 @@ public class ExBL extends CpBL {
 	}
 
 	/**
-	 * Retorna o conteï¿½do de um Map<String,String> na forma de um array de bytes
-	 * formatado de acordo com os padrï¿½es de Url Encoded Form e utilizando
-	 * iso-8859-1 como charset.
+	 * Retorna o conteï¿½do de um Map<String,String> na forma de um array de
+	 * bytes formatado de acordo com os padrï¿½es de Url Encoded Form e
+	 * utilizando iso-8859-1 como charset.
 	 * 
 	 * @param map
 	 * @return
@@ -2275,7 +2284,7 @@ public class ExBL extends CpBL {
 				}
 			}
 		}
-	}	
+	}
 
 	public void cancelarMovimentacao(final DpPessoa cadastrante, final DpLotacao lotaCadastrante, final ExMobil mob) throws Exception {
 		try {
@@ -2319,9 +2328,9 @@ public class ExBL extends CpBL {
 				final ExMovimentacao ultMovNaoCancelada = m.getUltimaMovimentacaoNaoCancelada(movACancelar);
 
 				/*
-				 * O correto seria a variï¿½vel abaixo guardar a movimentaï¿½ï¿½o
-				 * anterior ï¿½ movimentaï¿½ï¿½o acima. Nï¿½o necessariamente serï¿½ a
-				 * penï¿½ltima.
+				 * O correto seria a variï¿½vel abaixo guardar a
+				 * movimentaï¿½ï¿½o anterior ï¿½ movimentaï¿½ï¿½o acima. Nï¿½o
+				 * necessariamente serï¿½ a penï¿½ltima.
 				 */
 				final ExMovimentacao penultMovNaoCancelada = m.getPenultimaMovimentacaoNaoCancelada();
 
@@ -2442,7 +2451,8 @@ public class ExBL extends CpBL {
 				armazenarCertidaoDeDesentranhamento(mov, mob, ans, textoMotivo);
 				// if (ans.size() != 1)
 				// throw new AplicacaoException(
-				// "Nï¿½o foi possï¿½vel obter a numeraï¿½ï¿½o ï¿½nica automï¿½tica das
+				// "Nï¿½o foi possï¿½vel obter a numeração ï¿½nica automï¿½tica
+				// das
 				// pï¿½ginas da movimentaï¿½ï¿½o a ser cancelada.");
 				//
 				// criarCertidaoDeDesentranhamento(mov, mob, ans.get(0)
@@ -2689,37 +2699,52 @@ public class ExBL extends CpBL {
 	}
 
 	public Long obterProximoNumero(ExDocumento doc) throws Exception {
+		
 		doc.setAnoEmissao(Long.valueOf(new Date().getYear()) + 1900);
+		Long num = null;		
 
-		Long num = dao().obterProximoNumero(doc, doc.getAnoEmissao());
+		if (doc.getAnoEmissao() <= 2015) {
 
-		if (num == null) {
-			// Verifica se reiniciar a numeraï¿½ï¿½o ou continua com a numeraï¿½ï¿½o
-			// anterior
-			if (getComp().podeReiniciarNumeracao(doc)) {
+			num = dao().obterProximoNumero(doc, doc.getAnoEmissao());
 
-				if (doc.getExFormaDocumento().getExTipoFormaDoc().isExpediente())
-					num = 1L;
-				else
-					// PROCESSO ADMINISTRATIVO
-					num = 150000L;
-			} else {
-				// Obtï¿½m o prï¿½ximo nï¿½mero considerando os anos anteriores atï¿½
-				// 2006
-				Long anoEmissao = doc.getAnoEmissao();
-				while (num == null && anoEmissao > 2005) {
-					anoEmissao = anoEmissao - 1;
-					num = dao().obterProximoNumero(doc, anoEmissao);
-				}
-				// Se continuar null ï¿½ porque nunca foi criado documento para
-				// este formato.
-				if (num == null)
+			if (num == null) {
+				
+				// Verifica se reiniciar a numeração ou continua com a numeração
+				// anterior
+				if (getComp().podeReiniciarNumeracao(doc)) {
+
 					if (doc.getExFormaDocumento().getExTipoFormaDoc().isExpediente())
 						num = 1L;
 					else
 						// PROCESSO ADMINISTRATIVO
 						num = 150000L;
+				} else {
+					// Obtém o próximo número considerando os anos anteriores
+					// até
+					// 2006
+					Long anoEmissao = doc.getAnoEmissao();
+					while (num == null && anoEmissao > 2005) {
+						anoEmissao = anoEmissao - 1;
+						num = dao().obterProximoNumero(doc, anoEmissao);
+					}
+					// Se continuar null é porque nunca foi criado documento para este formato.
+					if (num == null){
+						if (doc.getExFormaDocumento().getExTipoFormaDoc().isExpediente()) {
+
+							if (doc.getExFormaDocumento().getDescricao().compareTo("Portaria") == 0) {
+								num = 52000L; // TODO: DEFINIR Nº INICIAL DE PORTARIA
+							} else {
+								num = 1L;
+							}
+						} else { // PROCESSO ADMINISTRATIVO
+							num = 150000L;
+						}
+					}
+				}
 			}
+			
+		} else{
+			//TODO: Implementar a lógica do NUP aqui.
 		}
 
 		return num;
@@ -2917,8 +2942,8 @@ public class ExBL extends CpBL {
 		 * doc.isProcesso()) { if
 		 * (!ExCompetenciaBL.podeCriarSubprocesso(cadastrante, lotaCadastrante,
 		 * doc.getExMobilPai())) throw new AplicacaoException(
-		 * "Nï¿½o foi possï¿½vel criar Subprocesso do documento selecionado."); }
-		 * else { if (!ExCompetenciaBL.podeCriarDocFilho(cadastrante,
+		 * "Nï¿½o foi possï¿½vel criar Subprocesso do documento selecionado.");
+		 * } else { if (!ExCompetenciaBL.podeCriarDocFilho(cadastrante,
 		 * lotaCadastrante, doc.getExMobilPai())) throw new AplicacaoException(
 		 * "Nï¿½o ï¿½ permitido criar documento filho do documento pai selecionado, pois este estï¿½ inacessï¿½vel ao usuï¿½rio."
 		 * ); }
@@ -2951,7 +2976,8 @@ public class ExBL extends CpBL {
 			long tempoIni = System.currentTimeMillis();
 
 			// Remover eventuais pendencias de anexos que foram inseridar por
-			// modelos anteriores e que nï¿½o sï¿½o necessï¿½rias no motelo atual.
+			// modelos anteriores e que nï¿½o sï¿½o necessï¿½rias no motelo
+			// atual.
 			if (!doc.isFinalizado()) {
 				while (true) {
 					ExMovimentacao mov = doc.getMobilGeral().anexoPendente(null, false);
@@ -3194,7 +3220,10 @@ public class ExBL extends CpBL {
 	public void excluirDocumento(final ExDocumento doc, DpPessoa titular, DpLotacao lotaTitular, boolean automatico) /*
 																													 * somente
 																													 * documentos
-																													 * temporï¿½rios
+																													 * temporï
+																													 * ¿
+																													 * ½
+																													 * rios
 																													 */
 	throws Exception {
 		try {
@@ -3525,7 +3554,8 @@ public class ExBL extends CpBL {
 			}
 		}
 
-		// ï¿½ necessï¿½rio gravar novamente pois uma movimentaï¿½ï¿½o de inclusï¿½o
+		// ï¿½ necessï¿½rio gravar novamente pois uma movimentaï¿½ï¿½o de
+		// inclusï¿½o
 		// de cossignatï¿½rio pode ter sido introduzida, gerando a necessidade
 		// de refazer o HTML e o PDF.
 		novoDoc = gravar(cadastrante, lotaCadastrante, novoDoc, null);
@@ -3717,8 +3747,9 @@ public class ExBL extends CpBL {
 	}
 
 	/**
-	 * Transfere um documento de um local para outro. Esse mï¿½todo trata tanto da
-	 * movimentaï¿½ï¿½o "Despacho com transferï¿½ncia" como "Transferï¿½ncia".
+	 * Transfere um documento de um local para outro. Esse mï¿½todo trata tanto
+	 * da movimentaï¿½ï¿½o "Despacho com transferï¿½ncia" como
+	 * "Transferï¿½ncia".
 	 * 
 	 * @param orgaoExterno
 	 * @param obsOrgao
@@ -4320,7 +4351,10 @@ public class ExBL extends CpBL {
 			mov.setLotaSubscritor(mov.getSubscritor().getLotacao());
 		} else {
 			if (idtpmov == ExTipoMovimentacao.TIPO_MOVIMENTACAO_VINCULACAO_PAPEL) {
-				mov.setSubscritor(null); /* o perfil(responsï¿½vel) ï¿½ uma lotaï¿½ï¿½o */
+				mov.setSubscritor(null); /*
+										 * o perfil(responsï¿½vel) ï¿½ uma
+										 * lotaï¿½ï¿½o
+										 */
 				mov.setLotaSubscritor(lotaSubscritor);
 			} else {
 				mov.setSubscritor(cadastrante);
@@ -4342,7 +4376,8 @@ public class ExBL extends CpBL {
 		else
 			mov.setDtMov(dt);
 
-		// A data de inï¿½cio da movimentaï¿½ï¿½o sempre serï¿½ a data do servidor, nï¿½o
+		// A data de inï¿½cio da movimentaï¿½ï¿½o sempre serï¿½ a data do
+		// servidor, nï¿½o
 		// a data que o usuï¿½rio digitou
 		mov.setDtIniMov(dao().dt());
 		mov.setExMobil(mob);
@@ -4392,7 +4427,10 @@ public class ExBL extends CpBL {
 			mov.setLotaSubscritor(mov.getSubscritor().getLotacao());
 		} else {
 			if (idtpmov == ExTipoMovimentacao.TIPO_MOVIMENTACAO_VINCULACAO_PAPEL) {
-				mov.setSubscritor(null); /* o perfil(responsï¿½vel) ï¿½ uma lotaï¿½ï¿½o */
+				mov.setSubscritor(null); /*
+										 * o perfil(responsï¿½vel) ï¿½ uma
+										 * lotaï¿½ï¿½o
+										 */
 				mov.setLotaSubscritor(lotaSubscritor);
 			} else {
 				mov.setSubscritor(cadastrante);
@@ -4419,7 +4457,8 @@ public class ExBL extends CpBL {
 		else
 			mov.setDtFimMov(dtFimMov);
 
-		// A data de inï¿½cio da movimentaï¿½ï¿½o sempre serï¿½ a data do servidor, nï¿½o
+		// A data de inï¿½cio da movimentaï¿½ï¿½o sempre serï¿½ a data do
+		// servidor, nï¿½o
 		// a data que o usuï¿½rio digitou
 		mov.setDtIniMov(dao().dt());
 		mov.setExMobil(mob);
@@ -4561,8 +4600,8 @@ public class ExBL extends CpBL {
 
 	/**
 	 * Obtem a lista de formas de documentos a partir dos modelos selecionados e
-	 * das restriï¿½ï¿½es de tipo (interno, externo) e de tipo da forma (expediente,
-	 * processo)
+	 * das restriï¿½ï¿½es de tipo (interno, externo) e de tipo da forma
+	 * (expediente, processo)
 	 * 
 	 * @param modelos
 	 * @param tipoDoc
@@ -4812,7 +4851,7 @@ public class ExBL extends CpBL {
 		Matcher m = p.matcher(num);
 
 		if (!m.matches())
-			throw new AplicacaoException("Nï¿½mero invï¿½lido");
+			throw new AplicacaoException("número invï¿½lido");
 
 		Long idDoc = Long.parseLong(m.group(1));
 
@@ -4844,7 +4883,7 @@ public class ExBL extends CpBL {
 				if (Math.abs((doc.getDescrCurta() + mov.getIdMov()).hashCode() % 10000) == hash || Math.abs((doc.getDescrCurta() + mov.getIdMov() + "AssinaturaExterna").hashCode() % 10000) == hash)
 					move = mov;
 			if (move == null)
-				throw new AplicacaoException("Nï¿½mero invï¿½lido");
+				throw new AplicacaoException("número invï¿½lido");
 
 			return move;
 		}
@@ -4940,11 +4979,11 @@ public class ExBL extends CpBL {
 	}
 
 	/**
-	 * Apï¿½s desapensar o mobil, copiamos do grande mestre o responsï¿½vel e sua
-	 * lotaï¿½ï¿½o para o mobil em questï¿½o, de modo que nem todas as movimentaï¿½ï¿½es
-	 * do grande mestre tenham que ser copiadas para todos os mobiles. Em
-	 * especial, a transferï¿½ncia e o recebimento sï¿½ serï¿½ copiado quando nï¿½o se
-	 * tratar de volume processual apensado ao prï¿½ximo.
+	 * Apï¿½s desapensar o mobil, copiamos do grande mestre o responsï¿½vel e
+	 * sua lotaï¿½ï¿½o para o mobil em questï¿½o, de modo que nem todas as
+	 * movimentaï¿½ï¿½es do grande mestre tenham que ser copiadas para todos os
+	 * mobiles. Em especial, a transferï¿½ncia e o recebimento sï¿½ serï¿½
+	 * copiado quando nï¿½o se tratar de volume processual apensado ao próximo.
 	 * 
 	 * @param cadastrante
 	 * @param lotaCadastrante
@@ -4990,7 +5029,8 @@ public class ExBL extends CpBL {
 
 		if (mob.doc().isEletronico()) {
 			dao().getSessao().refresh(mob);
-			// Verifica se ï¿½ Processo e conta o nï¿½mero de pï¿½ginas para verificar
+			// Verifica se ï¿½ Processo e conta o número de pï¿½ginas para
+			// verificar
 			// se tem que encerrar o volume
 			if (mob.doc().isProcesso()) {
 				if (mob.getTotalDePaginasSemAnexosDoMobilGeral() >= 200) {
@@ -5334,7 +5374,8 @@ public class ExBL extends CpBL {
 			for (ExClassificacao exClassConflito : exClassMesmoNivel) {
 
 				if (exClassNovo.getDescricao().equalsIgnoreCase(exClassConflito.getDescricao())) {
-					// se conflito nï¿½o causado por movimentacao onde a prï¿½pria
+					// se conflito nï¿½o causado por movimentacao onde a
+					// prï¿½pria
 					// classificacao ï¿½ o conflito
 					if (exClassAntigo == null || !exClassConflito.getCodificacao().equals(exClassAntigo.getCodificacao())) {
 						throw new AplicacaoException("Termo da classificaï¿½ï¿½o em conflito! <br/><br/>" + exClassConflito.getDescricaoCompleta());
@@ -5470,8 +5511,8 @@ public class ExBL extends CpBL {
 		 * AVISO:
 		 * 
 		 * 
-		 * O cï¿½digo abaixo foi comentado para permitir a atualizaï¿½ï¿½o da tabela
-		 * de classificaï¿½ï¿½o documental enquanto a funcionalidade de
+		 * O cï¿½digo abaixo foi comentado para permitir a atualizaï¿½ï¿½o da
+		 * tabela de classificaï¿½ï¿½o documental enquanto a funcionalidade de
 		 * reclassificaï¿½ï¿½o de documentos nï¿½a estï¿½ disponï¿½vel.
 		 */
 
@@ -5710,7 +5751,8 @@ public class ExBL extends CpBL {
 
 		String jsonOutput = gson.toJson(mob);
 
-		// Importante para que as alteraï¿½ï¿½es do "prune" nï¿½o sejam salvas no BD.
+		// Importante para que as alteraï¿½ï¿½es do "prune" nï¿½o sejam salvas
+		// no BD.
 		dao().getSessao().clear();
 
 		return jsonOutput;
