@@ -22,7 +22,7 @@
 			cpf = document.forms["login"]["matricula"].value;
 			acabou = false;
 			while (!acabou) {
-				if (cpf[0] == '0') {
+				if (cpf.charAt(0) == '0') {
 					cpf = cpf.substring(1);
 				} else {
 					acabou = true;
