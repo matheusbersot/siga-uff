@@ -1,87 +1,87 @@
 SET DEFINE OFF;
 --REM INSERTING into SIGA.EX_MODELO
 
-DECLARE
-  dest_blob_ex_mod BLOB;
-  src_blob_ex_mod BLOB;
-  
-BEGIN
-
--- ######## PORTARIA Designação de Chefe e Sub-Chefe de Departamento - Chapa Única e Lista Tríplice ###############	
-
-Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1010,'Designação de Chefe e Sub-Chefe de Departamento - Chapa Única e Lista Tríplice','Designação de Chefe e Sub-Chefe de Departamento - Chapa Única e Lista Tríplice','template/freemarker', null, 6, 1010,1);
+	DECLARE
+	  dest_blob_ex_mod BLOB;
+	  src_blob_ex_mod BLOB;
+	  
+	BEGIN
 	
-update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1010;
-
-select conteudo_blob_mod into dest_blob_ex_mod from SIGA.EX_MODELO where id_mod = 1010 for update;
-src_blob_ex_mod := utl_raw.cast_to_raw(convert('
-[#-- Bloco Entrevista --]
-
-[@entrevista]
-	[@grupo]
-		[@texto var="num_portaria" titulo="Portaria de Designação"  largura="10" maxcaracteres="10" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-	[/@grupo]
-	[@grupo]
-		[@data var="dt_portaria" titulo="Data da Portaria:" obrigatorio=true desativado="${desabilitadoEdicao}"/]
-	[/@grupo]
-    [@grupo]
-		[@texto var="num_processo" titulo="Nº do Processo"  largura="30" maxcaracteres="40" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-	[/@grupo]
-	[@grupo]
-		[@texto var="departamento" titulo="Departamento"  largura="50" maxcaracteres="100" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-	[/@grupo]
-	[@grupo]
-		[@selecao var="preposicao" titulo="" opcoes= "da;do" desativado="${desabilitadoEdicao}"/]
-		[@texto var="unidade" titulo="Unidade"  largura="50" maxcaracteres="100" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-	[/@grupo]
-	[@grupo]
-		[@texto var="designado" titulo="Designado"  largura="50" maxcaracteres="100" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-	[/@grupo]
-	[@grupo]
-		[@selecao var="funcao" titulo="Função" opcoes="Chefe;Sub-Chefe" desativado="${desabilitadoEdicao}"/]
-	[/@grupo]
-	[@grupo]
-		[@texto var="siape" titulo="Siape"  largura="10" maxcaracteres="15" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-	[/@grupo]
-	[@grupo]
-		[@checkbox var="chapa" titulo="Chapa Única" default="Sim" obrigatorio="true" desativado="${desabilitadoEdicao}/]
-		[@checkbox var="lista_triplice" titulo="Lista Tríplice" default="Não" obrigatorio="true" desativado="${desabilitadoEdicao}/]
-	[/@grupo]
-	[@grupo]
-		[@checkbox var="funcao_gratificada" titulo="Função Gratificada" default="Sim" obrigatorio="true" desativado="${desabilitadoEdicao}/]
-	[/@grupo]
-
-[/@entrevista]
-
-[#-- Bloco Documento --]
-[@documento]
-
-[#assign texto_portaria]
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR</strong> da Universidade Federal Fluminense, no uso de suas atribuições legais, estatutárias e regimentais;</p>
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>Considerando</strong> o que dispõem os parágrafos 1º e 2º do artigo 14, e o artigo 17 do Estatuto;</p>  
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>Considerando</strong> as prescrições contidas nos Artigos 33 e 37 do Regimento Geral da Universidade;</p>
-		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>Considerando</strong> o que prescreve o Regulamento Geral das Consultas Eleitorais - RGCE, aprovado pela Resolução nº 104, de 03 de dezembro de 1997, do Conselho Universitário;</p>
-		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>Considerando</strong> o resultado final da consulta à comunidade universitária, com o objetivo de identificar as preferências com respeito à escolha do Chefe e Subchefe do <strong>${departamento!}<strong/>, ${preposicao!} ${unidade!}; e </p>
-		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>Considerando</strong> o que consta do Processo nº ${num_processo!},</p>
-		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE:</strong></p> 
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 1º - <strong>Designar</strong> [#if (lista_triplice!"") == "Sim"],dentre os eleitos através da lista tríplice,[/#if] <strong>${designado!?upper_case}</strong>, Professor do Magistério Superior, matrícula SIAPE nº. ${siape!} pertencente ao Quadro Permanente da Universidade, para exercer, com mandato de 2 (dois) anos, a função de ${funcao!} do <strong>${departamento!}<strong/>, ${preposicao!} ${unidade!}.</p> 
-		[#if (funcao_gratificada!"") == "Sim"]
-				<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 2º – Esta designação corresponde a função gratificada – código <strong>FG-1</strong>, a partir de sua publicação no Diário Oficial da União.</p> 
-		[#else]
-				<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 2º – Esta designação não corresponde a função gratificada.</p> 
-		[/#if]
+	-- ######## PORTARIA Designação de Chefe e Sub-Chefe de Departamento - Chapa Única e Lista Tríplice ###############	
 	
-[/#assign]
-
-
-[@portaria texto=texto_portaria ementa=""/]
-[/@documento]
-','AL32UTF8'));
-dbms_lob.append(dest_blob_ex_mod, src_blob_ex_mod);
-
-END;
-/
+	Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
+	values (1010,'Designação de Chefe e Sub-Chefe de Departamento - Chapa Única e Lista Tríplice','Designação de Chefe e Sub-Chefe de Departamento - Chapa Única e Lista Tríplice','template/freemarker', null, 6, 1010,1);
+		
+	update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1010;
+	
+	select conteudo_blob_mod into dest_blob_ex_mod from SIGA.EX_MODELO where id_mod = 1010 for update;
+	src_blob_ex_mod := utl_raw.cast_to_raw(convert('
+	[#-- Bloco Entrevista --]
+	
+	[@entrevista]
+		[@grupo]
+			[@texto var="num_portaria" titulo="Portaria de Designação" largura="10" maxcaracteres="10" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
+		[/@grupo]
+		[@grupo]
+			[@data var="dt_portaria" titulo="Data da Portaria:" obrigatorio=true desativado="${desabilitadoEdicao}"/]
+		[/@grupo]
+	    [@grupo]
+			[@texto var="num_processo" titulo="Nº do Processo" largura="30" maxcaracteres="40" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
+		[/@grupo]
+		[@grupo]
+			[@texto var="departamento" titulo="Departamento" largura="50" maxcaracteres="100" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
+		[/@grupo]
+		[@grupo]
+			[@selecao var="preposicao" titulo="" opcoes="da;do" desativado="${desabilitadoEdicao}"/]
+			[@texto var="unidade" titulo="Unidade" largura="50" maxcaracteres="100" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
+		[/@grupo]
+		[@grupo]
+			[@texto var="designado" titulo="Designado" largura="50" maxcaracteres="100" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
+		[/@grupo]
+		[@grupo]
+			[@selecao var="tipo_funcao" titulo="Função" opcoes="Chefe;Sub-Chefe" desativado="${desabilitadoEdicao}"/]
+		[/@grupo]
+		[@grupo]
+			[@texto var="siape" titulo="Siape"  largura="10" maxcaracteres="15" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
+		[/@grupo]
+		[@grupo]
+			[@checkbox var="chapa" titulo="Chapa Única" default="Sim" /]
+			[@checkbox var="lista_triplice" titulo="Lista Tríplice" default="Não"/]
+		[/@grupo]
+		[@grupo]
+			[@checkbox var="funcao_gratificada" titulo="Função Gratificada" default="Sim" /]
+		[/@grupo]
+	
+	[/@entrevista]
+	
+	[#-- Bloco Documento --]
+	[@documento]
+	
+	[#assign texto_portaria]
+	  		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR</strong> da Universidade Federal Fluminense, no uso de suas atribuições legais, estatutárias e regimentais;</p>
+	  		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>Considerando</strong> o que dispõem os parágrafos 1º e 2º do artigo 14, e o artigo 17 do Estatuto;</p>  
+	  		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>Considerando</strong> as prescrições contidas nos Artigos 33 e 37 do Regimento Geral da Universidade;</p>
+			<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>Considerando</strong> o que prescreve o Regulamento Geral das Consultas Eleitorais - RGCE, aprovado pela Resolução nº 104, de 03 de dezembro de 1997, do Conselho Universitário;</p>
+			<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>Considerando</strong> o resultado final da consulta à comunidade universitária, com o objetivo de identificar as preferências com respeito à escolha do Chefe e Subchefe do <strong>${departamento!}<strong/>, ${preposicao!} ${unidade!}; e </p>
+			<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>Considerando</strong> o que consta do Processo nº ${num_processo!},</p>
+			<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE:</strong></p> 
+	  		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 1º - <strong>Designar</strong> [#if (lista_triplice!"") == "Sim"],dentre os eleitos através da lista tríplice,[/#if] <strong>${designado!?upper_case}</strong>, Professor do Magistério Superior, matrícula SIAPE nº. ${siape!} pertencente ao Quadro Permanente da Universidade, para exercer, com mandato de 2 (dois) anos, a função de ${tipo_funcao!} do <strong>${departamento!}<strong/>, ${preposicao!} ${unidade!}.</p> 
+			[#if (funcao_gratificada!"") == "Sim"]
+					<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 2º – Esta designação corresponde a função gratificada – código <strong>FG-1</strong>, a partir de sua publicação no Diário Oficial da União.</p> 
+			[#else]
+					<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 2º – Esta designação não corresponde a função gratificada.</p> 
+			[/#if]
+		
+	[/#assign]
+	
+	
+	[@portaria texto=texto_portaria ementa=""/]
+	[/@documento]
+	','AL32UTF8'));
+	dbms_lob.append(dest_blob_ex_mod, src_blob_ex_mod);
+	
+	END;
+	/
 
 DECLARE
   dest_blob_ex_mod BLOB;
@@ -92,7 +92,7 @@ BEGIN
 -- ######## PORTARIA Designação de Chefe de departamento para complemento de mandato ###############	
 
 Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1011,'Designação de Chefe de departamento para complemento de mandato','Designação de Chefe de departamento para complemento de mandato','template/freemarker', null, 6, 1011,1);
+values (1011,'Designação de Chefe de Departamento para complemento de mandato','Designação de Chefe de Departamento para complemento de mandato','template/freemarker', null, 6, 1011,1);
 	
 update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1011;
 
@@ -105,20 +105,20 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 		[@texto var="num_portaria" titulo="Portaria de Designação"  largura="10" maxcaracteres="10" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-		[@data var="dt_portaria" titulo="Data da Portaria:" obrigatorio=true desativado="${desabilitadoEdicao}"/]
+		[@data var="dt_portaria" titulo="Data da Portaria" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
     [@grupo]
-		[@texto var="num_processo" titulo="Nº do Processo"  largura="30" maxcaracteres="40" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
+		[@texto var="num_processo" titulo="Nº do Processo" largura="30" maxcaracteres="40" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-		[@texto var="departamento" titulo="Departamento"  largura="50" maxcaracteres="100" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
+		[@texto var="departamento" titulo="Departamento" largura="50" maxcaracteres="100" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
 		[@selecao var="preposicao" titulo="" opcoes= "da;do" desativado="${desabilitadoEdicao}"/]
 		[@texto var="unidade" titulo="Unidade"  largura="50" maxcaracteres="100" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-		[@texto var="designado" titulo="Designado"  largura="50" maxcaracteres="100" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
+		[@texto var="designado" titulo="Nome do Servidor" largura="50" maxcaracteres="100" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
 		[@texto var="siape" titulo="Siape"  largura="10" maxcaracteres="15" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
@@ -127,10 +127,10 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 		[@texto var="num_portaria_inicial" titulo="Portaria Inicial"  largura="10" maxcaracteres="10" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-		[@data var="dt_portaria_inicial" titulo="Data da Portaria Inicial:" obrigatorio=true desativado="${desabilitadoEdicao}"/]
+		[@data var="dt_portaria_inicial" titulo="Data da Portaria Inicial" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-		[@data var="dt_publicacao_dou" titulo="Data de Publicação em Diário Oficial da Portaria Inicial:" obrigatorio=true desativado="${desabilitadoEdicao}"/]
+		[@data var="dt_publicacao_dou" titulo="Data de Publicação em Diário Oficial da Portaria Inicial" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 
 [/@entrevista]
@@ -268,7 +268,7 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 		[@texto var="siape" titulo="Siape"  largura="10" maxcaracteres="15" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-		[@selecao var="funcao" titulo="Funcão" opcoes= "Coordenador;Coordenadora" desativado="${desabilitadoEdicao}"/]
+		[@selecao var="tipo_funcao" titulo="Funcão" opcoes= "Coordenador;Coordenadora" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
 		[@selecao var="qualidade" titulo="Qualidade" opcoes= "Decano;Decana" desativado="${desabilitadoEdicao}"/]
@@ -283,7 +283,7 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
   		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR</strong> da Universidade Federal Fluminense, no uso de suas atribuições legais, estatutárias e regimentais;</p>
   		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>Considerando</strong> o que consta no processo nº ${num_processo!},</p>
 		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE:</strong></p> 
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 1º - <strong>Designar</strong>  <strong>${designado!?upper_case}</strong>, Professor do Magistério Superior, matrícula SIAPE nº. ${siape!} pertencente ao Quadro Permanente da Universidade, para exercer na qualidade de <strong>${qualidade!}</strong>, a função de <strong>${funcao!}</strong> do <strong>${departamento!}<strong/>, ${preposicao!} ${unidade!}.</p> 
+  		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 1º - <strong>Designar</strong>  <strong>${designado!?upper_case}</strong>, Professor do Magistério Superior, matrícula SIAPE nº. ${siape!} pertencente ao Quadro Permanente da Universidade, para exercer na qualidade de <strong>${qualidade!}</strong>, a função de <strong>${tipo_funcao!}</strong> do <strong>${departamento!}<strong/>, ${preposicao!} ${unidade!}.</p> 
 		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 2º -  Esta designação corresponde a Função Comissionada de Coordenação de Curso – código FCC, a partir de sua publicação no Diário Oficial da União.</p> 
 	
 [/#assign]
@@ -349,7 +349,7 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 		[@texto var="siape_vice_coordenador" titulo="Siape do Vice-Coordenador"  largura="10" maxcaracteres="15" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-		[@checkbox var="efeitos_retroativos" titulo="Efeitos Retroativos" default="Não" obrigatorio="true" desativado="${desabilitadoEdicao}/]
+		[@checkbox var="efeitos_retroativos" titulo="Efeitos Retroativos" default="Não"/]
 		[@data var="dt_efeitos_retroativos" titulo="Data dos efeitos retroativos" obrigatorio=false desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	
@@ -414,7 +414,7 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 		[@texto var="siape" titulo="Siape"  largura="10" maxcaracteres="15" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-		[@selecao var="funcao" titulo="Função" opcoes= "Coordenador;Coordenadora;Vice-Coordenador;Vice-Coordenadora" desativado="${desabilitadoEdicao}"/]
+		[@selecao var="tipo_funcao" titulo="Função" opcoes= "Coordenador;Coordenadora;Vice-Coordenador;Vice-Coordenadora" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
 		[@texto var="curso" titulo="Curso"  largura="50" maxcaracteres="100" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
@@ -427,7 +427,7 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 		[@data var="dt_designacao" titulo="Data da designação" obrigatorio=false desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-		[@checkbox var="funcao_comissionada" titulo="Função Comissionada" default="Não" obrigatorio="true" desativado="${desabilitadoEdicao}/]
+		[@checkbox var="funcao_comissionada" titulo="Função Comissionada" default="Não"/]
 	[/@grupo]
 	
 [/@entrevista]
@@ -443,7 +443,7 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>Considerando</strong> o resultado da consulta à comunidade universitária, com o objetivo de identificar as preferências com respeito à escolha de Coordenador e Vice-Coordenador do ${curso!}, ${preposicao!} ${unidade!}; e</p>
 		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>Considerando</strong>, finalmente, o que mais consta do Processo nº ${num_processo!},</p>
 		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE:</strong></p> 
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 1º - <strong>Designar, a partir de ${dt_designacao}, ${designado!?upper_case}</strong>, Professor do Magistério Superior, matrícula SIAPE nº. ${siape!} do Quadro Permanente da Universidade, para exercer, com mandato de 4 (quatro) anos, a função de ${funcao!} do ${curso!} , ${preposicao!} ${unidade!}.</p> 
+  		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 1º - <strong>Designar, a partir de ${dt_designacao}, ${designado!?upper_case}</strong>, Professor do Magistério Superior, matrícula SIAPE nº. ${siape!} do Quadro Permanente da Universidade, para exercer, com mandato de 4 (quatro) anos, a função de ${tipo_funcao!} do ${curso!} , ${preposicao!} ${unidade!}.</p> 
 		[#if (funcao_comissionada!"") == "Sim"]
 			Art. 2º – Esta designação corresponde a Função Comissionada de Coordenação de Curso - código FCC.
 		[#else]
@@ -495,7 +495,7 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 		[@texto var="siape" titulo="Siape"  largura="10" maxcaracteres="15" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-		[@selecao var="funcao" titulo="Função" opcoes= "Coordenador;Coordenadora" desativado="${desabilitadoEdicao}"/]
+		[@selecao var="tipo_funcao" titulo="Função" opcoes= "Coordenador;Coordenadora" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
 		[@texto var="curso" titulo="Curso"  largura="50" maxcaracteres="100" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
@@ -523,7 +523,7 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
   		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR</strong> da Universidade Federal Fluminense, no uso de suas atribuições legais, estatutárias e regimentais;</p>
   		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>Considerando</strong> o que consta do Processo nº ${num_processo!},</p>
 		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE:</strong></p> 
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 1º - <strong>Designar ${designado!?upper_case}</strong>, Professor do Magistério Superior, matrícula SIAPE nº. ${siape!} do Quadro Permanente da Universidade, para exercer a função de ${funcao!} do ${curso!} , ${preposicao!} ${unidade!}, complementando, assim, o mandato de 04 (quatro) anos iniciado pela Portaria nº ${num_portaria_inicial!} de ${dt_portaria_inicial!} e publicada no Diário Oficial da União de ${dt_publicacao_dou}.</p> 
+  		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 1º - <strong>Designar ${designado!?upper_case}</strong>, Professor do Magistério Superior, matrícula SIAPE nº. ${siape!} do Quadro Permanente da Universidade, para exercer a função de ${tipo_funcao!} do ${curso!} , ${preposicao!} ${unidade!}, complementando, assim, o mandato de 04 (quatro) anos iniciado pela Portaria nº ${num_portaria_inicial!} de ${dt_portaria_inicial!} e publicada no Diário Oficial da União de ${dt_publicacao_dou}.</p> 
 		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 2º - Esta designação corresponde a Função Comissionada de Coordenação de Curso - código <strong>FCC</strong>, a partir de sua publicação no Diário Oficial da União.</p> 		
 		
 	
@@ -572,7 +572,7 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 		[@texto var="siape" titulo="Siape"  largura="10" maxcaracteres="15" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-		[@selecao var="funcao" titulo="Função" opcoes= "Coordenador;Coordenadora" desativado="${desabilitadoEdicao}"/]
+		[@selecao var="tipo_funcao" titulo="Função" opcoes= "Coordenador;Coordenadora" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
 		[@texto var="curso" titulo="Curso"  largura="50" maxcaracteres="100" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
@@ -596,7 +596,7 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
   		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>Considerando</strong> o que prescreve o Regulamento dos Cursos de Pós-Graduação “Lato Sensu”, aprovado pela Resolução nº. 150 de 28 de abril de 2010, do Conselho de Ensino e Pesquisa, bem como a Resolução nº 200 de 14 de maio de 2014, do mesmo Conselho, que altera o Artigo 11, § 1º e o Artigo 22, § 2º da Resolução CEP nº 150/2010; e</p>
 		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>Considerando</strong> o que consta do Processo nº ${num_processo!},</p>
 		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE:</strong></p> 
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 1º - <strong>Designar</strong>,<i> com efeitos retroativos a </i> ${dt_efeitos_retroativos!}, <strong>${designado!?upper_case}</strong>, Professor do Magistério Superior, matrícula SIAPE nº. ${siape!} do Quadro Permanente desta Universidade, para exercer, <strong><i>pro tempore</i></strong>, a função de <strong>${funcao!}</strong> do <strong>Curso de Pós-Graduação</strong> ${curso!} , ${preposicao!} ${unidade!}, complementando, assim, o mandato de 04 (quatro) anos iniciado pela Portaria nº ${num_portaria_inicial!} de ${dt_portaria_inicial!} e publicada no Diário Oficial da União de ${dt_publicacao_dou}.</p> 
+  		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 1º - <strong>Designar</strong>,<i> com efeitos retroativos a </i> ${dt_efeitos_retroativos!}, <strong>${designado!?upper_case}</strong>, Professor do Magistério Superior, matrícula SIAPE nº. ${siape!} do Quadro Permanente desta Universidade, para exercer, <strong><i>pro tempore</i></strong>, a função de <strong>${tipo_funcao!}</strong> do <strong>Curso de Pós-Graduação</strong> ${curso!} , ${preposicao!} ${unidade!}, complementando, assim, o mandato de 04 (quatro) anos iniciado pela Portaria nº ${num_portaria_inicial!} de ${dt_portaria_inicial!} e publicada no Diário Oficial da União de ${dt_publicacao_dou}.</p> 
 		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 2º – Esta designação não corresponde a Função Comissionada de Coordenação de Curso . </p> 
 	
 [/#assign]
@@ -1080,7 +1080,7 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 		[@data var="dt_cessamento_portaria_designacao" titulo="Data de Cessamento da Portaria de Designação" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-		[@checkbox var="pro_tempore" titulo="Pro tempore" default="Não" obrigatorio="true" desativado="${desabilitadoEdicao}/]
+		[@checkbox var="pro_tempore" titulo="Pro tempore" default="Não"/]
 	[/@grupo]
 	
 	
@@ -1127,32 +1127,39 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 	[@grupo]
 		[@texto var="num_portaria" titulo="Portaria de Dispensa"  largura="10" maxcaracteres="10" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
+  
 	[@grupo]
 		[@data var="dt_portaria" titulo="Data da Portaria" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
-    [@grupo]
+  
+  [@grupo]
 		[@texto var="num_processo" titulo="Nº do Processo"  largura="30" maxcaracteres="40" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
+  
 	[@grupo]
 		[@texto var="dispensado" titulo="Nome do Servidor"  largura="50" maxcaracteres="100" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
+  
 	[@grupo]
 		[@texto var="siape" titulo="Siape"  largura="10" maxcaracteres="15" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
+  
 	[@grupo]
-		[@selecao var="funcao" titulo="Função" opcoes= "Coordenador;Coordenadora;Vice-Coordenador;Vice-Coordenadora" desativado="${desabilitadoEdicao}"/]
+		[@selecao var="tipo_funcao" titulo="Função" opcoes= "Coordenador;Coordenadora;Vice-Coordenador;Vice-Coordenadora" desativado="${desabilitadoEdicao}"/]
+	[/@grupo]
+  
 	[@grupo]
-	[@grupo]
-		[@checkbox var="qualidade" titulo="Qualidade" default="Não" obrigatorio="true" desativado="${desabilitadoEdicao}/]
+		[@checkbox var="qualidade" titulo="Qualidade" default="Não"/]
 		[@selecao var="desc_qualidade" titulo="Descrição da qualidade" opcoes= "Decano;Decana" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
+  [@grupo]
 		[@texto var="tipo_curso" titulo="Tipo de Curso"  largura="10" maxcaracteres="15" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
 		[@texto var="curso" titulo="Curso"  largura="10" maxcaracteres="15" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-		[@checkbox var="nivel" titulo="Nível" default="Não" obrigatorio="true" desativado="${desabilitadoEdicao}/]
+		[@checkbox var="nivel" titulo="Nível" default="Não"/]
 		[@data var="desc_nivel" titulo="Descrição do Nível" obrigatorio=false desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
@@ -1166,24 +1173,24 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 		[@data var="dt_portaria_designacao" titulo="Data da Portaria de Designação" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-		[@checkbox var="publicacao_dou" titulo="Publicado em Diário Oficial" default="Não" obrigatorio="true" desativado="${desabilitadoEdicao}/]
+		[@checkbox var="publicacao_dou" titulo="Publicado em Diário Oficial" default="Não"/]
 		[@data var="dt_publicacao_dou" titulo="Data da Publicação em Diário Oficial" obrigatorio=false desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-		[@checkbox var="efeitos_retroativos" titulo="Efeitos Retroativos" default="Não" obrigatorio="true" desativado="${desabilitadoEdicao}/]
+		[@checkbox var="efeitos_retroativos" titulo="Efeitos Retroativos" default="Não"/]
 		[@data var="dt_efeitos_retroativos" titulo="Data dos efeitos retroativos" obrigatorio=false desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-		[@checkbox var="pro_tempore" titulo="Pro tempore" default="Não" obrigatorio="true" desativado="${desabilitadoEdicao}/]
+		[@checkbox var="pro_tempore" titulo="Pro tempore" default="Não"/]
 	[/@grupo]
 	[@grupo]
-		[@checkbox var="pedido" titulo="A pedido" default="Não" obrigatorio="true" desativado="${desabilitadoEdicao}/]
+		[@checkbox var="pedido" titulo="A pedido" default="Não"/]
 	[/@grupo]
 	[@grupo]
-		[@checkbox var="entre_membros" titulo="Entre os membros do colegiado" default="Não" obrigatorio="true" desativado="${desabilitadoEdicao}/]
+		[@checkbox var="entre_membros" titulo="Entre os membros do colegiado" default="Não"/]
 	[/@grupo]
 	[@grupo]
-		[@checkbox var="funcao_comissionada" titulo="Função Comissionada" default="Não" obrigatorio="true" desativado="${desabilitadoEdicao}/]
+		[@checkbox var="funcao_comissionada" titulo="Função Comissionada" default="Não"/]
 	[/@grupo]
 	
 [/@entrevista]
@@ -1195,7 +1202,7 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
   		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR</strong> da Universidade Federal Fluminense, no uso de suas atribuições legais, estatutárias e regimentais;</p>
   		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>Considerando</strong> o constante no Processo nº ${num_processo!},</p>
 		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE:</strong></p> 
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 1º – Dispensar [#if (pedido!"") == "Sim"] , a pedido, [/#if] [#if (efeitos_retroativos!"") == "Sim"] , com efeitos retroativos a ${dt_efeitos_retroativos!}, [/#if] [#if (membros_colegiado!"") == "Sim"] , dentre os membros do Colegiado, [/#if] <strong>${dispensado!?upper_case}</strong>, Professor do Magistério Superior, matrícula SIAPE nº ${siape!}, pertencente ao Quadro Permanente desta Universidade [#if (qualidade!"") == "Sim"], na qualidade de <strong>${desc_qualidade!}</strong>, [/#if] da função de <strong>${funcao!}</strong> [#if (pro_tempore!"") == "Sim"] <strong><i>pro tempore</i></strong> [/#if] do <strong>${tipo_curso!} ${curso!}</strong>, [#if (nivel!"") == "Sim"] <strong>${desc_nivel!}</strong> [/#if] ${preposicao!} ${unidade!}, designada pela Portaria nº. ${portaria_designacao!} de ${dt_portaria_designacao} [#if (publicacao_dou!"") == "Sim"] , publicada no D.O.U de ${dt_publicacao_dou} [/#if]. [#if (funcao_comissionada!"") == "Sim"]<strong>FCC</strong>.[/#if]</p> 
+  		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 1º – Dispensar [#if (pedido!"") == "Sim"] , a pedido, [/#if] [#if (efeitos_retroativos!"") == "Sim"] , com efeitos retroativos a ${dt_efeitos_retroativos!}, [/#if] [#if (membros_colegiado!"") == "Sim"] , dentre os membros do Colegiado, [/#if] <strong>${dispensado!?upper_case}</strong>, Professor do Magistério Superior, matrícula SIAPE nº ${siape!}, pertencente ao Quadro Permanente desta Universidade [#if (qualidade!"") == "Sim"], na qualidade de <strong>${desc_qualidade!}</strong>, [/#if] da função de <strong>${tipo_funcao!}</strong> [#if (pro_tempore!"") == "Sim"] <strong><i>pro tempore</i></strong> [/#if] do <strong>${tipo_curso!} ${curso!}</strong>, [#if (nivel!"") == "Sim"] <strong>${desc_nivel!}</strong> [/#if] ${preposicao!} ${unidade!}, designada pela Portaria nº. ${portaria_designacao!} de ${dt_portaria_designacao} [#if (publicacao_dou!"") == "Sim"] , publicada no D.O.U de ${dt_publicacao_dou} [/#if]. [#if (funcao_comissionada!"") == "Sim"]<strong>FCC</strong>.[/#if]</p> 
   		
 [/#assign]
 
