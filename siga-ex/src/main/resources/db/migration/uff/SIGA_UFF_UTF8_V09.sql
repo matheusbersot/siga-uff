@@ -970,7 +970,7 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 		[@texto var="num_processo" titulo="Nº do Processo"  largura="30" maxcaracteres="40" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-		[@selecao var="função" titulo="Função" opcoes= "Chefe;Sub-Chefe" desativado="${desabilitadoEdicao}"/]
+		[@selecao var="tipo_funcao" titulo="Função" opcoes= "Chefe;Sub-Chefe" desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
 		[@texto var="dispensado" titulo="Nome do Servidor"  largura="50" maxcaracteres="100" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
@@ -992,17 +992,17 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 		[@data var="dt_portaria_designacao" titulo="Data da Portaria de Designação" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-		[@checkbox var="pedido" titulo="A pedido" default="Não" obrigatorio="true" desativado="${desabilitadoEdicao}/]
+		[@checkbox var="pedido" titulo="A pedido" default="Não"/]
 	[/@grupo]
 	[@grupo]
-		[@checkbox var="pro_tempore" titulo="Pro tempore" default="Não" obrigatorio="true" desativado="${desabilitadoEdicao}/]
+		[@checkbox var="pro_tempore" titulo="Pro tempore" default="Não"/]
 	[/@grupo]
 	[@grupo]
-		[@checkbox var="publicacao_dou" titulo="Publicado em Diário Oficial" default="Não" obrigatorio="true" desativado="${desabilitadoEdicao}/]
+		[@checkbox var="publicacao_dou" titulo="Publicado em Diário Oficial" default="Não"/]
 		[@data var="dt_publicacao_dou" titulo="Data da Publicação em Diário Oficial" obrigatorio=false desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-		[@checkbox var="funcao_gratificada" titulo="Função Gratificada" default="Não" obrigatorio="true" desativado="${desabilitadoEdicao}/]
+		[@checkbox var="funcao_gratificada" titulo="Função Gratificada" default="Não"/]
 	[/@grupo]
 	
 [/@entrevista]
@@ -1014,7 +1014,7 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
   		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR</strong> da Universidade Federal Fluminense, no uso de suas atribuições legais, estatutárias e regimentais;</p>
   		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>Considerando</strong> o constante no Processo nº ${num_processo!},</p>
 		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE:</strong></p> 
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 1º – Dispensar [#if (pedido!"") == "Sim"], a pedido , [/#if] <strong>${dispensado!?upper_case}</strong>, Professor do Magistério Superior, matrícula SIAPE nº. ${siape!}, pertencente ao Quadro Permanente da Universidade, da função de ${funcao!} [#if (pro_tempore!"") == "Sim"] <strong><i>“pro tempore”</i></strong> [/#if] do <strong>${departamento!}</strong>, ${preposicao!} ${unidade!}, designada pela Portaria nº. ${portaria_designacao!}, de ${dt_portaria_designacao!} [#if (publicacao_dou!"") == "Sim"], publicada no DOU de ${dt_publicacao_dou!} [/#if].[#if (funcao_gratificada!"") == "Sim"] <strong>FG-1 </strong>>.[/#if]</p> 
+  		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 1º – Dispensar [#if (pedido!"") == "Sim"], a pedido , [/#if] <strong>${dispensado!?upper_case}</strong>, Professor do Magistério Superior, matrícula SIAPE nº. ${siape!}, pertencente ao Quadro Permanente da Universidade, da função de ${tipo_funcao!} [#if (pro_tempore!"") == "Sim"] <strong><i>“pro tempore”</i></strong> [/#if] do <strong>${departamento!}</strong>, ${preposicao!} ${unidade!}, designada pela Portaria nº. ${portaria_designacao!}, de ${dt_portaria_designacao!} [#if (publicacao_dou!"") == "Sim"], publicada no DOU de ${dt_publicacao_dou!} [/#if].[#if (funcao_gratificada!"") == "Sim"] <strong>FG-1 </strong>>.[/#if]</p> 
   		
 [/#assign]
 
