@@ -3002,45 +3002,43 @@ src_blob := utl_raw.cast_to_raw(convert('
     <br/>
     <br/>
 
-    [@letra tamanho=tamanhoLetra]
-            [#if !numeracaoCentralizada]
-            <table style="float:none; clear:both;" width="100%" border="0" bgcolor="#FFFFFF">
-                <tr>
-                                <td align="left"><p style="font-family:Arial;font-weight:bold;font-size:12pt;"><br/>[@numeroDJE]${tipo} n&ordm; ${(doc.numExpediente)!}[/@numeroDJE]</p></td>
-                </tr>
-                        [#if !dataAntesDaAssinatura]
-                <tr>
-                    <td align="right">[@letra tamanho="12pt"]<p>[#if mov??]${mov.dtExtenso!}[#else]${doc.dtExtenso!}[/#if]</p>[/@letra]</td>
-                </tr>
+    [#if !numeracaoCentralizada]
+    <table style="float:none; clear:both;" width="100%" border="0" bgcolor="#FFFFFF">
+        <tr>
+                        <td align="left"><p style="font-family:Arial;font-weight:bold;font-size:12pt;"><br/>[@numeroDJE]${tipo} n&ordm; ${(doc.numExpediente)!}[/@numeroDJE]</p></td>
+        </tr>
+                [#if !dataAntesDaAssinatura]
+        <tr>
+            <td align="right">[@letra tamanho="12pt"]<p>[#if mov??]${mov.dtExtenso!}[#else]${doc.dtExtenso!}[/#if]</p>[/@letra]</td>
+        </tr>
+                [/#if]
+    </table>
+    [#else]
+    <table style="float:none; clear:both;" width="100%" border="0" bgcolor="#FFFFFF">
+        <tr>
+                    <td align="center">
+                        <p style="font-family:Arial;font-weight:bold;font-size:12pt;"><br/>
+                         [@numeroDJE]${tipo} n&ordm; ${(doc.numExpediente)!}[/@numeroDJE]
+                        [#if !dataAntesDaAssinatura && doc?? && doc.dtD??]
+                            de ${doc.dtD} de ${doc.dtMMMM} de ${doc.dtYYYY}</p>
                         [/#if]
-            </table>
-            [#else]
-            <table style="float:none; clear:both;" width="100%" border="0" bgcolor="#FFFFFF">
-                <tr>
-                            <td align="center">
-                                <p style="font-family:Arial;font-weight:bold;font-size:12pt;"><br/>
-                                 [@numeroDJE]${tipo} n&ordm; ${(doc.numExpediente)!}[/@numeroDJE]
-                                [#if !dataAntesDaAssinatura && doc?? && doc.dtD??]
-                                    de ${doc.dtD} de ${doc.dtMMMM} de ${doc.dtYYYY}</p>
-                                [/#if]
-                            </td>
-                </tr>
-            </table>
-            [/#if]
-            [@tituloDJE]
-		${(doc.codigo)!}
-            [/@tituloDJE]
-			<br/>
-            <br/>            
-			[#nested]
-            [#if dataAntesDaAssinatura]<p style="text-align:center">[#if mov??]${mov.dtExtenso!}[#else]${doc.dtExtenso!}[/#if]</p>[/#if]
-        <p>&nbsp;</p>
-            [#if mov??]
-            [@assinaturaMovCentro formatarOrgao=formatarOrgao/]
-            [#else]
-            [@assinaturaCentro formatarOrgao=formatarOrgao/]
-            [/#if]
-    [/@letra]
+                    </td>
+        </tr>
+    </table>
+    [/#if]
+    [@tituloDJE]
+${(doc.codigo)!}
+    [/@tituloDJE]
+	<br/>
+    <br/>            
+	[#nested]
+    [#if dataAntesDaAssinatura]<p style="text-align:center">[#if mov??]${mov.dtExtenso!}[#else]${doc.dtExtenso!}[/#if]</p>[/#if]
+<p>&nbsp;</p>
+    [#if mov??]
+    [@assinaturaMovCentro formatarOrgao=formatarOrgao/]
+    [#else]
+    [@assinaturaCentro formatarOrgao=formatarOrgao/]
+    [/#if]
 
     [@primeiroRodape]
     [@rodapeClassificacaoDocumental/]
