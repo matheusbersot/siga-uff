@@ -357,7 +357,7 @@ public class PDFTable extends PdfPTable {
 				pCell = new Paragraph();
 				// TODO Cell heights problem solved!!! Waiting for a iText
 				// solution.
-				pCell.setLeading(pCell.getLeading()-3);
+				pCell.setLeading((pCell.getLeading() / 2) + 4);
 				//pCell.setLeading((pCell.leading() / 2));
 				cell.addElement(pCell);
 				if (htmlCell.getPropertyValue("itext-padding") != null) {
