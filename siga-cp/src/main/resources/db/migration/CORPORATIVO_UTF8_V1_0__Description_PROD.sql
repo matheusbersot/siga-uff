@@ -3005,7 +3005,7 @@ src_blob := utl_raw.cast_to_raw(convert('
     [#if !numeracaoCentralizada]
     <table style="float:none; clear:both;" width="100%" border="0" bgcolor="#FFFFFF">
         <tr>
-                        <td align="left"><p style="font-family:Arial;font-weight:bold;font-size:12pt;"><br/>[@numeroDJE]${tipo} n&ordm; ${(doc.numExpediente)!}[/@numeroDJE]</p></td>
+            <td align="left"><p style="font-family:Arial;font-weight:bold;font-size:12pt;">[@numeroDJE]${tipo} n&ordm; ${(doc.numExpediente)!}[/@numeroDJE]</p></td>
         </tr>
                 [#if !dataAntesDaAssinatura]
         <tr>
@@ -3017,7 +3017,7 @@ src_blob := utl_raw.cast_to_raw(convert('
     <table style="float:none; clear:both;" width="100%" border="0" bgcolor="#FFFFFF">
         <tr>
                     <td align="center">
-                        <p style="font-family:Arial;font-weight:bold;font-size:12pt;"><br/>
+                        <p style="font-family:Arial;font-weight:bold;font-size:12pt;">
                          [@numeroDJE]${tipo} n&ordm; ${(doc.numExpediente)!}[/@numeroDJE]
                         [#if !dataAntesDaAssinatura && doc?? && doc.dtD??]
                             de ${doc.dtD} de ${doc.dtMMMM} de ${doc.dtYYYY}</p>
@@ -3094,10 +3094,10 @@ src_blob := utl_raw.cast_to_raw(convert('
               <table style="float:none;" width="100%" border="0" cellpadding="2" cellspacing="0" bgcolor="#FFFFFF">
                   <tr>
                       <td align="left" width="50%"></td>
-                    <td align="left" width="50%" style="text-align: justify;font-family: Times New Roman; font-size: ${tl};"><br/>${ementa!}</td>
+                    <td align="left" width="50%" style="text-align: justify;font-family: Times New Roman; font-size: ${tl};">${ementa!}</td>
                   </tr>
               </table>
-			  <br/><br/>
+			  <br/>
             [/#if]
             
             <div style="font-family: Times New Roman; font-size: ${tl};">
