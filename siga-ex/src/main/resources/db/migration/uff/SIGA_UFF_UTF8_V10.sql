@@ -19,26 +19,26 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 [#-- Bloco Entrevista --]
 
 [@entrevista]
-	[#assign valores = 1..100 /]
+    [#assign valores = 1..100 /]
     [@selecao var="qtdServidores" titulo="Quantidade de servidores" reler=true idAjax="qtdServidoresAjax" opcoes=valores?join(";") /]
     [@grupo depende="qtdServidoresAjax"]
         [#list 1..(qtdServidores)?number as i]
             [@grupo]
-                [@texto titulo="Matrícula SIAPE" var="siape"+i largura="9" maxcaracteres="9"/]
+                [@texto titulo="Matrícula SIAPE" var="siape"+i largura="9" maxcaracteres="9" obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
             [@grupo]
 				[@mensagem titulo="Nº do Processo" texto="23069."/]
-				[@texto var="sequencial"+i titulo="" largura="6" maxcaracteres="6" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
+				[@texto var="sequencial"+i titulo="" largura="6" maxcaracteres="6" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 				[@mensagem titulo="" texto="/"/]
-				[@texto var="ano"+i titulo="" largura="4" maxcaracteres="4" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
+				[@texto var="ano"+i titulo="" largura="4" maxcaracteres="4" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 				[@mensagem titulo="" texto="-"/]
-				[@texto var="digito"+i titulo="" largura="2" maxcaracteres="2" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
+				[@texto var="digito"+i titulo="" largura="2" maxcaracteres="2" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 			[/@grupo]
 			[@grupo]	
-                [@texto titulo="Nome do Servidor" var="nome"+i largura="50" maxcaracteres="100"/]
+                [@texto titulo="Nome do Servidor" var="nome"+i largura="50" maxcaracteres="100" obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			[@grupo]
-                [@data titulo="Data de Homologação" var="dtHomologacao"+i /]
+                [@data titulo="Data de Homologação" var="dtHomologacao"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
  			[@separador/]
         [/#list]
@@ -56,13 +56,21 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
   		<p style="text-align: justify; text-indent:${recuo_paragrafo};">O <strong>Reitor</strong> da <strong>Universidade Federal Fluminense</strong> no uso de suas atribuições  legais, estatutárias e regimentais,</p>
   		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE:</strong></p> 
   		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 1º - <strong>Homologar</strong> o Estágio Probatório dos Docentes relacionados no anexo a presente Portaria, nos termos da Lei 8.112 de 11 de Dezembro de 1990, Emenda Constitucional nº 19/98 e com base no Parecer AGU/MC nº 01/2004 publicado no D.O. de 16 de Julho de 2004, a Secretaria de Recursos Humanos do Ministério do Planejamento reconheceu como sendo de 03 anos o período de Estágio Probatório assim como o período para aquisição de estabilidade, e a Resolução CEP-UFF 219/2005 e <span style="font-style: italic;font-weight: bold;">Decisão CEP nº 731/13</span>.</p>
-      <br/>
+[/#assign]
+
+[#assign tabela_anexo]
       <table width="100%" cellpadding="3" style="border: 1px solid black; border-collapse: collapse; text-align:center;">
         <tr style="border: 1px solid black;font-size:11pt;">
            <td colspan="4" style="border: 1px solid black;"><strong>RELAÇÃO DE PROFESSORES DA CARREIRA DE MAGISTÉRIO SUPERIOR COM DIREITO À HOMOLOGAÇÃO DE ESTÁGIO PROBATÓRIO</strong></td>
         </tr>
         <tr style="border: 1px solid black;font-size:11pt;">
-           <td colspan="4" style="border: 1px solid black;"><strong>ANEXO à Portaria n&ordm; ${doc.numExpediente!} , ${doc.dtD!} de ${doc.dtMMMM!} de ${doc.dtYYYY!}.</strong></td>
+           <td colspan="4" style="border: 1px solid black;">
+ 			   [#if doc.exMobilPai??]
+	               <strong>ANEXO à Portaria n&ordm; ${doc.exMobilPai.exDocumento.numExpediente!} , ${doc.exMobilPai.exDocumento.dtD!} de ${doc.exMobilPai.exDocumento.dtMMMM!} de ${doc.exMobilPai.exDocumento.dtYYYY!}.</strong>
+			   [#else]
+	               <strong>ANEXO à Portaria n&ordm;  ,  de  de .</strong>
+ 		       [/#if]
+           </td>
         </tr>
         <tr style="border: 1px solid black;font-size:10pt;">	
           <td width="10%" style="border: 1px solid black;">Ordem</td>
@@ -81,8 +89,7 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
   </table>  
 [/#assign]
 
-
-[@portaria texto=texto_portaria ementa=texto_ementa/]
+[@portaria texto=texto_portaria ementa=texto_ementa texto_anexo=tabela_anexo/]
 [/@documento]
 ','AL32UTF8'));
 dbms_lob.append(dest_blob_ex_mod, src_blob_ex_mod);
