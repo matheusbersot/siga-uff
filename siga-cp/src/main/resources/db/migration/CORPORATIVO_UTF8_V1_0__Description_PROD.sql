@@ -1893,7 +1893,7 @@ src_blob := utl_raw.cast_to_raw(convert('
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
-[#macro texto var titulo="" largura="" maxcaracteres="" idAjax="" reler="" relertab="" obrigatorio="nao" default="" desativado="false"]
+[#macro texto var titulo="" largura="" maxcaracteres="" idAjax="" reler="" relertab="" obrigatorio=false default="" desativado="false"]
     [#if reler == ''ajax'']
         [#local jreler = " onchange=\"javascript: sbmt(''" + idAjax + "'');\""]
     [/#if]
@@ -1933,7 +1933,7 @@ src_blob := utl_raw.cast_to_raw(convert('
         [/#list]
     [/#if]
 
-    [#if obrigatorio == ''Sim'']
+    [#if obrigatorio]
     [#local negrito = "font-weight:bold"]
     <input type="hidden" name="obrigatorios" value="${var}" />
     [/#if]
@@ -2994,7 +2994,7 @@ src_blob := utl_raw.cast_to_raw(convert('
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
-[#macro estiloBrasaoCentralizado tipo tamanhoLetra="11pt" formatarOrgao=true numeracaoCentralizada=false dataAntesDaAssinatura=false]
+[#macro estiloBrasaoCentralizado tipo tamanhoLetra="11pt" formatarOrgao=true numeracaoCentralizada=false dataAntesDaAssinatura=false exibirNumeracaoDoc=true exibirAssinatura=true]
     [@primeiroCabecalho]
     [@cabecalhoCentralizadoPrimeiraPagina/]
     [/@primeiroCabecalho]
@@ -3002,43 +3002,47 @@ src_blob := utl_raw.cast_to_raw(convert('
     <br/>
     <br/>
 
-    [#if !numeracaoCentralizada]
-    <table style="float:none; clear:both;" width="100%" border="0" bgcolor="#FFFFFF">
-        <tr>
-            <td align="left"><p style="font-family:Arial;font-weight:bold;font-size:12pt;">[@numeroDJE]${tipo} n&ordm; ${(doc.numExpediente)!}[/@numeroDJE]</p></td>
-        </tr>
-                [#if !dataAntesDaAssinatura]
-        <tr>
-            <td align="right">[@letra tamanho="12pt"]<p>[#if mov??]${mov.dtExtenso!}[#else]${doc.dtExtenso!}[/#if]</p>[/@letra]</td>
-        </tr>
-                [/#if]
-    </table>
-    [#else]
-    <table style="float:none; clear:both;" width="100%" border="0" bgcolor="#FFFFFF">
-        <tr>
-                    <td align="center">
-                        <p style="font-family:Arial;font-weight:bold;font-size:12pt;">
-                         [@numeroDJE]${tipo} n&ordm; ${(doc.numExpediente)!}[/@numeroDJE]
-                        [#if !dataAntesDaAssinatura && doc?? && doc.dtD??]
-                            de ${doc.dtD} de ${doc.dtMMMM} de ${doc.dtYYYY}</p>
-                        [/#if]
-                    </td>
-        </tr>
-    </table>
+    [#if exibirNumeracaoDoc]
+	    [#if !numeracaoCentralizada]
+	    <table style="float:none; clear:both;" width="100%" border="0" bgcolor="#FFFFFF">
+	        <tr>
+	            <td align="left"><p style="font-family:Arial;font-weight:bold;font-size:12pt;">[@numeroDJE]${tipo} n&ordm; ${(doc.numExpediente)!}[/@numeroDJE]</p></td>
+	        </tr>
+	                [#if !dataAntesDaAssinatura]
+	        <tr>
+	            <td align="right">[@letra tamanho="12pt"]<p>[#if mov??]${mov.dtExtenso!}[#else]${doc.dtExtenso!}[/#if]</p>[/@letra]</td>
+	        </tr>
+	                [/#if]
+	    </table>
+	    [#else]
+	    <table style="float:none; clear:both;" width="100%" border="0" bgcolor="#FFFFFF">
+	        <tr>
+	                    <td align="center">
+	                        <p style="font-family:Arial;font-weight:bold;font-size:12pt;">
+	                         [@numeroDJE]${tipo} n&ordm; ${(doc.numExpediente)!}[/@numeroDJE]
+	                        [#if !dataAntesDaAssinatura && doc?? && doc.dtD??]
+	                            de ${doc.dtD} de ${doc.dtMMMM} de ${doc.dtYYYY}</p>
+	                        [/#if]
+	                    </td>
+	        </tr>
+	    </table>
+	    [/#if]
+		[@tituloDJE]
+			${(doc.codigo)!}
+		[/@tituloDJE]
     [/#if]
-    [@tituloDJE]
-${(doc.codigo)!}
-    [/@tituloDJE]
 	<br/>
     <br/>            
 	[#nested]
-    [#if dataAntesDaAssinatura]<p style="text-align:center">[#if mov??]${mov.dtExtenso!}[#else]${doc.dtExtenso!}[/#if]</p>[/#if]
-<p>&nbsp;</p>
-    [#if mov??]
-    [@assinaturaMovCentro formatarOrgao=formatarOrgao/]
-    [#else]
-    [@assinaturaCentro formatarOrgao=formatarOrgao/]
-    [/#if]
+	[#if exibirAssinatura]
+	    [#if dataAntesDaAssinatura]<p style="text-align:center">[#if mov??]${mov.dtExtenso!}[#else]${doc.dtExtenso!}[/#if]</p>[/#if]
+	<p>&nbsp;</p>
+	    [#if mov??]
+	    [@assinaturaMovCentro formatarOrgao=formatarOrgao/]
+	    [#else]
+	    [@assinaturaCentro formatarOrgao=formatarOrgao/]
+	    [/#if]
+	[/#if]
 
     [@primeiroRodape]
     [@rodapeClassificacaoDocumental/]
@@ -3078,7 +3082,7 @@ src_blob := utl_raw.cast_to_raw(convert('
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
-[#macro portaria texto abertura="" tamanhoLetra="Normal" _tipo="Portaria" ementa=""]
+[#macro portaria texto abertura="" tamanhoLetra="Normal" _tipo="Portaria" ementa="" texto_anexo=""]
     [#if tamanhoLetra! == "Normal"]
         [#assign tl = "12pt" /]
     [#elseif tamanhoLetra! == "Pequeno"]
@@ -3116,7 +3120,35 @@ src_blob := utl_raw.cast_to_raw(convert('
             </div>            
         [/@mioloDJE]
      [/@estiloBrasaoCentralizado]
+     [#if texto_anexo != ""]
+       [@quebraPagina/]
+       [@anexo texto=texto_anexo/]
+     [/#if]
 [/#macro]','WE8ISO8859P1'));
+
+dbms_lob.append(dest_blob, src_blob);
+src_blob := utl_raw.cast_to_raw(convert('
+[#macro anexo texto tamanhoLetra="Normal" _tipo="Anexo"]    
+    [#if tamanhoLetra! == "Normal"]
+        [#assign tl = "12pt" /]
+    [#elseif tamanhoLetra! == "Pequeno"]
+        [#assign tl = "9pt" /]
+    [#elseif tamanhoLetra! == "Grande"]
+        [#assign tl = "13pt" /]
+    [#else]     
+        [#assign tl = "11pt"]
+    [/#if]   
+    [@estiloBrasaoCentralizado tipo=_tipo tamanhoLetra=tl formatarOrgao=false numeracaoCentralizada=true exibirNumeracaoDoc=false exibirAssinatura=false]
+    [@mioloDJE]
+            <div style="font-family: Times New Roman; font-size: ${tl};">                
+                [@corpoBIE]
+                    ${texto!}
+                [/@corpoBIE]                               
+            </div>            
+        [/@mioloDJE]
+    [/@estiloBrasaoCentralizado]
+[/#macro]
+','WE8ISO8859P1'));
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
