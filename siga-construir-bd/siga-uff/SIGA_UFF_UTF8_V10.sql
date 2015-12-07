@@ -7,10 +7,10 @@ DECLARE
   
 BEGIN
 
--- ######## PORTARIA: Homologa√ß√£o de est√°gio probat√≥rio (Docente) ###############	
+-- ######## PORTARIA: HomologaÁ„o de est·gio probatÛrio (Docente) ###############	
 
 Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1050,'Homologa√ß√£o de est√°gio probat√≥rio (Docente)','Homologa√ß√£o de est√°gio probat√≥rio (Docente)','template/freemarker', null, 6, 1050,1);
+values (1050,'HomologaÁ„o de est·gio probatÛrio (Docente)','HomologaÁ„o de est·gio probatÛrio (Docente)','template/freemarker', null, 6, 1050,1);
 	
 update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1050;
 
@@ -24,10 +24,10 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
     [@grupo depende="qtdServidoresAjax"]
         [#list 1..(qtdServidores)?number as i]
             [@grupo]
-                [@texto titulo="Matr√≠cula SIAPE" var="siape"+i largura="9" maxcaracteres="9" obrigatorio=true desativado="${desabilitadoEdicao}"/]
+                [@texto titulo="MatrÌcula SIAPE" var="siape"+i largura="9" maxcaracteres="9" obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
             [@grupo]
-				[@mensagem titulo="N¬∫ do Processo" texto="23069."/]
+				[@mensagem titulo="N∫ do Processo" texto="23069."/]
 				[@texto var="sequencial"+i titulo="" largura="6" maxcaracteres="6" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 				[@mensagem titulo="" texto="/"/]
 				[@texto var="ano"+i titulo="" largura="4" maxcaracteres="4" obrigatorio=true desativado="${desabilitadoEdicao}"/]
@@ -38,7 +38,7 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
                 [@texto titulo="Nome do Servidor" var="nome"+i largura="50" maxcaracteres="100" obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			[@grupo]
-                [@data titulo="Data de Homologa√ß√£o" var="dtHomologacao"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
+                [@data titulo="Data de HomologaÁ„o" var="dtHomologacao"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
  			[@separador/]
         [/#list]
@@ -49,26 +49,26 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 [@documento]
 
 [#assign texto_ementa]
-  		Homologa√ß√£o do Est√°gio Probat√≥rio de Docente.
+  		HomologaÁ„o do Est·gio ProbatÛrio de Docente.
 [/#assign]
 
 [#assign texto_portaria]
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};">O <strong>Reitor</strong> da <strong>Universidade Federal Fluminense</strong> no uso de suas atribui√ß√µes  legais, estatut√°rias e regimentais,</p>
+  		<p style="text-align: justify; text-indent:${recuo_paragrafo};">O <strong>Reitor</strong> da <strong>Universidade Federal Fluminense</strong> no uso de suas atribuiÁıes  legais, estatut·rias e regimentais,</p>
   		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE:</strong></p> 
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 1¬∫ - <strong>Homologar</strong> o Est√°gio Probat√≥rio dos Docentes relacionados no anexo a presente Portaria, nos termos da Lei 8.112 de 11 de Dezembro de 1990, Emenda Constitucional n¬∫ 19/98 e com base no Parecer AGU/MC n¬∫ 01/2004 publicado no D.O. de 16 de Julho de 2004, a Secretaria de Recursos Humanos do Minist√©rio do Planejamento reconheceu como sendo de 03 anos o per√≠odo de Est√°gio Probat√≥rio assim como o per√≠odo para aquisi√ß√£o de estabilidade, e a Resolu√ß√£o CEP-UFF 219/2005 e <span style="font-style: italic;font-weight: bold;">Decis√£o CEP n¬∫ 731/13</span>.</p>
+  		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 1∫ - <strong>Homologar</strong> o Est·gio ProbatÛrio dos Docentes relacionados no anexo a presente Portaria, nos termos da Lei 8.112 de 11 de Dezembro de 1990, Emenda Constitucional n∫ 19/98 e com base no Parecer AGU/MC n∫ 01/2004 publicado no D.O. de 16 de Julho de 2004, a Secretaria de Recursos Humanos do MinistÈrio do Planejamento reconheceu como sendo de 03 anos o perÌodo de Est·gio ProbatÛrio assim como o perÌodo para aquisiÁ„o de estabilidade, e a ResoluÁ„o CEP-UFF 219/2005 e <span style="font-style: italic;font-weight: bold;">Decis„o CEP n∫ 731/13</span>.</p>
 [/#assign]
 
 [#assign tabela_anexo]
       <table width="100%" cellpadding="3" style="border: 1px solid black; border-collapse: collapse; text-align:center;">
         <tr style="border: 1px solid black;font-size:11pt;">
-           <td colspan="4" style="border: 1px solid black;"><strong>RELA√á√ÉO DE PROFESSORES DA CARREIRA DE MAGIST√âRIO SUPERIOR COM DIREITO √Ä HOMOLOGA√á√ÉO DE EST√ÅGIO PROBAT√ìRIO</strong></td>
+           <td colspan="4" style="border: 1px solid black;"><strong>RELA«√O DE PROFESSORES DA CARREIRA DE MAGIST…RIO SUPERIOR COM DIREITO ¿ HOMOLOGA«√O DE EST¡GIO PROBAT”RIO</strong></td>
         </tr>
         <tr style="border: 1px solid black;font-size:11pt;">
            <td colspan="4" style="border: 1px solid black;">
  			   [#if doc.exMobilPai??]
-	               <strong>ANEXO √† Portaria n&ordm; ${doc.exMobilPai.exDocumento.numExpediente!} , ${doc.exMobilPai.exDocumento.dtD!} de ${doc.exMobilPai.exDocumento.dtMMMM!} de ${doc.exMobilPai.exDocumento.dtYYYY!}.</strong>
+	               <strong>ANEXO ‡ Portaria n&ordm; ${doc.exMobilPai.exDocumento.numExpediente!} , ${doc.exMobilPai.exDocumento.dtD!} de ${doc.exMobilPai.exDocumento.dtMMMM!} de ${doc.exMobilPai.exDocumento.dtYYYY!}.</strong>
 			   [#else]
-	               <strong>ANEXO √† Portaria n&ordm;  ,  de  de .</strong>
+	               <strong>ANEXO ‡ Portaria n&ordm;  ,  de  de .</strong>
  		       [/#if]
            </td>
         </tr>
@@ -76,7 +76,7 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
           <td width="10%" style="border: 1px solid black;">Ordem</td>
           <td width="15%" style="border: 1px solid black;">Mat. SIAPE</td>
           <td width="55%" style="border: 1px solid black;">Processo/Nome</td>
-          <td width="20%" style="border: 1px solid black;">Homologa√ß√£o concedida em</td>
+          <td width="20%" style="border: 1px solid black;">HomologaÁ„o concedida em</td>
         </tr> 
         [#list 1..(qtdServidores)?number as i]				
       <tr style="border: 1px solid black;font-size:10pt;">	
@@ -106,10 +106,10 @@ DECLARE
   
 BEGIN
 
--- ######## PORTARIA: Concess√£o de promo√ß√£o e retribui√ß√£o por titula√ß√£o (Docente) ###############	
+-- ######## PORTARIA: Concess„o de promoÁ„o e retribuiÁ„o por titulaÁ„o (Docente) ###############	
 
 Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1051,'Concess√£o de progress√£o,promo√ß√£o e ou retribui√ß√£o por titula√ß√£o (Docente)','Concess√£o de progress√£o,promo√ß√£o e ou retribui√ß√£o por titula√ß√£o (Docente)','template/freemarker', null, 6, 1051,1);
+values (1051,'Concess„o de progress„o,promoÁ„o e ou retribuiÁ„o por titulaÁ„o (Docente)','Concess„o de progress„o,promoÁ„o e ou retribuiÁ„o por titulaÁ„o (Docente)','template/freemarker', null, 6, 1051,1);
 	
 update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1051;
 
@@ -124,13 +124,13 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 [@documento]
 
 [#assign texto_ementa]
-  		Concess√£o de Progress√£o, Promo√ß√£o Funcional e&#47;ou Retribui√ß√£o por Titula√ß√£o de Docente.
+  		Concess„o de Progress„o, PromoÁ„o Funcional e&#47;ou RetribuiÁ„o por TitulaÁ„o de Docente.
 [/#assign]
 
 [#assign texto_portaria]
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};">O <strong>Reitor</strong> da <strong>Universidade Federal Fluminense</strong> no uso de suas atribui√ß√µes  legais, estatut√°rias e regimentais,</p>
+  		<p style="text-align: justify; text-indent:${recuo_paragrafo};">O <strong>Reitor</strong> da <strong>Universidade Federal Fluminense</strong> no uso de suas atribuiÁıes  legais, estatut·rias e regimentais,</p>
   		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE:</strong></p> 
-		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 1¬∫ - Conceder Progress√£o, Promo√ß√£o funcional e&#47;ou Retribui√ß√£o por Titula√ß√£o aos Docentes relacionados no anexo √† presente Portaria, nos termos, da Lei n¬∫ 12.772/12, Portaria Ministerial n¬∫ 554/13, Lei n¬∫ 12.863/13, Lei n.¬∫ 11.344/06, da Resolu√ß√£o do CEP n.¬∫ 218/05,  Decreto Lei 94.664/87, Portaria MEC n¬∫ 475/87 e <span style="font-style: italic;font-weight: bold;">Decis√£o CEP n¬∫ 731/13</span>, observando-se a vig√™ncia e os efeitos financeiros decorrentes.</p>
+		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 1∫ - Conceder Progress„o, PromoÁ„o funcional e&#47;ou RetribuiÁ„o por TitulaÁ„o aos Docentes relacionados no anexo ‡ presente Portaria, nos termos, da Lei n∫ 12.772/12, Portaria Ministerial n∫ 554/13, Lei n∫ 12.863/13, Lei n.∫ 11.344/06, da ResoluÁ„o do CEP n.∫ 218/05,  Decreto Lei 94.664/87, Portaria MEC n∫ 475/87 e <span style="font-style: italic;font-weight: bold;">Decis„o CEP n∫ 731/13</span>, observando-se a vigÍncia e os efeitos financeiros decorrentes.</p>
 [/#assign]
 
 [@portaria texto=texto_portaria ementa=texto_ementa/]
