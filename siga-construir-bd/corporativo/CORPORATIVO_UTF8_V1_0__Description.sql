@@ -1758,7 +1758,7 @@ DECLARE
   
 BEGIN
 
-Insert into CP_MODELO (ID_MODELO,ID_ORGAO_USU,HIS_ID_INI,HIS_DT_INI,HIS_IDC_INI,HIS_DT_FIM,HIS_IDC_FIM,HIS_ATIVO,conteudo_blob_mod) values (1,null,1,to_date('05/03/12','DD/MM/RR'),1,null,null,1,utl_raw.cast_to_raw(' '));
+Insert into CP_MODELO (ID_MODELO,ID_ORGAO_USU,HIS_ID_INI,HIS_DT_INI,HIS_IDC_INI,HIS_DT_FIM,HIS_IDC_FIM,HIS_ATIVO,conteudo_blob_mod) values (1,null,1,SYSDATE,1,null,null,1,utl_raw.cast_to_raw(' '));
 
 select conteudo_blob_mod into dest_blob from CORPORATIVO.cp_modelo where id_modelo = 1 for update;
 
@@ -1789,7 +1789,7 @@ src_blob := utl_raw.cast_to_raw(convert('
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
             <head>
                 <style type="text/css">
-                    @page {
+                    &#64;page {
                         margin-left: ${margemEsquerda};
                         margin-right: ${margemDireita};
                         margin-top: ${margemSuperior};
@@ -3438,10 +3438,6 @@ src_blob := utl_raw.cast_to_raw(convert('
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
 [#macro botoesExtensaoAssinador][/#macro]','WE8ISO8859P1'));
-
-dbms_lob.append(dest_blob, src_blob);
-src_blob := utl_raw.cast_to_raw(convert('
-[#macro complementoHEAD][/#macro]','WE8ISO8859P1'));
 
 dbms_lob.append(dest_blob, src_blob);
 commit;

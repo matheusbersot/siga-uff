@@ -7,10 +7,10 @@ SET DEFINE OFF;
 	  
 	BEGIN
 	
-	-- ######## PORTARIA Designação (Chefe ou Sub-Chefe de Departamento - Chapa Única e Lista Tríplice) ###############	
+	-- ######## PORTARIA Designação de Chefe e Sub-Chefe de Departamento - Chapa Única e Lista Tríplice ###############	
 	
 	Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-	values (1010,'Designação (Chefe e Sub-Chefe de Departamento - Chapa Única e Lista Tríplice)','Designação (Chefe e Sub-Chefe de Departamento - Chapa Única e Lista Tríplice)','template/freemarker', null, 6, 1010,1);
+	values (1010,'Designação de Chefe e Sub-Chefe de Departamento - Chapa Única e Lista Tríplice','Designação de Chefe e Sub-Chefe de Departamento - Chapa Única e Lista Tríplice','template/freemarker', null, 6, 1010,1);
 		
 	update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1010;
 	
@@ -94,10 +94,10 @@ DECLARE
   
 BEGIN
 
--- ######## Designação (Chefe de Departamento - Complemento de mandato) ###############	
+-- ######## PORTARIA Designação de Chefe de departamento para complemento de mandato ###############	
 
 Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1011,'Designação (Chefe de Departamento - Complemento de mandato)','Designação (Chefe de Departamento - Complemento de mandato)','template/freemarker', null, 6, 1011,1);
+values (1011,'Designação de Chefe de Departamento para complemento de mandato','Designação de Chefe de Departamento para complemento de mandato','template/freemarker', null, 6, 1011,1);
 	
 update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1011;
 
@@ -172,10 +172,10 @@ DECLARE
   
 BEGIN
 
--- ######## PORTARIA Designação (Chefe de Departamento Pró Tempore) ###############	
+-- ######## PORTARIA Designação de Chefe de departamento Pro Tempore###############	
 
 Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1012,'Designação (Chefe de Departamento Pró Tempore)','Designação (Chefe de Departamento Pró Tempore)','template/freemarker', null, 6, 1012,1);
+values (1012,'Designação de Chefe de departamento Pro Tempore','Designação de Chefe de departamento Pro Tempore','template/freemarker', null, 6, 1012,1);
 	
 update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1012;
 
@@ -248,10 +248,10 @@ DECLARE
   
 BEGIN
 
--- ######## PORTARIA Designação (Coordenador de Graduação - Decano)  ###############	
+-- ######## PORTARIA Designação de Coordenador Decano ###############	
 
 Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1013,'Designação (Coordenador de Unidade - Decano)','Designação (Coordenador de Unidade - Decano)','template/freemarker', null, 6, 1013,1);
+values (1013,'Designação de Coordenador Decano','Designação de Coordenador Decano','template/freemarker', null, 6, 1013,1);
 	
 update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1013;
 
@@ -323,10 +323,10 @@ DECLARE
   
 BEGIN
 
--- ######## PORTARIA Designação (Coordenador e Vice-Coordenador de Pós-Graduação) ###############	
+-- ######## PORTARIA Designação de Coordenador e Vice-Coordenador da Pós-Graduação ###############	
 
 Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1014,'Designação (Coordenador e Vice-Coordenador de Pós-Graduação)','Designação (Coordenador e Vice-Coordenador de Pós-Graduação)','template/freemarker', null, 6, 1014,1);
+values (1014,'Designação de Coordenador e Vice-Coordenador da Pós-Graduação','Designação de Coordenador e Vice-Coordenador da Pós-Graduação','template/freemarker', null, 6, 1014,1);
 	
 update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1014;
 
@@ -411,7 +411,7 @@ DECLARE
   
 BEGIN
 
--- ######## PORTARIA Designação (Coordenador ou Vice-Coordenador de Graduação) ###############	
+-- ######## PORTARIA Designação de Coordenador e Vice-Coordenador da Graduação ###############	
 
 Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
 values (1015,'Designação de Coordenador e Vice-Coordenador da Graduação','Designação de Coordenador e Vice-Coordenador da Graduação','template/freemarker', null, 6, 1015,1);
@@ -497,10 +497,10 @@ DECLARE
   
 BEGIN
 
--- ######## PORTARIA Designação (Coordenador de Graduação - Complemento de Mandato) ###############	
+-- ######## PORTARIA Designação de Coordenador da Graduação para Complemento de Mandato ###############	
 
 Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1016,'Designação (Coordenador de Graduação - Complemento de Mandato)','Designação (Coordenador de Graduação - Complemento de Mandato)','template/freemarker', null, 6, 1016,1);
+values (1016,'Designação de Coordenador da Graduação para Complemento de Mandato','Designação de Coordenador da Graduação para Complemento de Mandato','template/freemarker', null, 6, 1016,1);
 	
 update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1016;
 
@@ -579,10 +579,10 @@ DECLARE
   
 BEGIN
 
--- ######## PORTARIA Designação (Coordenador de Pós-Graduação Pró Tempore) ###############	
+-- ######## PORTARIA Designação de Coordenador da Pós-Graduação Pro Tempore ###############	
 
 Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1017,'Designação (Coordenador de Pós-Graduação Pró Tempore)','Designação (Coordenador de Pós-Graduação Pró Tempore)','template/freemarker', null, 6, 1017,1);
+values (1017,'Designação de Coordenador da Pós-Graduação Pro Tempore','Designação de Coordenador da Pós-Graduação Pro Tempore','template/freemarker', null, 6, 1017,1);
 	
 update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1017;
 
@@ -658,7 +658,7 @@ DECLARE
   
 BEGIN
 
--- ######## PORTARIA Designação (Coordenador e Diretor de Unidade) ###############	
+-- ######## PORTARIA Designação de Coordenador e Diretor Acadêmico ###############	
 
 Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
 values (1018,'Designação de Coordenador e Diretor Acadêmico','Designação de Coordenador e Diretor Acadêmico','template/freemarker', null, 6, 1018,1);
@@ -746,10 +746,10 @@ DECLARE
   
 BEGIN
 
--- ######## PORTARIA Atribuição de função comissionada (Coordenador de Pós-Graduação) ###############	
+-- ######## PORTARIA Atribuição de Coordenador de Pós-Graduação ###############	
 
 Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1019,'Atribuição de função comissionada (Coordenador de Pós-Graduação)','Atribuição de função comissionada (Coordenador de Pós-Graduação)','template/freemarker', null, 6, 1019,1);
+values (1019,'Atribuição de Coordenador de Pós-Graduação','Atribuição de Coordenador de Pós-Graduação','template/freemarker', null, 6, 1019,1);
 	
 update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1019;
 
@@ -818,10 +818,10 @@ DECLARE
   
 BEGIN
 
--- ######## PORTARIA Nomeação (Diretor de Unidade - Decano) ###############	
+-- ######## PORTARIA Nomeação de Diretor Decano de unidade ###############	
 
 Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1020,'Nomeação (Diretor de Unidade - Decano)','Nomeação (Diretor de Unidade - Decano)','template/freemarker', null, 6, 1020,1);
+values (1020,'Nomeação de Diretor Decano de unidade','Nomeação de Diretor Decano de unidade','template/freemarker', null, 6, 1020,1);
 	
 update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1020;
 
@@ -928,10 +928,10 @@ DECLARE
   
 BEGIN
 
--- ######## PORTARIA Nomeação (Diretor ou Vice-Diretor de Unidade) ###############	
+-- ######## PORTARIA Nomeação de Diretor e Vice-Diretor de unidade ###############	
 
 Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1021,'Nomeação (Diretor ou Vice-Diretor de Unidade)','Nomeação (Diretor ou Vice-Diretor de Unidade)','template/freemarker', null, 6, 1021,1);
+values (1021,'Nomeação de Diretor e Vice-Diretor de unidade','Nomeação de Diretor e Vice-Diretor de unidade','template/freemarker', null, 6, 1021,1);
 	
 update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1021;
 
@@ -1010,10 +1010,10 @@ DECLARE
   
 BEGIN
 
--- ######## PORTARIA Dispensa (Chefe ou Subchefe de Departamento) ###############	
+-- ######## PORTARIA Dispensa de Chefe ou Sub-Chefe de Departamento ###############	
 
 Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1022,'Dispensa (Chefe ou Subchefe de Departamento)','Dispensa (Chefe ou Subchefe de Departamento)','template/freemarker', null, 6, 1022,1);
+values (1022,'Dispensa de Chefe ou Sub-Chefe de Departamento','Dispensa de Chefe ou Sub-Chefe de Departamento','template/freemarker', null, 6, 1022,1);
 	
 update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1022;
 
@@ -1100,10 +1100,10 @@ DECLARE
   
 BEGIN
 
--- ######## PORTARIA Dispensa por falecimento (Chefe de Departamento) ###############	
+-- ######## PORTARIA Dispensa de Chefe de Departamento por motivo de Falecimento ###############	
 
 Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1023,'Dispensa por falecimento (Chefe de Departamento)','Dispensa por falecimento (Chefe de Departamento)','template/freemarker', null, 6, 1023,1);
+values (1023,'Dispensa de Chefe de Departamento por motivo de Falecimento','Dispensa de Chefe de Departamento por motivo de Falecimento','template/freemarker', null, 6, 1023,1);
 	
 update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1023;
 
@@ -1184,7 +1184,7 @@ DECLARE
   
 BEGIN
 
--- ######## PORTARIA Dispensa (Coordenador ou Vice-Coordenador da Graduação ou Pós-Graduação) ###############	
+-- ######## PORTARIA Dispensa de Coordenador e Vice-Coordenador da Graduação e Pós-Graduação ###############	
 
 Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
 values (1024,'Dispensa de Coordenador e Vice-Coordenador da Graduação e Pós-Graduação','Dispensa de Coordenador e Vice-Coordenador da Graduação e Pós-Graduação','template/freemarker', null, 6, 1024,1);
@@ -1279,991 +1279,12 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
   		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR</strong> da Universidade Federal Fluminense, no uso de suas atribuições legais, estatutárias e regimentais;</p>
   		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>Considerando</strong> o constante no Processo nº 23069.${sequencial!}/${ano!}-${digito!},</p>
 		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE:</strong></p> 
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 1º - Dispensar [#if (pedido!"") == "Sim"] , a pedido, [/#if] [#if (efeitos_retroativos!"") == "Sim"] , com efeitos retroativos a ${dt_efeitos_retroativos!}, [/#if] [#if (membros_colegiado!"") == "Sim"] , dentre os membros do Colegiado, [/#if] <strong>${dispensado!?upper_case}</strong>, Professor do Magistério Superior, matrícula SIAPE nº ${siape!}, pertencente ao Quadro Permanente desta Universidade [#if (qualidade!"") == "Sim"], na qualidade de <strong>${desc_qualidade!}</strong>, [/#if] da função de <strong>${tipo_funcao!}</strong> [#if (pro_tempore!"") == "Sim"] <strong><i> pro tempore</i></strong> [/#if] do <strong>${tipo_curso!} ${curso!}</strong>, [#if (nivel!"") == "Sim"] <strong>${desc_nivel!}</strong> [/#if] ${preposicao!} ${unidade!}, designada pela Portaria nº. ${portaria_designacao!} de ${dt_portaria_designacao!} [#if (publicacao_dou!"") == "Sim"] , publicada no D.O.U de ${dt_publicacao_dou} [/#if]. [#if (funcao_comissionada!"") == "Sim"]<strong>FCC</strong>.[/#if]</p> 
+  		<p style="text-align: justify; text-indent:${recuo_paragrafo};">Art. 1º - Dispensar [#if (pedido!"") == "Sim"] , a pedido, [/#if] [#if (efeitos_retroativos!"") == "Sim"] , com efeitos retroativos a ${dt_efeitos_retroativos!}, [/#if] [#if (membros_colegiado!"") == "Sim"] , dentre os membros do Colegiado, [/#if] <strong>${dispensado!?upper_case}</strong>, Professor do Magistério Superior, matrícula SIAPE nº ${siape!}, pertencente ao Quadro Permanente desta Universidade [#if (qualidade!"") == "Sim"], na qualidade de <strong>${desc_qualidade!}</strong>, [/#if] da função de <strong>${tipo_funcao!}</strong> [#if (pro_tempore!"") == "Sim"] <strong><i> pro tempore</i></strong> [/#if] do <strong>${tipo_curso!} ${curso!}</strong>, [#if (nivel!"") == "Sim"] <strong>${desc_nivel!}</strong> [/#if] ${preposicao!} ${unidade!}, designada pela Portaria nº. ${portaria_designacao!} de ${dt_portaria_designacao} [#if (publicacao_dou!"") == "Sim"] , publicada no D.O.U de ${dt_publicacao_dou} [/#if]. [#if (funcao_comissionada!"") == "Sim"]<strong>FCC</strong>.[/#if]</p> 
   		
 [/#assign]
 
 
 [@portaria texto=texto_portaria ementa=""/]
-[/@documento]
-','AL32UTF8'));
-dbms_lob.append(dest_blob_ex_mod, src_blob_ex_mod);
-
-END;
-/
-
-
-DECLARE
-  dest_blob_ex_mod BLOB;
-  src_blob_ex_mod BLOB;
-  
-BEGIN
-
--- ######## PORTARIA: Cancelamento (Adicional de insalubridade) ###############	
-
-Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1025,'Cancelamento (Adicional de insalubridade)','Cancelamento (Adicional de insalubridade)','template/freemarker', null, 6, 1025,1);
-	
-update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1025;
-
-select conteudo_blob_mod into dest_blob_ex_mod from SIGA.EX_MODELO where id_mod = 1025 for update;
-src_blob_ex_mod := utl_raw.cast_to_raw(convert('
-[#-- Bloco Entrevista --]
-
-[@entrevista]
-    [#assign valores = 1..100 /]  
-    [@selecao var="qtdServidores" titulo="Quantidade de servidores" reler=true idAjax="qtdServidoresAjax" opcoes=valores?join(";") /]
-    [@grupo depende="qtdServidoresAjax"]
-        [#list 1..(qtdServidores)?number as i]
-			[@grupo]
-                [@texto titulo="Nome do Servidor" var="nome"+i /]
-            [/@grupo]
-            [@grupo]
-                [@texto titulo="Matrícula SIAPE" var="siape"+i /]
-            [/@grupo]
-            [@grupo]
-				[@mensagem titulo="Nº do Processo" texto="23069."/]
-				[@texto var="sequencial"+i titulo="" largura="6" maxcaracteres="6" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-				[@mensagem titulo="" texto="/"/]
-				[@texto var="ano"+i titulo="" largura="4" maxcaracteres="4" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-				[@mensagem titulo="" texto="-"/]
-				[@texto var="digito"+i titulo="" largura="2" maxcaracteres="2" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-			[/@grupo]
-			[@grupo]
-                [@texto titulo="Lotação" var="lotacao"+i /]
-            [/@grupo]
-			[@grupo]
-                [@texto titulo="UORG" var="uorg"+i /]
-            [/@grupo]
-			[@grupo]
-                [@texto titulo="Laudo" var="laudo"+i /]
-            [/@grupo]
-        [/#list]
-    [/@grupo]	
-[/@entrevista]
-
-[#-- Bloco Documento --]
-[@documento]
-
-[#assign texto_ementa]
-  		Cancelamento (Adicional de insalubridade)
-[/#assign]
-
-[#assign texto_portaria]
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR DA UNIVERSIDADE FEDERAL FLUMINENSE<strong>, no uso de suas
-  		atribuições e considerando as determinações contidas nos artigos 68 e 12, inciso I, das Leis
-		8.112/90 e 8.270/91, respectivamente, e tendo em vista o laudo pericial, e de acordo com a
-		Orientação Normativa Nº 6, de 18 de Março de 2013 da Secretaria de Recursos Humanos do
-		Ministério do Planejamento, Orçamento e Gestão,</p>
-		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE cessar o pagamento do ADICIONAL DE INSALUBRIDADE </strong>do(s)
-  		servidor(es) a seguir relacionado(s), pelo não cumprimento dos requisitos estabelecido pela Portaria
-		<strong>nº 3214/78, do Ministério do Trabalho.</p> 
-		<br/>
-		<table width="100%">
-			<tr>	
-				<td width="30%" align=center><strong>Nome</strong></td>
-				<td width="15%" align=center><strong>Processo</strong></td>
-				<td width="15%" align=center><strong>Lotação</strong></td>
-				<td width="10%" align=center><strong>UORG</strong></td>
-				<td width="15%" align=center><strong>LAUDO</strong></td>
-				<td width="15%" align=center><strong>SIAPE</strong></td>
-			</tr>
-			[#list 1..(qtdServidores)?number as i]				
-				<tr>	
-					<td>${.vars["nome"+i]!}</td>
-					<td>23069.${.vars["sequencial"+i]!}/${.vars["ano"+i]!}-${.vars["digito"+i]!}</td>
-					<td>${.vars["lotacao"+i]!}</td>
-					<td>${.vars["uorg"+i]!}</td>
-					<td>${.vars["laudo"+i]!}</td>
-					<td>${.vars["siape"+i]!}</td>
-				</tr>			
-		    [/#list]
-		</table>
-[/#assign]
-
-
-[@portaria texto=texto_portaria ementa=texto_ementa/]
-[/@documento]
-','AL32UTF8'));
-dbms_lob.append(dest_blob_ex_mod, src_blob_ex_mod);
-
-END;
-/
-
-DECLARE
-  dest_blob_ex_mod BLOB;
-  src_blob_ex_mod BLOB;
-  
-BEGIN
-
--- ######## PORTARIA: Exclusão (Adicional de insalubridade) ###############	
-
-Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1026,'Exclusão (Adicional de insalubridade)','Exclusão (Adicional de insalubridade)','template/freemarker', null, 6, 1026,1);
-	
-update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1026;
-
-select conteudo_blob_mod into dest_blob_ex_mod from SIGA.EX_MODELO where id_mod = 1026 for update;
-src_blob_ex_mod := utl_raw.cast_to_raw(convert('
-[#-- Bloco Entrevista --]
-
-[@entrevista]
-	[@grupo]
-		[@texto var="num_portaria_ex" titulo="Portaria de Exclusão"  largura="10" maxcaracteres="10" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-	[/@grupo]
-  
-	[@grupo]
-		[@data var="dt_portaria_ex" titulo="Data da Portaria de Exclusão" obrigatorio=true desativado="${desabilitadoEdicao}"/]
-	[/@grupo]
-	[@grupo]
-        [@texto titulo="Nº do Boletim de Serviço" var="num_boletim" /]
-    [/@grupo]
-	[@grupo]
-		[@data var="dt_boletim" titulo="Data do Boletim de Serviço" obrigatorio=true desativado="${desabilitadoEdicao}"/]
-	[/@grupo]
-
-
-    [#assign valores = 1..100 /]  
-    [@selecao var="qtdServidores" titulo="Quantidade de servidores" reler=true idAjax="qtdServidoresAjax" opcoes=valores?join(";") /]
-    [@grupo depende="qtdServidoresAjax"]
-        [#list 1..(qtdServidores)?number as i]
-			[@grupo]
-                [@texto titulo="Nome do Servidor" var="nome"+i /]
-            [/@grupo]
-            [@grupo]
-                [@texto titulo="Matrícula SIAPE" var="siape"+i /]
-            [/@grupo]
-            [@grupo]
-				[@mensagem titulo="Nº do Processo" texto="23069."/]
-				[@texto var="sequencial"+i titulo="" largura="6" maxcaracteres="6" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-				[@mensagem titulo="" texto="/"/]
-				[@texto var="ano"+i titulo="" largura="4" maxcaracteres="4" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-				[@mensagem titulo="" texto="-"/]
-				[@texto var="digito"+i titulo="" largura="2" maxcaracteres="2" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-			[/@grupo]
-			[@grupo]
-                [@texto titulo="Lotação" var="lotacao"+i /]
-            [/@grupo]
-			[@grupo]
-                [@texto titulo="UORG" var="uorg"+i /]
-            [/@grupo]
-			[@grupo]
-                [@texto titulo="Laudo" var="laudo"+i /]
-            [/@grupo]
-			[@grupo]
-                [@texto titulo="Data da exclusão" var="exclusao"+i /]
-            [/@grupo]
-			
-        [/#list]
-    [/@grupo]	
-[/@entrevista]
-
-[#-- Bloco Documento --]
-[@documento]
-
-[#assign texto_ementa]
-  		Exclusão (Adicional de insalubridade)
-[/#assign]
-
-[#assign texto_portaria]
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR DA UNIVERSIDADE FEDERAL FLUMINENSE</strong>, no uso de suas atribuições e considerando as determinações contidas nos artigos 68 e 12, inciso I, das Leis 8.112/90 e 8.270/91, respectivamente, e tendo em vista o laudo pericial, e de acordo com a Orientação Normativa Nº 6, de 18 de Março de 2013 da Secretaria de Recursos Humanos do Ministério do Planejamento, Orçamento e Gestão,</p>
-		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE: </strong></p>
-		<p style="text-align: justify;">1 - Excluir, na Portaria nº ${num_portaria_ex!} de ${dt_portaria_ex!} , publicada no BS/UFF nº ${num_boletim!}  de ${dt_boletim!} , o(a) servidor(a) abaixo relacionado(a): </p>
-		</br>
-		<table width="100%">
-			<tr>	
-				<td width="30%" align=center><strong>Nome</strong></td>
-				<td width="15%" align=center><strong>Lotação</strong></td>
-				<td width="10%" align=center><strong>UORG</strong></td>
-				<td width="15%" align=center><strong>LAUDO</strong></td>
-				<td width="15%" align=center><strong>SIAPE</strong></td>
-				<td width="15%" align=center><strong>A partir de</strong></td>
-			</tr>
-			[#list 1..(qtdServidores)?number as i]				
-				<tr>	
-					<td>${.vars["nome"+i]!}</td>
-					<td>${.vars["lotacao"+i]!}</td>
-					<td>${.vars["uorg"+i]!}</td>
-					<td>${.vars["laudo"+i]!}</td>
-					<td>${.vars["siape"+i]!}</td>
-					<td>${.vars["exclusao"+i]!}</td>
-				</tr>			
-		    [/#list]
-		</table>
-[/#assign]
-
-
-[@portaria texto=texto_portaria ementa=texto_ementa/]
-[/@documento]
-','AL32UTF8'));
-dbms_lob.append(dest_blob_ex_mod, src_blob_ex_mod);
-
-END;
-/
-
-DECLARE
-  dest_blob_ex_mod BLOB;
-  src_blob_ex_mod BLOB;
-  
-BEGIN
-
--- ######## PORTARIA: Concessão (Gratificação de RAIO-X) ###############	
-
-Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1027,'Concessão (Gratificação de RAIO-X)','Concessão (Gratificação de RAIO-X)','template/freemarker', null, 6, 1027,1);
-	
-update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1027;
-
-select conteudo_blob_mod into dest_blob_ex_mod from SIGA.EX_MODELO where id_mod = 1027 for update;
-src_blob_ex_mod := utl_raw.cast_to_raw(convert('
-[#-- Bloco Entrevista --]
-
-[@entrevista]
-
-    [#assign valores = 1..100 /]  
-    [@selecao var="qtdServidores" titulo="Quantidade de servidores" reler=true idAjax="qtdServidoresAjax" opcoes=valores?join(";") /]
-    [@grupo depende="qtdServidoresAjax"]
-        [#list 1..(qtdServidores)?number as i]
-			[@grupo]
-                [@texto titulo="Nome do Servidor" var="nome"+i /]
-            [/@grupo]
-            [@grupo]
-                [@texto titulo="Matrícula SIAPE" var="siape"+i /]
-            [/@grupo]
-            [@grupo]
-				[@mensagem titulo="Nº do Processo" texto="23069."/]
-				[@texto var="sequencial"+i titulo="" largura="6" maxcaracteres="6" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-				[@mensagem titulo="" texto="/"/]
-				[@texto var="ano"+i titulo="" largura="4" maxcaracteres="4" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-				[@mensagem titulo="" texto="-"/]
-				[@texto var="digito"+i titulo="" largura="2" maxcaracteres="2" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-			[/@grupo]
-			[@grupo]
-                [@texto titulo="Lotação" var="lotacao"+i /]
-            [/@grupo]
-			[@grupo]
-                [@texto titulo="UORG" var="uorg"+i /]
-            [/@grupo]
-			[@grupo]
-                [@texto titulo="Laudo" var="laudo"+i /]
-            [/@grupo]
-        [/#list]
-    [/@grupo]	
-[/@entrevista]
-
-[#-- Bloco Documento --]
-[@documento]
-
-[#assign texto_ementa]
-  		Concessão (Gratificação de RAIO-X)
-[/#assign]
-
-[#assign texto_portaria]
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR DA UNIVERSIDADE FEDERAL FLUMINENSE</strong>, no uso de suas atribuições e considerando as determinações contidas nos artigos 68 e 12, inciso I, das Leis 8.112/90 e 8.270/91, respectivamente, e tendo em vista o laudo pericial, e de acordo com a Orientação Normativa Nº 6, de 18 de Março de 2013 da Secretaria de Recursos Humanos do Ministério do Planejamento, Orçamento e Gestão,</p>
-		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE conceder a GRATIFICAÇÃO DE RAIOS-X</strong>, incidente sobre o vencimento do cargo efetivo, ao(s) servidor (es) a seguir relacionado(s), enquanto desempenhar(em) as atividades que ora executa(m) e permanecer(em) no atual local de exercício, por estar(em) exposto(s) à ambiente(s) insalubre(s):</p> 
-		</br>
-		<table width="100%">
-			<tr>	
-				<td width="30%" align=center><strong>Nome</strong></td>
-				<td width="15%" align=center><strong>Processo</strong></td>
-				<td width="15%" align=center><strong>Lotação</strong></td>
-				<td width="10%" align=center><strong>UORG</strong></td>
-				<td width="15%" align=center><strong>LAUDO</strong></td>
-				<td width="15%" align=center><strong>SIAPE</strong></td>
-			</tr>
-			[#list 1..(qtdServidores)?number as i]				
-				<tr>	
-					<td>${.vars["nome"+i]!}</td>
-					<td>23069.${.vars["sequencial"+i]!}/${.vars["ano"+i]!}-${.vars["digito"+i]!}</td>
-					<td>${.vars["lotacao"+i]!}</td>
-					<td>${.vars["uorg"+i]!}</td>
-					<td>${.vars["laudo"+i]!}</td>
-					<td>${.vars["siape"+i]!}</td>
-				</tr>			
-		    [/#list]
-		</table>
-[/#assign]
-
-
-[@portaria texto=texto_portaria ementa=texto_ementa/]
-[/@documento]
-','AL32UTF8'));
-dbms_lob.append(dest_blob_ex_mod, src_blob_ex_mod);
-
-END;
-/
-
-DECLARE
-  dest_blob_ex_mod BLOB;
-  src_blob_ex_mod BLOB;
-  
-BEGIN
-
--- ######## PORTARIA: Reajuste (Adicional de insalubridade Grau médio) ###############	
-
-Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1028,'Reajuste (Adicional de insalubridade Grau médio)','Reajuste (Adicional de insalubridade Grau médio)','template/freemarker', null, 6, 1028,1);
-	
-update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1028;
-
-select conteudo_blob_mod into dest_blob_ex_mod from SIGA.EX_MODELO where id_mod = 1028 for update;
-src_blob_ex_mod := utl_raw.cast_to_raw(convert('
-[#-- Bloco Entrevista --]
-
-[@entrevista]
-
-    [#assign valores = 1..100 /]  
-    [@selecao var="qtdServidores" titulo="Quantidade de servidores" reler=true idAjax="qtdServidoresAjax" opcoes=valores?join(";") /]
-    [@grupo depende="qtdServidoresAjax"]
-        [#list 1..(qtdServidores)?number as i]
-			[@grupo]
-                [@texto titulo="Nome do Servidor" var="nome"+i /]
-            [/@grupo]
-            [@grupo]
-                [@texto titulo="Matrícula SIAPE" var="siape"+i /]
-            [/@grupo]
-            [@grupo]
-				[@mensagem titulo="Nº do Processo" texto="23069."/]
-				[@texto var="sequencial"+i titulo="" largura="6" maxcaracteres="6" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-				[@mensagem titulo="" texto="/"/]
-				[@texto var="ano"+i titulo="" largura="4" maxcaracteres="4" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-				[@mensagem titulo="" texto="-"/]
-				[@texto var="digito"+i titulo="" largura="2" maxcaracteres="2" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-			[/@grupo]
-			[@grupo]
-                [@texto titulo="Lotação" var="lotacao"+i /]
-            [/@grupo]
-			[@grupo]
-                [@texto titulo="UORG" var="uorg"+i /]
-            [/@grupo]
-			[@grupo]
-                [@texto titulo="Laudo" var="laudo"+i /]
-            [/@grupo]
-        [/#list]
-    [/@grupo]	
-[/@entrevista]
-
-[#-- Bloco Documento --]
-[@documento]
-
-[#assign texto_ementa]
-  		Reajuste (Adicional de insalubridade Grau médio)
-[/#assign]
-
-[#assign texto_portaria]
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR DA UNIVERSIDADE FEDERAL FLUMINENSE</strong>, no uso de suas atribuições e considerando as determinações contidas nos artigos 68 e 12, inciso I, das Leis 8.112/90 e 8.270/91, respectivamente, e tendo em vista o laudo pericial, e de acordo com a Orientação Normativa Nº 6, de 18 de Março de 2013 da Secretaria de Recursos Humanos do Ministério do Planejamento, Orçamento e Gestão,</p>
-		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE conceder o REAJUSTE de ADICIONAL DE INSALUBRIDADE, de Grau Médio (10%) para Grau Máximo (20%)</strong>, incidente sobre o vencimento do cargo efetivo, ao(s) servidor(es) a seguir relacionado(s), enquanto desempenhar(em) as atividades que ora executa(m) e permanecer(em) no atual local de exercício, por estar(em) exposto(s) à ambiente(s) insalubre(s):</p>
-		</br>
-		<table width="100%">
-			<tr>	
-				<td width="30%" align=center><strong>Nome</strong></td>
-				<td width="15%" align=center><strong>Processo</strong></td>
-				<td width="15%" align=center><strong>Lotação</strong></td>
-				<td width="10%" align=center><strong>UORG</strong></td>
-				<td width="15%" align=center><strong>LAUDO</strong></td>
-				<td width="15%" align=center><strong>SIAPE</strong></td>
-			</tr>
-			[#list 1..(qtdServidores)?number as i]				
-				<tr>	
-					<td>${.vars["nome"+i]!}</td>
-					<td>23069.${.vars["sequencial"+i]!}/${.vars["ano"+i]!}-${.vars["digito"+i]!}</td>
-					<td>${.vars["lotacao"+i]!}</td>
-					<td>${.vars["uorg"+i]!}</td>
-					<td>${.vars["laudo"+i]!}</td>
-					<td>${.vars["siape"+i]!}</td>
-				</tr>			
-		    [/#list]
-		</table>
-[/#assign]
-
-
-[@portaria texto=texto_portaria ementa=texto_ementa/]
-[/@documento]
-','AL32UTF8'));
-dbms_lob.append(dest_blob_ex_mod, src_blob_ex_mod);
-
-END;
-/
-
-
-DECLARE
-  dest_blob_ex_mod BLOB;
-  src_blob_ex_mod BLOB;
-  
-BEGIN
-
--- ######## PORTARIA: Indeferimento (Adicional de Insalubridade) ###############	
-
-Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1029,'Indeferimento (Adicional de Insalubridade)','Indeferimento (Adicional de Insalubridade)','template/freemarker', null, 6, 1029,1);
-	
-update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1029;
-
-select conteudo_blob_mod into dest_blob_ex_mod from SIGA.EX_MODELO where id_mod = 1029 for update;
-src_blob_ex_mod := utl_raw.cast_to_raw(convert('
-[#-- Bloco Entrevista --]
-
-[@entrevista]
-
-    [#assign valores = 1..100 /]  
-    [@selecao var="qtdServidores" titulo="Quantidade de servidores" reler=true idAjax="qtdServidoresAjax" opcoes=valores?join(";") /]
-    [@grupo depende="qtdServidoresAjax"]
-        [#list 1..(qtdServidores)?number as i]
-			[@grupo]
-                [@texto titulo="Nome do Servidor" var="nome"+i /]
-            [/@grupo]
-            [@grupo]
-                [@texto titulo="Matrícula SIAPE" var="siape"+i /]
-            [/@grupo]
-            [@grupo]
-				[@mensagem titulo="Nº do Processo" texto="23069."/]
-				[@texto var="sequencial"+i titulo="" largura="6" maxcaracteres="6" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-				[@mensagem titulo="" texto="/"/]
-				[@texto var="ano"+i titulo="" largura="4" maxcaracteres="4" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-				[@mensagem titulo="" texto="-"/]
-				[@texto var="digito"+i titulo="" largura="2" maxcaracteres="2" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-			[/@grupo]
-			[@grupo]
-                [@texto titulo="Lotação" var="lotacao"+i /]
-            [/@grupo]
-			[@grupo]
-                [@texto titulo="UORG" var="uorg"+i /]
-            [/@grupo]
-			[@grupo]
-                [@texto titulo="Laudo" var="laudo"+i /]
-            [/@grupo]
-        [/#list]
-    [/@grupo]	
-[/@entrevista]
-
-[#-- Bloco Documento --]
-[@documento]
-
-[#assign texto_ementa]
-  		Indeferimento (Adicional de Insalubridade)
-[/#assign]
-
-[#assign texto_portaria]
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR DA UNIVERSIDADE FEDERAL FLUMINENSE</strong>, no uso de suas atribuições e considerando as determinações contidas nos artigos 68 e 12, inciso I, das Leis 8.112/90 e 8.270/91, respectivamente, e tendo em vista o laudo pericial, e de acordo com a Orientação Normativa Nº 6, de 18 de Março de 2013 da Secretaria de Recursos Humanos do Ministério do Planejamento, Orçamento e Gestão,</p>
-		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE indeferir o pedido de ADICIONAL DE INSALUBRIDADE</strong> do servidor a seguir relacionado, por não se enquadrar nos requisitos estabelecidos pela Portaria nº 3214/78, do Ministério do Trabalho.</p>
-		</br>
-		<table width="100%">
-			<tr>	
-				<td width="30%" align=center><strong>Nome</strong></td>
-				<td width="15%" align=center><strong>Processo</strong></td>
-				<td width="15%" align=center><strong>Lotação</strong></td>
-				<td width="10%" align=center><strong>UORG</strong></td>
-				<td width="15%" align=center><strong>LAUDO</strong></td>
-				<td width="15%" align=center><strong>SIAPE</strong></td>
-			</tr>
-			[#list 1..(qtdServidores)?number as i]				
-				<tr>	
-					<td>${.vars["nome"+i]!}</td>
-					<td>23069.${.vars["sequencial"+i]!}/${.vars["ano"+i]!}-${.vars["digito"+i]!}</td>
-					<td>${.vars["lotacao"+i]!}</td>
-					<td>${.vars["uorg"+i]!}</td>
-					<td>${.vars["laudo"+i]!}</td>
-					<td>${.vars["siape"+i]!}</td>
-				</tr>			
-		    [/#list]
-		</table>
-[/#assign]
-
-
-[@portaria texto=texto_portaria ementa=texto_ementa/]
-[/@documento]
-','AL32UTF8'));
-dbms_lob.append(dest_blob_ex_mod, src_blob_ex_mod);
-
-END;
-/
-
-
-DECLARE
-  dest_blob_ex_mod BLOB;
-  src_blob_ex_mod BLOB;
-  
-BEGIN
-
--- ######## PORTARIA: Indeferimento (Gratificação de RAIO-X) ###############	
-
-Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1030,'Indeferimento de Gratificação de RAIO-X','Indeferimento de Gratificação de RAIO-X','template/freemarker', null, 6, 1030,1);
-	
-update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1030;
-
-select conteudo_blob_mod into dest_blob_ex_mod from SIGA.EX_MODELO where id_mod = 1030 for update;
-src_blob_ex_mod := utl_raw.cast_to_raw(convert('
-[#-- Bloco Entrevista --]
-
-[@entrevista]
-
-    [#assign valores = 1..100 /]  
-    [@selecao var="qtdServidores" titulo="Quantidade de servidores" reler=true idAjax="qtdServidoresAjax" opcoes=valores?join(";") /]
-    [@grupo depende="qtdServidoresAjax"]
-        [#list 1..(qtdServidores)?number as i]
-			[@grupo]
-                [@texto titulo="Nome do Servidor" var="nome"+i /]
-            [/@grupo]
-            [@grupo]
-                [@texto titulo="Matrícula SIAPE" var="siape"+i /]
-            [/@grupo]
-            [@grupo]
-				[@mensagem titulo="Nº do Processo" texto="23069."/]
-				[@texto var="sequencial"+i titulo="" largura="6" maxcaracteres="6" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-				[@mensagem titulo="" texto="/"/]
-				[@texto var="ano"+i titulo="" largura="4" maxcaracteres="4" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-				[@mensagem titulo="" texto="-"/]
-				[@texto var="digito"+i titulo="" largura="2" maxcaracteres="2" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-			[/@grupo]
-			[@grupo]
-                [@texto titulo="Lotação" var="lotacao"+i /]
-            [/@grupo]
-			[@grupo]
-                [@texto titulo="UORG" var="uorg"+i /]
-            [/@grupo]
-			[@grupo]
-                [@texto titulo="Laudo" var="laudo"+i /]
-            [/@grupo]
-        [/#list]
-    [/@grupo]	
-[/@entrevista]
-
-[#-- Bloco Documento --]
-[@documento]
-
-[#assign texto_ementa]
-  		Indeferimento de Gratificação de RAIO-X
-[/#assign]
-
-[#assign texto_portaria]
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR DA UNIVERSIDADE FEDERAL FLUMINENSE</strong>, no uso de suas atribuições e considerando as determinações contidas nos artigos 68 e 12, inciso I, das Leis 8.112/90 e 8.270/91, respectivamente, e tendo em vista o laudo pericial, e de acordo com a Orientação Normativa Nº 6, de 18 de Março de 2013 da Secretaria de Recursos Humanos do Ministério do Planejamento, Orçamento e Gestão,</p>
-		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE indeferir o pedido de GRATIFICAÇÃO DE RAIOS-X</strong>  do servidor a seguir relacionado, por não se enquadrar nos requisitos estabelecidos pela Portaria nº 3214/78, do Ministério do Trabalho</p>
-		</br>
-		<table width="100%">
-			<tr>	
-				<td width="30%" align=center><strong>Nome</strong></td>
-				<td width="15%" align=center><strong>Processo</strong></td>
-				<td width="15%" align=center><strong>Lotação</strong></td>
-				<td width="10%" align=center><strong>UORG</strong></td>
-				<td width="15%" align=center><strong>LAUDO</strong></td>
-				<td width="15%" align=center><strong>SIAPE</strong></td>
-			</tr>
-			[#list 1..(qtdServidores)?number as i]				
-				<tr>	
-					<td>${.vars["nome"+i]!}</td>
-					<td>23069.${.vars["sequencial"+i]!}/${.vars["ano"+i]!}-${.vars["digito"+i]!}</td>
-					<td>${.vars["lotacao"+i]!}</td>
-					<td>${.vars["uorg"+i]!}</td>
-					<td>${.vars["laudo"+i]!}</td>
-					<td>${.vars["siape"+i]!}</td>
-				</tr>			
-		    [/#list]
-		</table>
-[/#assign]
-
-
-[@portaria texto=texto_portaria ementa=texto_ementa/]
-[/@documento]
-','AL32UTF8'));
-dbms_lob.append(dest_blob_ex_mod, src_blob_ex_mod);
-
-END;
-/
-
-DECLARE
-  dest_blob_ex_mod BLOB;
-  src_blob_ex_mod BLOB;
-  
-BEGIN
-
--- ######## PORTARIA: Concessão (Adicional de insalubridade Grau máximo) ###############	
-
-Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1031,'Concessão (Adicional de insalubridade Grau máximo)','Concessão (Adicional de insalubridade Grau máximo)','template/freemarker', null, 6, 1031,1);
-	
-update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1031;
-
-select conteudo_blob_mod into dest_blob_ex_mod from SIGA.EX_MODELO where id_mod = 1031 for update;
-src_blob_ex_mod := utl_raw.cast_to_raw(convert('
-[#-- Bloco Entrevista --]
-
-[@entrevista]
-
-    [#assign valores = 1..100 /]  
-    [@selecao var="qtdServidores" titulo="Quantidade de servidores" reler=true idAjax="qtdServidoresAjax" opcoes=valores?join(";") /]
-    [@grupo depende="qtdServidoresAjax"]
-        [#list 1..(qtdServidores)?number as i]
-			[@grupo]
-                [@texto titulo="Nome do Servidor" var="nome"+i /]
-            [/@grupo]
-            [@grupo]
-                [@texto titulo="Matrícula SIAPE" var="siape"+i /]
-            [/@grupo]
-            [@grupo]
-				[@mensagem titulo="Nº do Processo" texto="23069."/]
-				[@texto var="sequencial"+i titulo="" largura="6" maxcaracteres="6" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-				[@mensagem titulo="" texto="/"/]
-				[@texto var="ano"+i titulo="" largura="4" maxcaracteres="4" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-				[@mensagem titulo="" texto="-"/]
-				[@texto var="digito"+i titulo="" largura="2" maxcaracteres="2" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-			[/@grupo]
-			[@grupo]
-                [@texto titulo="Lotação" var="lotacao"+i /]
-            [/@grupo]
-			[@grupo]
-                [@texto titulo="UORG" var="uorg"+i /]
-            [/@grupo]
-			[@grupo]
-                [@texto titulo="Laudo" var="laudo"+i /]
-            [/@grupo]
-        [/#list]
-    [/@grupo]	
-[/@entrevista]
-
-[#-- Bloco Documento --]
-[@documento]
-
-[#assign texto_ementa]
-  		Concessão (Adicional de insalubridade Grau máximo)
-[/#assign]
-
-[#assign texto_portaria]
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR DA UNIVERSIDADE FEDERAL FLUMINENSE</strong>, no uso de suas atribuições e considerando as determinações contidas nos artigos 68 e 12, inciso I, das Leis 8.112/90 e 8.270/91, respectivamente, e tendo em vista o laudo pericial, e de acordo com a Orientação Normativa Nº 6, de 18 de Março de 2013 da Secretaria de Recursos Humanos do Ministério do Planejamento, Orçamento e Gestão,</p>
-		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE conceder o ADICIONAL DE INSALUBRIDADE, no Grau Máximo (20%)</strong>, incidente sobre o vencimento do cargo efetivo, ao(s) servidor(es) a seguir relacionado(s), enquanto desempenhar(em) as atividades que ora executa(m) e permanecer(em) no atual local de exercício, por estar(em) exposto(s) a ambiente(s) insalubre(s):</p>
-		</br>
-		<table width="100%">
-			<tr>	
-				<td width="30%" align=center><strong>Nome</strong></td>
-				<td width="15%" align=center><strong>Processo</strong></td>
-				<td width="15%" align=center><strong>Lotação</strong></td>
-				<td width="10%" align=center><strong>UORG</strong></td>
-				<td width="15%" align=center><strong>LAUDO</strong></td>
-				<td width="15%" align=center><strong>SIAPE</strong></td>
-			</tr>
-			[#list 1..(qtdServidores)?number as i]				
-				<tr>	
-					<td>${.vars["nome"+i]!}</td>
-					<td>23069.${.vars["sequencial"+i]!}/${.vars["ano"+i]!}-${.vars["digito"+i]!}</td>
-					<td>${.vars["lotacao"+i]!}</td>
-					<td>${.vars["uorg"+i]!}</td>
-					<td>${.vars["laudo"+i]!}</td>
-					<td>${.vars["siape"+i]!}</td>
-				</tr>			
-		    [/#list]
-		</table>
-[/#assign]
-
-
-[@portaria texto=texto_portaria ementa=texto_ementa/]
-[/@documento]
-','AL32UTF8'));
-dbms_lob.append(dest_blob_ex_mod, src_blob_ex_mod);
-
-END;
-/
-
-
-DECLARE
-  dest_blob_ex_mod BLOB;
-  src_blob_ex_mod BLOB;
-  
-BEGIN
-
--- ######## PORTARIA: Concessão (Adicional de insalubridade Grau médio) ###############	
-
-Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1032,'Concessão (Adicional de insalubridade Grau médio)','Concessão (Adicional de insalubridade Grau médio)','template/freemarker', null, 6, 1032,1);
-	
-update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1032;
-
-select conteudo_blob_mod into dest_blob_ex_mod from SIGA.EX_MODELO where id_mod = 1032 for update;
-src_blob_ex_mod := utl_raw.cast_to_raw(convert('
-[#-- Bloco Entrevista --]
-
-[@entrevista]
-
-    [#assign valores = 1..100 /]  
-    [@selecao var="qtdServidores" titulo="Quantidade de servidores" reler=true idAjax="qtdServidoresAjax" opcoes=valores?join(";") /]
-    [@grupo depende="qtdServidoresAjax"]
-        [#list 1..(qtdServidores)?number as i]
-			[@grupo]
-                [@texto titulo="Nome do Servidor" var="nome"+i /]
-            [/@grupo]
-            [@grupo]
-                [@texto titulo="Matrícula SIAPE" var="siape"+i /]
-            [/@grupo]
-            [@grupo]
-				[@mensagem titulo="Nº do Processo" texto="23069."/]
-				[@texto var="sequencial"+i titulo="" largura="6" maxcaracteres="6" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-				[@mensagem titulo="" texto="/"/]
-				[@texto var="ano"+i titulo="" largura="4" maxcaracteres="4" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-				[@mensagem titulo="" texto="-"/]
-				[@texto var="digito"+i titulo="" largura="2" maxcaracteres="2" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-			[/@grupo]
-			[@grupo]
-                [@texto titulo="Lotação" var="lotacao"+i /]
-            [/@grupo]
-			[@grupo]
-                [@texto titulo="UORG" var="uorg"+i /]
-            [/@grupo]
-			[@grupo]
-                [@texto titulo="Laudo" var="laudo"+i /]
-            [/@grupo]
-        [/#list]
-    [/@grupo]	
-[/@entrevista]
-
-[#-- Bloco Documento --]
-[@documento]
-
-[#assign texto_ementa]
-  		Concessão (Adicional de insalubridade Grau médio)
-[/#assign]
-
-[#assign texto_portaria]
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR DA UNIVERSIDADE FEDERAL FLUMINENSE</strong>, no uso de suas atribuições e considerando as determinações contidas nos artigos 68 e 12, inciso I, das Leis 8.112/90 e 8.270/91, respectivamente, e tendo em vista o laudo pericial, e de acordo com a Orientação Normativa Nº 6, de 18 de Março de 2013 da Secretaria de Recursos Humanos do Ministério do Planejamento, Orçamento e Gestão,</p>
-		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE conceder o ADICIONAL DE INSALUBRIDADE, no Grau Médio (10%)</strong>, incidente sobre o vencimento do cargo efetivo, ao(s) servidor (es) a seguir relacionado(s), enquanto desempenhar(em) as atividades que ora executa(m) e permanecer(em) no atual local de exercício, por estar(em) exposto(s) a ambiente(s) insalubre(s):</p>
-		</br>
-		<table width="100%">
-			<tr>	
-				<td width="30%" align=center><strong>Nome</strong></td>
-				<td width="15%" align=center><strong>Processo</strong></td>
-				<td width="15%" align=center><strong>Lotação</strong></td>
-				<td width="10%" align=center><strong>UORG</strong></td>
-				<td width="15%" align=center><strong>LAUDO</strong></td>
-				<td width="15%" align=center><strong>SIAPE</strong></td>
-			</tr>
-			[#list 1..(qtdServidores)?number as i]				
-				<tr>	
-					<td>${.vars["nome"+i]!}</td>
-					<td>23069.${.vars["sequencial"+i]!}/${.vars["ano"+i]!}-${.vars["digito"+i]!}</td>
-					<td>${.vars["lotacao"+i]!}</td>
-					<td>${.vars["uorg"+i]!}</td>
-					<td>${.vars["laudo"+i]!}</td>
-					<td>${.vars["siape"+i]!}</td>
-				</tr>			
-		    [/#list]
-		</table>
-[/#assign]
-
-
-[@portaria texto=texto_portaria ementa=texto_ementa/]
-[/@documento]
-','AL32UTF8'));
-dbms_lob.append(dest_blob_ex_mod, src_blob_ex_mod);
-
-END;
-/
-
-
-DECLARE
-  dest_blob_ex_mod BLOB;
-  src_blob_ex_mod BLOB;
-  
-BEGIN
-
--- ######## PORTARIA: Revogação (Insalubridade Grau Médio) ###############	
-
-Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1033,'Revogação (Insalubridade Grau Médio)','Revogação (Insalubridade Grau Médio)','template/freemarker', null, 6, 1033,1);
-	
-update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1033;
-
-select conteudo_blob_mod into dest_blob_ex_mod from SIGA.EX_MODELO where id_mod = 1033 for update;
-src_blob_ex_mod := utl_raw.cast_to_raw(convert('
-[#-- Bloco Entrevista --]
-
-[@entrevista]
-
-	[@grupo]
-		[@texto var="num_portaria_rev" titulo="Portaria de Revogação"  largura="10" maxcaracteres="10" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-	[/@grupo]
-  
-	[@grupo]
-		[@data var="dt_portaria_rev" titulo="Data da Portaria de Revogação" obrigatorio=true desativado="${desabilitadoEdicao}"/]
-	[/@grupo]
-	[@grupo]
-        [@texto titulo="Nº do Boletim de Serviço" var="num_boletim" /]
-    [/@grupo]
-	[@grupo]
-        [@texto titulo="Página do Boletim de Serviço" var="pg_boletim" /]
-    [/@grupo]
-	[@grupo]
-		[@data var="dt_boletim" titulo="Data do Boletim de Serviço" obrigatorio=true desativado="${desabilitadoEdicao}"/]
-	[/@grupo]
-
-    [#assign valores = 1..100 /]  
-    [@selecao var="qtdServidores" titulo="Quantidade de servidores" reler=true idAjax="qtdServidoresAjax" opcoes=valores?join(";") /]
-    [@grupo depende="qtdServidoresAjax"]
-        [#list 1..(qtdServidores)?number as i]
-			[@grupo]
-                [@texto titulo="Nome do Servidor" var="nome"+i /]
-            [/@grupo]
-            [@grupo]
-                [@texto titulo="Matrícula SIAPE" var="siape"+i /]
-            [/@grupo]
-            [@grupo]
-				[@mensagem titulo="Nº do Processo" texto="23069."/]
-				[@texto var="sequencial"+i titulo="" largura="6" maxcaracteres="6" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-				[@mensagem titulo="" texto="/"/]
-				[@texto var="ano"+i titulo="" largura="4" maxcaracteres="4" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-				[@mensagem titulo="" texto="-"/]
-				[@texto var="digito"+i titulo="" largura="2" maxcaracteres="2" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-			[/@grupo]
-			[@grupo]
-                [@texto titulo="Lotação" var="lotacao"+i /]
-            [/@grupo]
-			[@grupo]
-                [@texto titulo="UORG" var="uorg"+i /]
-            [/@grupo]
-			[@grupo]
-                [@texto titulo="Laudo" var="laudo"+i /]
-            [/@grupo]
-			
-        [/#list]
-    [/@grupo]	
-[/@entrevista]
-
-[#-- Bloco Documento --]
-[@documento]
-
-[#assign texto_ementa]
-  		Revogação (Insalubridade Grau Médio)
-[/#assign]
-
-[#assign texto_portaria]
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR DA UNIVERSIDADE FEDERAL FLUMINENSE</strong>, no uso de suas atribuições e considerando as determinações contidas nos artigos 68 e 12, inciso I, das Leis 8.112/90 e 8.270/91, respectivamente, e tendo em vista o laudo pericial, e de acordo com a Orientação Normativa Nº 6, de 18 de Março de 2013 da Secretaria de Recursos Humanos do Ministério do Planejamento, Orçamento e Gestão,</p>
-		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE: </strong></p>
-		<p style="text-align: justify;">1 - <strong>Revogar</strong> a Portaria nº ${num_portaria_rev!} de ${dt_portaria_rev!}, publicada no BS/UFF nº ${num_boletim!} de ${dt_boletim!}, pág. ${pg_boletim!}, SEÇÃO II;</p>
-		<p style="text-align: justify;">2 - <strong>Conceder o ADICIONAL DE INSALUBRIDADE, no Grau Médio (10%)</strong>, incidente sobre o vencimento do cargo efetivo, ao(s) servidor (es) a seguir relacionado(s), enquanto desempenhar(em) as atividades que ora executa(m) e permanecer(em) no atual local de exercício, por estar(em) exposto(s) a ambiente(s) insalubre(s):</p>
-		</br>
-		<table width="100%">
-			<tr>	
-				<td width="30%" align=center><strong>Nome</strong></td>
-				<td width="15%" align=center><strong>Processo</strong></td>
-				<td width="15%" align=center><strong>Lotação</strong></td>
-				<td width="10%" align=center><strong>UORG</strong></td>
-				<td width="15%" align=center><strong>LAUDO</strong></td>
-				<td width="15%" align=center><strong>SIAPE</strong></td>
-				
-			</tr>
-			[#list 1..(qtdServidores)?number as i]				
-				<tr>	
-					<td>${.vars["nome"+i]!}</td>
-					<td>23069.${.vars["sequencial"+i]!}/${.vars["ano"+i]!}-${.vars["digito"+i]!}</td>
-					<td>${.vars["lotacao"+i]!}</td>
-					<td>${.vars["uorg"+i]!}</td>
-					<td>${.vars["laudo"+i]!}</td>
-					<td>${.vars["siape"+i]!}</td>
-				</tr>			
-		    [/#list]
-		</table>
-[/#assign]
-
-
-[@portaria texto=texto_portaria ementa=texto_ementa/]
-[/@documento]
-','AL32UTF8'));
-dbms_lob.append(dest_blob_ex_mod, src_blob_ex_mod);
-
-END;
-/
-
-
-DECLARE
-  dest_blob_ex_mod BLOB;
-  src_blob_ex_mod BLOB;
-  
-BEGIN
-
--- ######## PORTARIA: Retificação (Adicional de Insalubridade) ###############	
-
-Insert into SIGA.EX_MODELO (ID_MOD,NM_MOD,DESC_MOD,CONTEUDO_TP_BLOB,ID_CLASSIFICACAO,ID_FORMA_DOC,HIS_ID_INI, HIS_ATIVO) 
-values (1034,'Retificação (Adicional de Insalubridade)','Retificação (Adicional de Insalubridade)','template/freemarker', null, 6, 1034,1);
-	
-update SIGA.EX_MODELO set conteudo_blob_mod = utl_raw.cast_to_raw(' ') where id_mod = 1034;
-
-select conteudo_blob_mod into dest_blob_ex_mod from SIGA.EX_MODELO where id_mod = 1034 for update;
-src_blob_ex_mod := utl_raw.cast_to_raw(convert('
-[#-- Bloco Entrevista --]
-
-[@entrevista]
-	[@grupo]
-		[@texto var="num_portaria" titulo="Portaria"  largura="10" maxcaracteres="10" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-	[/@grupo]
-  
-	[@grupo]
-		[@data var="dt_portaria" titulo="Data da Portaria" obrigatorio=true desativado="${desabilitadoEdicao}"/]
-	[/@grupo]
-	[@grupo]
-		[@texto var="desc_grau" titulo="Descrição do Grau de Insalubridade"  largura="10" maxcaracteres="10" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-	[/@grupo]
-  	[@grupo]
-		[@texto var="pct_grau" titulo="Porcentagem do Grau de Insalubridade"  largura="10" maxcaracteres="10" obrigatorio="true" desativado="${desabilitadoEdicao}"/]
-	[/@grupo]
-	[@grupo]
-        [@texto titulo="Nº do Boletim de Serviço" var="num_boletim" /]
-    [/@grupo]
-	[@grupo]
-        [@texto titulo="Página do Boletim de Serviço" var="pg_boletim" /]
-    [/@grupo]
-	[@grupo]
-		[@data var="dt_boletim" titulo="Data do Boletim de Serviço" obrigatorio=true desativado="${desabilitadoEdicao}"/]
-	[/@grupo]
-	[@grupo]
-         [@texto titulo="Nome do Servidor" var="nome" /]
-    [/@grupo]
-	[@grupo]
-         [@texto titulo="Matrícula SIAPE" var="siape" /]
-    [/@grupo]
-
-    [#assign valores = 1..100 /]  
-    [@selecao var="qtdRetificoes" titulo="Quantidade de retificações" reler=true idAjax="qtdRetificoesAjax" opcoes=valores?join(";") /]
-    [@grupo depende="qtdRetificoesAjax"]
-        [#list 1..(qtdRetificoes)?number as i]
-			[@grupo]
-                [@texto titulo="Termo" var="termo"+i /]
-            [/@grupo]
-            [@grupo]
-                [@texto titulo="Retificação" var="retificacao"+i /]
-            [/@grupo]
-        [/#list]
-    [/@grupo]	
-[/@entrevista]
-
-[#-- Bloco Documento --]
-[@documento]
-
-[#assign texto_ementa]
-  		Retificação (Adicional de Insalubridade)
-[/#assign]
-
-[#assign texto_portaria]
-  		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR DA UNIVERSIDADE FEDERAL FLUMINENSE</strong>, no uso de suas atribuições legais, estatutárias e regimentais;</p>
-		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE: </strong></p>
-		<p style="text-align: justify;"><strong>1 - Retificar, em parte a Portaria nº ${num_portaria!} de ${dt_portaria!}</strong>, que concedeu o Adicional de Insalubridade, no Grau ${desc_grau!} (${pct_grau!}%), ao servidor ${nome!}, matrícula SIAPE n° ${siape!} e publicado no BS/UFF nº ${num_boletim!} de ${dt_boletim!}, pág. ${pg_boletim!} SEÇÃO II.</p>
-		<p style="text-align: justify;">2 - <strong>Conceder o ADICIONAL DE INSALUBRIDADE, no Grau Médio (10%)</strong>, incidente sobre o vencimento do cargo efetivo, ao(s) servidor (es) a seguir relacionado(s), enquanto desempenhar(em) as atividades que ora executa(m) e permanecer(em) no atual local de exercício, por estar(em) exposto(s) a ambiente(s) insalubre(s):</p>
-		</br>
-		<table width="100%">
-			<tr>	
-				<td width="50%" align=center><strong>Onde se Lê</strong></td>
-				<td width="50%" align=center><strong>Leia-se</strong></td>
-			</tr>
-			[#list 1..(qtdRetificoes)?number as i]				
-				<tr>	
-					<td>${.vars["termo"+i]!}</td>
-					<td>${.vars["retificacao"+i]!}</td>
-				</tr>			
-		    [/#list]
-		</table>
-		</br>		
-		<p style="text-align: justify;">2 - Esta Portaria entra em vigor na data de sua publicação.	</p>
-		
-[/#assign]
-
-
-[@portaria texto=texto_portaria ementa=texto_ementa/]
 [/@documento]
 ','AL32UTF8'));
 dbms_lob.append(dest_blob_ex_mod, src_blob_ex_mod);

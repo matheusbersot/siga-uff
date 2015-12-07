@@ -1,7 +1,7 @@
 -------------------------------------------
 --	SCRIPT:CRIACAO DO BANCO
 -------------------------------------------
-SET DEFINE OFF;
+--SET DEFINE OFF
 ALTER SESSION SET CURRENT_SCHEMA=corporativo;
 
 CREATE SEQUENCE  "CORPORATIVO"."CP_CONFIGURACAO_SEQ"  MINVALUE 1 MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
@@ -659,7 +659,7 @@ GRANT FLASHBACK ON "CORPORATIVO"."DP_LOTACAO" TO "SIGA";
 	"CPF_PESSOA" NUMBER(11,0), 
 	"NOME_PESSOA" VARCHAR2(60), 
 	"DATA_NASC_PESSOA" DATE, 
-	"MATRICULA" NUMBER(20,0), 
+	"MATRICULA" NUMBER(8,0), 
 	"ID_LOTACAO" NUMBER(5,0), 
 	"ID_CARGO" NUMBER(10,0) DEFAULT NULL, 
 	"ID_FUNCAO_CONFIANCA" NUMBER(10,0) DEFAULT NULL, 
@@ -862,8 +862,7 @@ Insert into CORPORATIVO.CP_CONFIGURACAO (ID_CONFIGURACAO,DT_INI_VIG_CONFIGURACAO
 --REM INSERTING into CORPORATIVO.CP_GRUPO
 
 --REM INSERTING into CORPORATIVO.CP_IDENTIDADE
-Insert into CORPORATIVO.CP_IDENTIDADE (ID_IDENTIDADE,ID_TP_IDENTIDADE,ID_PESSOA,DATA_CRIACAO_IDENTIDADE,ID_ORGAO_USU,LOGIN_IDENTIDADE,SENHA_IDENTIDADE,HIS_ID_INI,HIS_DT_INI,HIS_IDC_INI,HIS_ATIVO) 
-values (1,1,1,to_date('16/10/14','DD/MM/RR'),1,'FF92745638111','0747ca639558ee019f8ff8a23fd1d7afa00cc1e7',1,to_date('16/10/14','DD/MM/RR'),1,1);
+Insert into CORPORATIVO.CP_IDENTIDADE (ID_IDENTIDADE,ID_TP_IDENTIDADE,ID_PESSOA,DATA_CRIACAO_IDENTIDADE,DATA_EXPIRACAO_IDENTIDADE,DATA_CANCELAMENTO_IDENTIDADE,ID_ORGAO_USU,LOGIN_IDENTIDADE,SENHA_IDENTIDADE,SENHA_IDENTIDADE_CRIPTO,SENHA_IDENTIDADE_CRIPTO_SINC,HIS_ID_INI,HIS_DT_INI,HIS_IDC_INI,HIS_DT_FIM,HIS_IDC_FIM,HIS_ATIVO) values (1,1,1,to_date('26/10/11','DD/MM/RR'),null,null,9999999999,'ZZ99999','2ac9cb7dc02b3c0083eb70898e549b63','I20BhBeI7KavVeWdbIa8+g==','I20BhBeI7KavVeWdbIa8+g==',1,to_date('26/10/11','DD/MM/RR'),1,null,null,1);
 
 --REM INSERTING into CORPORATIVO.CP_LOCALIDADE
 --REM INSERTING into CORPORATIVO.CP_MARCA
@@ -900,11 +899,14 @@ Insert into CORPORATIVO.CP_MARCADOR (ID_MARCADOR,DESCR_MARCADOR,ID_TP_MARCADOR) 
 --REM INSERTING into CORPORATIVO.CP_OCORRENCIA_FERIADO
 
 --REM INSERTING into CORPORATIVO.CP_ORGAO
-Insert into CORPORATIVO.CP_ORGAO (ID_ORGAO,NM_ORGAO,CGC_ORGAO,RAZAO_SOCIAL_ORGAO,END_ORGAO,BAIRRO_ORGAO,MUNICIPIO_ORGAO,CEP_ORGAO,DSC_TIPO_ORGAO,NOME_RESPONSAVEL_ORGAO,EMAIL_RESPONSAVEL_ORGAO,NOME_CONTATO_ORGAO,EMAIL_CONTATO_ORGAO,TEL_CONTATO_ORGAO,SIGLA_ORGAO,UF_ORGAO,ID_ORGAO_USU,FG_ATIVO,HIS_ID_INI,HIS_IDE,HIS_DT_INI,HIS_DT_FIM,HIS_ATIVO) values (1,'PRESIDENCIA DA REPUBLICA',null,null,null,null,null,null,null,null,null,null,null,null,'Pres. Rep.',null,1,null,1,'1',to_date('03/08/11','DD/MM/RR'),null,1);
+Insert into CORPORATIVO.CP_ORGAO (ID_ORGAO,NM_ORGAO,CGC_ORGAO,RAZAO_SOCIAL_ORGAO,END_ORGAO,BAIRRO_ORGAO,MUNICIPIO_ORGAO,CEP_ORGAO,DSC_TIPO_ORGAO,NOME_RESPONSAVEL_ORGAO,EMAIL_RESPONSAVEL_ORGAO,NOME_CONTATO_ORGAO,EMAIL_CONTATO_ORGAO,TEL_CONTATO_ORGAO,SIGLA_ORGAO,UF_ORGAO,ID_ORGAO_USU,FG_ATIVO,HIS_ID_INI,HIS_IDE,HIS_DT_INI,HIS_DT_FIM,HIS_ATIVO) values (1,'PRESIDENCIA DA REPUBLICA',null,null,null,null,null,null,null,null,null,null,null,null,'Pres. Rep.',null,9999999999,'S',1,'1',to_date('03/08/11','DD/MM/RR'),null,1);
 
 --REM INSERTING into CORPORATIVO.CP_ORGAO_USUARIO
-Insert into CORPORATIVO.CP_ORGAO_USUARIO (ID_ORGAO_USU, NM_ORGAO_USU, MUNICIPIO_ORGAO_USU, SIGLA_ORGAO_USU, UF_ORGAO_USU, ACRONIMO_ORGAO_USU)
-VALUES (1, 'Universidade Federal Fluminense', 'Niteroi', 'FF', 'RJ', 'UFF');
+Insert into CORPORATIVO.CP_ORGAO_USUARIO (ID_ORGAO_USU,NM_ORGAO_USU,CGC_ORGAO_USU,RAZAO_SOCIAL_ORGAO_USU,END_ORGAO_USU,BAIRRO_ORGAO_USU,MUNICIPIO_ORGAO_USU,CEP_ORGAO_USU,NM_RESP_ORGAO_USU,TEL_ORGAO_USU,SIGLA_ORGAO_USU,UF_ORGAO_USU,COD_ORGAO_USU,ACRONIMO_ORGAO_USU) values (9999999999,'ORGAO TESTE ZZ',null,null,null,null,'Rio de Janeiro',null,null,null,'ZZ',null,null,'OTZZ');
+Insert into CORPORATIVO.CP_ORGAO_USUARIO (ID_ORGAO_USU,NM_ORGAO_USU,CGC_ORGAO_USU,RAZAO_SOCIAL_ORGAO_USU,END_ORGAO_USU,BAIRRO_ORGAO_USU,MUNICIPIO_ORGAO_USU,CEP_ORGAO_USU,NM_RESP_ORGAO_USU,TEL_ORGAO_USU,SIGLA_ORGAO_USU,UF_ORGAO_USU,COD_ORGAO_USU,ACRONIMO_ORGAO_USU) values (1,'Seção Judiciária do Rio de Janeiro',null,null,null,null,'Rio de Janeiro',null,null,null,'RJ','RJ',null,'SJRJ');
+Insert into CORPORATIVO.CP_ORGAO_USUARIO (ID_ORGAO_USU,NM_ORGAO_USU,CGC_ORGAO_USU,RAZAO_SOCIAL_ORGAO_USU,END_ORGAO_USU,BAIRRO_ORGAO_USU,MUNICIPIO_ORGAO_USU,CEP_ORGAO_USU,NM_RESP_ORGAO_USU,TEL_ORGAO_USU,SIGLA_ORGAO_USU,UF_ORGAO_USU,COD_ORGAO_USU,ACRONIMO_ORGAO_USU) values (2,'Seção Judiciária do Espírito Santo',null,null,null,null,'Vitória - ES',null,null,null,'ES','ES',50,'SJES');
+Insert into CORPORATIVO.CP_ORGAO_USUARIO (ID_ORGAO_USU,NM_ORGAO_USU,CGC_ORGAO_USU,RAZAO_SOCIAL_ORGAO_USU,END_ORGAO_USU,BAIRRO_ORGAO_USU,MUNICIPIO_ORGAO_USU,CEP_ORGAO_USU,NM_RESP_ORGAO_USU,TEL_ORGAO_USU,SIGLA_ORGAO_USU,UF_ORGAO_USU,COD_ORGAO_USU,ACRONIMO_ORGAO_USU) values (3,'Tribunal Regional Federal - 2ª Região',null,null,null,null,'Rio de Janeiro',null,null,null,'T2','RJ',null,'TRF2');
+Insert into CORPORATIVO.CP_ORGAO_USUARIO (ID_ORGAO_USU,NM_ORGAO_USU,CGC_ORGAO_USU,RAZAO_SOCIAL_ORGAO_USU,END_ORGAO_USU,BAIRRO_ORGAO_USU,MUNICIPIO_ORGAO_USU,CEP_ORGAO_USU,NM_RESP_ORGAO_USU,TEL_ORGAO_USU,SIGLA_ORGAO_USU,UF_ORGAO_USU,COD_ORGAO_USU,ACRONIMO_ORGAO_USU) values (4,'Conselho da Justiça Federal',null,null,null,null,'Brasília',null,null,null,'CF','DF',null,'CJF');
 
 --REM INSERTING into CORPORATIVO.CP_PAPEL
 
@@ -1048,6 +1050,7 @@ Insert into CORPORATIVO.CP_SERVICO (ID_SERVICO,SIGLA_SERVICO,DESC_SERVICO,ID_SER
 Insert into CORPORATIVO.CP_SERVICO (ID_SERVICO,SIGLA_SERVICO,DESC_SERVICO,ID_SERVICO_PAI,ID_TP_SERVICO) values (133,'SIGA-AQ-CARGA','Carga',82,2);
 Insert into CORPORATIVO.CP_SERVICO (ID_SERVICO,SIGLA_SERVICO,DESC_SERVICO,ID_SERVICO_PAI,ID_TP_SERVICO) values (134,'SIGA-AQ-CARGA-MENU','Acesso',133,2);
 
+
 --REM INSERTING into CORPORATIVO.CP_SITUACAO_CONFIGURACAO
 Insert into CORPORATIVO.CP_SITUACAO_CONFIGURACAO (ID_SIT_CONFIGURACAO,DSC_SIT_CONFIGURACAO,RESTRITIVIDADE_SIT_CONF) values (9,'Ignorar configuração anterior',1);
 Insert into CORPORATIVO.CP_SITUACAO_CONFIGURACAO (ID_SIT_CONFIGURACAO,DSC_SIT_CONFIGURACAO,RESTRITIVIDADE_SIT_CONF) values (1,'Pode',0);
@@ -1114,6 +1117,9 @@ Insert into CORPORATIVO.CP_TIPO_IDENTIDADE (ID_TP_IDENTIDADE,DESC_TP_IDENTIDADE)
 
 --REM INSERTING into CORPORATIVO.CP_TIPO_LOTACAO
 Insert into CORPORATIVO.CP_TIPO_LOTACAO (ID_TP_LOTACAO,SIGLA_TP_LOTACAO,DESC_TP_LOTACAO,ID_TP_LOTACAO_PAI) values (1,'ADM','Unidade da Administração',null);
+Insert into CORPORATIVO.CP_TIPO_LOTACAO (ID_TP_LOTACAO,SIGLA_TP_LOTACAO,DESC_TP_LOTACAO,ID_TP_LOTACAO_PAI) values (100,'JUD','Unidade Judicial',null);
+Insert into CORPORATIVO.CP_TIPO_LOTACAO (ID_TP_LOTACAO,SIGLA_TP_LOTACAO,DESC_TP_LOTACAO,ID_TP_LOTACAO_PAI) values (101,'VF','Vara Federal',100);
+Insert into CORPORATIVO.CP_TIPO_LOTACAO (ID_TP_LOTACAO,SIGLA_TP_LOTACAO,DESC_TP_LOTACAO,ID_TP_LOTACAO_PAI) values (102,'VFCR','Vara Federal Criminal',100);
 
 --REM INSERTING into CORPORATIVO.CP_TIPO_MARCA
 Insert into CORPORATIVO.CP_TIPO_MARCA (ID_TP_MARCA,DESCR_TP_MARCA) values (1,'SIGA-EX');
@@ -1176,7 +1182,7 @@ Insert into CORPORATIVO.CP_UF (ID_UF,NM_UF) values (26,'SP');
 Insert into CORPORATIVO.CP_UF (ID_UF,NM_UF) values (27,'TO');
 
 --REM INSERTING into CORPORATIVO.DP_CARGO
-Insert into CORPORATIVO.DP_CARGO (ID_CARGO,NOME_CARGO,ID_ORGAO_USU,DT_INI_CARGO,ID_CARGO_INICIAL,IDE_CARGO,SIGLA_CARGO) values (99999,'ADMINISTRADOR SIGA',1,to_date('16/10/14','DD/MM/RR'),99999,'99999','ADM_SIGA');
+Insert into CORPORATIVO.DP_CARGO (ID_CARGO,NOME_CARGO,ID_ORGAO_USU,DT_FIM_CARGO,DT_INI_CARGO,ID_CARGO_INICIAL,IDE_CARGO,SIGLA_CARGO) values (1,'FUNCIONÁRIO',9999999999,null,to_date('03/08/11','DD/MM/RR'),1,'203','500300');
 
 --REM INSERTING into CORPORATIVO.DP_ESTADO_CIVIL
 Insert into CORPORATIVO.DP_ESTADO_CIVIL (ID_ESTADO_CIVIL,NM_ESTADO_CIVIL) values (3,'SEPARADO');
@@ -1190,12 +1196,12 @@ Insert into CORPORATIVO.DP_ESTADO_CIVIL (ID_ESTADO_CIVIL,NM_ESTADO_CIVIL) values
 --REM INSERTING into CORPORATIVO.DP_FUNCAO_CONFIANCA
 
 --REM INSERTING into CORPORATIVO.DP_LOTACAO
-Insert into CORPORATIVO.DP_LOTACAO (ID_LOTACAO,DATA_INI_LOT,NOME_LOTACAO,SIGLA_LOTACAO,ID_ORGAO_USU,ID_LOTACAO_INI,ID_TP_LOTACAO, IDE_LOTACAO) values (99999,to_date('16/10/14','DD/MM/RR'),'LOTACAO ADMINISTRADOR SIGA','LADM',1,99999,1, '99999');
+Insert into CORPORATIVO.DP_LOTACAO (ID_LOTACAO,DATA_INI_LOT,DATA_FIM_LOT,NOME_LOTACAO,ID_LOTACAO_PAI,SIGLA_LOTACAO,ID_ORGAO_USU,IDE_LOTACAO,ID_LOTACAO_INI,ID_TP_LOTACAO) values (1,to_date('08/08/11','DD/MM/RR'),null,'LOTACAO TESTE',null,'LTEST',9999999999,'1076',1,100);
 
 --REM INSERTING into CORPORATIVO.DP_PADRAO_REFERENCIA
 
 --REM INSERTING into CORPORATIVO.DP_PESSOA
-Insert into CORPORATIVO.DP_PESSOA (ID_PESSOA,DATA_INI_PESSOA,DATA_FIM_PESSOA,CPF_PESSOA,NOME_PESSOA,MATRICULA,ID_LOTACAO,ID_CARGO,SESB_PESSOA,EMAIL_PESSOA,SITUACAO_FUNCIONAL_PESSOA,ID_ORGAO_USU,ID_PESSOA_INICIAL,ID_TP_PESSOA,NOME_EXIBICAO, IDE_PESSOA) values (1,to_date('20/11/13','DD/MM/RR'),null,92745638111,'ADMINISTRADOR SIGA',92745638111,99999,99999,'FF','errossigadoc@gmail.com','1',1,1,2,'ADMINISTRADOR SIGA','1');
+Insert into CORPORATIVO.DP_PESSOA (ID_PESSOA,DATA_INI_PESSOA,DATA_FIM_PESSOA,CPF_PESSOA,NOME_PESSOA,DATA_NASC_PESSOA,MATRICULA,ID_LOTACAO,ID_CARGO,ID_FUNCAO_CONFIANCA,SESB_PESSOA,EMAIL_PESSOA,TP_SERVIDOR_PESSOA,SIGLA_PESSOA,SEXO_PESSOA,GRAU_INSTRUCAO_PESSOA,TP_SANGUINEO_PESSOA,NACIONALIDADE_PESSOA,DATA_POSSE_PESSOA,DATA_NOMEACAO_PESSOA,DATA_PUBLICACAO_PESSOA,DATA_INICIO_EXERCICIO_PESSOA,ATO_NOMEACAO_PESSOA,SITUACAO_FUNCIONAL_PESSOA,ID_PROVIMENTO,NATURALIDADE_PESSOA,FG_IMPRIME_END,DSC_PADRAO_REFERENCIA_PESSOA,ID_ORGAO_USU,IDE_PESSOA,ID_PESSOA_INICIAL,ENDERECO_PESSOA,BAIRRO_PESSOA,CIDADE_PESSOA,CEP_PESSOA,TELEFONE_PESSOA,RG_PESSOA,RG_ORGAO_PESSOA,RG_DATA_EXPEDICAO_PESSOA,RG_UF_PESSOA,ID_ESTADO_CIVIL,ID_TP_PESSOA,NOME_EXIBICAO) values (1,to_date('01/01/01','DD/MM/RR'),null,11111111111,'USUARIO TESTE',to_date('01/01/01','DD/MM/RR'),99999,1,1,null,'ZZ','usuarioteste@jfrj.jus.br',null,'TST','M','ESPEC','A+','BRASILEIRO',to_date('01/01/01','DD/MM/RR'),to_date('01/01/01','DD/MM/RR'),to_date('01/01/01','DD/MM/RR'),to_date('01/01/01','DD/MM/RR'),'0000/2001','1',null,null,null,'PAD-REF',9999999999,'99999',1,'AV ALMTE BARROSO 78','CENTRO','RIO DE JANEIRO','20000000','9700','987654321','TESTE',to_date('01/01/01','DD/MM/RR'),'RJ',2,2,null);
 
 --REM INSERTING into CORPORATIVO.DP_PROVIMENTO
 --REM INSERTING into CORPORATIVO.DP_SUBSTITUICAO
@@ -1466,7 +1472,8 @@ begin
         select cp_feriado_SEQ.nextval into :new.id_feriado from dual;
      end if;
 end cp_feriado_insert_trg;
-/
+
+
 ALTER TRIGGER "CP_FERIADO_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger CP_LOCALIDADE_INSERT_TRG
@@ -1480,7 +1487,8 @@ if :new.ID_localidade is null then
 select cp_localidade_SEQ.nextval into :new.id_localidade from dual;
 end if;
 end;
-/
+
+
 ALTER TRIGGER "CP_LOCALIDADE_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger CP_ORGAO_INSERT_TRG
@@ -1493,7 +1501,7 @@ if :new.ID_ORGAO is null then
 select CP_ORGAO_SEQ.nextval into :new.ID_ORGAO from dual;
 end if;
 end;
-/
+
 ALTER TRIGGER "CP_ORGAO_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger CP_SEDE_INSERT_TRG
@@ -1507,7 +1515,7 @@ if :new.ID_SEDE is null then
 select CP_SEDE_SEQ.nextval into :new.ID_SEDE from dual;
 end if;
 end;
-/
+
 ALTER TRIGGER "CP_SEDE_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger CP_UF_INSERT_TRG
@@ -1523,7 +1531,8 @@ begin
      select cp_uf_SEQ.nextval into :new.id_uf from dual;
  end if;
 end cp_uf_insert_trg;
-/
+
+
 ALTER TRIGGER "CP_UF_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger DP_CARGO_INSERT_TRG
@@ -1541,7 +1550,7 @@ if :new.id_cargo_inicial is null then
 end if;
 end;
 --
-/
+
 ALTER TRIGGER "DP_CARGO_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger DP_ESTADO_CIVIL_INSERT_TRG
@@ -1557,7 +1566,8 @@ begin
         select DP_ESTADO_CIVIL_SEQ.nextval into :new.ID_ESTADO_CIVIL from dual;
      end if;
 end DP_ESTADO_CIVIL_insert_trg;
-/
+
+
 ALTER TRIGGER "DP_ESTADO_CIVIL_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger DP_FUNC_CONF_INSERT_TRG
@@ -1574,7 +1584,7 @@ if :new.id_fun_conf_ini is null then
     select :new.ID_funcao_confianca into :new.id_fun_conf_ini from dual;
 end if;
 end;
-/
+
 ALTER TRIGGER "DP_FUNC_CONF_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger DP_LOTACAO_INSERT_TRG
@@ -1591,7 +1601,7 @@ if :new.id_lotacao_ini is null then
     select :new.ID_lotacao into :new.id_lotacao_ini from dual;
 end if;
 end;
-/
+
 ALTER TRIGGER "DP_LOTACAO_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger DP_PADRAO_REF_INSERT_TRG
@@ -1604,7 +1614,7 @@ if :new.ID_padrao_referencia is null then
 select dP_padrao_referencia_SEQ.nextval into :new.ID_padrao_referencia from dual;
 end if;
 end;
-/
+
 ALTER TRIGGER "DP_PADRAO_REF_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger DP_PESSOA_INSERT_TRG
@@ -1620,7 +1630,7 @@ if :new.id_pessoa_inicial is null then
     select :new.ID_pessoa into :new.id_pessoa_inicial from dual;
 end if;
 end;
-/
+
 ALTER TRIGGER "DP_PESSOA_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger DP_PROVIMENTO_INSERT_TRG
@@ -1634,7 +1644,7 @@ if :new.ID_provimento is null then
 select dp_provimento_SEQ.nextval into :new.id_provimento from dual;
 end if;
 end;
-/
+
 ALTER TRIGGER "DP_PROVIMENTO_INSERT_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Trigger DP_SUBSTITUICAO_INSERT_TRG
@@ -1646,7 +1656,7 @@ if :new.ID_substituicao is null then
 select dP_substituicao_SEQ.nextval into :new.ID_substituicao from dual;
 end if;
 end;
-/
+
 ALTER TRIGGER "DP_SUBSTITUICAO_INSERT_TRG" ENABLE;
 
 --------------------------------------------------------
@@ -1752,12 +1762,12 @@ end;
 ---------------------
 --MODELOS FREEMARKER-
 ---------------------
+
 DECLARE
   dest_blob BLOB;
   src_blob BLOB;
   
 BEGIN
-
 Insert into CP_MODELO (ID_MODELO,ID_ORGAO_USU,HIS_ID_INI,HIS_DT_INI,HIS_IDC_INI,HIS_DT_FIM,HIS_IDC_FIM,HIS_ATIVO,conteudo_blob_mod) values (1,null,1,to_date('05/03/12','DD/MM/RR'),1,null,null,1,utl_raw.cast_to_raw(' '));
 
 select conteudo_blob_mod into dest_blob from CORPORATIVO.cp_modelo where id_modelo = 1 for update;
@@ -1893,7 +1903,7 @@ src_blob := utl_raw.cast_to_raw(convert('
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
-[#macro texto var titulo="" largura="" maxcaracteres="" idAjax="" reler="" relertab="" obrigatorio=false default="" desativado="false"]
+[#macro texto var titulo="" largura="" maxcaracteres="" idAjax="" reler="" relertab="" obrigatorio="nao" default=""]
     [#if reler == ''ajax'']
         [#local jreler = " onchange=\"javascript: sbmt(''" + idAjax + "'');\""]
     [/#if]
@@ -1919,10 +1929,6 @@ src_blob := utl_raw.cast_to_raw(convert('
         [#local v = default/]
     [/#if]
 
-    [#if desativado == "true"]
-	    <input type="hidden" name="${var}" value="${v}" />
-    [/#if]
-
     <input type="hidden" name="vars" value="${var}" />
 
     [#if alerta!"" == ''Sim'' && v==""]
@@ -1933,7 +1939,7 @@ src_blob := utl_raw.cast_to_raw(convert('
         [/#list]
     [/#if]
 
-    [#if obrigatorio]
+    [#if obrigatorio == ''Sim'']
     [#local negrito = "font-weight:bold"]
     <input type="hidden" name="obrigatorios" value="${var}" />
     [/#if]
@@ -1943,7 +1949,7 @@ src_blob := utl_raw.cast_to_raw(convert('
     [/#if]
     
     [#if !gerar_formulario!false]
-    <input type="text" name="${var}" value="${v}" ${jreler!""}${jrelertab!""}${jlargura!""}${jmaxcaracteres!""}[#if desativado == "true"] disabled [/#if] />
+    <input type="text" name="${var}" value="${v}" ${jreler!""}${jrelertab!""}${jlargura!""}${jmaxcaracteres!""}/>
     [#else]
     <span class="valor">${v}</span>
     [/#if]
@@ -2036,7 +2042,7 @@ src_blob := utl_raw.cast_to_raw(convert('
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
-[#macro editor var titulo semBotaoSalvar=false desativado="false"]
+[#macro editor var titulo semBotaoSalvar=false]
     [#if .vars[var]??]
         [#local v = .vars[var]/]
     [#else]
@@ -2051,14 +2057,8 @@ src_blob := utl_raw.cast_to_raw(convert('
         [#if titulo != ""]
             <b>${titulo}</b>
         [/#if]
-        
-	    <input type="hidden" name="vars" value="${var}" />
-
-		[#if desativado == "true"]
-			<input type="hidden" id="${var}" name="${var}" value="${v?html}">
-		[/#if]
-
-        [#if desativado == "false" && !formulario!false]
+        [#if !formulario!false]
+            <input type="hidden" name="vars" value="${var}" />
             <script type="text/javascript">FCKeditorAPI = null;__FCKeditorNS = null;</script>   
             <table class="entrevista" width="100%">
                 <tr>
@@ -2216,7 +2216,7 @@ src_blob := utl_raw.cast_to_raw(convert('
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
-[#macro selecao var titulo opcoes reler=false idAjax="" onclick="" desativado="false"]
+[#macro selecao var titulo opcoes reler=false idAjax="" onclick=""]
     [#local l=opcoes?split(";")]
     [#if .vars[var]??]
         [#local v = .vars[var]/]
@@ -2224,18 +2224,13 @@ src_blob := utl_raw.cast_to_raw(convert('
         [#local v = l?first/]
                 [#assign inlineTemplate = ["[#assign ${var} = v/]", "assignInlineTemplate"]?interpret /]
                 [@inlineTemplate/]
-    [/#if]
+        [/#if]
     
-    ${titulo!""}[#if titulo != ""]:[/#if]
-
-	[#if desativado == "true"]
-	    <input type="hidden" name="${var}" value="${v}" />
-    [/#if]
+        ${titulo!""}[#if titulo != ""]:[/#if]
 
     [#if !gerar_formulario!false]
         <input type="hidden" name="vars" value="${var}" />
-        <select name="${var}" [#if reler] onchange="javascript: sbmt([#if idAjax != ""]''${idAjax}''[/#if]);"[/#if] onclick="${onclick}"
-                      [#if desativado == "true"] disabled [/#if]  >
+        <select name="${var}" [#if reler] onchange="javascript: sbmt([#if idAjax != ""]''${idAjax}''[/#if]);"[/#if] onclick="${onclick}">
                     [#list l as opcao]
                         <option[#if v == opcao] selected[/#if] value="${opcao}">${opcao}</option><br/>
             [/#list]
@@ -2247,7 +2242,7 @@ src_blob := utl_raw.cast_to_raw(convert('
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
-[#macro memo var titulo colunas linhas reler=false obrigatorio=false default="" desativado="false"]
+[#macro memo var titulo colunas linhas reler=false obrigatorio=false default=""]
         [#if reler == true]
                 [#local jreler = " onchange=\"javascript: sbmt();\""]
         [/#if]
@@ -2269,17 +2264,13 @@ src_blob := utl_raw.cast_to_raw(convert('
             <input type="hidden" name="obrigatorios" value="${var}" />
         [/#if]
 
-		[#if desativado == "true"]
-			<input type="hidden" name="${var}" value="${v}" />
-		[/#if]
-
         <div style="padding-top:5px;">
                 [#if titulo != ""] 
                         <span style="${negrito!""};${vermelho!""}">${titulo}:<br/></span>
                 [/#if]
 
                 [#if !gerar_formulario!false]
-                    <textarea cols="${colunas}" rows="${linhas}" name="${var}" ${jreler!""} [#if desativado == "true"] disabled [/#if] >${v}</textarea>
+                    <textarea cols="${colunas}" rows="${linhas}" name="${var}" ${jreler!""}>${v}</textarea>
                 [#else]
                     <span class="valor">${v}</span>
                 [/#if]
@@ -2481,7 +2472,7 @@ src_blob := utl_raw.cast_to_raw(convert('
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
-[#macro data titulo var reler=false idAjax="" default="" alerta=false obrigatorio=false desativado="false"]
+[#macro data titulo var reler=false idAjax="" default="" alerta=false obrigatorio=false]
     [#if reler == true && idAjax != ""]
             [#local jreler = " sbmt(''" + idAjax + "'');\""]
     [#elseif reler == true]
@@ -2503,15 +2494,11 @@ src_blob := utl_raw.cast_to_raw(convert('
     <input type="hidden" name="obrigatorios" value="${var}" />
     [/#if]
 
-    [#if desativado == "true"]
-	    <input type="hidden" name="${var}" value="${v}" />
-    [/#if]
-
     [#if titulo?? && titulo != ""]<span style="${negrito!};${vermelho!}">${titulo}</span>[/#if]
 
     [#if !gerar_formulario!false]
         <input type="hidden" name="vars" value="${var}" />
-        <input type="text" name="${var}" value="${v}" size="10" maxlength="10" onblur="javascript:verifica_data(this[#if alerta], ''Sim''[/#if]);${jreler!}" [#if desativado == "true"] disabled [/#if]  />
+        <input type="text" name="${var}" value="${v}" size="10" maxlength="10" onblur="javascript:verifica_data(this[#if alerta], ''Sim''[/#if]);${jreler!}" />
     [#else]
     <span class="valor">${v}</span>
     [/#if]
@@ -2633,20 +2620,14 @@ src_blob := utl_raw.cast_to_raw(convert('
             </tr>
             <tr>
                 <td width="100%" align="center">
-<p style="font-family: AvantGarde Bk BT, Arial; font-size: 11pt;font-weight: bold;">${(func.resource("siga.ex.modelos.cabecalho.titulo"))!}</p>
+                <p style="font-family: AvantGarde Bk BT, Arial; font-size: 11pt;">PODER JUDICIÁRIO</p>
                 </td>
             </tr>
-			<tr>
+            <tr>
                 <td width="100%" align="center">
-                  <p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${(func.resource("siga.ex.modelos.cabecalho.subtitulo1"))!}</p>
+                <p style="font-family: Arial; font-size: 10pt; font-weight: bold;">JUSTIÇA FEDERAL</p>
                 </td>
             </tr>
- 			<tr>
-                <td width="100%" align="center">
-                  <p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${(func.resource("siga.ex.modelos.cabecalho.subtitulo2"))!}</p>
-                </td>
-            </tr>
-          [#if func.orgaoUsuarioPresenteNoCabecalhoModelo()!true]
             <tr>
                 <td width="100%" align="center">
                 <p style="font-family: AvantGarde Bk BT, Arial; font-size: 8pt;">
@@ -2657,8 +2638,7 @@ src_blob := utl_raw.cast_to_raw(convert('
                 [/#if]</p>
                 </td>
             </tr>
-          [/#if]
-        </table>       
+        </table>
         </td>
     </tr>
 </table>
@@ -2673,20 +2653,14 @@ src_blob := utl_raw.cast_to_raw(convert('
         <table width="100%" border="0" cellpadding="2">
             <tr>
                 <td width="100%" align="center">
-<p style="font-family: AvantGarde Bk BT, Arial; font-size: 11pt;">${(func.resource("siga.ex.modelos.cabecalho.titulo"))!}</p>
+                <p style="font-family: AvantGarde Bk BT, Arial; font-size: 11pt;">PODER JUDICIÁRIO</p>
                 </td>
             </tr>
             <tr>
                 <td width="100%" align="center">
-<p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${(func.resource("siga.ex.modelos.cabecalho.subtitulo1"))!}</p>
+                <p style="font-family: Arial; font-size: 10pt; font-weight: bold;">JUSTIÇA FEDERAL</p>
                 </td>
             </tr>
-			<tr>
-                <td width="100%" align="center">
-<p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${(func.resource("siga.ex.modelos.cabecalho.subtitulo2"))!}</p>
-                </td>
-            </tr>
-          [#if func.orgaoUsuarioPresenteNoCabecalhoModelo()!true]
             <tr>
                 <td width="100%" align="center">
                 <p style="font-family: AvantGarde Bk BT, Arial; font-size: 8pt;">
@@ -2697,7 +2671,6 @@ src_blob := utl_raw.cast_to_raw(convert('
                 [/#if]</p>
                 </td>
             </tr>
-          [/#if]	
         </table>
         </td>
     </tr>
@@ -2714,23 +2687,17 @@ src_blob := utl_raw.cast_to_raw(convert('
         <td width="84%">
         <table align="left" width="100%">
             <tr>
-                <td width="100%" align="center">
-<p style="font-family: AvantGarde Bk BT, Arial; font-size: 11pt;">${(func.resource("siga.ex.modelos.cabecalho.titulo"))!}</p>
+                <td width="100%" align="left">
+                <p style="font-family: AvantGarde Bk BT, Arial; font-size: 11pt;">PODER JUDICIÁRIO</p>
                 </td>
             </tr>
             <tr>
-                <td width="100%" align="center">
-<p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${(func.resource("siga.ex.modelos.cabecalho.subtitulo1"))!}</p>
+                <td width="100%" align="left">
+                <p style="font-family: Arial; font-size: 10pt; font-weight: bold;">JUSTIÇA FEDERAL</p>
                 </td>
             </tr>
             <tr>
-                <td width="100%" align="center">
-<p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${(func.resource("siga.ex.modelos.cabecalho.subtitulo2"))!}</p>
-                </td>
-            </tr>
-          [#if func.orgaoUsuarioPresenteNoCabecalhoModelo()!true]
-            <tr>
-                <td width="100%" align="center">
+                <td width="100%" align="left">
                 <p style="font-family: AvantGarde Bk BT, Arial; font-size: 8pt;">
                 [#if mov??]
                     ${(mov.lotaTitular.orgaoUsuario.descricaoMaiusculas)!}
@@ -2739,7 +2706,6 @@ src_blob := utl_raw.cast_to_raw(convert('
                 [/#if]</p>
                 </td>
             </tr>
-          [/#if]	
         </table>
         </td>
     </tr>
@@ -2754,32 +2720,26 @@ src_blob := utl_raw.cast_to_raw(convert('
         <td width="100%">
         <table width="100%">
             <tr>
-                <td width="100%" align="center">
-<p style="font-family: AvantGarde Bk BT, Arial; font-size: 11pt;">${(func.resource("siga.ex.modelos.cabecalho.titulo"))!}</p>
+                <td width="100%" align="left">
+                <p style="font-family: AvantGarde Bk BT, Arial; font-size: 11pt;">PODER JUDICIÁRIO</p>
                 </td>
             </tr>
             <tr>
-                <td width="100%" align="center">
-<p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${(func.resource("siga.ex.modelos.cabecalho.subtitulo1"))!}</p>
+                <td width="100%" align="left">
+                <p style="font-family: Arial; font-size: 10pt; font-weight: bold;">JUSTIÇA FEDERAL</p>
                 </td>
             </tr>
             <tr>
-                <td width="100%" align="center">
-<p style="font-family: Arial; font-size: 10pt; font-weight: bold;">${(func.resource("siga.ex.modelos.cabecalho.subtitulo2"))!}</p>
-                </td>
-            </tr>
-          [#if func.orgaoUsuarioPresenteNoCabecalhoModelo()!true]
-            <tr>
-                <td width="100%" align="center">
+                <td width="100%" align="left">
                 <p style="font-family: AvantGarde Bk BT, Arial; font-size: 8pt;">
                 [#if mov??]
                     ${(mov.lotaTitular.orgaoUsuario.descricaoMaiusculas)!}
                 [#else]
                     ${(doc.lotaTitular.orgaoUsuario.descricaoMaiusculas)!}
-                [/#if]</p>
+                [/#if]<br />
+                 </p>
                 </td>
             </tr>
-          [/#if]	
         </table>
         </td>
     </tr>
@@ -2836,7 +2796,7 @@ dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
 [#macro assinaturaCentro formatarOrgao=false]
 [@assinaturaBIE]
-<p style="font-family: Times New Roman; font-size: 12pt;" align="center">
+<p style="font-family: Arial; font-size: 11pt;" align="center">
     [#if (doc.nmSubscritor)??]
         ${doc.nmSubscritor}
     [#else]
@@ -2917,7 +2877,7 @@ src_blob := utl_raw.cast_to_raw(convert('
             [local funcSubscrDoc = movim.descrMov /]
         [/#if]
     [/#list]
-    <p align="center" style="font-family:Times New Roman;font-size:12pt;">${(mov.subscritor.descricao)!}<br />
+    <p align="center" style="font-family:Arial;font-size:11pt;">${(mov.subscritor.descricao)!}<br />
     [#if mov.nmFuncao??]
         ${mov.nmFuncao}
     [#elseif mov.titular?? && doc.titular?? && mov.titular.idPessoa == doc.titular.idPessoa && doc.nmFuncao??]
@@ -2994,55 +2954,52 @@ src_blob := utl_raw.cast_to_raw(convert('
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
-[#macro estiloBrasaoCentralizado tipo tamanhoLetra="11pt" formatarOrgao=true numeracaoCentralizada=false dataAntesDaAssinatura=false exibirNumeracaoDoc=true exibirAssinatura=true]
+[#macro estiloBrasaoCentralizado tipo tamanhoLetra="11pt" formatarOrgao=true numeracaoCentralizada=false dataAntesDaAssinatura=false]
     [@primeiroCabecalho]
     [@cabecalhoCentralizadoPrimeiraPagina/]
     [/@primeiroCabecalho]
 
-    <br/>
-    <br/>
+    [@cabecalho]
+    [@cabecalhoCentralizado/]
+    [/@cabecalho]
 
-    [#if exibirNumeracaoDoc]
-	    [#if !numeracaoCentralizada]
-	    <table style="float:none; clear:both;" width="100%" border="0" bgcolor="#FFFFFF">
-	        <tr>
-	            <td align="left"><p style="font-family:Arial;font-weight:bold;font-size:12pt;">[@numeroDJE]${tipo} n&ordm; ${(doc.numExpediente)!}[/@numeroDJE]</p></td>
-	        </tr>
-	                [#if !dataAntesDaAssinatura]
-	        <tr>
-	            <td align="right">[@letra tamanho="12pt"]<p>[#if mov??]${mov.dtExtenso!}[#else]${doc.dtExtenso!}[/#if]</p>[/@letra]</td>
-	        </tr>
-	                [/#if]
-	    </table>
-	    [#else]
-	    <table style="float:none; clear:both;" width="100%" border="0" bgcolor="#FFFFFF">
-	        <tr>
-	                    <td align="center">
-	                        <p style="font-family:Arial;font-weight:bold;font-size:12pt;">
-	                         [@numeroDJE]${tipo} n&ordm; ${(doc.numExpediente)!}[/@numeroDJE]
-	                        [#if !dataAntesDaAssinatura && doc?? && doc.dtD??]
-	                            de ${doc.dtD} de ${doc.dtMMMM} de ${doc.dtYYYY}</p>
-	                        [/#if]
-	                    </td>
-	        </tr>
-	    </table>
-	    [/#if]
-		[@tituloDJE]
-			${(doc.codigo)!}
-		[/@tituloDJE]
-    [/#if]
-	<br/>
-    <br/>            
-	[#nested]
-	[#if exibirAssinatura]
-	    [#if dataAntesDaAssinatura]<p style="text-align:center">[#if mov??]${mov.dtExtenso!}[#else]${doc.dtExtenso!}[/#if]</p>[/#if]
-	<p>&nbsp;</p>
-	    [#if mov??]
-	    [@assinaturaMovCentro formatarOrgao=formatarOrgao/]
-	    [#else]
-	    [@assinaturaCentro formatarOrgao=formatarOrgao/]
-	    [/#if]
-	[/#if]
+    [@letra tamanho=tamanhoLetra]
+            [#if !numeracaoCentralizada]
+            <table style="float:none; clear:both;" width="100%" border="0" bgcolor="#FFFFFF">
+                <tr>
+                                <td align="left"><p style="font-family:Arial;font-weight:bold;font-size:11pt;"><br/>[@numeroDJE]${tipo} N&ordm; ${(doc.codigo)!}[/@numeroDJE]</p></td>
+                </tr>
+                        [#if !dataAntesDaAssinatura]
+                <tr>
+                    <td align="right">[@letra tamanho="11pt"]<p>[#if mov??]${mov.dtExtenso!}[#else]${doc.dtExtenso!}[/#if]</p>[/@letra]</td>
+                </tr>
+                        [/#if]
+            </table>
+            [#else]
+            <table style="float:none; clear:both;" width="100%" border="0" bgcolor="#FFFFFF">
+                <tr>
+                            <td align="center">
+                                <p style="font-family:Arial;font-weight:bold;font-size:11pt;"><br/>
+                                 [@numeroDJE]${tipo} N&ordm; ${(doc.codigo)!}[/@numeroDJE]
+                                [#if !dataAntesDaAssinatura && doc?? && doc.dtD??]
+                                    de ${doc.dtD} de ${doc.dtMMMM} de ${doc.dtYYYY}</p>
+                                [/#if]
+                            </td>
+                </tr>
+            </table>
+            [/#if]
+            [@tituloDJE]
+		${(doc.codigo)!}
+            [/@tituloDJE]
+            [#nested]
+            [#if dataAntesDaAssinatura]<p style="text-align:center">[#if mov??]${mov.dtExtenso!}[#else]${doc.dtExtenso!}[/#if]</p>[/#if]
+        <p>&nbsp;</p>
+            [#if mov??]
+            [@assinaturaMovCentro formatarOrgao=formatarOrgao/]
+            [#else]
+            [@assinaturaCentro formatarOrgao=formatarOrgao/]
+            [/#if]
+    [/@letra]
 
     [@primeiroRodape]
     [@rodapeClassificacaoDocumental/]
@@ -3078,13 +3035,9 @@ src_blob := utl_raw.cast_to_raw(convert('
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
-[#assign recuo_paragrafo = "2.5cm" /]','WE8ISO8859P1'));
-
-dbms_lob.append(dest_blob, src_blob);
-src_blob := utl_raw.cast_to_raw(convert('
-[#macro portaria texto abertura="" tamanhoLetra="Normal" _tipo="Portaria" ementa="" texto_anexo=""]
+[#macro portaria texto abertura="" tamanhoLetra="Normal" _tipo="PORTARIA" dispoe_sobre=""]
     [#if tamanhoLetra! == "Normal"]
-        [#assign tl = "12pt" /]
+        [#assign tl = "11pt" /]
     [#elseif tamanhoLetra! == "Pequeno"]
         [#assign tl = "9pt" /]
     [#elseif tamanhoLetra! == "Grande"]
@@ -3094,17 +3047,16 @@ src_blob := utl_raw.cast_to_raw(convert('
     [/#if]
     [@estiloBrasaoCentralizado tipo=_tipo tamanhoLetra=tl formatarOrgao=false numeracaoCentralizada=true]
         [@mioloDJE]
-            [#if ementa != ""]     
+            [#if dispoe_sobre != ""]     
               <table style="float:none;" width="100%" border="0" cellpadding="2" cellspacing="0" bgcolor="#FFFFFF">
                   <tr>
                       <td align="left" width="50%"></td>
-                    <td align="left" width="50%" style="text-align: justify;font-family: Times New Roman; font-size: ${tl};">${ementa!}</td>
+                    <td align="left" width="50%" style="font-family: Arial; font-size: ${tl};"><br/>Dispõe sobre ${dispoe_sobre!}</td>
                   </tr>
               </table>
-			  <br/>
             [/#if]
             
-            <div style="font-family: Times New Roman; font-size: ${tl};">
+            <div style="font-family: Arial; font-size: ${tl};">
                 [#if abertura != ""] 
                     [@aberturaBIE]
                         ${abertura!}
@@ -3113,42 +3065,15 @@ src_blob := utl_raw.cast_to_raw(convert('
                 [@corpoBIE]
                     ${texto!}
                 [/@corpoBIE]
-                <span style="font-family: Times New Roman; font-size: ${tl}; margin-left:${recuo_paragrafo}">
+                <span style="font-family: Arial; font-size: ${tl}"><center>
                 [@fechoBIE]
-                    Publique-se, registre-se e cumpra-se.</span>
-                [/@fechoBIE]                
+                    PUBLIQUE-SE. REGISTRE-SE. CUMPRA-SE.</center></span></p>
+                [/@fechoBIE]
+                </center></span></p>
             </div>            
         [/@mioloDJE]
      [/@estiloBrasaoCentralizado]
-     [#if texto_anexo != ""]
-       [@quebraPagina/]
-       [@anexo texto=texto_anexo/]
-     [/#if]
 [/#macro]','WE8ISO8859P1'));
-
-dbms_lob.append(dest_blob, src_blob);
-src_blob := utl_raw.cast_to_raw(convert('
-[#macro anexo texto tamanhoLetra="Normal" _tipo="Anexo"]    
-    [#if tamanhoLetra! == "Normal"]
-        [#assign tl = "12pt" /]
-    [#elseif tamanhoLetra! == "Pequeno"]
-        [#assign tl = "9pt" /]
-    [#elseif tamanhoLetra! == "Grande"]
-        [#assign tl = "13pt" /]
-    [#else]     
-        [#assign tl = "11pt"]
-    [/#if]   
-    [@estiloBrasaoCentralizado tipo=_tipo tamanhoLetra=tl formatarOrgao=false numeracaoCentralizada=true exibirNumeracaoDoc=false exibirAssinatura=false]
-    [@mioloDJE]
-            <div style="font-family: Times New Roman; font-size: ${tl};">                
-                [@corpoBIE]
-                    ${texto!}
-                [/@corpoBIE]                               
-            </div>            
-        [/@mioloDJE]
-    [/@estiloBrasaoCentralizado]
-[/#macro]
-','WE8ISO8859P1'));
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
@@ -3411,19 +3336,50 @@ src_blob := utl_raw.cast_to_raw(convert('
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
+[#assign _presidente = {
+    "genero":"M", 
+    "vocativo":"Excelentíssimo Senhor", 
+    "vocativo_carta":"Exmo. Sr. Juiz Federal - Diretor do Foro", 
+    "enderecamento":"Exmo. Sr. Dr.", 
+    "nome":"<DEFINIR_NOME>", 
+    "cargo":"<DEFINIR_CARGO>",
+    "orgao":"<DEFINIR_ORGAO>",
+    "endereco":"Avenida Almirante Barroso, 78 / 13º andar - Centro - Rio de Janeiro/RJ - CEP: 20031-004"} /]','WE8ISO8859P1'));
+    
+dbms_lob.append(dest_blob, src_blob);
+src_blob := utl_raw.cast_to_raw(convert('
+[#assign _secretario_geral = {
+    "genero":"F", 
+    "vocativo":"Senhora", 
+    "vocativo_carta":"Sra. Diretora da Secretaria Geral", 
+    "enderecamento":"Sra. Dra.", 
+    "nome":"<DEFINIR_NOME>", 
+    "cargo":"<DEFINIR_CARGO>",
+    "orgao":"<DEFINIR_ORGAO>",
+    "endereco":"Avenida Almirante Barroso, 78  - Centro - Rio de Janeiro/RJ - CEP: 20031-004"} /]','WE8ISO8859P1'));
+    
+dbms_lob.append(dest_blob, src_blob);
+src_blob := utl_raw.cast_to_raw(convert('
+[#assign _secretario_rh = {
+    "genero":"F", 
+    "vocativo":"Senhora", 
+    "vocativo_carta":"Sra. Diretora da Subsecretaria de Gestão de Pessoas", 
+    "enderecamento":"Sra. Dra.", 
+    "nome":"<DEFINIR_NOME>", 
+    "cargo":"<DEFINIR_CARGO>",
+    "orgao":"<DEFINIR_ORGAO>",
+    "endereco":"Avenida Almirante Barroso, 78  - Centro - Rio de Janeiro/RJ - CEP: 20031-004"} /]
+[#assign enderecamentoPresidente = "Exmo. Sr. Juiz Federal - Diretor de Foro" /]
+[#assign enderecamentoDiretorGeral = "Ilmo(a). Sr(a). Diretor(a)-Geral" /]
+[#assign enderecamentoDiretorDeRH = "Ilma. Sra. Diretora da Subsecretaria de Gestão de Pessoas" /]','WE8ISO8859P1'));
+
+dbms_lob.append(dest_blob, src_blob);
+src_blob := utl_raw.cast_to_raw(convert('
 [#macro dadosComplementares][/#macro]','WE8ISO8859P1'));
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
-[#macro extensaoBuscaTextual]
-<tr>
-   <td class="tdLabel">
-      <label for="fullText" class="label">Conteúdo:</label>
-   </td>
-   <td>
-      <input type="text" name="fullText" size="80" value="" id="fullText"/>
-   </td>
-</tr>[/#macro]','WE8ISO8859P1'));
+[#macro extensaoBuscaTextual][/#macro]','WE8ISO8859P1'));
 
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
@@ -3438,96 +3394,11 @@ src_blob := utl_raw.cast_to_raw(convert('
 dbms_lob.append(dest_blob, src_blob);
 src_blob := utl_raw.cast_to_raw(convert('
 [#macro botoesExtensaoAssinador][/#macro]','WE8ISO8859P1'));
-
-dbms_lob.append(dest_blob, src_blob);
-src_blob := utl_raw.cast_to_raw(convert('
-[#macro complementoHEAD][/#macro]','WE8ISO8859P1'));
-
-dbms_lob.append(dest_blob, src_blob);
 commit;
 END;
 /
 
-/* EXECUTAR ESSA PARTE NO SCHEMA CORPORATIVO */
 
-GRANT REFERENCES ON CORPORATIVO.DP_CARGO TO siga;
-GRANT REFERENCES ON CORPORATIVO.DP_FUNCAO_CONFIANCA TO siga;
-GRANT REFERENCES ON CORPORATIVO.DP_PESSOA TO siga;
-GRANT REFERENCES ON CORPORATIVO.DP_LOTACAO TO siga;
-GRANT REFERENCES ON CORPORATIVO.CP_ORGAO TO siga;
-GRANT REFERENCES ON CORPORATIVO.CP_ORGAO_USUARIO TO siga;
-GRANT SELECT ON "CORPORATIVO"."CP_APLICACAO_FERIADO" TO "SIGA";
-GRANT ALTER ON "CORPORATIVO"."CP_CONFIGURACAO" TO "SIGA";
-GRANT DEBUG ON "CORPORATIVO"."CP_CONFIGURACAO" TO "SIGA";
-GRANT DELETE ON "CORPORATIVO"."CP_CONFIGURACAO" TO "SIGA";
-GRANT FLASHBACK ON "CORPORATIVO"."CP_CONFIGURACAO" TO "SIGA";
-GRANT INDEX ON "CORPORATIVO"."CP_CONFIGURACAO" TO "SIGA";
-GRANT INSERT ON "CORPORATIVO"."CP_CONFIGURACAO" TO "SIGA";
-GRANT ON COMMIT REFRESH ON "CORPORATIVO"."CP_CONFIGURACAO" TO "SIGA";
-GRANT QUERY REWRITE ON "CORPORATIVO"."CP_CONFIGURACAO" TO "SIGA";
-GRANT REFERENCES ON "CORPORATIVO"."CP_CONFIGURACAO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_CONFIGURACAO" TO "SIGA";
-GRANT UPDATE ON "CORPORATIVO"."CP_CONFIGURACAO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_CONFIGURACAO_SEQ" TO "SIGA";
-GRANT REFERENCES ON "CORPORATIVO"."CP_FERIADO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_FERIADO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_GRUPO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_IDENTIDADE" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_LOCALIDADE" TO "SIGA";
-GRANT DELETE ON "CORPORATIVO"."CP_MARCA" TO "SIGA";
-GRANT INSERT ON "CORPORATIVO"."CP_MARCA" TO "SIGA";
-GRANT REFERENCES ON "CORPORATIVO"."CP_MARCA" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_MARCA" TO "SIGA";
-GRANT UPDATE ON "CORPORATIVO"."CP_MARCA" TO "SIGA";
-GRANT REFERENCES ON "CORPORATIVO"."CP_MARCADOR" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_MARCADOR" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_MARCA_SEQ" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_MODELO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_OCORRENCIA_FERIADO" TO "SIGA";
-GRANT REFERENCES ON "CORPORATIVO"."CP_ORGAO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_ORGAO" TO "SIGA";
-GRANT REFERENCES ON "CORPORATIVO"."CP_ORGAO_USUARIO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_ORGAO_USUARIO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_PAPEL" TO "SIGA";
-GRANT DELETE ON "CORPORATIVO"."CP_PERSONALIZACAO" TO "SIGA";
-GRANT INSERT ON "CORPORATIVO"."CP_PERSONALIZACAO" TO "SIGA";
-GRANT REFERENCES ON "CORPORATIVO"."CP_PERSONALIZACAO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_PERSONALIZACAO" TO "SIGA";
-GRANT UPDATE ON "CORPORATIVO"."CP_PERSONALIZACAO" TO "SIGA";
-GRANT INSERT ON "CORPORATIVO"."CP_SERVICO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_SERVICO" TO "SIGA";
-GRANT UPDATE ON "CORPORATIVO"."CP_SERVICO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_SERVICO_SEQ" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_SITUACAO_CONFIGURACAO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_TIPO_CONFIGURACAO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_TIPO_GRUPO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_TIPO_IDENTIDADE" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_TIPO_LOTACAO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_TIPO_MARCA" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_TIPO_MARCADOR" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_TIPO_PAPEL" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_TIPO_PESSOA" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_TIPO_SERVICO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_TIPO_SERVICO_SITUACAO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_UF" TO "SIGA";
-GRANT REFERENCES ON "CORPORATIVO"."DP_CARGO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."DP_CARGO" TO "SIGA";
-GRANT REFERENCES ON "CORPORATIVO"."DP_FUNCAO_CONFIANCA" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."DP_FUNCAO_CONFIANCA" TO "SIGA";
-GRANT REFERENCES ON "CORPORATIVO"."DP_LOTACAO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."DP_LOTACAO" TO "SIGA";
-GRANT REFERENCES ON "CORPORATIVO"."DP_PESSOA" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."DP_PESSOA" TO "SIGA";
-GRANT REFERENCES ON "CORPORATIVO"."DP_PROVIMENTO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."DP_PROVIMENTO" TO "SIGA";
-GRANT DELETE ON "CORPORATIVO"."DP_SUBSTITUICAO" TO "SIGA";
-GRANT INSERT ON "CORPORATIVO"."DP_SUBSTITUICAO" TO "SIGA";
-GRANT REFERENCES ON "CORPORATIVO"."DP_SUBSTITUICAO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."DP_SUBSTITUICAO" TO "SIGA";
-GRANT UPDATE ON "CORPORATIVO"."DP_SUBSTITUICAO" TO "SIGA";
-GRANT SELECT ON "CORPORATIVO"."CP_CONFIGURACAO_SEQ" TO "SIGA";
-GRANT INSERT ON "CORPORATIVO"."CP_CONFIGURACAO" TO "SIGA";
-GRANT ALTER  ON "CORPORATIVO"."CP_MARCA" TO "SIGA";
-GRANT INSERT ON "CORPORATIVO"."CP_TIPO_CONFIGURACAO" TO "SIGA";
-GRANT UPDATE ON "CORPORATIVO"."CP_TIPO_CONFIGURACAO" TO "SIGA";
-GRANT INSERT ON "CORPORATIVO"."CP_MARCADOR" TO "SIGA";
+
+
+
