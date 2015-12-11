@@ -1934,7 +1934,7 @@ public class ExDocumento extends AbstractExDocumento implements Serializable {
 		}
 		return null;
 	}
-
+	
 	/**
 	 * Retorna uma lista de documentos filhos [de cada móbil] do documento
 	 * atual.
@@ -1994,6 +1994,19 @@ public class ExDocumento extends AbstractExDocumento implements Serializable {
 			if (mobil.isVolume())
 				volumes.add(mobil);
 		return volumes;
+	}
+	
+	/**
+	 * Retorna todos as vias de um expediente.
+	 */
+	public Set<ExMobil> getVias() {
+		if (!isExpediente())
+			return new LinkedHashSet<ExMobil>();
+		Set<ExMobil> vias = new LinkedHashSet<ExMobil>();
+		for (final ExMobil mobil : getExMobilSet())
+			if (mobil.isVia())
+				vias.add(mobil);
+		return vias;
 	}
 
 	/**
@@ -2534,6 +2547,36 @@ public class ExDocumento extends AbstractExDocumento implements Serializable {
 		}
 
 		return null;
+	}
+	
+	/*Retorna verdadeiro caso exista no Ex_Mobil uma movimentação do tipo #tipoMovimentacao# onde #pessoa# é responsável
+	 * por essa movimentação.*/
+	public boolean temTipoMovimentacaoParaPessoaNoMobil(final long tipoMovimentacao, final DpPessoa pessoa)
+	{
+		if (this.isProcesso()){			
+			Set<ExMobil> volumes = getVolumes();
+			for (ExMobil volume : volumes) {
+				List<ExMovimentacao> listaMovimentacoes = volume.getMovimentacoesPorTipo(tipoMovimentacao);
+				for (ExMovimentacao mov : listaMovimentacoes){
+					if(!mov.isCancelada() && mov.getResp().equivale(pessoa)){
+						return true;
+					}
+				}
+			}
+			
+		}else{ // expediente
+			Set<ExMobil> vias = getVias();
+			for (ExMobil via : vias) {
+				List<ExMovimentacao> listaMovimentacoes = via.getMovimentacoesPorTipo(tipoMovimentacao);
+				for (ExMovimentacao mov : listaMovimentacoes){
+					if(!mov.isCancelada() && mov.getResp().equivale(pessoa)){
+						return true;
+					}
+				}
+			}
+		}			
+		
+		return false;
 	}
 	
 	@SuppressWarnings("unchecked")
