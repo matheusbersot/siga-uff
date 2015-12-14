@@ -2549,16 +2549,18 @@ public class ExDocumento extends AbstractExDocumento implements Serializable {
 		return null;
 	}
 	
-	/*Retorna verdadeiro caso exista no Ex_Mobil uma movimentação do tipo #tipoMovimentacao# onde #pessoa# é responsável
+	/*Retorna verdadeiro caso exista no Ex_Mobil uma movimentação do tipo #tipoMovimentacao# onde #pessoa# ou #lotação# é responsável
 	 * por essa movimentação.*/
-	public boolean temTipoMovimentacaoParaPessoaNoMobil(final long tipoMovimentacao, final DpPessoa pessoa)
+	public boolean temTipoMovimentacaoParaPessoaOuLotacaoNoMobil(final long tipoMovimentacao, final DpPessoa pessoa, final DpLotacao lotacao)
 	{
 		if (this.isProcesso()){			
 			Set<ExMobil> volumes = getVolumes();
 			for (ExMobil volume : volumes) {
 				List<ExMovimentacao> listaMovimentacoes = volume.getMovimentacoesPorTipo(tipoMovimentacao);
 				for (ExMovimentacao mov : listaMovimentacoes){
-					if(!mov.isCancelada() && mov.getResp().equivale(pessoa)){
+					if(!mov.isCancelada() && 
+					   ((mov.getResp()!= null && mov.getResp().equivale(pessoa)) || (mov.getLotaResp()!= null && mov.getLotaResp().equivale(lotacao)))
+					   ) {
 						return true;
 					}
 				}
@@ -2569,7 +2571,10 @@ public class ExDocumento extends AbstractExDocumento implements Serializable {
 			for (ExMobil via : vias) {
 				List<ExMovimentacao> listaMovimentacoes = via.getMovimentacoesPorTipo(tipoMovimentacao);
 				for (ExMovimentacao mov : listaMovimentacoes){
-					if(!mov.isCancelada() && mov.getResp().equivale(pessoa)){
+					if(!mov.isCancelada() &&
+    				   ((mov.getResp()!= null && mov.getResp().equivale(pessoa)) || (mov.getLotaResp()!= null && mov.getLotaResp().equivale(lotacao)))
+    				   )
+					{
 						return true;
 					}
 				}
