@@ -3754,9 +3754,9 @@ public class ExCompetenciaBL extends CpCompetenciaBL {
 		return (mob.isVia() || mob.isVolume())
 				&& !mob.isEmTransito() && !mob.isJuntado()
 				&& !mob.isArquivado()
-				&& (mob.doc().isAssinado() || (mob.doc().getExTipoDocumento()
-						.getIdTpDoc() == ExTipoDocumento.TIPO_DOCUMENTO_EXTERNO) || 
-						(mob.doc().isProcesso() && mob.doc().getExTipoDocumento().getIdTpDoc() == ExTipoDocumento.TIPO_DOCUMENTO_INTERNO_ANTIGO))
+				&& (mob.doc().isAssinado() || (!mob.doc().isAssinado() && mob.doc().getExTipoDocumento().getIdTpDoc() == ExTipoDocumento.TIPO_DOCUMENTO_INTERNO) 
+				   || (mob.doc().getExTipoDocumento().getIdTpDoc() == ExTipoDocumento.TIPO_DOCUMENTO_EXTERNO) 
+				   || (mob.doc().isProcesso() && mob.doc().getExTipoDocumento().getIdTpDoc() == ExTipoDocumento.TIPO_DOCUMENTO_INTERNO_ANTIGO))
 				&& !mob.isEmEditalEliminacao()
 				&& !mob.isSobrestado()
 				&& !mob.doc().isSemEfeito()
