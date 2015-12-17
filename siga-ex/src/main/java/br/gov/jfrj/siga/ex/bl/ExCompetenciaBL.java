@@ -2127,8 +2127,8 @@ public class ExCompetenciaBL extends CpCompetenciaBL {
 		if (!mob.doc().getLotaCadastrante().equivale(lotaTitular)
 			&& (mob.doc().getSubscritor() != null && !mob.doc().getSubscritor().equivale(titular))
 			&& (mob.doc().getTitular() != null && !mob.doc().getTitular().equivale(titular))
-			&& (mob.doc().getPai() != null && !(mob.doc().getPai().temTipoMovimentacaoParaPessoaNoMobil(ExTipoMovimentacao.TIPO_MOVIMENTACAO_DESPACHO_TRANSFERENCIA, titular)
-			    || mob.doc().getPai().temTipoMovimentacaoParaPessoaNoMobil(ExTipoMovimentacao.TIPO_MOVIMENTACAO_TRANSFERENCIA, titular))))
+			&& (mob.doc().getPai() != null && !(mob.doc().getPai().temTipoMovimentacaoParaPessoaOuLotacaoNoMobil(ExTipoMovimentacao.TIPO_MOVIMENTACAO_DESPACHO_TRANSFERENCIA, titular, lotaTitular)
+			    || mob.doc().getPai().temTipoMovimentacaoParaPessoaOuLotacaoNoMobil(ExTipoMovimentacao.TIPO_MOVIMENTACAO_TRANSFERENCIA, titular, lotaTitular))))
 		{	
 			if(!mob.getExDocumento().temPerfil(titular, lotaTitular, ExPapel.PAPEL_GESTOR))
 				return false;
@@ -3754,9 +3754,9 @@ public class ExCompetenciaBL extends CpCompetenciaBL {
 		return (mob.isVia() || mob.isVolume())
 				&& !mob.isEmTransito() && !mob.isJuntado()
 				&& !mob.isArquivado()
-				&& (mob.doc().isAssinado() || (mob.doc().getExTipoDocumento()
-						.getIdTpDoc() == ExTipoDocumento.TIPO_DOCUMENTO_EXTERNO) || 
-						(mob.doc().isProcesso() && mob.doc().getExTipoDocumento().getIdTpDoc() == ExTipoDocumento.TIPO_DOCUMENTO_INTERNO_ANTIGO))
+				&& (mob.doc().isAssinado() || (!mob.doc().isAssinado() && mob.doc().getExTipoDocumento().getIdTpDoc() == ExTipoDocumento.TIPO_DOCUMENTO_INTERNO) 
+				   || (mob.doc().getExTipoDocumento().getIdTpDoc() == ExTipoDocumento.TIPO_DOCUMENTO_EXTERNO) 
+				   || (mob.doc().isProcesso() && mob.doc().getExTipoDocumento().getIdTpDoc() == ExTipoDocumento.TIPO_DOCUMENTO_INTERNO_ANTIGO))
 				&& !mob.isEmEditalEliminacao()
 				&& !mob.isSobrestado()
 				&& !mob.doc().isSemEfeito()
