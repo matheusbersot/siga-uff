@@ -397,11 +397,20 @@ public class ExDocumentoVO extends ExVO {
 				"lock",
 				"Finalizar",
 				"/expediente/doc",
-
 				"finalizar",
 				Ex.getInstance().getComp()
 						.podeFinalizar(titular, lotaTitular, mob),
 				"Confirma a finalização do documento?", null, null, null,
+				"once");
+		
+		vo.addAcao(
+				"lock",
+				"Encerrar",
+				"/expediente/doc",
+				"encerrar",
+				Ex.getInstance().getComp()
+						.podeEncerrar(titular, lotaTitular, mob),
+				"Confirma o encerramento do documento?", null, null, null,
 				"once");
 
 		// addAcao("Finalizar e Assinar", "/expediente/mov",

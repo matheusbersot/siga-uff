@@ -90,6 +90,9 @@ public abstract class AbstractExDocumento extends ExArquivo implements
 
 	@Column(name = "DT_FECHAMENTO")
 	private Date dtFinalizacao;
+	
+	@Column(name = "DT_ENCERRAMENTO")
+	private Date dtEncerramento;
 
 	@Column(name = "DT_REG_DOC")
 	private java.util.Date dtRegDoc;
@@ -312,6 +315,15 @@ public abstract class AbstractExDocumento extends ExArquivo implements
 	public Date getDtFinalizacao() {
 		return dtFinalizacao;
 	}
+	
+	/**
+	 * Retorna a data de encerramento do documento
+	 * 
+	 * @return
+	 */
+	public Date getDtEncerramento() {
+		return dtEncerramento;
+	}	
 
 	/**
 	 * Retorna a data de registro do documento
@@ -663,6 +675,10 @@ public abstract class AbstractExDocumento extends ExArquivo implements
 
 	public void setDtFinalizacao(final Date dtFinalizacao) {
 		this.dtFinalizacao = dtFinalizacao;
+	}
+	
+	public void setDtEncerramento(final Date dtEncerramento) {
+		this.dtEncerramento = dtEncerramento;
 	}
 
 	/**

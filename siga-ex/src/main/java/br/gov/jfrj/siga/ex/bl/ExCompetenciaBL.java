@@ -2737,23 +2737,66 @@ public class ExCompetenciaBL extends CpCompetenciaBL {
 	public boolean podeFinalizar(final DpPessoa titular,
 			final DpLotacao lotaTitular, final ExMobil mob) throws Exception {
 
+		if (!mob.doc().isEncerrado())
+			return false;
 		if (mob.doc().isFinalizado())
 			return false;
 		if (lotaTitular.isFechada())
 			return false;
 		if (mob.isPendenteDeAnexacao())
 			return false;
-		if (mob.doc().getExTipoDocumento().getIdTpDoc() != 2
-				&& mob.doc().getExTipoDocumento().getIdTpDoc() != 3)
+		if (mob.doc().getExTipoDocumento().getIdTpDoc() != ExTipoDocumento.TIPO_DOCUMENTO_INTERNO_ANTIGO
+				&& mob.doc().getExTipoDocumento().getIdTpDoc() != ExTipoDocumento.TIPO_DOCUMENTO_EXTERNO)
 			if (!mob.doc().getLotaCadastrante().equivale(lotaTitular)
-					&& (mob.doc().getSubscritor() != null && !mob.doc()
-							.getSubscritor().equivale(titular))
-					&& (mob.doc().getTitular() != null && !mob.doc()
-							.getTitular().equivale(titular))
-					&& !mob.getExDocumento().temPerfil(titular, lotaTitular, ExPapel.PAPEL_GESTOR))
-				return false;
+				&& (mob.doc().getSubscritor() != null && !mob.doc().getSubscritor().equivale(titular))
+				&& (mob.doc().getTitular() != null && !mob.doc().getTitular().equivale(titular))
+				&& !mob.getExDocumento().temPerfil(titular, lotaTitular, ExPapel.PAPEL_GESTOR)
+				&& (mob.doc().getPai() != null && !(mob.doc().getPai().temTipoMovimentacaoParaPessoaOuLotacaoNoMobil(ExTipoMovimentacao.TIPO_MOVIMENTACAO_DESPACHO_TRANSFERENCIA, titular, lotaTitular)
+					|| mob.doc().getPai().temTipoMovimentacaoParaPessoaOuLotacaoNoMobil(ExTipoMovimentacao.TIPO_MOVIMENTACAO_TRANSFERENCIA, titular, lotaTitular))))
+			{
+				return false;				
+			}
+		
 		return getConf().podePorConfiguracao(titular, lotaTitular,
 				CpTipoConfiguracao.TIPO_CONFIG_FINALIZAR);
+	}
+	
+	/**
+	 * Retorna se é possível encerrar o documento ao qual o móbil passado por
+	 * parâmetro pertence. São estas as regras:
+	 * <ul>
+	 * <li>Documento não pode estar finalizado</li>
+	 * <li>Se o documento for interno produzido, usuário tem de ser: 1) da
+	 * lotação cadastrante do documento, 2) o subscritor do documento ou 3) o
+	 * titular do documento. </li>	 
+	 * </ul>
+	 * 
+	 * @param titular
+	 * @param lotaTitular
+	 * @param mob
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean podeEncerrar(final DpPessoa titular,
+			final DpLotacao lotaTitular, final ExMobil mob) throws Exception {
+
+		if (mob.doc().isEncerrado())
+			return false;
+		if (lotaTitular.isFechada())
+			return false;
+		if (mob.isPendenteDeAnexacao())
+			return false;
+		if (mob.doc().getExTipoDocumento().getIdTpDoc() != ExTipoDocumento.TIPO_DOCUMENTO_INTERNO_ANTIGO
+				&& mob.doc().getExTipoDocumento().getIdTpDoc() != ExTipoDocumento.TIPO_DOCUMENTO_EXTERNO)
+			if (!mob.doc().getLotaCadastrante().equivale(lotaTitular)
+				&& (mob.doc().getSubscritor() != null && !mob.doc().getSubscritor().equivale(titular))
+				&& (mob.doc().getTitular() != null && !mob.doc().getTitular().equivale(titular))
+				&& !mob.getExDocumento().temPerfil(titular, lotaTitular, ExPapel.PAPEL_GESTOR)){
+				return false;				
+			}
+		
+		return getConf().podePorConfiguracao(titular, lotaTitular,
+				CpTipoConfiguracao.TIPO_CONFIG_ENCERRAR);
 	}
 
 	/**
@@ -3062,7 +3105,7 @@ public class ExCompetenciaBL extends CpCompetenciaBL {
 		if (exMov == null) {
 			return false;
 		}
-		if (mob.isCancelada() || !mob.doc().isFinalizado())
+		if (mob.isCancelada() || !mob.doc().isEncerrado())
 			return false;
 
 		return true;

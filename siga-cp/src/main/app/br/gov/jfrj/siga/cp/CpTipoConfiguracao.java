@@ -111,6 +111,9 @@ public class CpTipoConfiguracao extends AbstractCpTipoConfiguracao {
 	public static final long TIPO_CONFIG_REINICIAR_NUMERACAO_TODO_ANO = 34;
 	
 	public static final long TIPO_CONFIG_AUTUAVEL = 35;
+	
+	public static final long TIPO_CONFIG_ENCERRAR = 36;
+	
 	// SIGA-WF
 
 	public static final long TIPO_CONFIG_INSTANCIAR_PROCEDIMENTO = 100;

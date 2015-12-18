@@ -466,11 +466,19 @@ public class ExDao extends CpDao {
 
 	public ExMobil consultarPorSigla(final ExMobilDaoFiltro flt) {
 		try {
-			if (flt.getIdDoc() != null
-					&& (flt.getIdTipoMobil() == null || flt.getIdTipoMobil() == ExTipoMobil.TIPO_MOBIL_GERAL)) {
-				final ExDocumento d = consultar(flt.getIdDoc(),
-						ExDocumento.class, false);
-				return d.getMobilGeral();
+			if (flt.getIdDoc() != null && (flt.getIdTipoMobil() == null || flt.getIdTipoMobil() == ExTipoMobil.TIPO_MOBIL_GERAL)) {
+				
+				final ExDocumento d = consultar(flt.getIdDoc(),ExDocumento.class, false);
+				if(d.isEncerrado()){
+					if(d.isProcesso()){
+						return d.getUltimoVolume();
+					}else{
+						return d.getUltimaVia();
+					}					
+				}
+				else{				
+				    return d.getMobilGeral();
+				}
 			}
 
 			if (flt.getAnoEmissao() == null)
@@ -496,8 +504,6 @@ public class ExDao extends CpDao {
 
 			if (l.size() != 1)
 				return null;
-
-			final ExMobil retorno = new ExMobil();
 
 			return l.get(0);
 

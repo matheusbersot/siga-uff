@@ -354,7 +354,7 @@ public class ExMobil extends AbstractExMobil implements Serializable,
 			setExDocumento(doc);
 		}
 
-		if (m2.find()) {  //DOCUMENTOS EM ELABORAï¿½ï¿½O/TEMPORï¿½RIOS 
+		if (m2.find()) {  //DOCUMENTOS EM ELABORAÇÃO/TEMPORÁRIOS 
 			if (m2.group(1) != null)
 				getExDocumento().setIdDoc(new Long(m2.group(1)));
 			return;
@@ -362,7 +362,7 @@ public class ExMobil extends AbstractExMobil implements Serializable,
 		
 		if (m3.find()) //PROCESSO ADMINISTRATIVO UFF
 		{
-			final String msgErro = "Erro na leitura do cï¿½digo do processo administrativo.";			
+			final String msgErro = "Erro na leitura do código do processo administrativo.";			
 			
 			final String siglaOrgaoUsuario = "UFF";
 			
