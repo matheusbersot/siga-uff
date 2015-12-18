@@ -23,10 +23,10 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
     [@grupo depende="qtdServidoresAjax"]
         [#list 1..(qtdServidores)?number as i]
 			[@grupo]
-                [@texto titulo="Nome do Servidor" var="nome"+i /]
+                [@texto titulo="Nome do Servidor" var="nome"+i obrigatorio=true desativado="${desabilitadoEdicao}/]
             [/@grupo]
             [@grupo]
-                [@texto titulo="Matrícula SIAPE" var="siape"+i /]
+                [@texto titulo="Matrícula SIAPE" var="siape"+i obrigatorio=true desativado="${desabilitadoEdicao}/]
             [/@grupo]
             [@grupo]
 				[@mensagem titulo="Nº do Processo" texto="23069."/]
@@ -37,13 +37,13 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 				[@texto var="digito"+i titulo="" largura="2" maxcaracteres="2" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 			[/@grupo]
 			[@grupo]
-                [@texto titulo="Lotação" var="lotacao"+i /]
+                [@texto titulo="Lotação" var="lotacao"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			[@grupo]
-                [@texto titulo="UORG" var="uorg"+i /]
+                [@texto titulo="UORG" var="uorg"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			[@grupo]
-                [@texto titulo="Laudo" var="laudo"+i /]
+                [@texto titulo="Laudo" var="laudo"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
         [/#list]
     [/@grupo]	
@@ -66,14 +66,14 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
   		servidor(es) a seguir relacionado(s), pelo não cumprimento dos requisitos estabelecido pela Portaria
 		<strong>nº 3214/78, do Ministério do Trabalho.</p> 
 		<br/>
-		<table width="100%">
+		<table width="100%" style="font-size:8pt">
 			<tr>	
 				<td width="30%" align=center><strong>Nome</strong></td>
-				<td width="15%" align=center><strong>Processo</strong></td>
-				<td width="15%" align=center><strong>Lotação</strong></td>
-				<td width="10%" align=center><strong>UORG</strong></td>
-				<td width="15%" align=center><strong>LAUDO</strong></td>
-				<td width="15%" align=center><strong>SIAPE</strong></td>
+				<td width="18%" align=center><strong>Processo</strong></td>
+				<td width="13%" align=center><strong>Lotação</strong></td>
+				<td width="9%" align=center><strong>UORG</strong></td>
+				<td width="16%" align=center><strong>LAUDO</strong></td>
+				<td width="14%" align=center><strong>SIAPE</strong></td>
 			</tr>
 			[#list 1..(qtdServidores)?number as i]				
 				<tr>	
@@ -123,7 +123,7 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 		[@data var="dt_portaria_ex" titulo="Data da Portaria de Exclusão" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-        [@texto titulo="Nº do Boletim de Serviço" var="num_boletim" /]
+        [@texto titulo="Nº do Boletim de Serviço" var="num_boletim" obrigatorio=true desativado="${desabilitadoEdicao}"/]
     [/@grupo]
 	[@grupo]
 		[@data var="dt_boletim" titulo="Data do Boletim de Serviço" obrigatorio=true desativado="${desabilitadoEdicao}"/]
@@ -135,13 +135,13 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
     [@grupo depende="qtdServidoresAjax"]
         [#list 1..(qtdServidores)?number as i]
 			[@grupo]
-                [@texto titulo="Nome do Servidor" var="nome"+i /]
+                [@texto titulo="Nome do Servidor" var="nome"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
             [@grupo]
-                [@texto titulo="Matrícula SIAPE" var="siape"+i /]
+                [@texto titulo="Matrícula SIAPE" var="siape"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
             [@grupo]
-				[@mensagem titulo="Nº do Processo" texto="23069."/]
+				[@mensagem titulo="Nº do Processo" texto="23069." /]
 				[@texto var="sequencial"+i titulo="" largura="6" maxcaracteres="6" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 				[@mensagem titulo="" texto="/"/]
 				[@texto var="ano"+i titulo="" largura="4" maxcaracteres="4" obrigatorio=true desativado="${desabilitadoEdicao}"/]
@@ -149,16 +149,16 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 				[@texto var="digito"+i titulo="" largura="2" maxcaracteres="2" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 			[/@grupo]
 			[@grupo]
-                [@texto titulo="Lotação" var="lotacao"+i /]
+                [@texto titulo="Lotação" var="lotacao"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			[@grupo]
-                [@texto titulo="UORG" var="uorg"+i /]
+                [@texto titulo="UORG" var="uorg"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			[@grupo]
-                [@texto titulo="Laudo" var="laudo"+i /]
+                [@texto titulo="Laudo" var="laudo"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			[@grupo]
-                [@texto titulo="Data da exclusão" var="exclusao"+i /]
+                [@texto titulo="Data da exclusão" var="exclusao"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			
         [/#list]
@@ -177,14 +177,14 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE: </strong></p>
 		<p style="text-align: justify;">1 - Excluir, na Portaria nº ${num_portaria_ex!} de ${dt_portaria_ex!} , publicada no BS/UFF nº ${num_boletim!}  de ${dt_boletim!} , o(a) servidor(a) abaixo relacionado(a): </p>
 		</br>
-		<table width="100%">
+		<table width="100%" style="font-size:8pt">
 			<tr>	
 				<td width="30%" align=center><strong>Nome</strong></td>
 				<td width="15%" align=center><strong>Lotação</strong></td>
-				<td width="10%" align=center><strong>UORG</strong></td>
-				<td width="15%" align=center><strong>LAUDO</strong></td>
-				<td width="15%" align=center><strong>SIAPE</strong></td>
-				<td width="15%" align=center><strong>A partir de</strong></td>
+				<td width="9%" align=center><strong>UORG</strong></td>
+				<td width="16%" align=center><strong>LAUDO</strong></td>
+				<td width="14%" align=center><strong>SIAPE</strong></td>
+				<td width="16%" align=center><strong>A partir de</strong></td>
 			</tr>
 			[#list 1..(qtdServidores)?number as i]				
 				<tr>	
@@ -232,10 +232,10 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
     [@grupo depende="qtdServidoresAjax"]
         [#list 1..(qtdServidores)?number as i]
 			[@grupo]
-                [@texto titulo="Nome do Servidor" var="nome"+i /]
+                [@texto titulo="Nome do Servidor" var="nome"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
             [@grupo]
-                [@texto titulo="Matrícula SIAPE" var="siape"+i /]
+                [@texto titulo="Matrícula SIAPE" var="siape"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
             [@grupo]
 				[@mensagem titulo="Nº do Processo" texto="23069."/]
@@ -246,13 +246,13 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 				[@texto var="digito"+i titulo="" largura="2" maxcaracteres="2" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 			[/@grupo]
 			[@grupo]
-                [@texto titulo="Lotação" var="lotacao"+i /]
+                [@texto titulo="Lotação" var="lotacao"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			[@grupo]
-                [@texto titulo="UORG" var="uorg"+i /]
+                [@texto titulo="UORG" var="uorg"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			[@grupo]
-                [@texto titulo="Laudo" var="laudo"+i /]
+                [@texto titulo="Laudo" var="laudo"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
         [/#list]
     [/@grupo]	
@@ -269,14 +269,14 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
   		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR DA UNIVERSIDADE FEDERAL FLUMINENSE</strong>, no uso de suas atribuições e considerando as determinações contidas nos artigos 68 e 12, inciso I, das Leis 8.112/90 e 8.270/91, respectivamente, e tendo em vista o laudo pericial, e de acordo com a Orientação Normativa Nº 6, de 18 de Março de 2013 da Secretaria de Recursos Humanos do Ministério do Planejamento, Orçamento e Gestão,</p>
 		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE conceder a GRATIFICAÇÃO DE RAIOS-X</strong>, incidente sobre o vencimento do cargo efetivo, ao(s) servidor (es) a seguir relacionado(s), enquanto desempenhar(em) as atividades que ora executa(m) e permanecer(em) no atual local de exercício, por estar(em) exposto(s) à ambiente(s) insalubre(s):</p> 
 		</br>
-		<table width="100%">
+		<table width="100%" style="font-size:8pt">
 			<tr>	
 				<td width="30%" align=center><strong>Nome</strong></td>
-				<td width="15%" align=center><strong>Processo</strong></td>
-				<td width="15%" align=center><strong>Lotação</strong></td>
-				<td width="10%" align=center><strong>UORG</strong></td>
-				<td width="15%" align=center><strong>LAUDO</strong></td>
-				<td width="15%" align=center><strong>SIAPE</strong></td>
+				<td width="18%" align=center><strong>Processo</strong></td>
+				<td width="13%" align=center><strong>Lotação</strong></td>
+				<td width="9%" align=center><strong>UORG</strong></td>
+				<td width="16%" align=center><strong>LAUDO</strong></td>
+				<td width="14%" align=center><strong>SIAPE</strong></td>
 			</tr>
 			[#list 1..(qtdServidores)?number as i]				
 				<tr>	
@@ -324,10 +324,10 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
     [@grupo depende="qtdServidoresAjax"]
         [#list 1..(qtdServidores)?number as i]
 			[@grupo]
-                [@texto titulo="Nome do Servidor" var="nome"+i /]
+                [@texto titulo="Nome do Servidor" var="nome"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
             [@grupo]
-                [@texto titulo="Matrícula SIAPE" var="siape"+i /]
+                [@texto titulo="Matrícula SIAPE" var="siape"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
             [@grupo]
 				[@mensagem titulo="Nº do Processo" texto="23069."/]
@@ -338,13 +338,13 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 				[@texto var="digito"+i titulo="" largura="2" maxcaracteres="2" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 			[/@grupo]
 			[@grupo]
-                [@texto titulo="Lotação" var="lotacao"+i /]
+                [@texto titulo="Lotação" var="lotacao"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			[@grupo]
-                [@texto titulo="UORG" var="uorg"+i /]
+                [@texto titulo="UORG" var="uorg"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			[@grupo]
-                [@texto titulo="Laudo" var="laudo"+i /]
+                [@texto titulo="Laudo" var="laudo"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
         [/#list]
     [/@grupo]	
@@ -361,14 +361,14 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
   		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR DA UNIVERSIDADE FEDERAL FLUMINENSE</strong>, no uso de suas atribuições e considerando as determinações contidas nos artigos 68 e 12, inciso I, das Leis 8.112/90 e 8.270/91, respectivamente, e tendo em vista o laudo pericial, e de acordo com a Orientação Normativa Nº 6, de 18 de Março de 2013 da Secretaria de Recursos Humanos do Ministério do Planejamento, Orçamento e Gestão,</p>
 		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE conceder o REAJUSTE de ADICIONAL DE INSALUBRIDADE, de Grau Médio (10%) para Grau Máximo (20%)</strong>, incidente sobre o vencimento do cargo efetivo, ao(s) servidor(es) a seguir relacionado(s), enquanto desempenhar(em) as atividades que ora executa(m) e permanecer(em) no atual local de exercício, por estar(em) exposto(s) à ambiente(s) insalubre(s):</p>
 		</br>
-		<table width="100%">
+		<table width="100%" style="font-size:8pt">
 			<tr>	
 				<td width="30%" align=center><strong>Nome</strong></td>
-				<td width="15%" align=center><strong>Processo</strong></td>
-				<td width="15%" align=center><strong>Lotação</strong></td>
-				<td width="10%" align=center><strong>UORG</strong></td>
-				<td width="15%" align=center><strong>LAUDO</strong></td>
-				<td width="15%" align=center><strong>SIAPE</strong></td>
+				<td width="18%" align=center><strong>Processo</strong></td>
+				<td width="13%" align=center><strong>Lotação</strong></td>
+				<td width="9%" align=center><strong>UORG</strong></td>
+				<td width="16%" align=center><strong>LAUDO</strong></td>
+				<td width="14%" align=center><strong>SIAPE</strong></td>
 			</tr>
 			[#list 1..(qtdServidores)?number as i]				
 				<tr>	
@@ -417,10 +417,10 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
     [@grupo depende="qtdServidoresAjax"]
         [#list 1..(qtdServidores)?number as i]
 			[@grupo]
-                [@texto titulo="Nome do Servidor" var="nome"+i /]
+                [@texto titulo="Nome do Servidor" var="nome"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
             [@grupo]
-                [@texto titulo="Matrícula SIAPE" var="siape"+i /]
+                [@texto titulo="Matrícula SIAPE" var="siape"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
             [@grupo]
 				[@mensagem titulo="Nº do Processo" texto="23069."/]
@@ -431,13 +431,13 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 				[@texto var="digito"+i titulo="" largura="2" maxcaracteres="2" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 			[/@grupo]
 			[@grupo]
-                [@texto titulo="Lotação" var="lotacao"+i /]
+                [@texto titulo="Lotação" var="lotacao"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			[@grupo]
-                [@texto titulo="UORG" var="uorg"+i /]
+                [@texto titulo="UORG" var="uorg"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			[@grupo]
-                [@texto titulo="Laudo" var="laudo"+i /]
+                [@texto titulo="Laudo" var="laudo"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
         [/#list]
     [/@grupo]	
@@ -454,14 +454,14 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
   		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR DA UNIVERSIDADE FEDERAL FLUMINENSE</strong>, no uso de suas atribuições e considerando as determinações contidas nos artigos 68 e 12, inciso I, das Leis 8.112/90 e 8.270/91, respectivamente, e tendo em vista o laudo pericial, e de acordo com a Orientação Normativa Nº 6, de 18 de Março de 2013 da Secretaria de Recursos Humanos do Ministério do Planejamento, Orçamento e Gestão,</p>
 		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE indeferir o pedido de ADICIONAL DE INSALUBRIDADE</strong> do servidor a seguir relacionado, por não se enquadrar nos requisitos estabelecidos pela Portaria nº 3214/78, do Ministério do Trabalho.</p>
 		</br>
-		<table width="100%">
+		<table width="100%" style="font-size:8pt">
 			<tr>	
 				<td width="30%" align=center><strong>Nome</strong></td>
-				<td width="15%" align=center><strong>Processo</strong></td>
-				<td width="15%" align=center><strong>Lotação</strong></td>
-				<td width="10%" align=center><strong>UORG</strong></td>
-				<td width="15%" align=center><strong>LAUDO</strong></td>
-				<td width="15%" align=center><strong>SIAPE</strong></td>
+				<td width="18%" align=center><strong>Processo</strong></td>
+				<td width="13%" align=center><strong>Lotação</strong></td>
+				<td width="9%" align=center><strong>UORG</strong></td>
+				<td width="16%" align=center><strong>LAUDO</strong></td>
+				<td width="14%" align=center><strong>SIAPE</strong></td>
 			</tr>
 			[#list 1..(qtdServidores)?number as i]				
 				<tr>	
@@ -510,10 +510,10 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
     [@grupo depende="qtdServidoresAjax"]
         [#list 1..(qtdServidores)?number as i]
 			[@grupo]
-                [@texto titulo="Nome do Servidor" var="nome"+i /]
+                [@texto titulo="Nome do Servidor" var="nome"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
             [@grupo]
-                [@texto titulo="Matrícula SIAPE" var="siape"+i /]
+                [@texto titulo="Matrícula SIAPE" var="siape"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
             [@grupo]
 				[@mensagem titulo="Nº do Processo" texto="23069."/]
@@ -524,13 +524,13 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 				[@texto var="digito"+i titulo="" largura="2" maxcaracteres="2" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 			[/@grupo]
 			[@grupo]
-                [@texto titulo="Lotação" var="lotacao"+i /]
+                [@texto titulo="Lotação" var="lotacao"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			[@grupo]
-                [@texto titulo="UORG" var="uorg"+i /]
+                [@texto titulo="UORG" var="uorg"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			[@grupo]
-                [@texto titulo="Laudo" var="laudo"+i /]
+                [@texto titulo="Laudo" var="laudo"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
         [/#list]
     [/@grupo]	
@@ -547,14 +547,14 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
   		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR DA UNIVERSIDADE FEDERAL FLUMINENSE</strong>, no uso de suas atribuições e considerando as determinações contidas nos artigos 68 e 12, inciso I, das Leis 8.112/90 e 8.270/91, respectivamente, e tendo em vista o laudo pericial, e de acordo com a Orientação Normativa Nº 6, de 18 de Março de 2013 da Secretaria de Recursos Humanos do Ministério do Planejamento, Orçamento e Gestão,</p>
 		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE indeferir o pedido de GRATIFICAÇÃO DE RAIOS-X</strong>  do servidor a seguir relacionado, por não se enquadrar nos requisitos estabelecidos pela Portaria nº 3214/78, do Ministério do Trabalho</p>
 		</br>
-		<table width="100%">
+		<table width="100%" style="font-size:8pt">
 			<tr>	
 				<td width="30%" align=center><strong>Nome</strong></td>
-				<td width="15%" align=center><strong>Processo</strong></td>
-				<td width="15%" align=center><strong>Lotação</strong></td>
-				<td width="10%" align=center><strong>UORG</strong></td>
-				<td width="15%" align=center><strong>LAUDO</strong></td>
-				<td width="15%" align=center><strong>SIAPE</strong></td>
+				<td width="18%" align=center><strong>Processo</strong></td>
+				<td width="13%" align=center><strong>Lotação</strong></td>
+				<td width="9%" align=center><strong>UORG</strong></td>
+				<td width="16%" align=center><strong>LAUDO</strong></td>
+				<td width="14%" align=center><strong>SIAPE</strong></td>
 			</tr>
 			[#list 1..(qtdServidores)?number as i]				
 				<tr>	
@@ -602,10 +602,10 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
     [@grupo depende="qtdServidoresAjax"]
         [#list 1..(qtdServidores)?number as i]
 			[@grupo]
-                [@texto titulo="Nome do Servidor" var="nome"+i /]
+                [@texto titulo="Nome do Servidor" var="nome"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
             [@grupo]
-                [@texto titulo="Matrícula SIAPE" var="siape"+i /]
+                [@texto titulo="Matrícula SIAPE" var="siape"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
             [@grupo]
 				[@mensagem titulo="Nº do Processo" texto="23069."/]
@@ -616,13 +616,13 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 				[@texto var="digito"+i titulo="" largura="2" maxcaracteres="2" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 			[/@grupo]
 			[@grupo]
-                [@texto titulo="Lotação" var="lotacao"+i /]
+                [@texto titulo="Lotação" var="lotacao"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			[@grupo]
-                [@texto titulo="UORG" var="uorg"+i /]
+                [@texto titulo="UORG" var="uorg"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			[@grupo]
-                [@texto titulo="Laudo" var="laudo"+i /]
+                [@texto titulo="Laudo" var="laudo"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
         [/#list]
     [/@grupo]	
@@ -639,14 +639,14 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
   		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR DA UNIVERSIDADE FEDERAL FLUMINENSE</strong>, no uso de suas atribuições e considerando as determinações contidas nos artigos 68 e 12, inciso I, das Leis 8.112/90 e 8.270/91, respectivamente, e tendo em vista o laudo pericial, e de acordo com a Orientação Normativa Nº 6, de 18 de Março de 2013 da Secretaria de Recursos Humanos do Ministério do Planejamento, Orçamento e Gestão,</p>
 		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE conceder o ADICIONAL DE INSALUBRIDADE, no Grau Máximo (20%)</strong>, incidente sobre o vencimento do cargo efetivo, ao(s) servidor(es) a seguir relacionado(s), enquanto desempenhar(em) as atividades que ora executa(m) e permanecer(em) no atual local de exercício, por estar(em) exposto(s) a ambiente(s) insalubre(s):</p>
 		</br>
-		<table width="100%">
+		<table width="100%" style="font-size:8pt">
 			<tr>	
 				<td width="30%" align=center><strong>Nome</strong></td>
-				<td width="15%" align=center><strong>Processo</strong></td>
-				<td width="15%" align=center><strong>Lotação</strong></td>
-				<td width="10%" align=center><strong>UORG</strong></td>
-				<td width="15%" align=center><strong>LAUDO</strong></td>
-				<td width="15%" align=center><strong>SIAPE</strong></td>
+				<td width="18%" align=center><strong>Processo</strong></td>
+				<td width="13%" align=center><strong>Lotação</strong></td>
+				<td width="9%" align=center><strong>UORG</strong></td>
+				<td width="16%" align=center><strong>LAUDO</strong></td>
+				<td width="14%" align=center><strong>SIAPE</strong></td>
 			</tr>
 			[#list 1..(qtdServidores)?number as i]				
 				<tr>	
@@ -695,10 +695,10 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
     [@grupo depende="qtdServidoresAjax"]
         [#list 1..(qtdServidores)?number as i]
 			[@grupo]
-                [@texto titulo="Nome do Servidor" var="nome"+i /]
+                [@texto titulo="Nome do Servidor" var="nome"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
             [@grupo]
-                [@texto titulo="Matrícula SIAPE" var="siape"+i /]
+                [@texto titulo="Matrícula SIAPE" var="siape"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
             [@grupo]
 				[@mensagem titulo="Nº do Processo" texto="23069."/]
@@ -709,13 +709,13 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 				[@texto var="digito"+i titulo="" largura="2" maxcaracteres="2" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 			[/@grupo]
 			[@grupo]
-                [@texto titulo="Lotação" var="lotacao"+i /]
+                [@texto titulo="Lotação" var="lotacao"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			[@grupo]
-                [@texto titulo="UORG" var="uorg"+i /]
+                [@texto titulo="UORG" var="uorg"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			[@grupo]
-                [@texto titulo="Laudo" var="laudo"+i /]
+                [@texto titulo="Laudo" var="laudo"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
         [/#list]
     [/@grupo]	
@@ -732,14 +732,14 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
   		<p style="text-align: justify; text-indent:${recuo_paragrafo};"><strong>O REITOR DA UNIVERSIDADE FEDERAL FLUMINENSE</strong>, no uso de suas atribuições e considerando as determinações contidas nos artigos 68 e 12, inciso I, das Leis 8.112/90 e 8.270/91, respectivamente, e tendo em vista o laudo pericial, e de acordo com a Orientação Normativa Nº 6, de 18 de Março de 2013 da Secretaria de Recursos Humanos do Ministério do Planejamento, Orçamento e Gestão,</p>
 		<p style="text-indent:${recuo_paragrafo};"><strong>RESOLVE conceder o ADICIONAL DE INSALUBRIDADE, no Grau Médio (10%)</strong>, incidente sobre o vencimento do cargo efetivo, ao(s) servidor (es) a seguir relacionado(s), enquanto desempenhar(em) as atividades que ora executa(m) e permanecer(em) no atual local de exercício, por estar(em) exposto(s) a ambiente(s) insalubre(s):</p>
 		</br>
-		<table width="100%">
+		<table width="100%" style="font-size:8pt">
 			<tr>	
 				<td width="30%" align=center><strong>Nome</strong></td>
-				<td width="15%" align=center><strong>Processo</strong></td>
-				<td width="15%" align=center><strong>Lotação</strong></td>
-				<td width="10%" align=center><strong>UORG</strong></td>
-				<td width="15%" align=center><strong>LAUDO</strong></td>
-				<td width="15%" align=center><strong>SIAPE</strong></td>
+				<td width="18%" align=center><strong>Processo</strong></td>
+				<td width="13%" align=center><strong>Lotação</strong></td>
+				<td width="9%" align=center><strong>UORG</strong></td>
+				<td width="16%" align=center><strong>LAUDO</strong></td>
+				<td width="14%" align=center><strong>SIAPE</strong></td>
 			</tr>
 			[#list 1..(qtdServidores)?number as i]				
 				<tr>	
@@ -791,10 +791,10 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 		[@data var="dt_portaria_rev" titulo="Data da Portaria de Revogação" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-        [@texto titulo="Nº do Boletim de Serviço" var="num_boletim" /]
+        [@texto titulo="Nº do Boletim de Serviço" var="num_boletim" obrigatorio=true desativado="${desabilitadoEdicao}"/]
     [/@grupo]
 	[@grupo]
-        [@texto titulo="Página do Boletim de Serviço" var="pg_boletim" /]
+        [@texto titulo="Página do Boletim de Serviço" var="pg_boletim" obrigatorio=true desativado="${desabilitadoEdicao}"/]
     [/@grupo]
 	[@grupo]
 		[@data var="dt_boletim" titulo="Data do Boletim de Serviço" obrigatorio=true desativado="${desabilitadoEdicao}"/]
@@ -805,10 +805,10 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
     [@grupo depende="qtdServidoresAjax"]
         [#list 1..(qtdServidores)?number as i]
 			[@grupo]
-                [@texto titulo="Nome do Servidor" var="nome"+i /]
+                [@texto titulo="Nome do Servidor" var="nome"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
             [@grupo]
-                [@texto titulo="Matrícula SIAPE" var="siape"+i /]
+                [@texto titulo="Matrícula SIAPE" var="siape"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
             [@grupo]
 				[@mensagem titulo="Nº do Processo" texto="23069."/]
@@ -819,13 +819,13 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 				[@texto var="digito"+i titulo="" largura="2" maxcaracteres="2" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 			[/@grupo]
 			[@grupo]
-                [@texto titulo="Lotação" var="lotacao"+i /]
+                [@texto titulo="Lotação" var="lotacao"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			[@grupo]
-                [@texto titulo="UORG" var="uorg"+i /]
+                [@texto titulo="UORG" var="uorg"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			[@grupo]
-                [@texto titulo="Laudo" var="laudo"+i /]
+                [@texto titulo="Laudo" var="laudo"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
 			
         [/#list]
@@ -845,14 +845,14 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 		<p style="text-align: justify;">1 - <strong>Revogar</strong> a Portaria nº ${num_portaria_rev!} de ${dt_portaria_rev!}, publicada no BS/UFF nº ${num_boletim!} de ${dt_boletim!}, pág. ${pg_boletim!}, SEÇÃO II;</p>
 		<p style="text-align: justify;">2 - <strong>Conceder o ADICIONAL DE INSALUBRIDADE, no Grau Médio (10%)</strong>, incidente sobre o vencimento do cargo efetivo, ao(s) servidor (es) a seguir relacionado(s), enquanto desempenhar(em) as atividades que ora executa(m) e permanecer(em) no atual local de exercício, por estar(em) exposto(s) a ambiente(s) insalubre(s):</p>
 		</br>
-		<table width="100%">
+		<table width="100%" style="font-size:8pt">
 			<tr>	
-				<td width="30%" align=center><strong>Nome</strong></td>
-				<td width="15%" align=center><strong>Processo</strong></td>
-				<td width="15%" align=center><strong>Lotação</strong></td>
-				<td width="10%" align=center><strong>UORG</strong></td>
-				<td width="15%" align=center><strong>LAUDO</strong></td>
-				<td width="15%" align=center><strong>SIAPE</strong></td>
+			    <td width="30%" align=center><strong>Nome</strong></td>
+				<td width="18%" align=center><strong>Processo</strong></td>
+				<td width="13%" align=center><strong>Lotação</strong></td>
+				<td width="9%" align=center><strong>UORG</strong></td>
+				<td width="16%" align=center><strong>LAUDO</strong></td>
+				<td width="14%" align=center><strong>SIAPE</strong></td>
 				
 			</tr>
 			[#list 1..(qtdServidores)?number as i]				
@@ -910,19 +910,19 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 		[@texto var="pct_grau" titulo="Porcentagem do Grau de Insalubridade"  largura="10" maxcaracteres="10" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-        [@texto titulo="Nº do Boletim de Serviço" var="num_boletim" /]
+        [@texto titulo="Nº do Boletim de Serviço" var="num_boletim" obrigatorio=true desativado="${desabilitadoEdicao}"/]
     [/@grupo]
 	[@grupo]
-        [@texto titulo="Página do Boletim de Serviço" var="pg_boletim" /]
+        [@texto titulo="Página do Boletim de Serviço" var="pg_boletim" obrigatorio=true desativado="${desabilitadoEdicao}"/]
     [/@grupo]
 	[@grupo]
 		[@data var="dt_boletim" titulo="Data do Boletim de Serviço" obrigatorio=true desativado="${desabilitadoEdicao}"/]
 	[/@grupo]
 	[@grupo]
-         [@texto titulo="Nome do Servidor" var="nome" /]
+         [@texto titulo="Nome do Servidor" var="nome" obrigatorio=true desativado="${desabilitadoEdicao}"/]
     [/@grupo]
 	[@grupo]
-         [@texto titulo="Matrícula SIAPE" var="siape" /]
+         [@texto titulo="Matrícula SIAPE" var="siape" obrigatorio=true desativado="${desabilitadoEdicao}"/]
     [/@grupo]
 
     [#assign valores = 1..100 /]  
@@ -930,10 +930,10 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
     [@grupo depende="qtdRetificoesAjax"]
         [#list 1..(qtdRetificoes)?number as i]
 			[@grupo]
-                [@texto titulo="Termo" var="termo"+i /]
+                [@texto titulo="Termo" var="termo"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
             [@grupo]
-                [@texto titulo="Retificação" var="retificacao"+i /]
+                [@texto titulo="Retificação" var="retificacao"+i obrigatorio=true desativado="${desabilitadoEdicao}"/]
             [/@grupo]
         [/#list]
     [/@grupo]	
@@ -952,8 +952,7 @@ src_blob_ex_mod := utl_raw.cast_to_raw(convert('
 		<p style="text-align: justify;"><strong>1 - Retificar, em parte a Portaria nº ${num_portaria!} de ${dt_portaria!}</strong>, que concedeu o Adicional de Insalubridade, no Grau ${desc_grau!} (${pct_grau!}%), ao servidor ${nome!}, matrícula SIAPE n° ${siape!} e publicado no BS/UFF nº ${num_boletim!} de ${dt_boletim!}, pág. ${pg_boletim!} SEÇÃO II.</p>
 		<p style="text-align: justify;">2 - <strong>Conceder o ADICIONAL DE INSALUBRIDADE, no Grau Médio (10%)</strong>, incidente sobre o vencimento do cargo efetivo, ao(s) servidor (es) a seguir relacionado(s), enquanto desempenhar(em) as atividades que ora executa(m) e permanecer(em) no atual local de exercício, por estar(em) exposto(s) a ambiente(s) insalubre(s):</p>
 		</br>
-		<table width="100%">
-			<tr>	
+		<table width="100%" style="font-size:8pt">
 				<td width="50%" align=center><strong>Onde se Lê</strong></td>
 				<td width="50%" align=center><strong>Leia-se</strong></td>
 			</tr>
