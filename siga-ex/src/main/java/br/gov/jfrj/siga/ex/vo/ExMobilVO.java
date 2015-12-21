@@ -478,7 +478,7 @@ public class ExMobilVO extends ExVO {
 
 		// Não aparece a opção de Cancelar Movimentação para documentos
 		// temporários
-		if (mob.getExDocumento().isFinalizado()
+		if (mob.getExDocumento().isEncerrado() 
 				&& mob.getUltimaMovimentacaoNaoCancelada() != null
 				&& mob.getUltimaMovimentacaoNaoCancelada()
 						.getExTipoMovimentacao().getIdTpMov() != ExTipoMovimentacao.TIPO_MOVIMENTACAO_INCLUSAO_DE_COSIGNATARIO

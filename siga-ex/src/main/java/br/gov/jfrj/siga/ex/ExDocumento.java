@@ -943,6 +943,14 @@ public class ExDocumento extends AbstractExDocumento implements Serializable {
 	public boolean isFinalizado() {
 		return getDtFinalizacao() != null;
 	}
+	
+	/**
+	 * Verifica se um documento está encerrado, ou seja, se possui
+	 * dtEncerramento definida
+	 */
+	public boolean isEncerrado() {
+		return getDtEncerramento() != null;
+	}
 
 	/**
 	 * Verifica se um documento pode ser indexado conforme as regras

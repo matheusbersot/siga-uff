@@ -1210,6 +1210,34 @@ public class ExDocumentoAction extends ExActionSupport {
 
 		return Action.SUCCESS;
 	}
+	
+	public String aEncerrar() throws Exception {
+		buscarDocumento(true);
+
+		verificaDocumento();
+
+		if (!Ex.getInstance().getComp()
+				.podeEncerrar(getTitular(), getLotaTitular(), mob))
+			throw new AplicacaoException("Não é possível Encerrar");
+
+		try {
+
+			setMsg(Ex.getInstance().getBL()
+					.encerrar(getCadastrante(), getLotaTitular(), doc, null));
+
+			if (doc.getForm() != null) {
+				String funcao = doc.getForm().get("acaoFinalizar"); //TODO: REVER
+				if (funcao != null && funcao.trim().length() > 0) {
+					obterMetodoPorString(funcao, doc);
+				}
+			}
+
+		} catch (final Throwable t) {
+			throw new AplicacaoException("Erro ao encerrar documento", 0, t);
+		}
+
+		return Action.SUCCESS;
+	}
 
 	public String aFinalizarAssinar() throws Exception {
 

@@ -623,11 +623,8 @@ public class ExBL extends CpBL {
 		Boolean isDocumentoSemEfeito = mob.doc().isSemEfeito();
 
 		if (mob.isGeral()) {
-			if (!mob.doc().isFinalizado()) {
-				acrescentarMarca(set, mob, CpMarcador.MARCADOR_EM_ELABORACAO, mob.doc().getDtRegDoc(), mob.doc().getCadastrante(), mob.doc().getLotaCadastrante());
-				if (mob.getExDocumento().getSubscritor() != null)
-					acrescentarMarca(set, mob, CpMarcador.MARCADOR_REVISAR, mob.doc().getDtRegDoc(), mob.getExDocumento().getSubscritor(), null);
-
+			if (!mob.doc().isEncerrado()) { 
+				acrescentarMarca(set, mob, CpMarcador.MARCADOR_EM_ELABORACAO, mob.doc().getDtRegDoc(), mob.doc().getCadastrante(), mob.doc().getLotaCadastrante());		
 			}
 
 			if (mob.getExMovimentacaoSet() != null) {
@@ -791,8 +788,9 @@ public class ExBL extends CpBL {
 				if (t == ExTipoMovimentacao.TIPO_MOVIMENTACAO_CRIACAO || t == ExTipoMovimentacao.TIPO_MOVIMENTACAO_RECEBIMENTO || t == ExTipoMovimentacao.TIPO_MOVIMENTACAO_DESOBRESTAR
 						|| t == ExTipoMovimentacao.TIPO_MOVIMENTACAO_ASSINATURA_DIGITAL_DOCUMENTO || t == ExTipoMovimentacao.TIPO_MOVIMENTACAO_CANCELAMENTO_JUNTADA
 						|| t == ExTipoMovimentacao.TIPO_MOVIMENTACAO_DESAPENSACAO)
-					if (mob.doc().isAssinado() || mob.doc().getExTipoDocumento().getIdTpDoc() == 2 || mob.doc().getExTipoDocumento().getIdTpDoc() == 3) {
-
+					
+					if (mob.doc().isAssinado() || mob.doc().getExTipoDocumento().getIdTpDoc() == 2 || mob.doc().getExTipoDocumento().getIdTpDoc() == 3) 
+					{
 						if (!apensadoAVolumeDoMesmoProcesso) {
 							m = CpMarcador.MARCADOR_EM_ANDAMENTO;
 						} else
@@ -800,7 +798,9 @@ public class ExBL extends CpBL {
 
 					} else if (mob.isApensado()) {
 						m = CpMarcador.MARCADOR_APENSADO;
-					} else {
+					} else if (mob.doc().isEncerrado() && !mob.doc().isFinalizado()) {
+						m = CpMarcador.MARCADOR_PENDENTE_FINALIZACAO; 
+					} else { 
 						m = CpMarcador.MARCADOR_PENDENTE_DE_ASSINATURA;
 					}
 
@@ -2599,28 +2599,67 @@ public class ExBL extends CpBL {
 	public String finalizar(final DpPessoa cadastrante, final DpLotacao lotaCadastrante, ExDocumento doc, String realPath) throws Exception {
 
 		if (doc.isFinalizado())
-			throw new AplicacaoException("Documento jï¿½ estï¿½ finalizado.");
+			throw new AplicacaoException("Documento já está finalizado.");
+		
+		try {
+			iniciarAlteracao();
+			
+			Date dt = dao().dt();
+			doc.setDtFinalizacao(dt);
+			
+			if (doc.getNumExpediente() == null)
+				doc.setNumExpediente(obterProximoNumero(doc));
+
+			if (doc.getExMobilPai() != null) {
+				if (doc.getExMobilPai().doc().isProcesso() && doc.isProcesso()) {
+					if (getComp().podeCriarSubprocesso(cadastrante, doc.getLotaCadastrante(), doc.getExMobilPai())) {
+						int n = dao().obterProximoNumeroSubdocumento(doc.getExMobilPai());
+						doc.setNumSequencia(n);
+					} else {
+						throw new AplicacaoException("Documento filho não pode ser criado nessas condições.");
+					}
+				}
+			}
+			
+			processar(doc, false, false, realPath);
+			
+			concluirAlteracao(doc);
+
+			String s = processarComandosEmTag(doc, "finalizacao");
+
+			return s;
+		} catch (final Exception e) {
+			cancelarAlteracao();
+			throw new AplicacaoException("Erro ao finalizar o documento: " + e.getMessage(), 0, e);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public String encerrar(final DpPessoa cadastrante, final DpLotacao lotaCadastrante, ExDocumento doc, String realPath) throws Exception {
+
+		if (doc.isEncerrado())
+			throw new AplicacaoException("Documento já está encerrado.");
 
 		if (!doc.getExClassificacao().isAtivo())
-			throw new AplicacaoException("Classificaï¿½ï¿½o documental encerrada. Selecione outra na tela de ediï¿½ï¿½o.");
+			throw new AplicacaoException("Classificação documental encerrada. Selecione outra na tela de edição.");
 
 		if (doc.getExModelo() != null && doc.getExModelo().isFechado()) {
-			throw new AplicacaoException("Este modelo nï¿½o estï¿½ mais em uso. Selecione outro na tela de ediï¿½ï¿½o");
+			throw new AplicacaoException("Este modelo não está mais em uso. Selecione outro na tela de edição");
 		}
 
 		if (doc.getExModelo() != null && !doc.getExModelo().isAtivo()) {
-			throw new AplicacaoException("Este modelo foi alterado. Edite-o para atualizï¿½-lo");
+			throw new AplicacaoException("Este modelo foi alterado. Edite-o para atualizá-lo");
 		}
 
 		if (!doc.isEletronico() && doc.isProcesso() && doc.getExMobilPai() != null && doc.getExMobilPai().getExDocumento().isProcesso() && doc.getExMobilPai().getExDocumento().isEletronico())
-			throw new AplicacaoException("Nï¿½o ï¿½ possï¿½vel criar Subprocesso fï¿½sico de processo eletrï¿½nico.");
+			throw new AplicacaoException("Não é possível criar Subprocesso físico de processo eletrônico.");
 
 		if (!getComp().podeSerSubscritor(doc))
-			throw new AplicacaoException("O usuï¿½rio nï¿½o pode ser subscritor do documento");
+			throw new AplicacaoException("O usuário não pode ser subscritor do documento");
 
 		if (doc.isProcesso() && doc.getMobilGeral().temAnexos())
 			throw new AplicacaoException(
-					"Processos nï¿½o podem possuir anexos antes da finalizaï¿½ï¿½o. Exclua todos os anexos para poder finalizar. Os anexos poderï¿½o ser incluï¿½dos no primeiro volume apï¿½s a finalizaï¿½ï¿½o.");
+					"Processos não podem possuir anexos antes da finalização. Exclua todos os anexos para poder finalizar. Os anexos poderão ser incluídos no primeiro volume após a finalização.");
 
 		Set<ExVia> setVias = doc.getSetVias();
 
@@ -2636,7 +2675,7 @@ public class ExBL extends CpBL {
 				dtDocCalendar.setTime(doc.getDtDoc());
 
 				if (c.before(dtDocCalendar))
-					throw new Exception("Nï¿½o ï¿½ permitido criar documento com data futura");
+					throw new Exception("Não é permitido criar documento com data futura");
 			}
 
 			// Pega a data sem horas, minutos e segundos...
@@ -2648,21 +2687,7 @@ public class ExBL extends CpBL {
 			if (doc.getOrgaoUsuario() == null)
 				doc.setOrgaoUsuario(doc.getLotaCadastrante().getOrgaoUsuario());
 
-			if (doc.getNumExpediente() == null)
-				doc.setNumExpediente(obterProximoNumero(doc));
-
-			doc.setDtFinalizacao(dt);
-
-			if (doc.getExMobilPai() != null) {
-				if (doc.getExMobilPai().doc().isProcesso() && doc.isProcesso()) {
-					if (getComp().podeCriarSubprocesso(cadastrante, doc.getLotaCadastrante(), doc.getExMobilPai())) {
-						int n = dao().obterProximoNumeroSubdocumento(doc.getExMobilPai());
-						doc.setNumSequencia(n);
-					} else {
-						throw new AplicacaoException("Documento filho nï¿½o pode ser criado nessas condiï¿½ï¿½es.");
-					}
-				}
-			}
+			doc.setDtEncerramento(dt);			
 
 			processar(doc, false, false, realPath);
 
@@ -2687,7 +2712,7 @@ public class ExBL extends CpBL {
 			if (setVias == null || setVias.size() == 0)
 				criarVia(cadastrante, lotaCadastrante, doc, null);
 
-			String s = processarComandosEmTag(doc, "finalizacao");
+			String s = processarComandosEmTag(doc, "finalizacao"); //TODO:REVER
 
 			alimentaFilaIndexacao(doc, true);
 
@@ -4130,7 +4155,7 @@ public class ExBL extends CpBL {
 	public void processar(final ExDocumento doc, final boolean gravar, final boolean transacao, String realPath) throws Exception {
 		try {
 			if (doc != null && (doc.isAssinado() || doc.isAssinadoDigitalmente()))
-				throw new AplicacaoException("O documento nï¿½o pode ser reprocessado, pois jï¿½ estï¿½ assinado");
+				throw new AplicacaoException("O documento não pode ser reprocessado, pois já está assinado");
 
 			if ((doc.getExModelo() != null && ("template/freemarker".equals(doc.getExModelo().getConteudoTpBlob()) || doc.getExModelo().getNmArqMod() != null))
 					|| doc.getExTipoDocumento().getIdTpDoc() == 2) {
@@ -4174,7 +4199,7 @@ public class ExBL extends CpBL {
 					pdf = Documento.generatePdf(strHtml, conversor, realPath);
 				} catch (Exception e) {
 					throw new AplicacaoException(
-							"Erro na geraï¿½ï¿½o do PDF. Por favor, verifique se existem recursos de formataï¿½ï¿½o nï¿½o suportados. Para eliminar toda a formataï¿½ï¿½o do texto clique em voltar e depois, no editor, clique no botï¿½o de 'Selecionar Tudo' e depois no botï¿½o de 'Remover Formataï¿½ao'.",
+							"Erro na geração do PDF. Por favor, verifique se existem recursos de formatação não suportados. Para eliminar toda a formatação do texto clique em voltar e depois, no editor, clique no botão de 'Selecionar Tudo' e depois no botão de 'Remover Formatação'.",
 							0, e);
 				}
 				doc.setConteudoBlobPdf(pdf);
@@ -4196,7 +4221,7 @@ public class ExBL extends CpBL {
 			if (gravar && transacao) {
 				cancelarAlteracao();
 			}
-			throw new AplicacaoException("Erro na gravaï¿½ï¿½o", 0, e);
+			throw new AplicacaoException("Erro na gravação", 0, e);
 		}
 	}
 
@@ -4264,7 +4289,7 @@ public class ExBL extends CpBL {
 					attrs.put("despachoHtml", mov.getConteudoBlobHtmlString());
 				}
 				// attrs.put("nmArqMod", "despacho_mov.jsp");
-				ExModelo m = dao().consultarExModelo(null, "Despacho Automï¿½tico");
+				ExModelo m = dao().consultarExModelo(null, "Despacho Automático");
 				attrs.put("nmMod", m.getNmMod());
 				attrs.put("template", new String(m.getConteudoBlobMod2(), "utf-8"));
 
@@ -4348,8 +4373,8 @@ public class ExBL extends CpBL {
 		} else {
 			if (idtpmov == ExTipoMovimentacao.TIPO_MOVIMENTACAO_VINCULACAO_PAPEL) {
 				mov.setSubscritor(null); /*
-										 * o perfil(responsï¿½vel) ï¿½ uma
-										 * lotaï¿½ï¿½o
+										 * o perfil(responsável) é uma
+										 * lotação
 										 */
 				mov.setLotaSubscritor(lotaSubscritor);
 			} else {
@@ -4372,9 +4397,8 @@ public class ExBL extends CpBL {
 		else
 			mov.setDtMov(dt);
 
-		// A data de inï¿½cio da movimentaï¿½ï¿½o sempre serï¿½ a data do
-		// servidor, nï¿½o
-		// a data que o usuï¿½rio digitou
+		// A data de início da movimentação sempre será a data do
+		// servidor, não a data que o usuário digitou
 		mov.setDtIniMov(dao().dt());
 		mov.setExMobil(mob);
 		mov.setExTipoMovimentacao(tpmov);
@@ -4507,7 +4531,7 @@ public class ExBL extends CpBL {
 		atualizarDnmNivelAcesso(doc);
 		atualizarDnmAcesso(doc);
 	}
-
+	
 	private void concluirAlteracao(ExDocumento doc) throws Exception {
 		if (doc != null) {
 			atualizarMarcas(doc);

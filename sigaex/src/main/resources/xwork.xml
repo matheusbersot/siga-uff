@@ -364,6 +364,12 @@
 				exibir?sigla=${doc.sigla}&amp;msg=${msg}
 			</result>
 		</action>
+		<action name="encerrar" class="br.gov.jfrj.webwork.action.ExDocumentoAction"
+			method="aEncerrar">
+			<result type="redirect-action">
+				exibir?sigla=${doc.sigla}&amp;msg=${msg}
+			</result>
+		</action>
 		<action name="editar" class="br.gov.jfrj.webwork.action.ExDocumentoAction"
 			method="aEditar">
 			<result>/paginas/expediente/edita.jsp</result>
@@ -945,7 +951,7 @@
 					exibir?sigla=${doc.sigla}
 				</param>
 			</result>
-		</action>		
+		</action>
 		<action name="cancelar" class="br.gov.jfrj.webwork.action.ExMovimentacaoAction"
 			method="aCancelar">
 			<!-- <result type="redirect-action"> <param name="namespace">/expediente/doc</param> 
