@@ -43,7 +43,7 @@ public class SignatureController {
 		// get private key
 		PrivateKey privateKey =  CryptoManager.getInstance().findPrivKeyByCert(cert.getMozillaX509Certificate());
 		
-		// certificate used to decode signed data (public key)
+		// certificate used to code signed data (public key)
 		X509CertificateHolder x509CertHolder = new X509CertificateHolder(cert.getJdkX509Certificate().getEncoded());
 		
 	    List<X509CertificateHolder> certList = new ArrayList<X509CertificateHolder>();
